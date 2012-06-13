@@ -37,7 +37,7 @@ public class ImageDataFactory {
 							usePngLoader = false;
 						}
 
-						Log.info("Use Java PNG Loader = " + usePngLoader);
+						//Log.info("Use Java PNG Loader = " + usePngLoader);
 						return null;
 					}
 				});
