@@ -51,6 +51,7 @@ public class AppletGameContainer extends Applet {
 	/**
 	 * @see java.applet.Applet#destroy()
 	 */
+	@Override
 	public void destroy() {
 		if (displayParent != null) {
 			remove(displayParent);
@@ -76,6 +77,7 @@ public class AppletGameContainer extends Applet {
 	/**
 	 * @see java.applet.Applet#start()
 	 */
+	@Override
 	public void start() {
 
 	}
@@ -89,6 +91,7 @@ public class AppletGameContainer extends Applet {
 		}
 
 		gameThread = new Thread() {
+			@Override
 			public void run() {
 				try {
 					canvas.start();
@@ -111,12 +114,14 @@ public class AppletGameContainer extends Applet {
 	/**
 	 * @see java.applet.Applet#stop()
 	 */
+	@Override
 	public void stop() {
 	}
 
 	/**
 	 * @see java.applet.Applet#init()
 	 */
+	@Override
 	public void init() {
 		removeAll();
 		setLayout(new BorderLayout());
@@ -130,10 +135,12 @@ public class AppletGameContainer extends Applet {
 			displayParent = new Canvas() {
 				private static final long serialVersionUID = 1L;
 
+				@Override
 				public final void addNotify() {
 					super.addNotify();
 					startLWJGL();
 				}
+				@Override
 				public final void removeNotify() {
 					destroyLWJGL();
 					super.removeNotify();
@@ -296,6 +303,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#getScreenHeight()
 		 */
+		@Override
 		public int getScreenHeight() {
 			return 0;
 		}
@@ -303,6 +311,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#getScreenWidth()
 		 */
+		@Override
 		public int getScreenWidth() {
 			return 0;
 		}
@@ -319,6 +328,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#hasFocus()
 		 */
+		@Override
 		public boolean hasFocus() {
 			return true;
 		}
@@ -334,6 +344,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setIcon(java.lang.String)
 		 */
+		@Override
 		public void setIcon(String ref) throws SlickException {
 			// unsupported in an applet
 		}
@@ -341,6 +352,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setMouseGrabbed(boolean)
 		 */
+		@Override
 		public void setMouseGrabbed(boolean grabbed) {
 			Mouse.setGrabbed(grabbed);
 		}
@@ -348,6 +360,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#isMouseGrabbed()
 		 */
+		@Override
 		public boolean isMouseGrabbed() {
 			return Mouse.isGrabbed();
 		}
@@ -356,6 +369,7 @@ public class AppletGameContainer extends Applet {
 		 * @see org.newdawn.slick.GameContainer#setMouseCursor(java.lang.String,
 		 *      int, int)
 		 */
+		@Override
 		public void setMouseCursor(String ref, int hotSpotX, int hotSpotY) throws SlickException {
 			try {
 				Cursor cursor = CursorLoader.get().getCursor(ref, hotSpotX, hotSpotY);
@@ -383,6 +397,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * {@inheritDoc}
 		 */
+		@Override
 		public void setMouseCursor(Image image, int hotSpotX, int hotSpotY) throws SlickException {
 			try {
 				Image temp = new Image(get2Fold(image.getWidth()), get2Fold(image.getHeight()));
@@ -404,6 +419,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setIcons(java.lang.String[])
 		 */
+		@Override
 		public void setIcons(String[] refs) throws SlickException {
 			// unsupported in an applet
 		}
@@ -411,6 +427,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setMouseCursor(org.newdawn.slick.opengl.ImageData, int, int)
 		 */
+		@Override
 		public void setMouseCursor(ImageData data, int hotSpotX, int hotSpotY) throws SlickException {
 			try {
 				Cursor cursor = CursorLoader.get().getCursor(data, hotSpotX, hotSpotY);
@@ -424,6 +441,7 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setMouseCursor(org.lwjgl.input.Cursor, int, int)
 		 */
+		@Override
 		public void setMouseCursor(Cursor cursor, int hotSpotX, int hotSpotY) throws SlickException {
 			try {
 				Mouse.setNativeCursor(cursor);
@@ -436,13 +454,16 @@ public class AppletGameContainer extends Applet {
 		/**
 		 * @see org.newdawn.slick.GameContainer#setDefaultMouseCursor()
 		 */
+		@Override
 		public void setDefaultMouseCursor() {
 		}
 
+		@Override
 		public boolean isFullscreen() {
 			return Display.isFullscreen();
 		}
 
+		@Override
 		public void setFullscreen(boolean fullscreen) throws SlickException {
 			if (fullscreen == isFullscreen()) {
 				return;

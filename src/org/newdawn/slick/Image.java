@@ -544,6 +544,7 @@ public class Image implements Renderable {
 	 * @param x The x location to draw the image at
 	 * @param y The y location to draw the image at
 	 */
+	@Override
 	public void draw(float x, float y) {
 		init();
 		draw(x,y,width,height);
@@ -1293,6 +1294,7 @@ public class Image implements Renderable {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		init();
 

@@ -53,6 +53,7 @@ public class ImageBufferEndianTest extends BasicGame {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setColor(Color.white);
 		g.drawString("Endianness is " + endian, 10, 100);
@@ -67,6 +68,7 @@ public class ImageBufferEndianTest extends BasicGame {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		// detect what endian we have
 		if (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) {
@@ -106,6 +108,7 @@ public class ImageBufferEndianTest extends BasicGame {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		// nothing to do
 	}

@@ -42,6 +42,7 @@ public class PedigreeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.container = container;
 
@@ -68,6 +69,7 @@ public class PedigreeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		((ConfigurableEmitter) trail.getEmitter(0)).setPosition(rx+14,ry+35);
 		trail.render();
@@ -80,6 +82,7 @@ public class PedigreeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		fire.update(delta);
 		trail.update(delta);
@@ -90,6 +93,7 @@ public class PedigreeTest extends BasicGame {
 		}
 	}
 
+	@Override
 	public void mousePressed(int button, int x, int y) {
 		super.mousePressed(button, x, y);
 
@@ -116,6 +120,7 @@ public class PedigreeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
 			container.exit();

@@ -205,6 +205,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return "[" + name + "]";
 	}
@@ -262,6 +263,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#isEnabled()
 	 */
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -269,6 +271,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#setEnabled(boolean)
 	 */
+	@Override
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
@@ -277,6 +280,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	 * @see org.newdawn.slick.particles.ParticleEmitter#update(org.newdawn.slick.particles.ParticleSystem,
 	 *      int)
 	 */
+	@Override
 	public void update(ParticleSystem system, int delta) {
 		this.engine = system;
 
@@ -372,6 +376,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	 * @see org.newdawn.slick.particles.ParticleEmitter#updateParticle(org.newdawn.slick.particles.Particle,
 	 *      int)
 	 */
+	@Override
 	public void updateParticle(Particle particle, int delta) {
 		particleCount++;
 
@@ -441,6 +446,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	 * 
 	 * @return True if the emitter has completed it's cycle
 	 */
+	@Override
 	public boolean completed() {
 		if (engine == null) {
 			return false;
@@ -557,6 +563,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 		 * 
 		 * @return The currently configured value
 		 */
+		@Override
 		public float getValue(float time) {
 			return value;
 		}
@@ -596,6 +603,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 		 * 
 		 * @return The currently configured value
 		 */
+		@Override
 		public float getValue(float time) {
 			return (float) (Math.random() * value);
 		}
@@ -673,6 +681,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 		 * @param t The time value (expecting t in [0,1])
 		 * @return The value to use at the specified time
 		 */
+		@Override
 		public float getValue(float t) {
 			// first: determine the segment we are in
 			Vector2f p0 = curve.get(0);
@@ -881,27 +890,33 @@ public class ConfigurableEmitter implements ParticleEmitter {
 		}
 	}
 
+	@Override
 	public boolean useAdditive() {
 		return useAdditive;
 	}
 
+	@Override
 	public boolean isOriented() {
 		return this.useOriented;
 	}
 
+	@Override
 	public boolean usePoints(ParticleSystem system) {
 		return (this.usePoints == Particle.INHERIT_POINTS) && (system.usePoints()) ||
 				(this.usePoints == Particle.USE_POINTS);
 	}
 
+	@Override
 	public Image getImage() {
 		return image;
 	}
 
+	@Override
 	public void wrapUp() {
 		wrapUp = true;
 	}
 
+	@Override
 	public void resetState() {
 		wrapUp = false;
 		replay();

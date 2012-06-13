@@ -64,6 +64,7 @@ public class AngelCodeFont implements Font {
 	private final LinkedHashMap<String, DisplayList> displayLists = new LinkedHashMap<String, DisplayList>(DISPLAY_LIST_CACHE_SIZE, 1, true) {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		protected boolean removeEldestEntry(Entry<String, DisplayList> eldest) {
 			eldestDisplayList = (DisplayList)eldest.getValue();
 			eldestDisplayListID = eldestDisplayList.id;
@@ -327,6 +328,7 @@ public class AngelCodeFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String)
 	 */
+	@Override
 	public void drawString(float x, float y, String text) {
 		drawString(x, y, text, Color.white);
 	}
@@ -335,6 +337,7 @@ public class AngelCodeFont implements Font {
 	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String,
 	 *      org.newdawn.slick.Color)
 	 */
+	@Override
 	public void drawString(float x, float y, String text, Color col) {
 		drawString(x, y, text, col, 0, text.length() - 1);
 	}
@@ -342,6 +345,7 @@ public class AngelCodeFont implements Font {
 	/**
 	 * @see Font#drawString(float, float, String, Color, int, int)
 	 */
+	@Override
 	public void drawString(float x, float y, String text, Color col,
 			int startIndex, int endIndex) {
 		fontImage.bind();
@@ -451,6 +455,7 @@ public class AngelCodeFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getHeight(java.lang.String)
 	 */
+	@Override
 	public int getHeight(String text) {
 		DisplayList displayList = null;
 		if (displayListCaching) {
@@ -490,6 +495,7 @@ public class AngelCodeFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getWidth(java.lang.String)
 	 */
+	@Override
 	public int getWidth(String text) {
 		DisplayList displayList = null;
 		if (displayListCaching) {
@@ -570,6 +576,7 @@ public class AngelCodeFont implements Font {
 		/**
 		 * @see java.lang.Object#toString()
 		 */
+		@Override
 		public String toString() {
 			return "[CharDef id=" + id + " x=" + x + " y=" + y + "]";
 		}
@@ -613,6 +620,7 @@ public class AngelCodeFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getLineHeight()
 	 */
+	@Override
 	public int getLineHeight() {
 		return lineHeight;
 	}

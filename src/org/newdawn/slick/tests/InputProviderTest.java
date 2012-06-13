@@ -42,6 +42,7 @@ public class InputProviderTest extends BasicGame implements InputProviderListene
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		provider = new InputProvider(container.getInput());
 		provider.addListener(this);
@@ -60,6 +61,7 @@ public class InputProviderTest extends BasicGame implements InputProviderListene
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.drawString("Press A, W, Left, Up, space, mouse button 1,and gamepad controls",10,50);
 		g.drawString(message,100,150);
@@ -68,12 +70,14 @@ public class InputProviderTest extends BasicGame implements InputProviderListene
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.command.InputProviderListener#controlPressed(org.newdawn.slick.command.Command)
 	 */
+	@Override
 	public void controlPressed(Command command) {
 		message = "Pressed: "+command;
 	}
@@ -81,6 +85,7 @@ public class InputProviderTest extends BasicGame implements InputProviderListene
 	/**
 	 * @see org.newdawn.slick.command.InputProviderListener#controlReleased(org.newdawn.slick.command.Command)
 	 */
+	@Override
 	public void controlReleased(Command command) {
 		message = "Released: "+command;
 	}

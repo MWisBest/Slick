@@ -80,12 +80,14 @@ public class OverTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#addPolyPoint(float, float)
 	 */
+	@Override
 	public void addPolyPoint(float x, float y) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTriangleCount()
 	 */
+	@Override
 	public int getTriangleCount() {
 		return triangles.length / 3;
 	}
@@ -93,6 +95,7 @@ public class OverTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTrianglePoint(int, int)
 	 */
+	@Override
 	public float[] getTrianglePoint(int tri, int i) {
 		float[] pt = triangles[(tri * 3)+i];
 
@@ -102,12 +105,14 @@ public class OverTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#startHole()
 	 */
+	@Override
 	public void startHole() {
 	}
 
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#triangulate()
 	 */
+	@Override
 	public boolean triangulate() {
 		return true;
 	}

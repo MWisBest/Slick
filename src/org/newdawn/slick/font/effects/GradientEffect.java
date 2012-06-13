@@ -50,6 +50,7 @@ public class GradientEffect implements ConfigurableEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.Effect#draw(java.awt.image.BufferedImage, java.awt.Graphics2D, org.newdawn.slick.UnicodeFont, org.newdawn.slick.font.Glyph)
 	 */
+	@Override
 	public void draw(BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph) {
 		int ascent = unicodeFont.getAscent();
 		float height = (ascent) * scale;
@@ -153,6 +154,7 @@ public class GradientEffect implements ConfigurableEffect {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return "Gradient";
 	}
@@ -160,6 +162,7 @@ public class GradientEffect implements ConfigurableEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.ConfigurableEffect#getValues()
 	 */
+	@Override
 	public List<Value> getValues() {
 		List<Value> values = new ArrayList<Value>();
 		values.add(EffectUtil.colorValue("Top color", topColor));
@@ -175,6 +178,7 @@ public class GradientEffect implements ConfigurableEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.ConfigurableEffect#setValues(java.util.List)
 	 */
+	@Override
 	public void setValues(List<Value> values) {
 		for (Value value : values) {
 			if (value.getName().equals("Top color")) {

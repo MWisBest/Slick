@@ -43,6 +43,7 @@ public strictfp class Circle extends Ellipse {
 	 * 
 	 * @return The x coordinate of the centre of the circle
 	 */
+	@Override
 	public float getCenterX() {
 		return getX() + radius;
 	}
@@ -52,6 +53,7 @@ public strictfp class Circle extends Ellipse {
 	 * 
 	 * @return The y coordinate of the centre of the circle
 	 */
+	@Override
 	public float getCenterY() {
 		return getY() + radius;
 	}
@@ -84,6 +86,7 @@ public strictfp class Circle extends Ellipse {
 	 * @param shape The other circle
 	 * @return True if they touch
 	 */
+	@Override
 	public boolean intersects(Shape shape) {
 		if(shape instanceof Circle) {
 			Circle other = (Circle)shape;
@@ -118,6 +121,7 @@ public strictfp class Circle extends Ellipse {
 	 * @param y The y coorindate of the point to check
 	 * @return True if the point is contained by this circle
 	 */
+	@Override
 	public boolean contains(float x, float y)
 	{
 		return (x - getX()) * (x - getX()) + (y - getY()) * (y - getY()) < getRadius() * getRadius();
@@ -136,6 +140,7 @@ public strictfp class Circle extends Ellipse {
 	/**
 	 * @see org.newdawn.slick.geom.Ellipse#findCenter()
 	 */
+	@Override
 	protected void findCenter() {
 		center = new float[2];
 		center[0] = x + radius;
@@ -145,6 +150,7 @@ public strictfp class Circle extends Ellipse {
 	/**
 	 * @see org.newdawn.slick.geom.Ellipse#calculateRadius()
 	 */
+	@Override
 	protected void calculateRadius() {
 		boundingCircleRadius = radius;
 	}

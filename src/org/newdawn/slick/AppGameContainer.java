@@ -32,6 +32,7 @@ import org.newdawn.slick.util.ResourceLoader;
 public class AppGameContainer extends GameContainer {
 	static {
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			@Override
 			public Object run() {
 				try {
 					Display.getDisplayMode();
@@ -170,6 +171,7 @@ public class AppGameContainer extends GameContainer {
 	 * 
 	 * @return True if the display is in fullscreen mode
 	 */
+	@Override
 	public boolean isFullscreen() {
 		return Display.isFullscreen();
 	}
@@ -181,6 +183,7 @@ public class AppGameContainer extends GameContainer {
 	 * @param fullscreen True if we want to be in fullscreen mode
 	 * @throws SlickException Indicates we failed to change the display mode
 	 */
+	@Override
 	public void setFullscreen(boolean fullscreen) throws SlickException {
 		if (isFullscreen() == fullscreen) {
 			return;
@@ -201,6 +204,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setMouseCursor(java.lang.String, int, int)
 	 */
+	@Override
 	public void setMouseCursor(String ref, int hotSpotX, int hotSpotY) throws SlickException {
 		try {
 			Cursor cursor = CursorLoader.get().getCursor(ref, hotSpotX, hotSpotY);
@@ -214,6 +218,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setMouseCursor(org.newdawn.slick.opengl.ImageData, int, int)
 	 */
+	@Override
 	public void setMouseCursor(ImageData data, int hotSpotX, int hotSpotY) throws SlickException {
 		try {
 			Cursor cursor = CursorLoader.get().getCursor(data, hotSpotX, hotSpotY);
@@ -227,6 +232,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setMouseCursor(org.lwjgl.input.Cursor, int, int)
 	 */
+	@Override
 	public void setMouseCursor(Cursor cursor, int hotSpotX, int hotSpotY) throws SlickException {
 		try {
 			Mouse.setNativeCursor(cursor);
@@ -253,6 +259,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setMouseCursor(org.newdawn.slick.Image, int, int)
 	 */
+	@Override
 	public void setMouseCursor(Image image, int hotSpotX, int hotSpotY) throws SlickException {
 		try {
 			Image temp = new Image(get2Fold(image.getWidth()), get2Fold(image.getHeight()));
@@ -274,6 +281,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#reinit()
 	 */
+	@Override
 	public void reinit() throws SlickException {
 		InternalTextureLoader.get().clear();
 		SoundStore.get().clear();
@@ -344,6 +352,7 @@ public class AppGameContainer extends GameContainer {
 		Log.info("TargetDisplayMode: "+targetDisplayMode);
 
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			@Override
 			public Object run() {
 				try {
 					PixelFormat format = new PixelFormat(8,8,stencil ? 8 : 0,samples);
@@ -428,6 +437,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setUpdateOnlyWhenVisible(boolean)
 	 */
+	@Override
 	public void setUpdateOnlyWhenVisible(boolean updateOnlyWhenVisible) {
 		updateOnlyOnVisible = updateOnlyWhenVisible;
 	}
@@ -435,6 +445,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#isUpdatingOnlyWhenVisible()
 	 */
+	@Override
 	public boolean isUpdatingOnlyWhenVisible() {
 		return updateOnlyOnVisible;
 	}
@@ -442,6 +453,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setIcon(java.lang.String)
 	 */
+	@Override
 	public void setIcon(String ref) throws SlickException {
 		setIcons(new String[] {ref});
 	}
@@ -449,6 +461,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setMouseGrabbed(boolean)
 	 */
+	@Override
 	public void setMouseGrabbed(boolean grabbed) {
 		Mouse.setGrabbed(grabbed);
 	}
@@ -456,6 +469,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#isMouseGrabbed()
 	 */
+	@Override
 	public boolean isMouseGrabbed() {
 		return Mouse.isGrabbed();
 	}
@@ -463,6 +477,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#hasFocus()
 	 */
+	@Override
 	public boolean hasFocus() {
 		// hmm, not really the right thing, talk to the LWJGL guys
 		return Display.isActive();
@@ -471,6 +486,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#getScreenHeight()
 	 */
+	@Override
 	public int getScreenHeight() {
 		return originalDisplayMode.getHeight();
 	}
@@ -478,6 +494,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#getScreenWidth()
 	 */
+	@Override
 	public int getScreenWidth() {
 		return originalDisplayMode.getWidth();
 	}
@@ -493,6 +510,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setIcons(java.lang.String[])
 	 */
+	@Override
 	public void setIcons(String[] refs) throws SlickException {
 		ByteBuffer[] bufs = new ByteBuffer[refs.length];
 		for (int i=0;i<refs.length;i++) {
@@ -520,6 +538,7 @@ public class AppGameContainer extends GameContainer {
 	/**
 	 * @see org.newdawn.slick.GameContainer#setDefaultMouseCursor()
 	 */
+	@Override
 	public void setDefaultMouseCursor() {
 		try {
 			Mouse.setNativeCursor(null);

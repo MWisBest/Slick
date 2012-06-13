@@ -118,6 +118,7 @@ public class Ellipse extends Shape {
 	 * Generate the points to outline this ellipse.
 	 *
 	 */
+	@Override
 	protected void createPoints() {
 		ArrayList<Float> tempPoints = new ArrayList<Float>();
 
@@ -167,6 +168,7 @@ public class Ellipse extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#transform(org.newdawn.slick.geom.Transform)
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		checkPoints();
 
@@ -183,6 +185,7 @@ public class Ellipse extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#findCenter()
 	 */
+	@Override
 	protected void findCenter() {
 		center = new float[2];
 		center[0] = x + radius1;
@@ -192,6 +195,7 @@ public class Ellipse extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#calculateRadius()
 	 */
+	@Override
 	protected void calculateRadius() {
 		boundingCircleRadius = (radius1 > radius2) ? radius1 : radius2;
 	}

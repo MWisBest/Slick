@@ -147,6 +147,7 @@ public class TextField extends AbstractComponent {
 	 * @param y
 	 *            Y coordinate
 	 */
+	@Override
 	public void setLocation(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -157,6 +158,7 @@ public class TextField extends AbstractComponent {
 	 * 
 	 * @return x
 	 */
+	@Override
 	public int getX() {
 		return x;
 	}
@@ -166,6 +168,7 @@ public class TextField extends AbstractComponent {
 	 * 
 	 * @return y
 	 */
+	@Override
 	public int getY() {
 		return y;
 	}
@@ -175,6 +178,7 @@ public class TextField extends AbstractComponent {
 	 * 
 	 * @return The width of the component
 	 */
+	@Override
 	public int getWidth() {
 		return width;
 	}
@@ -184,6 +188,7 @@ public class TextField extends AbstractComponent {
 	 * 
 	 * @return The height of the component
 	 */
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -222,6 +227,7 @@ public class TextField extends AbstractComponent {
 	 * @see org.newdawn.slick.gui.AbstractComponent#render(org.newdawn.slick.gui.GUIContext,
 	 *      org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GUIContext container, Graphics g) {
 		if (lastKey != -1) {
 			if (input.isKeyDown(lastKey)) {
@@ -367,6 +373,7 @@ public class TextField extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (hasFocus()) {
 			if (key != -1)
@@ -468,6 +475,7 @@ public class TextField extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#setFocus(boolean)
 	 */
+	@Override
 	public void setFocus(boolean focus) {
 		lastKey = -1;
 

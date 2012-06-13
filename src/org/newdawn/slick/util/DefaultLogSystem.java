@@ -18,6 +18,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * @param message The message describing the error
 	 * @param e The exception causing the error
 	 */
+	@Override
 	public void error(String message, Throwable e) {
 		error(message);
 		error(e);
@@ -28,6 +29,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * 
 	 * @param e The exception causing the error
 	 */
+	@Override
 	public void error(Throwable e) {
 		out.println(new Date()+" ERROR:" +e.getMessage());
 		e.printStackTrace(out);
@@ -38,6 +40,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * 
 	 * @param message The message describing the error
 	 */
+	@Override
 	public void error(String message) {
 		out.println(new Date()+" ERROR:" +message);
 	}
@@ -47,6 +50,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * 
 	 * @param message The message describing the warning
 	 */
+	@Override
 	public void warn(String message) {
 		out.println(new Date()+" WARN:" +message);
 	}
@@ -56,6 +60,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * 
 	 * @param message The message describing the infomation
 	 */
+	@Override
 	public  void info(String message) {
 		out.println(new Date()+" INFO:" +message);
 	}
@@ -65,6 +70,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * 
 	 * @param message The message describing the debug
 	 */
+	@Override
 	public void debug(String message) {
 		out.println(new Date()+" DEBUG:" +message);
 	}
@@ -75,6 +81,7 @@ public class DefaultLogSystem implements LogSystem {
 	 * @param message The message describing the warning
 	 * @param e The cause of the warning
 	 */
+	@Override
 	public void warn(String message, Throwable e) {
 		warn(message);
 		e.printStackTrace(out);

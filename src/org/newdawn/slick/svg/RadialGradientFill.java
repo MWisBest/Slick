@@ -43,6 +43,7 @@ public class RadialGradientFill implements TexCoordGenerator {
 	/**
 	 * @see org.newdawn.slick.geom.TexCoordGenerator#getCoordFor(float, float)
 	 */
+	@Override
 	public Vector2f getCoordFor(float x, float y) {
 		float u = centre.distance(new Vector2f(x,y));
 		u /= radius;

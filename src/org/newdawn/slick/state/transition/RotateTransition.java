@@ -46,6 +46,7 @@ public class RotateTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#init(org.newdawn.slick.state.GameState, org.newdawn.slick.state.GameState)
 	 */
+	@Override
 	public void init(GameState firstState, GameState secondState) {
 		prev = secondState;
 	}
@@ -53,6 +54,7 @@ public class RotateTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#isComplete()
 	 */
+	@Override
 	public boolean isComplete() {
 		return finish;
 	}
@@ -60,6 +62,7 @@ public class RotateTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#postRender(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void postRender(StateBasedGame game, GameContainer container, Graphics g) throws SlickException {
 		g.translate(container.getWidth()/2, container.getHeight()/2);
 		g.scale(scale,scale);
@@ -81,6 +84,7 @@ public class RotateTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#preRender(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void preRender(StateBasedGame game, GameContainer container,
 			Graphics g) throws SlickException {
 	}
@@ -88,6 +92,7 @@ public class RotateTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#update(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(StateBasedGame game, GameContainer container, int delta)
 			throws SlickException {
 		ang += delta * 0.5f;

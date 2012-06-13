@@ -38,6 +38,7 @@ public class MorphShapeTest extends BasicGame {
 	/**
 	 * @see BasicGame#init(GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		a = new Rectangle(100,100,50,200);
 		a = a.transform(Transform.createRotateTransform(0.1f,100,100));
@@ -56,6 +57,7 @@ public class MorphShapeTest extends BasicGame {
 	/**
 	 * @see BasicGame#update(GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		time += delta * 0.001f;
@@ -65,6 +67,7 @@ public class MorphShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(GameContainer, Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		g.setColor(Color.green);

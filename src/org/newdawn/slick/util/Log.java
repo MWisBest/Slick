@@ -66,6 +66,7 @@ public final class Log {
 	public static void checkVerboseLogSetting() {
 		try {
 			AccessController.doPrivileged(new PrivilegedAction<Object>() {
+				@Override
 				public Object run() {
 					String val = System.getProperty(Log.forceVerboseProperty);
 					if ((val != null) && (val.equalsIgnoreCase(Log.forceVerbosePropertyOnValue))) {

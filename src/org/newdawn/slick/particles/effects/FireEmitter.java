@@ -56,6 +56,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#update(org.newdawn.slick.particles.ParticleSystem, int)
 	 */
+	@Override
 	public void update(ParticleSystem system, int delta) {
 		timer -= delta;
 		if (timer <= 0) {
@@ -73,6 +74,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#updateParticle(org.newdawn.slick.particles.Particle, int)
 	 */
+	@Override
 	public void updateParticle(Particle particle, int delta) {
 		if (particle.getLife() > 600) {
 			particle.adjustSize(0.07f * delta);
@@ -86,6 +88,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#isEnabled()
 	 */
+	@Override
 	public boolean isEnabled() {
 		return true;
 	}
@@ -93,12 +96,14 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#setEnabled(boolean)
 	 */
+	@Override
 	public void setEnabled(boolean enabled) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#completed()
 	 */
+	@Override
 	public boolean completed() {
 		return false;
 	}
@@ -106,6 +111,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#useAdditive()
 	 */
+	@Override
 	public boolean useAdditive() {
 		return false;
 	}
@@ -113,6 +119,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#getImage()
 	 */
+	@Override
 	public Image getImage() {
 		return null;
 	}
@@ -120,6 +127,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#usePoints(org.newdawn.slick.particles.ParticleSystem)
 	 */
+	@Override
 	public boolean usePoints(ParticleSystem system) {
 		return false;
 	}
@@ -127,6 +135,7 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#isOriented()
 	 */
+	@Override
 	public boolean isOriented() {
 		return false;
 	}
@@ -134,12 +143,14 @@ public class FireEmitter implements ParticleEmitter {
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#wrapUp()
 	 */
+	@Override
 	public void wrapUp() {
 	}
 
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#resetState()
 	 */
+	@Override
 	public void resetState() {
 	}
 }

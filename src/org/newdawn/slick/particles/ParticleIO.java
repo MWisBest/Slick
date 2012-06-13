@@ -181,6 +181,7 @@ public class ParticleIO {
 			ConfigurableEmitterFactory factory, ParticleSystem system, Color mask) throws IOException {
 		if (factory == null) {
 			factory = new ConfigurableEmitterFactory() {
+				@Override
 				public ConfigurableEmitter createEmitter(String name) {
 					return new ConfigurableEmitter(name);
 				}
@@ -392,6 +393,7 @@ public class ParticleIO {
 			ConfigurableEmitterFactory factory) throws IOException {
 		if (factory == null) {
 			factory = new ConfigurableEmitterFactory() {
+				@Override
 				public ConfigurableEmitter createEmitter(String name) {
 					return new ConfigurableEmitter(name);
 				}

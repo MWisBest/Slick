@@ -26,6 +26,7 @@ public class WebstartMuffin implements Muffin {
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap, java.lang.String)
 	 */
+	@Override
 	public void saveFile(HashMap<String, ?> scoreMap, String fileName) throws IOException {
 
 		PersistenceService ps;
@@ -85,6 +86,7 @@ public class WebstartMuffin implements Muffin {
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#loadFile(java.lang.String)
 	 */
+	@Override
 	public HashMap<String, Object> loadFile(String fileName) throws IOException {
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 

@@ -72,6 +72,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 * Sorts glyphs by height, tallest first.
 	 */
 	private static final Comparator<Glyph> heightComparator = new Comparator<Glyph>() {
+		@Override
 		public int compare(Glyph o1, Glyph o2) {
 			return o1.getHeight() - o2.getHeight();
 		}
@@ -129,6 +130,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	private final LinkedHashMap<String, DisplayList> displayLists = new LinkedHashMap<String, DisplayList>(DISPLAY_LIST_CACHE_SIZE, 1, true) {
 		private static final long serialVersionUID = 1L;
 
+		@Override
 		protected boolean removeEldestEntry(Entry<String, DisplayList> eldest) {
 			DisplayList displayList = eldest.getValue();
 			if (displayList != null) eldestDisplayListID = displayList.id;
@@ -539,14 +541,17 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		return displayList;
 	}
 
+	@Override
 	public void drawString (float x, float y, String text, Color color, int startIndex, int endIndex) {
 		drawDisplayList(x, y, text, color, startIndex, endIndex);
 	}
 
+	@Override
 	public void drawString (float x, float y, String text) {
 		drawString(x, y, text, Color.white);
 	}
 
+	@Override
 	public void drawString (float x, float y, String text, Color col) {
 		drawString(x, y, text, col, 0, text.length());
 	}
@@ -566,6 +571,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 		if (glyphCode < 0 || glyphCode >= MAX_GLYPH_CODE) {
 			// GlyphVector#getGlyphCode sometimes returns negative numbers on OS X.
 			return new Glyph(codePoint, bounds, vector, index, this) {
+				@Override
 				public boolean isMissing () {
 					return true;
 				}
@@ -609,6 +615,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * @see org.newdawn.slick.Font#getWidth(java.lang.String)
 	 */
+	@Override
 	public int getWidth (String text) {
 		if (text == null) throw new IllegalArgumentException("text cannot be null.");
 		if (text.length() == 0) return 0;
@@ -643,6 +650,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	/**
 	 * @see org.newdawn.slick.Font#getHeight(java.lang.String)
 	 */
+	@Override
 	public int getHeight (String text) {
 		if (text == null) throw new IllegalArgumentException("text cannot be null.");
 		if (text.length() == 0) return 0;
@@ -822,6 +830,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 	 * Returns the distance from one line of text to the next. This is the sum of the descent, ascent, leading, padding top,
 	 * padding bottom, and padding advance y. To change the line height, use {@link #setPaddingAdvanceY(int)}.
 	 */
+	@Override
 	public int getLineHeight() {
 		return descent + ascent + leading + paddingTop + paddingBottom + paddingAdvanceY;
 	}

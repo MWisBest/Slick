@@ -58,6 +58,7 @@ public class CanvasGameContainer extends Canvas {
 	 */
 	public void start() throws SlickException {
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Input.disableControllers();
@@ -87,6 +88,7 @@ public class CanvasGameContainer extends Canvas {
 		}
 
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					container.gameLoop();
@@ -142,6 +144,7 @@ public class CanvasGameContainer extends Canvas {
 		/**
 		 * Updated the FPS counter
 		 */
+		@Override
 		protected void updateFPS() {
 			super.updateFPS();
 		}
@@ -149,6 +152,7 @@ public class CanvasGameContainer extends Canvas {
 		/**
 		 * @see org.newdawn.slick.GameContainer#running()
 		 */
+		@Override
 		protected boolean running() {
 			return super.running() && CanvasGameContainer.this.isDisplayable();
 		}
@@ -156,6 +160,7 @@ public class CanvasGameContainer extends Canvas {
 		/**
 		 * @see org.newdawn.slick.GameContainer#getHeight()
 		 */
+		@Override
 		public int getHeight() {
 			return CanvasGameContainer.this.getHeight();
 		}
@@ -163,6 +168,7 @@ public class CanvasGameContainer extends Canvas {
 		/**
 		 * @see org.newdawn.slick.GameContainer#getWidth()
 		 */
+		@Override
 		public int getWidth() {
 			return CanvasGameContainer.this.getWidth();
 		}

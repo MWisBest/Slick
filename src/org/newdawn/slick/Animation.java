@@ -322,6 +322,7 @@ public class Animation implements Renderable {
 	 * @param x The x position to draw the animation at
 	 * @param y The y position to draw the animation at
 	 */
+	@Override
 	public void draw(float x,float y) {
 		draw(x,y,getWidth(),getHeight());
 	}
@@ -651,6 +652,7 @@ public class Animation implements Renderable {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		String res = "[Animation ("+frames.size()+") ";
 		for (int i=0;i<frames.size();i++) {

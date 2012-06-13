@@ -79,6 +79,7 @@ public class PBufferGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#disable()
 	 */
+	@Override
 	protected void disable() {
 		GL.flush();
 
@@ -98,6 +99,7 @@ public class PBufferGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#enable()
 	 */
+	@Override
 	protected void enable() {
 		SlickCallable.enterSafeBlock();
 
@@ -155,6 +157,7 @@ public class PBufferGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#destroy()
 	 */
+	@Override
 	public void destroy() {
 		super.destroy();
 
@@ -164,6 +167,7 @@ public class PBufferGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#flush()
 	 */
+	@Override
 	public void flush() {
 		super.flush();
 

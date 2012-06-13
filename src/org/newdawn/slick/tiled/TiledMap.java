@@ -594,6 +594,7 @@ public class TiledMap {
 			factory.setValidating(false);
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			builder.setEntityResolver(new EntityResolver() {
+				@Override
 				public InputSource resolveEntity(String publicId,
 						String systemId) throws SAXException, IOException {
 					return new InputSource(

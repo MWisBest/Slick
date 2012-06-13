@@ -31,6 +31,7 @@ public class TestState1 extends BasicGameState {
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#getID()
 	 */
+	@Override
 	public int getID() {
 		return ID;
 	}
@@ -38,6 +39,7 @@ public class TestState1 extends BasicGameState {
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#init(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
 	 */
+	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
@@ -46,6 +48,7 @@ public class TestState1 extends BasicGameState {
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#render(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		g.setFont(font);
 		g.setColor(Color.white);
@@ -58,12 +61,14 @@ public class TestState1 extends BasicGameState {
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#update(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, int)
 	 */
+	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#keyReleased(int, char)
 	 */
+	@Override
 	public void keyReleased(int key, char c) {
 
 		if (key == Input.KEY_2) {
@@ -71,10 +76,12 @@ public class TestState1 extends BasicGameState {
 
 			final long start = System.currentTimeMillis();
 			CrossStateTransition t = new CrossStateTransition(target) {
+				@Override
 				public boolean isComplete() {
 					return (System.currentTimeMillis() - start) > 2000;
 				}
 
+				@Override
 				public void init(GameState firstState, GameState secondState) {
 				}
 			};

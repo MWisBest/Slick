@@ -91,6 +91,7 @@ public class OutlineWobbleEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#toString()
 	 */
+	@Override
 	public String toString() {
 		return "Outline (Wobble)";
 	}
@@ -98,6 +99,7 @@ public class OutlineWobbleEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#getValues()
 	 */
+	@Override
 	public List<Value> getValues() {
 		List<Value> values = super.getValues();
 		values.remove(2); // Remove "Join".
@@ -110,6 +112,7 @@ public class OutlineWobbleEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#setValues(java.util.List)
 	 */
+	@Override
 	public void setValues(List<Value> values) {
 		super.setValues(values);
 		for (Value value : values) {
@@ -134,6 +137,7 @@ public class OutlineWobbleEffect extends OutlineEffect {
 		/**
 		 * @see java.awt.Stroke#createStrokedShape(java.awt.Shape)
 		 */
+		@Override
 		public Shape createStrokedShape (Shape shape) {
 			GeneralPath result = new GeneralPath();
 			shape = new BasicStroke(getWidth(), BasicStroke.CAP_SQUARE, getJoin()).createStrokedShape(shape);

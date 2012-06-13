@@ -173,6 +173,7 @@ public abstract class AbstractComponent extends InputAdapter {
 	 * 
 	 * @see org.newdawn.slick.gui.AbstractComponent#mouseReleased(int, int, int)
 	 */
+	@Override
 	public void mouseReleased(int button, int x, int y) {
 		setFocus(Rectangle.contains(x, y, getX(), getY(), getWidth(),
 				getHeight()));

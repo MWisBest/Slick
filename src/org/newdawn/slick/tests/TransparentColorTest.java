@@ -29,6 +29,7 @@ public class TransparentColorTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = new Image("testdata/transtest.png");
 		timage = new Image("testdata/transtest.png",new Color(94,66,41,255));
@@ -37,6 +38,7 @@ public class TransparentColorTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.setBackground(Color.red);
 		image.draw(10,10);
@@ -46,6 +48,7 @@ public class TransparentColorTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 	}
 
@@ -67,6 +70,7 @@ public class TransparentColorTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 	}
 }

@@ -111,6 +111,7 @@ public final class ShapeRenderer {
 		TextureImpl.bindNone();
 
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				// do nothing, we're just filling the shape this time
 				return null;
@@ -191,6 +192,7 @@ public final class ShapeRenderer {
 		image.getTexture().bind();
 
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				float tx = x * scaleX;
 				float ty = y * scaleY;
@@ -229,6 +231,7 @@ public final class ShapeRenderer {
 		image.getTexture().bind();
 
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				x -= shape.getMinX();
 				y -= shape.getMinY();
@@ -270,6 +273,7 @@ public final class ShapeRenderer {
 		TextureImpl.bindNone();
 
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				fill.colorAt(shape, x, y).bind();
 				Vector2f offset = fill.getOffsetAt(shape, x, y);
@@ -306,6 +310,7 @@ public final class ShapeRenderer {
 
 		final float center[] = shape.getCenter();
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				fill.colorAt(shape, x - center[0], y - center[1]).bind();
 				Vector2f offset = fill.getOffsetAt(shape, x, y);
@@ -345,6 +350,7 @@ public final class ShapeRenderer {
 		image.getTexture().bind();
 
 		fill(shape, new PointCallback() {
+			@Override
 			public float[] preRenderPoint(Shape shape, float x, float y) {
 				Vector2f tex = gen.getCoordFor(x, y);
 				GL.glTexCoord2f(tex.x, tex.y);

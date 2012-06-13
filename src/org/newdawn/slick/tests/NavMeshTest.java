@@ -59,6 +59,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * 
 	 * @param container the container the game is running in
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setShowFPS(false);
 
@@ -76,6 +77,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	/**
 	 * Update data map etc
 	 */
+	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		if (container.getInput().isKeyPressed(Input.KEY_1)) {
@@ -92,6 +94,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * @param container The container we're running the game in
 	 * @param g The graphics context on which to render
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		g.translate(50,50);
@@ -137,6 +140,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getMover()
 	 */
+	@Override
 	public Mover getMover() {
 		return null;
 	}
@@ -145,6 +149,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSearchDistance()
 	 */
+	@Override
 	public int getSearchDistance() {
 		return 0;
 	}
@@ -153,6 +158,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSourceX()
 	 */
+	@Override
 	public int getSourceX() {
 		return 0;
 	}
@@ -161,6 +167,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSourceY()
 	 */
+	@Override
 	public int getSourceY() {
 		return 0;
 	}
@@ -169,6 +176,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 	 * (non-Javadoc)
 	 * @see org.newdawn.slick.BasicGame#mousePressed(int, int, int)
 	 */
+	@Override
 	public void mousePressed(int button, int x, int y) {
 		float mx = (x - 50) / 10.0f;
 		float my = (y - 50) / 10.0f;
@@ -207,6 +215,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 		 * (non-Javadoc)
 		 * @see org.newdawn.slick.util.pathfinding.TileBasedMap#blocked(org.newdawn.slick.util.pathfinding.PathFindingContext, int, int)
 		 */
+		@Override
 		public boolean blocked(PathFindingContext context, int tx, int ty) {
 			if ((tx < 0) || (ty < 0) || (tx >= 50) || (ty >= 50)) {
 				return false;
@@ -219,6 +228,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 		 * (non-Javadoc)
 		 * @see org.newdawn.slick.util.pathfinding.TileBasedMap#getCost(org.newdawn.slick.util.pathfinding.PathFindingContext, int, int)
 		 */
+		@Override
 		public float getCost(PathFindingContext context, int tx, int ty) {
 			return 1;
 		}
@@ -227,6 +237,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 		 * (non-Javadoc)
 		 * @see org.newdawn.slick.util.pathfinding.TileBasedMap#getHeightInTiles()
 		 */
+		@Override
 		public int getHeightInTiles() {
 			return 50;
 		}
@@ -235,6 +246,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 		 * (non-Javadoc)
 		 * @see org.newdawn.slick.util.pathfinding.TileBasedMap#getWidthInTiles()
 		 */
+		@Override
 		public int getWidthInTiles() {
 			return 50;
 		}
@@ -243,6 +255,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext {
 		 * (non-Javadoc)
 		 * @see org.newdawn.slick.util.pathfinding.TileBasedMap#pathFinderVisited(int, int)
 		 */
+		@Override
 		public void pathFinderVisited(int x, int y) {
 		}
 	}

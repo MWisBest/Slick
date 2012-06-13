@@ -169,6 +169,7 @@ public class SpriteSheet extends Image {
 	/**
 	 * @see org.newdawn.slick.Image#initImpl()
 	 */
+	@Override
 	protected void initImpl() {
 		if (subImages != null) {
 			return;
@@ -271,6 +272,7 @@ public class SpriteSheet extends Image {
 	/**
 	 * @see org.newdawn.slick.Image#endUse()
 	 */
+	@Override
 	public void endUse() {
 		if (target == this) {
 			super.endUse();
@@ -282,6 +284,7 @@ public class SpriteSheet extends Image {
 	/**
 	 * @see org.newdawn.slick.Image#startUse()
 	 */
+	@Override
 	public void startUse() {
 		if (target == this) {
 			super.startUse();
@@ -293,6 +296,7 @@ public class SpriteSheet extends Image {
 	/**
 	 * @see org.newdawn.slick.Image#setTexture(org.newdawn.slick.opengl.Texture)
 	 */
+	@Override
 	public void setTexture(Texture texture) {
 		if (target == this) {
 			super.setTexture(texture);

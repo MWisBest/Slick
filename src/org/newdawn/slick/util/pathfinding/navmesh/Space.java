@@ -313,6 +313,7 @@ public class Space {
 	 * 
 	 * @return The string representation of this instance
 	 */
+	@Override
 	public String toString() {
 		return "[Space "+x+","+y+" "+width+","+height+"]";
 	}

@@ -40,6 +40,7 @@ public class CurveTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.getGraphics().setBackground(Color.white);
 
@@ -54,6 +55,7 @@ public class CurveTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 	}
 
@@ -70,6 +72,7 @@ public class CurveTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setColor(Color.gray);
 		drawMarker(g, p1);

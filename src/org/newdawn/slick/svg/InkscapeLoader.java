@@ -138,6 +138,7 @@ public class InkscapeLoader implements Loader {
 
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			builder.setEntityResolver(new EntityResolver() {
+				@Override
 				public InputSource resolveEntity(String publicId,
 						String systemId) throws SAXException, IOException {
 					return new InputSource(
@@ -180,6 +181,7 @@ public class InkscapeLoader implements Loader {
 	 * @see org.newdawn.slick.svg.Loader#loadChildren(org.w3c.dom.Element,
 	 *      org.newdawn.slick.geom.Transform)
 	 */
+	@Override
 	public void loadChildren(Element element, Transform t)
 			throws ParsingException {
 		NodeList list = element.getChildNodes();

@@ -31,6 +31,7 @@ public class ParticleTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		Image image = new Image("testdata/particle.tga", true);
 		system = new ParticleSystem(image);
@@ -45,6 +46,7 @@ public class ParticleTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		for (int i=0;i<100;i++) {
 			g.translate(1,1);
@@ -58,6 +60,7 @@ public class ParticleTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		system.update(delta);
 	}
@@ -65,6 +68,7 @@ public class ParticleTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
 			System.exit(0);

@@ -29,6 +29,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
 	 */
+	@Override
 	public int getDepth() {
 		return 32;
 	}
@@ -36,6 +37,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getHeight()
 	 */
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -43,6 +45,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getImageBufferData()
 	 */
+	@Override
 	public ByteBuffer getImageBufferData() {
 		return BufferUtils.createByteBuffer(getTexWidth() * getTexHeight() * 4);
 	}
@@ -50,6 +53,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexHeight()
 	 */
+	@Override
 	public int getTexHeight() {
 		return InternalTextureLoader.get2Fold(height);
 	}
@@ -57,6 +61,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexWidth()
 	 */
+	@Override
 	public int getTexWidth() {
 		return InternalTextureLoader.get2Fold(width);
 	}
@@ -64,6 +69,7 @@ public class EmptyImageData implements ImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getWidth()
 	 */
+	@Override
 	public int getWidth() {
 		return width;
 	}

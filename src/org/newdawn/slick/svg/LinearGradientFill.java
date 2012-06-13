@@ -51,6 +51,7 @@ public class LinearGradientFill implements TexCoordGenerator {
 	/**
 	 * @see org.newdawn.slick.geom.TexCoordGenerator#getCoordFor(float, float)
 	 */
+	@Override
 	public Vector2f getCoordFor(float x, float y) {
 		Vector2f result = new Vector2f();
 		line.getClosestPoint(new Vector2f(x,y), result);

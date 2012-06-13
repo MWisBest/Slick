@@ -53,6 +53,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		if (container instanceof AppGameContainer) {
 			app = (AppGameContainer) container;
@@ -65,6 +66,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.drawString("left shift down: "+lshift, 100, 240);
 		g.drawString("right shift down: "+rshift, 100, 260);
@@ -89,6 +91,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		lshift = container.getInput().isKeyDown(Input.KEY_LSHIFT);
 		rshift = container.getInput().isKeyDown(Input.KEY_RSHIFT);
@@ -111,6 +114,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
 			System.exit(0);
@@ -128,6 +132,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyReleased(int, char)
 	 */
+	@Override
 	public void keyReleased(int key, char c) {
 		message = "You pressed key code "+key+" (character = "+c+")";
 	}
@@ -135,6 +140,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#mousePressed(int, int, int)
 	 */
+	@Override
 	public void mousePressed(int button, int x, int y) {
 		if (button == 0) {
 			buttonDown = true;
@@ -146,6 +152,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseReleased(int, int, int)
 	 */
+	@Override
 	public void mouseReleased(int button, int x, int y) {
 		if (button == 0) {
 			buttonDown = false;
@@ -157,6 +164,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseClicked(int, int, int, int)
 	 */
+	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 		System.out.println("CLICKED:"+x+","+y+" "+clickCount);
 	}
@@ -164,6 +172,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseWheelMoved(int)
 	 */
+	@Override
 	public void mouseWheelMoved(int change) {
 		message = "Mouse wheel moved: "+change;
 
@@ -178,6 +187,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseMoved(int, int, int, int)
 	 */
+	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		if (buttonDown) {
 			lines.add(new Line(oldx,oldy,newx,newy));
@@ -227,6 +237,7 @@ public class InputTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerButtonPressed(int, int)
 	 */
+	@Override
 	public void controllerButtonPressed(int controller, int button) {
 		super.controllerButtonPressed(controller, button);
 

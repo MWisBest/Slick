@@ -49,6 +49,7 @@ public class GUITest extends BasicGame implements ComponentListener {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		if (container instanceof AppGameContainer) {
 			app = (AppGameContainer) container;
@@ -57,12 +58,14 @@ public class GUITest extends BasicGame implements ComponentListener {
 
 		font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
 		field = new TextField(container, font, 150,20,500,35, new ComponentListener() {
+			@Override
 			public void componentActivated(AbstractComponent source) {
 				message = "Entered1: "+field.getText();
 				field2.setFocus(true);
 			}
 		});
 		field2 = new TextField(container, font, 150,70,500,35,new ComponentListener() {
+			@Override
 			public void componentActivated(AbstractComponent source) {
 				message = "Entered2: "+field2.getText();
 				field.setFocus(true);
@@ -84,6 +87,7 @@ public class GUITest extends BasicGame implements ComponentListener {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		background.draw(0, 0, 800, 500);
 
@@ -100,12 +104,14 @@ public class GUITest extends BasicGame implements ComponentListener {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
 			System.exit(0);
@@ -142,6 +148,7 @@ public class GUITest extends BasicGame implements ComponentListener {
 	/**
 	 * @see org.newdawn.slick.gui.ComponentListener#componentActivated(org.newdawn.slick.gui.AbstractComponent)
 	 */
+	@Override
 	public void componentActivated(AbstractComponent source) {
 		System.out.println("ACTIVL : "+source);
 		for (int i=0;i<4;i++) {

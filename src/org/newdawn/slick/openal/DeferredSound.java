@@ -63,6 +63,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#load()
 	 */
+	@Override
 	public void load() throws IOException {
 		boolean before = SoundStore.get().isDeferredLoading();
 		SoundStore.get().setDeferredLoading(false);
@@ -109,6 +110,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.openal.AudioImpl#isPlaying()
 	 */
+	@Override
 	public boolean isPlaying() {
 		checkTarget();
 
@@ -118,6 +120,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.openal.AudioImpl#playAsMusic(float, float, boolean)
 	 */
+	@Override
 	public int playAsMusic(float pitch, float gain, boolean loop) {
 		checkTarget();
 		return target.playAsMusic(pitch, gain, loop);
@@ -126,6 +129,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.openal.AudioImpl#playAsSoundEffect(float, float, boolean)
 	 */
+	@Override
 	public int playAsSoundEffect(float pitch, float gain, boolean loop) {
 		checkTarget();
 		return target.playAsSoundEffect(pitch, gain, loop);
@@ -141,6 +145,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	 * @param y The y position of the sound
 	 * @param z The z position of the sound
 	 */
+	@Override
 	public int playAsSoundEffect(float pitch, float gain, boolean loop, float x, float y, float z) {
 		checkTarget();
 		return target.playAsSoundEffect(pitch, gain, loop, x, y, z);
@@ -149,6 +154,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.openal.AudioImpl#stop()
 	 */
+	@Override
 	public void stop() {
 		checkTarget();
 		target.stop();
@@ -157,6 +163,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return ref;
 	}

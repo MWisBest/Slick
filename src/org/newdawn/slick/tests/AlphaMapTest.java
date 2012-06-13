@@ -29,6 +29,7 @@ public class AlphaMapTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		alphaMap = new Image("testdata/alphamap.png");
 		textureMap = new Image("testdata/grass.png");
@@ -38,6 +39,7 @@ public class AlphaMapTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 	}
@@ -45,6 +47,7 @@ public class AlphaMapTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		g.clearAlphaMap();
@@ -64,6 +67,7 @@ public class AlphaMapTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 	}
 

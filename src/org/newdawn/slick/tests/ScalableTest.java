@@ -25,18 +25,21 @@ public class ScalableTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 	}
 
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 	}
 
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setColor(new Color(0.4f,0.6f,0.8f));
 		g.fillRect(0,0, 1024,568);
@@ -84,6 +87,7 @@ public class ScalableTest extends BasicGame {
 		try {
 			ScalableGame game = new ScalableGame(new ScalableTest(),1024,568,true) {
 
+				@Override
 				protected void renderOverlay(GameContainer container, Graphics g) {
 					g.setColor(Color.white);
 					g.drawString("Outside The Game", 350, 10);

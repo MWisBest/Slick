@@ -75,6 +75,7 @@ public class PBufferUniqueGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#disable()
 	 */
+	@Override
 	protected void disable() {
 		// Bind the texture after rendering.
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, image.getTexture().getTextureID());
@@ -94,6 +95,7 @@ public class PBufferUniqueGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#enable()
 	 */
+	@Override
 	protected void enable() {
 		SlickCallable.enterSafeBlock();
 
@@ -150,6 +152,7 @@ public class PBufferUniqueGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#destroy()
 	 */
+	@Override
 	public void destroy() {
 		super.destroy();
 
@@ -159,6 +162,7 @@ public class PBufferUniqueGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#flush()
 	 */
+	@Override
 	public void flush() {
 		super.flush();
 

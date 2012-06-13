@@ -168,6 +168,7 @@ public class MorphShape extends Shape {
 	/**
 	 * @see MorphShape#createPoints()
 	 */
+	@Override
 	protected void createPoints() {
 		if (current == next) {
 			System.arraycopy(current.points,0,points,0,points.length);
@@ -186,6 +187,7 @@ public class MorphShape extends Shape {
 	/**
 	 * @see MorphShape#transform(Transform)
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		createPoints();
 		Polygon poly = new Polygon(points);

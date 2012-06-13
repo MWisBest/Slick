@@ -44,6 +44,7 @@ public class CanvasContainerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = tga = new Image("testdata/logo.tga");
 		scaleMe = new Image("testdata/logo.tga", true, Image.FILTER_NEAREST);
@@ -56,6 +57,7 @@ public class CanvasContainerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		image.draw(0,0);
 		image.draw(500,0,200,100);
@@ -82,6 +84,7 @@ public class CanvasContainerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		rot += delta * 0.1f;
 		if (rot > 360) {
@@ -104,6 +107,7 @@ public class CanvasContainerTest extends BasicGame {
 			frame.add(container);
 
 			frame.addWindowListener(new WindowAdapter() {
+				@Override
 				public void windowClosing(WindowEvent e) {
 					System.exit(0);
 				}
@@ -118,6 +122,7 @@ public class CanvasContainerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SPACE) {
 			if (image == gif) {

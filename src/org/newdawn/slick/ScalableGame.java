@@ -62,6 +62,7 @@ public class ScalableGame implements Game {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.container = container;
 
@@ -126,6 +127,7 @@ public class ScalableGame implements Game {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		if ((targetHeight != container.getHeight()) ||
 				(targetWidth != container.getWidth())) {
@@ -138,6 +140,7 @@ public class ScalableGame implements Game {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public final void render(GameContainer container, Graphics g)
 			throws SlickException {
 		int yoffset = 0;
@@ -175,6 +178,7 @@ public class ScalableGame implements Game {
 	/**
 	 * @see org.newdawn.slick.Game#closeRequested()
 	 */
+	@Override
 	public boolean closeRequested() {
 		return held.closeRequested();
 	}
@@ -182,6 +186,7 @@ public class ScalableGame implements Game {
 	/**
 	 * @see org.newdawn.slick.Game#getTitle()
 	 */
+	@Override
 	public String getTitle() {
 		return held.getTitle();
 	}

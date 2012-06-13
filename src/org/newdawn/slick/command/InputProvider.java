@@ -292,6 +292,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#isAcceptingInput()
 		 */
+		@Override
 		public boolean isAcceptingInput() {
 			return true;
 		}
@@ -299,6 +300,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#keyPressed(int, char)
 		 */
+		@Override
 		public void keyPressed(int key, char c) {
 			Command command = commands.get(new KeyControl(key));
 			if (command != null) {
@@ -309,6 +311,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#keyReleased(int, char)
 		 */
+		@Override
 		public void keyReleased(int key, char c) {
 			Command command = commands.get(new KeyControl(key));
 			if (command != null) {
@@ -319,6 +322,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#mousePressed(int, int, int)
 		 */
+		@Override
 		public void mousePressed(int button, int x, int y) {
 			Command command = commands.get(new MouseButtonControl(
 					button));
@@ -330,6 +334,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#mouseReleased(int, int, int)
 		 */
+		@Override
 		public void mouseReleased(int button, int x, int y) {
 			Command command = commands.get(new MouseButtonControl(
 					button));
@@ -341,6 +346,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerLeftPressed(int)
 		 */
+		@Override
 		public void controllerLeftPressed(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -353,6 +359,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerLeftReleased(int)
 		 */
+		@Override
 		public void controllerLeftReleased(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -365,6 +372,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerRightPressed(int)
 		 */
+		@Override
 		public void controllerRightPressed(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -377,6 +385,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerRightReleased(int)
 		 */
+		@Override
 		public void controllerRightReleased(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -389,6 +398,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerUpPressed(int)
 		 */
+		@Override
 		public void controllerUpPressed(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -400,6 +410,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerUpReleased(int)
 		 */
+		@Override
 		public void controllerUpReleased(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -412,6 +423,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerDownPressed(int)
 		 */
+		@Override
 		public void controllerDownPressed(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -424,6 +436,7 @@ public class InputProvider {
 		/**
 		 * @see org.newdawn.slick.util.InputAdapter#controllerDownReleased(int)
 		 */
+		@Override
 		public void controllerDownReleased(int controller) {
 			Command command = commands
 					.get(new ControllerDirectionControl(controller,
@@ -437,6 +450,7 @@ public class InputProvider {
 		 * @see org.newdawn.slick.util.InputAdapter#controllerButtonPressed(int,
 		 *      int)
 		 */
+		@Override
 		public void controllerButtonPressed(int controller, int button) {
 			Command command = commands
 					.get(new ControllerButtonControl(controller, button));
@@ -449,6 +463,7 @@ public class InputProvider {
 		 * @see org.newdawn.slick.util.InputAdapter#controllerButtonReleased(int,
 		 *      int)
 		 */
+		@Override
 		public void controllerButtonReleased(int controller, int button) {
 			Command command = commands
 					.get(new ControllerButtonControl(controller, button));

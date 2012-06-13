@@ -98,6 +98,7 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener {
 	/**
 	 * @see BasicGame#init(GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		util.setListener(this);
 		init();
@@ -107,6 +108,7 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener {
 	/**
 	 * @see BasicGame#update(GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		if (container.getInput().isKeyPressed(Input.KEY_SPACE)) {
@@ -161,6 +163,7 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener {
 	/**
 	 * @see org.newdawn.slick.Game#render(GameContainer, Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		g.drawString("Space - toggle movement of cutting shape",530,10);
@@ -219,18 +222,22 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener {
 		}
 	}
 
+	@Override
 	public void pointExcluded(float x, float y) {
 		exclude.add(new Vector2f(x,y));
 	}
 
+	@Override
 	public void pointIntersected(float x, float y) {
 		marks.add(new Vector2f(x,y));
 	}
 
+	@Override
 	public void pointUsed(float x, float y) {
 		points.add(new Vector2f(x,y));
 	}
 
+	@Override
 	public void mouseWheelMoved(int change) {
 		if (dynamic) {
 			if (change < 0) {

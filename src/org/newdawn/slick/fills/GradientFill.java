@@ -194,6 +194,7 @@ public class GradientFill implements ShapeFill {
 	 * @param y The y coordinate of the point being coloured
 	 * @return The colour that should be applied based on the control points of this gradient
 	 */
+	@Override
 	public Color colorAt(Shape shape, float x, float y) {
 		if (local) {
 			return colorAt(x-shape.getCenterX(),y-shape.getCenterY());
@@ -247,6 +248,7 @@ public class GradientFill implements ShapeFill {
 	/**
 	 * @see org.newdawn.slick.ShapeFill#getOffsetAt(org.newdawn.slick.geom.Shape, float, float)
 	 */
+	@Override
 	public Vector2f getOffsetAt(Shape shape, float x, float y) {
 		return none;
 	}

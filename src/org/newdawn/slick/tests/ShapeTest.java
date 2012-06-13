@@ -68,6 +68,7 @@ public class ShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		shapes = new ArrayList<Shape>();
 		rect = new Rectangle(10, 10, 100, 80);
@@ -89,6 +90,7 @@ public class ShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.setColor(Color.green);
 
@@ -118,6 +120,7 @@ public class ShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 
 		createPoly(200,200);
@@ -261,6 +264,7 @@ public class ShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		keys[key] = true;
 		lastChar[key] = c;
@@ -269,6 +273,7 @@ public class ShapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyReleased(int, char)
 	 */
+	@Override
 	public void keyReleased(int key, char c) {
 		keys[key] = false;
 	}

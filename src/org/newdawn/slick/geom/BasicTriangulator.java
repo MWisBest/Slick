@@ -32,6 +32,7 @@ public class BasicTriangulator implements Triangulator {
 	 * @param x The x coordinate of the point
 	 * @param y the y coordinate of the point
 	 */
+	@Override
 	public void addPolyPoint(float x, float y) {
 		Point p = new Point(x,y);
 		if (!poly.contains(p)) {
@@ -63,6 +64,7 @@ public class BasicTriangulator implements Triangulator {
 	 * 
 	 * @return True if we managed the task
 	 */
+	@Override
 	public boolean triangulate() {
 		tried = true;
 
@@ -75,6 +77,7 @@ public class BasicTriangulator implements Triangulator {
 	 * 
 	 * @return The number of triangles produced
 	 */
+	@Override
 	public int getTriangleCount() {
 		if (!tried) {
 			throw new RuntimeException("Call triangulate() before accessing triangles");
@@ -90,6 +93,7 @@ public class BasicTriangulator implements Triangulator {
 	 * (0 - 2)
 	 * @return The x,y coordinate pair for the point
 	 */
+	@Override
 	public float[] getTrianglePoint(int tri, int i) {
 		if (!tried) {
 			throw new RuntimeException("Call triangulate() before accessing triangles");
@@ -340,6 +344,7 @@ public class BasicTriangulator implements Triangulator {
 		/**
 		 * @see java.lang.Object#hashCode()
 		 */
+		@Override
 		public int hashCode() {
 			return (int) (x * y * 31);
 		}
@@ -347,6 +352,7 @@ public class BasicTriangulator implements Triangulator {
 		/**
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
+		@Override
 		public boolean equals(Object other) {
 			if (other instanceof Point) {
 				Point p = (Point) other;
@@ -360,6 +366,7 @@ public class BasicTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#startHole()
 	 */
+	@Override
 	public void startHole() {
 		// TODO Auto-generated method stub
 

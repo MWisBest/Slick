@@ -124,6 +124,7 @@ public class Path extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#createPoints()
 	 */
+	@Override
 	protected void createPoints() {
 		points = new float[localPoints.size() * 2];
 		for (int i=0;i<localPoints.size();i++) {
@@ -136,6 +137,7 @@ public class Path extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#transform(org.newdawn.slick.geom.Transform)
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		Path p = new Path(cx,cy);
 		p.localPoints = transform(localPoints, transform);
@@ -237,6 +239,7 @@ public class Path extends Shape {
 	 * 
 	 * @return True if this is a closed shape
 	 */
+	@Override
 	public boolean closed() {
 		return closed;
 	}

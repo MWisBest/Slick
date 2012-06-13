@@ -29,6 +29,7 @@ public class ImageIOWriter implements ImageWriter {
 	 * @see org.newdawn.slick.imageout.ImageWriter#saveImage(org.newdawn.slick.Image,
 	 * java.lang.String, java.io.OutputStream, boolean)
 	 */
+	@Override
 	public void saveImage(Image image, String format, OutputStream output, boolean hasAlpha)
 			throws IOException {
 		// conver the image into a byte buffer by reading each pixel in turn

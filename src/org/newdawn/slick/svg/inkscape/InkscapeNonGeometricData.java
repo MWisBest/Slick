@@ -28,6 +28,7 @@ public class InkscapeNonGeometricData extends NonGeometricData {
 	/**
 	 * @see org.newdawn.slick.svg.NonGeometricData#getAttribute(java.lang.String)
 	 */
+	@Override
 	public String getAttribute(String attribute) {
 		String result = super.getAttribute(attribute);
 		if (result == null) {

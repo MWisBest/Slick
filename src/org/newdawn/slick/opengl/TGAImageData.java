@@ -51,6 +51,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
 	 */
+	@Override
 	public int getDepth() {
 		return pixelDepth;
 	}
@@ -58,6 +59,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getWidth()
 	 */
+	@Override
 	public int getWidth() {
 		return width;
 	}
@@ -65,6 +67,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getHeight()
 	 */
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -72,6 +75,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexWidth()
 	 */
+	@Override
 	public int getTexWidth() {
 		return texWidth;
 	}
@@ -79,6 +83,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexHeight()
 	 */
+	@Override
 	public int getTexHeight() {
 		return texHeight;
 	}
@@ -86,6 +91,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.LoadableImageData#loadImage(java.io.InputStream)
 	 */
+	@Override
 	public ByteBuffer loadImage(InputStream fis) throws IOException {
 		return loadImage(fis,true, null);
 	}
@@ -93,6 +99,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.LoadableImageData#loadImage(java.io.InputStream, boolean, int[])
 	 */
+	@Override
 	public ByteBuffer loadImage(InputStream fis, boolean flipped, int[] transparent) throws IOException {
 		return loadImage(fis, flipped, false, transparent);
 	}
@@ -100,6 +107,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.LoadableImageData#loadImage(java.io.InputStream, boolean, boolean, int[])
 	 */
+	@Override
 	public ByteBuffer loadImage(InputStream fis, boolean flipped, boolean forceAlpha, int[] transparent) throws IOException {
 		if (transparent != null) {
 			forceAlpha = true;
@@ -313,6 +321,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getImageBufferData()
 	 */
+	@Override
 	public ByteBuffer getImageBufferData() {
 		throw new RuntimeException("TGAImageData doesn't store it's image.");
 	}
@@ -320,6 +329,7 @@ public class TGAImageData implements LoadableImageData {
 	/**
 	 * @see org.newdawn.slick.opengl.LoadableImageData#configureEdging(boolean)
 	 */
+	@Override
 	public void configureEdging(boolean edging) {
 	}
 }

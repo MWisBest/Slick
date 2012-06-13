@@ -46,6 +46,7 @@ public class DeferredLoadingTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		LoadingList.setDeferredLoading(true);
 
@@ -72,6 +73,7 @@ public class DeferredLoadingTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		if (nextResource != null) {
 			g.drawString("Loading: "+nextResource.getDescription(), 100, 100);
@@ -92,6 +94,7 @@ public class DeferredLoadingTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (nextResource != null) {
 			try {
@@ -134,6 +137,7 @@ public class DeferredLoadingTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 	}
 }

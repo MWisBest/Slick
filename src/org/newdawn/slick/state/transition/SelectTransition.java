@@ -64,6 +64,7 @@ public class SelectTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#init(org.newdawn.slick.state.GameState, org.newdawn.slick.state.GameState)
 	 */
+	@Override
 	public void init(GameState firstState, GameState secondState) {
 		prev = secondState;
 	}
@@ -71,6 +72,7 @@ public class SelectTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#isComplete()
 	 */
+	@Override
 	public boolean isComplete() {
 		return finish;
 	}
@@ -78,6 +80,7 @@ public class SelectTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#postRender(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void postRender(StateBasedGame game, GameContainer container, Graphics g) throws SlickException {
 		g.resetTransform();
 
@@ -94,6 +97,7 @@ public class SelectTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#preRender(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void preRender(StateBasedGame game, GameContainer container,
 			Graphics g) throws SlickException {
 		if (moveBackDone) {
@@ -113,6 +117,7 @@ public class SelectTransition implements Transition {
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#update(org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(StateBasedGame game, GameContainer container, int delta)
 			throws SlickException {
 		if (!init) {

@@ -224,6 +224,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#getX()
 	 */
+	@Override
 	public float getX() {
 		return getX1();
 	}
@@ -231,6 +232,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#getY()
 	 */
+	@Override
 	public float getY() {
 		return getY1();
 	}
@@ -345,6 +347,7 @@ public class Line extends Shape {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return "[Line " + start + "," + end + "]";
 	}
@@ -424,6 +427,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#createPoints()
 	 */
+	@Override
 	protected void createPoints() {
 		points = new float[4];
 		points[0] = getX1();
@@ -435,6 +439,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#transform(org.newdawn.slick.geom.Transform)
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		float[] temp = new float[4];
 		createPoints();
@@ -446,6 +451,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#closed()
 	 */
+	@Override
 	public boolean closed() {
 		return false;
 	}
@@ -453,6 +459,7 @@ public class Line extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#intersects(org.newdawn.slick.geom.Shape)
 	 */
+	@Override
 	public boolean intersects(Shape shape)
 	{
 		if (shape instanceof Circle)

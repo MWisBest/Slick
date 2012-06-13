@@ -212,6 +212,7 @@ public class MouseOverArea extends AbstractComponent {
 	 * 
 	 * @return x
 	 */
+	@Override
 	public int getX() {
 		return (int) area.getX();
 	}
@@ -221,6 +222,7 @@ public class MouseOverArea extends AbstractComponent {
 	 * 
 	 * @return y
 	 */
+	@Override
 	public int getY() {
 		return (int) area.getY();
 	}
@@ -289,6 +291,7 @@ public class MouseOverArea extends AbstractComponent {
 	 * @see org.newdawn.slick.gui.AbstractComponent#render(org.newdawn.slick.gui.GUIContext,
 	 *      org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GUIContext container, Graphics g) {
 		if (currentImage != null) {
 
@@ -367,6 +370,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseMoved(int, int, int, int)
 	 */
+	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		over = area.contains(newx, newy);
 	}
@@ -374,6 +378,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseDragged(int, int, int, int)
 	 */
+	@Override
 	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
 		mouseMoved(oldx, oldy, newx, newy);
 	}
@@ -381,6 +386,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mousePressed(int, int, int)
 	 */
+	@Override
 	public void mousePressed(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
@@ -391,6 +397,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.util.InputAdapter#mouseReleased(int, int, int)
 	 */
+	@Override
 	public void mouseReleased(int button, int mx, int my) {
 		over = area.contains(mx, my);
 		if (button == 0) {
@@ -401,6 +408,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#getHeight()
 	 */
+	@Override
 	public int getHeight() {
 		return (int) (area.getMaxY() - area.getY());
 	}
@@ -408,6 +416,7 @@ public class MouseOverArea extends AbstractComponent {
 	/**
 	 * @see org.newdawn.slick.gui.AbstractComponent#getWidth()
 	 */
+	@Override
 	public int getWidth() {
 		return (int) (area.getMaxX() - area.getX());
 	}
@@ -427,6 +436,7 @@ public class MouseOverArea extends AbstractComponent {
 	 * @param x The x coordinate of this area
 	 * @param y The y coordiante of this area
 	 */
+	@Override
 	public void setLocation(int x, int y) {
 		setLocation((float) x,(float) y);
 	}

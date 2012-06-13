@@ -76,6 +76,7 @@ public class Curve extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#createPoints()
 	 */
+	@Override
 	protected void createPoints() {
 		float step = 1.0f / segments;
 		points = new float[(segments+1) * 2];
@@ -91,6 +92,7 @@ public class Curve extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#transform(org.newdawn.slick.geom.Transform)
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		float[] pts = new float[8];
 		float[] dest = new float[8];
@@ -109,6 +111,7 @@ public class Curve extends Shape {
 	 * 
 	 * @return True if this is a closed shape
 	 */
+	@Override
 	public boolean closed() {
 		return false;
 	}

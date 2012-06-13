@@ -45,6 +45,7 @@ public class AudioImpl implements Audio {
 	 * 
 	 * @return The ID of the OpenAL buffer holding this data
 	 */
+	@Override
 	public int getBufferID() {
 		return buffer;
 	}
@@ -59,6 +60,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#stop()
 	 */
+	@Override
 	public void stop() {
 		if (index != -1) {
 			store.stopSource(index);
@@ -69,6 +71,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#isPlaying()
 	 */
+	@Override
 	public boolean isPlaying() {
 		if (index != -1) {
 			return store.isPlaying(index);
@@ -80,6 +83,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#playAsSoundEffect(float, float, boolean)
 	 */
+	@Override
 	public int playAsSoundEffect(float pitch, float gain, boolean loop) {
 		index = store.playAsSound(buffer, pitch, gain, loop);
 		return store.getSource(index);
@@ -89,6 +93,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#playAsSoundEffect(float, float, boolean, float, float, float)
 	 */
+	@Override
 	public int playAsSoundEffect(float pitch, float gain, boolean loop, float x, float y, float z) {
 		index = store.playAsSoundAt(buffer, pitch, gain, loop, x, y, z);
 		return store.getSource(index);
@@ -97,6 +102,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#playAsMusic(float, float, boolean)
 	 */
+	@Override
 	public int playAsMusic(float pitch, float gain, boolean loop) {
 		store.playAsMusic(buffer, pitch, gain, loop);
 		index = 0;
@@ -120,6 +126,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#setPosition(float)
 	 */
+	@Override
 	public boolean setPosition(float position) {
 		position = position % length;
 
@@ -133,6 +140,7 @@ public class AudioImpl implements Audio {
 	/**
 	 * @see org.newdawn.slick.openal.Audio#getPosition()
 	 */
+	@Override
 	public float getPosition() {
 		return AL10.alGetSourcef(store.getSource(index), AL11.AL_SEC_OFFSET);
 	}

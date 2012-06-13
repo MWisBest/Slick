@@ -135,6 +135,7 @@ public class FBOGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#disable()
 	 */
+	@Override
 	protected void disable() {
 		GL.flush();
 
@@ -153,6 +154,7 @@ public class FBOGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#enable()
 	 */
+	@Override
 	protected void enable() {
 		if (!valid) {
 			throw new RuntimeException("Attempt to use a destroy()ed offscreen graphics context.");
@@ -205,6 +207,7 @@ public class FBOGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#destroy()
 	 */
+	@Override
 	public void destroy() {
 		super.destroy();
 
@@ -219,6 +222,7 @@ public class FBOGraphics extends Graphics {
 	/**
 	 * @see org.newdawn.slick.Graphics#flush()
 	 */
+	@Override
 	public void flush() {
 		super.flush();
 

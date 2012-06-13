@@ -42,6 +42,7 @@ public class SlickCallableTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = new Image("testdata/rocket.png");
 		back = new Image("testdata/sky.jpg");
@@ -53,6 +54,7 @@ public class SlickCallableTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.scale(2,2);
 		g.fillRect(0, 0, 800, 600, back, 0, 0);
@@ -64,6 +66,7 @@ public class SlickCallableTest extends BasicGame {
 		font.drawString(100,200,"Text Drawn before the callable");
 
 		SlickCallable callable = new SlickCallable() {
+			@Override
 			protected void performGLOperations() throws SlickException {
 				renderGL();
 			}
@@ -223,6 +226,7 @@ public class SlickCallableTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		rot += delta * 0.1f;
 	}

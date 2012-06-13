@@ -39,6 +39,7 @@ public class AnimationTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.container = container;
 
@@ -64,6 +65,7 @@ public class AnimationTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.drawString("Space to restart() animation", 100, 50);
 		g.drawString("Til Limited animation: "+start, 100, 500);
@@ -83,6 +85,7 @@ public class AnimationTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		if (container.getInput().isKeyDown(Input.KEY_1)) {
 			manual.update(delta);
@@ -110,6 +113,7 @@ public class AnimationTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
 			container.exit();

@@ -50,6 +50,7 @@ public class ItemContainer extends Item {
 	 * 
 	 * @param prefix The prefix to apply to all lines
 	 */
+	@Override
 	public void dump(String prefix) {
 		System.out.println(prefix+"Item Container "+name+","+condition);
 		for (int i=0;i<items.size();i++) {

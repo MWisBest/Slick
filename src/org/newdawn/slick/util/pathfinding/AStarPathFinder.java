@@ -78,6 +78,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 	/**
 	 * @see PathFinder#findPath(Mover, int, int, int, int)
 	 */
+	@Override
 	public Path findPath(Mover mover, int sx, int sy, int tx, int ty) {
 		current = null;
 
@@ -408,6 +409,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 		/**
 		 * @see Comparable#compareTo(Object)
 		 */
+		@Override
 		public int compareTo(Node other) {
 			float f = heuristic + cost;
 			float of = other.heuristic + other.cost;
@@ -470,6 +472,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 		/**
 		 * @see java.lang.Object#toString()
 		 */
+		@Override
 		public String toString() {
 			return "[Node "+x+","+y+"]";
 		}
@@ -478,6 +481,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 	/**
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getMover()
 	 */
+	@Override
 	public Mover getMover() {
 		return mover;
 	}
@@ -485,6 +489,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 	/**
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSearchDistance()
 	 */
+	@Override
 	public int getSearchDistance() {
 		return distance;
 	}
@@ -492,6 +497,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 	/**
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSourceX()
 	 */
+	@Override
 	public int getSourceX() {
 		return sourceX;
 	}
@@ -499,6 +505,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext {
 	/**
 	 * @see org.newdawn.slick.util.pathfinding.PathFindingContext#getSourceY()
 	 */
+	@Override
 	public int getSourceY() {
 		return sourceY;
 	}

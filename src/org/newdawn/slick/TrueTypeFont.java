@@ -293,6 +293,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * 
 	 * @return The width of the characters
 	 */
+	@Override
 	public int getWidth(String whatchars) {
 		int totalwidth = 0;
 		IntObject intObject = null;
@@ -325,6 +326,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * 
 	 * @return The height of a given string
 	 */
+	@Override
 	public int getHeight(String HeightString) {
 		return fontHeight;
 	}
@@ -334,6 +336,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * 
 	 * @return The line height of the font
 	 */
+	@Override
 	public int getLineHeight() {
 		return fontHeight;
 	}
@@ -350,6 +353,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * @param color
 	 *            The color to draw the text
 	 */
+	@Override
 	public void drawString(float x, float y, String whatchars,
 			org.newdawn.slick.Color color) {
 		drawString(x,y,whatchars,color,0,whatchars.length()-1);
@@ -358,6 +362,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	/**
 	 * @see Font#drawString(float, float, String, org.newdawn.slick.Color, int, int)
 	 */
+	@Override
 	public void drawString(float x, float y, String whatchars,
 			org.newdawn.slick.Color color, int startIndex, int endIndex) {
 		color.bind();
@@ -402,6 +407,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * @param whatchars
 	 *            The string to draw
 	 */
+	@Override
 	public void drawString(float x, float y, String whatchars) {
 		drawString(x, y, whatchars, org.newdawn.slick.Color.white);
 	}

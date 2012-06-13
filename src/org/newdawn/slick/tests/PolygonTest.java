@@ -29,6 +29,7 @@ public class PolygonTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		poly = new Polygon();
 		poly.addPoint(300, 100);
@@ -43,6 +44,7 @@ public class PolygonTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		in = poly.contains(container.getInput().getMouseX(), container.getInput().getMouseY());
 
@@ -52,6 +54,7 @@ public class PolygonTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		if (in) {
 			g.setColor(Color.red);

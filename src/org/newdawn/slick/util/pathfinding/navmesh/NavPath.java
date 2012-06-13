@@ -60,6 +60,7 @@ public class NavPath {
 	 * 
 	 * @return The string representation of this instance
 	 */
+	@Override
 	public String toString() {
 		return "[Path length="+length()+"]";
 	}

@@ -140,6 +140,7 @@ public class Path implements Serializable {
 		/**
 		 * @see Object#hashCode()
 		 */
+		@Override
 		public int hashCode() {
 			return x*y;
 		}
@@ -147,6 +148,7 @@ public class Path implements Serializable {
 		/**
 		 * @see Object#equals(Object)
 		 */
+		@Override
 		public boolean equals(Object other) {
 			if (other instanceof Step) {
 				Step o = (Step) other;

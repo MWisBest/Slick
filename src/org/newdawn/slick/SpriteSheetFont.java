@@ -53,6 +53,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String)
 	 */
+	@Override
 	public void drawString(float x, float y, String text) {
 		drawString(x, y, text, Color.white);
 	}
@@ -60,6 +61,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String, org.newdawn.slick.Color)
 	 */
+	@Override
 	public void drawString(float x, float y, String text, Color col) {
 		drawString(x,y,text,col,0,text.length()-1);
 	}
@@ -67,6 +69,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see Font#drawString(float, float, String, Color, int, int)
 	 */
+	@Override
 	public void drawString(float x, float y, String text, Color col, int startIndex, int endIndex) {
 		try {
 			byte[] data = text.getBytes("US-ASCII");
@@ -91,6 +94,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getHeight(java.lang.String)
 	 */
+	@Override
 	public int getHeight(String text) {
 		return charHeight;
 	}
@@ -98,6 +102,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getWidth(java.lang.String)
 	 */
+	@Override
 	public int getWidth(String text) {
 		return charWidth * text.length();
 	}
@@ -105,6 +110,7 @@ public class SpriteSheetFont implements Font {
 	/**
 	 * @see org.newdawn.slick.Font#getLineHeight()
 	 */
+	@Override
 	public int getLineHeight() {
 		return charHeight;
 	}

@@ -46,6 +46,7 @@ public class ImageGraphicsTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		testImage = new Image("testdata/logo.png");
 		preloaded = new Image("testdata/logo.png");
@@ -76,6 +77,7 @@ public class ImageGraphicsTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 
 		// RENDERING TO AN IMAGE AND THEN DRAWING IT TO THE DISPLAY
@@ -144,6 +146,7 @@ public class ImageGraphicsTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		ang += delta * 0.1f;
 	}

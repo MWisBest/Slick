@@ -43,6 +43,7 @@ public class ImageTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = tga = new Image("testdata/logo.png");
 		rotImage = new Image("testdata/logo.png");
@@ -68,6 +69,7 @@ public class ImageTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.drawRect(0,0,image.getWidth(),image.getHeight());
 		image.draw(0,0);
@@ -98,6 +100,7 @@ public class ImageTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		rot += delta * 0.1f;
 		if (rot > 360) {
@@ -141,6 +144,7 @@ public class ImageTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SPACE) {
 			if (image == gif) {

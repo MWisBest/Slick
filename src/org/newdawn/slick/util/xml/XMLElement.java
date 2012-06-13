@@ -245,6 +245,7 @@ public class XMLElement {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		String value = "[XML "+getName();
 		String[] attrs = getAttributeNames();

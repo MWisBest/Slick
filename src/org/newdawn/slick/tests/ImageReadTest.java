@@ -31,6 +31,7 @@ public class ImageReadTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = new Image("testdata/testcard.png");
 		read[0] = image.getColor(0, 0);
@@ -42,6 +43,7 @@ public class ImageReadTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		this.g = g;
 
@@ -69,6 +71,7 @@ public class ImageReadTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 		int mx = container.getInput().getMouseX();
 		int my = container.getInput().getMouseY();

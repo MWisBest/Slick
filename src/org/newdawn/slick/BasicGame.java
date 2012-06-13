@@ -36,12 +36,14 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#setInput(org.newdawn.slick.Input)
 	 */
+	@Override
 	public void setInput(Input input) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.Game#closeRequested()
 	 */
+	@Override
 	public boolean closeRequested() {
 		return true;
 	}
@@ -49,6 +51,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.Game#getTitle()
 	 */
+	@Override
 	public String getTitle() {
 		return title;
 	}
@@ -56,41 +59,48 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.Game#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public abstract void init(GameContainer container) throws SlickException;
 
 	/**
 	 * @see org.newdawn.slick.InputListener#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#keyReleased(int, char)
 	 */
+	@Override
 	public void keyReleased(int key, char c) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseMoved(int, int, int, int)
 	 */
+	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseDragged(int, int, int, int)
 	 */
+	@Override
 	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseClicked(int, int, int, int)
 	 */
+	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#mousePressed(int, int, int)
 	 */
+	@Override
 	public void mousePressed(int button, int x, int y) {
 
 	}
@@ -98,6 +108,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerButtonPressed(int, int)
 	 */
+	@Override
 	public void controllerButtonPressed(int controller, int button) {
 		controllerButton[controller][button] = true;
 	}
@@ -105,6 +116,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerButtonReleased(int, int)
 	 */
+	@Override
 	public void controllerButtonReleased(int controller, int button) {
 		controllerButton[controller][button] = false;
 	}
@@ -112,6 +124,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerDownPressed(int)
 	 */
+	@Override
 	public void controllerDownPressed(int controller) {
 		controllerDown[controller] = true;
 	}
@@ -119,6 +132,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerDownReleased(int)
 	 */
+	@Override
 	public void controllerDownReleased(int controller) {
 		controllerDown[controller] = false;
 	}
@@ -126,6 +140,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerLeftPressed(int)
 	 */
+	@Override
 	public void controllerLeftPressed(int controller) {
 		controllerLeft[controller] = true;
 	}
@@ -133,6 +148,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerLeftReleased(int)
 	 */
+	@Override
 	public void controllerLeftReleased(int controller) {
 		controllerLeft[controller] = false;
 	}
@@ -140,6 +156,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerRightPressed(int)
 	 */
+	@Override
 	public void controllerRightPressed(int controller) {
 		controllerRight[controller] = true;
 	}
@@ -147,6 +164,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerRightReleased(int)
 	 */
+	@Override
 	public void controllerRightReleased(int controller) {
 		controllerRight[controller] = false;
 	}
@@ -154,6 +172,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerUpPressed(int)
 	 */
+	@Override
 	public void controllerUpPressed(int controller) {
 		controllerUp[controller] = true;
 	}
@@ -161,6 +180,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerUpReleased(int)
 	 */
+	@Override
 	public void controllerUpReleased(int controller) {
 		controllerUp[controller] = false;
 	}
@@ -168,23 +188,27 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseReleased(int, int, int)
 	 */
+	@Override
 	public void mouseReleased(int button, int x, int y) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.Game#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public abstract void update(GameContainer container, int delta) throws SlickException;
 
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseWheelMoved(int)
 	 */
+	@Override
 	public void mouseWheelMoved(int change) {
 	}
 
 	/**
 	 * @see org.newdawn.slick.InputListener#isAcceptingInput()
 	 */
+	@Override
 	public boolean isAcceptingInput() {
 		return true;
 	}
@@ -192,6 +216,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.InputListener#inputEnded()
 	 */
+	@Override
 	public void inputEnded() {
 
 	}
@@ -199,6 +224,7 @@ public abstract class BasicGame implements Game, InputListener {
 	/**
 	 * @see org.newdawn.slick.ControlledInputReciever#inputStarted()
 	 */
+	@Override
 	public void inputStarted() {
 
 	}

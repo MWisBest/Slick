@@ -136,6 +136,7 @@ public class Graphics {
 	public Graphics(int width, int height) {
 		if (DEFAULT_FONT == null) {
 			AccessController.doPrivileged(new PrivilegedAction<Object>() {
+				@Override
 				public Object run() {
 					try {
 						DEFAULT_FONT = new AngelCodeFont(

@@ -39,6 +39,7 @@ public class TexturePaintTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		poly.addPoint(120, 120);
 		poly.addPoint(420, 100);
@@ -48,6 +49,7 @@ public class TexturePaintTest extends BasicGame {
 		image = new Image("testdata/rocks.png");
 
 		texPaint = new TexCoordGenerator() {
+			@Override
 			public Vector2f getCoordFor(float x, float y) {
 				float tx = (texRect.getX() - x) / texRect.getWidth();
 				float ty = (texRect.getY() - y) / texRect.getHeight();
@@ -60,12 +62,14 @@ public class TexturePaintTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 	}
 
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setColor(Color.white);
 		g.texture(poly, image);

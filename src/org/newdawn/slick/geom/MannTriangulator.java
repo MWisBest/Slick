@@ -61,6 +61,7 @@ public class MannTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#addPolyPoint(float, float)
 	 */
+	@Override
 	public void addPolyPoint(float x, float y) {
 		addPoint(new Vector2f(x,y));
 	}
@@ -80,6 +81,7 @@ public class MannTriangulator implements Triangulator {
 	/**
 	 * Begin adding a hole to the polygon
 	 */
+	@Override
 	public void startHole() {
 		PointBag newHole = getPointBag();
 		newHole.next = holes;
@@ -590,6 +592,7 @@ public class MannTriangulator implements Triangulator {
 		}
 	}
 
+	@Override
 	public boolean triangulate() {
 		Vector2f[] temp = triangulate(new Vector2f[0]);
 
@@ -607,6 +610,7 @@ public class MannTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTriangleCount()
 	 */
+	@Override
 	public int getTriangleCount() {
 		return triangles.size() / 3;
 	}
@@ -614,6 +618,7 @@ public class MannTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTrianglePoint(int, int)
 	 */
+	@Override
 	public float[] getTrianglePoint(int tri, int i) {
 		Vector2f pt = triangles.get((tri * 3) + i);
 

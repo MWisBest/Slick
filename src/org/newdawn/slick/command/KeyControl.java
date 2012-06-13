@@ -22,6 +22,7 @@ public class KeyControl implements Control {
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof KeyControl) {
 			return ((KeyControl)o).keycode == keycode;
@@ -33,6 +34,7 @@ public class KeyControl implements Control {
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
+	@Override
 	public int hashCode() {
 		return keycode;
 	}

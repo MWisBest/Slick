@@ -23,6 +23,7 @@ public class FileMuffin implements Muffin {
 	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap,
 	 *      java.lang.String)
 	 */
+	@Override
 	public void saveFile(HashMap<String, ?> scoreMap, String fileName) throws IOException {
 		String userHome = System.getProperty("user.home");
 		File file = new File(userHome);
@@ -44,6 +45,7 @@ public class FileMuffin implements Muffin {
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#loadFile(java.lang.String)
 	 */
+	@Override
 	public HashMap<?, ?> loadFile(String fileName) throws IOException {
 		String userHome = System.getProperty("user.home");
 

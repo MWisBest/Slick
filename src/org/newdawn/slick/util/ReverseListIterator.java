@@ -9,14 +9,17 @@ public class ReverseListIterator<T> implements ListIterator<T> {
 		this.iter = iter;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return iter.hasPrevious();
 	}
 
+	@Override
 	public T next() {
 		return iter.previous();
 	}
 
+	@Override
 	public void remove() {
 		iter.remove();
 	}

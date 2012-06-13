@@ -41,6 +41,7 @@ abstract class ControllerControl implements Control {
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if(o == null)
 			return false;
@@ -55,6 +56,7 @@ abstract class ControllerControl implements Control {
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
+	@Override
 	public int hashCode() {
 		return event + button + controllerNumber;
 	}

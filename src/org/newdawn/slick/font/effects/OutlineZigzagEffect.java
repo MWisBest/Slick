@@ -91,6 +91,7 @@ public class OutlineZigzagEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#toString()
 	 */
+	@Override
 	public String toString () {
 		return "Outline (Zigzag)";
 	}
@@ -98,6 +99,7 @@ public class OutlineZigzagEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#getValues()
 	 */
+	@Override
 	public List<Value> getValues() {
 		List<Value> values = super.getValues();
 		values.add(EffectUtil.floatValue("Wavelength", wavelength, 1, 100, "This setting controls the wavelength of the outline. "
@@ -110,6 +112,7 @@ public class OutlineZigzagEffect extends OutlineEffect {
 	/**
 	 * @see org.newdawn.slick.font.effects.OutlineEffect#setValues(java.util.List)
 	 */
+	@Override
 	public void setValues(List<Value> values) {
 		super.setValues(values);
 		for (Value value : values) {
@@ -134,6 +137,7 @@ public class OutlineZigzagEffect extends OutlineEffect {
 		/**
 		 * @see java.awt.Stroke#createStrokedShape(java.awt.Shape)
 		 */
+		@Override
 		public Shape createStrokedShape (Shape shape) {
 			GeneralPath result = new GeneralPath();
 			PathIterator it = new FlatteningPathIterator(shape.getPathIterator(null), FLATNESS);

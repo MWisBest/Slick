@@ -132,6 +132,7 @@ public class Polygon extends Shape {
 	 * @param transform The transform to be applied
 	 * @return The transformed shape.
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		checkPoints();
 
@@ -149,6 +150,7 @@ public class Polygon extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#setX(float)
 	 */
+	@Override
 	public void setX(float x) {
 		super.setX(x);
 
@@ -158,6 +160,7 @@ public class Polygon extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#setY(float)
 	 */
+	@Override
 	public void setY(float y) {
 		super.setY(y);
 
@@ -167,6 +170,7 @@ public class Polygon extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#createPoints()
 	 */
+	@Override
 	protected void createPoints() {
 		//    	This is empty since a polygon must have it's points all the time.
 	}
@@ -174,6 +178,7 @@ public class Polygon extends Shape {
 	/**
 	 * @see org.newdawn.slick.geom.Shape#closed()
 	 */
+	@Override
 	public boolean closed() {
 		return closed;
 	}

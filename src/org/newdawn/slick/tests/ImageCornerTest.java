@@ -32,6 +32,7 @@ public class ImageCornerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = new Image("testdata/logo.png");
 
@@ -67,6 +68,7 @@ public class ImageCornerTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		for (int x=0;x<3;x++) {
 			for (int y=0;y<3;y++) {
@@ -90,6 +92,7 @@ public class ImageCornerTest extends BasicGame {
 		}
 	}
 
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 	}
 }

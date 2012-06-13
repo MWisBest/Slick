@@ -33,8 +33,10 @@ public class CachedRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(final GameContainer container) throws SlickException {
 		operations = new Runnable() {
+			@Override
 			public void run() {
 				for (int i=0;i<100;i++) {
 					int c = i+100;
@@ -50,6 +52,7 @@ public class CachedRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (container.getInput().isKeyPressed(Input.KEY_SPACE)) {
 			drawCached = !drawCached;
@@ -59,6 +62,7 @@ public class CachedRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setColor(Color.white);
 		g.drawString("Press space to toggle caching", 10, 130);

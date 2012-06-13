@@ -33,6 +33,7 @@ public class MorphSVGTest extends BasicGame {
 	/**
 	 * @see BasicGame#init(GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		base = InkscapeLoader.load("testdata/svg/walk1.svg");
 		morph = new SVGMorph(base);
@@ -46,6 +47,7 @@ public class MorphSVGTest extends BasicGame {
 	/**
 	 * @see BasicGame#update(GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		morph.updateMorphTime(delta * 0.003f);
@@ -59,6 +61,7 @@ public class MorphSVGTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(GameContainer, Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		g.translate(x, 0);

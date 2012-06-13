@@ -63,11 +63,13 @@ public class EffectUtil {
 	 */
 	static public Value colorValue(String name, Color currentValue) {
 		return new DefaultValue(name, EffectUtil.toString(currentValue)) {
+			@Override
 			public void showDialog () {
 				Color newColor = JColorChooser.showDialog(null, "Choose a color", EffectUtil.fromString(value));
 				if (newColor != null) value = EffectUtil.toString(newColor);
 			}
 
+			@Override
 			public Object getObject () {
 				return EffectUtil.fromString(value);
 			}
@@ -84,11 +86,13 @@ public class EffectUtil {
 	 */
 	static public Value intValue (String name, final int currentValue, final String description) {
 		return new DefaultValue(name, String.valueOf(currentValue)) {
+			@Override
 			public void showDialog () {
 				JSpinner spinner = new JSpinner(new SpinnerNumberModel(currentValue, Short.MIN_VALUE, Short.MAX_VALUE, 1));
 				if (showValueDialog(spinner, description)) value = String.valueOf(spinner.getValue());
 			}
 
+			@Override
 			public Object getObject () {
 				return Integer.valueOf(value);
 			}
@@ -108,11 +112,13 @@ public class EffectUtil {
 	static public Value floatValue (String name, final float currentValue, final float min, final float max,
 			final String description) {
 		return new DefaultValue(name, String.valueOf(currentValue)) {
+			@Override
 			public void showDialog () {
 				JSpinner spinner = new JSpinner(new SpinnerNumberModel(currentValue, min, max, 0.1f));
 				if (showValueDialog(spinner, description)) value = String.valueOf(((Double)spinner.getValue()).floatValue());
 			}
 
+			@Override
 			public Object getObject () {
 				return Float.valueOf(value);
 			}
@@ -129,12 +135,14 @@ public class EffectUtil {
 	 */
 	static public Value booleanValue (String name, final boolean currentValue, final String description) {
 		return new DefaultValue(name, String.valueOf(currentValue)) {
+			@Override
 			public void showDialog () {
 				JCheckBox checkBox = new JCheckBox();
 				checkBox.setSelected(currentValue);
 				if (showValueDialog(checkBox, description)) value = String.valueOf(checkBox.isSelected());
 			}
 
+			@Override
 			public Object getObject () {
 				return Boolean.valueOf(value);
 			}
@@ -156,6 +164,7 @@ public class EffectUtil {
 	 */
 	static public Value optionValue (String name, final String currentValue, final String[][] options, final String description) {
 		return new DefaultValue(name, currentValue.toString()) {
+			@Override
 			public void showDialog () {
 				int selectedIndex = -1;
 				DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -173,12 +182,14 @@ public class EffectUtil {
 				return options[i][1];
 			}
 
+			@Override
 			public String toString () {
 				for (int i = 0; i < options.length; i++)
 					if (getValue(i).equals(value)) return options[i][0].toString();
 				return "";
 			}
 
+			@Override
 			public Object getObject () {
 				return value;
 			}
@@ -237,6 +248,7 @@ public class EffectUtil {
 		/**
 		 * @see org.newdawn.slick.font.effects.ConfigurableEffect.Value#setString(java.lang.String)
 		 */
+		@Override
 		public void setString(String value) {
 			this.value = value;
 		}
@@ -244,6 +256,7 @@ public class EffectUtil {
 		/**
 		 * @see org.newdawn.slick.font.effects.ConfigurableEffect.Value#getString()
 		 */
+		@Override
 		public String getString() {
 			return value;
 		}
@@ -251,6 +264,7 @@ public class EffectUtil {
 		/**
 		 * @see org.newdawn.slick.font.effects.ConfigurableEffect.Value#getName()
 		 */
+		@Override
 		public String getName() {
 			return name;
 		}
@@ -258,6 +272,7 @@ public class EffectUtil {
 		/**
 		 * @see java.lang.Object#toString()
 		 */
+		@Override
 		public String toString() {
 			if (value == null) {
 				return "";
@@ -277,6 +292,7 @@ public class EffectUtil {
 			dialog.setTitle(name);
 			dialog.setLocationRelativeTo(null);
 			EventQueue.invokeLater(new Runnable() {
+				@Override
 				public void run () {
 					JComponent focusComponent = component;
 					if (focusComponent instanceof JSpinner)
@@ -348,6 +364,7 @@ public class EffectUtil {
 				JButton okButton = new JButton("OK");
 				buttonPanel.add(okButton);
 				okButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed (ActionEvent evt) {
 						okPressed = true;
 						setVisible(false);
@@ -358,6 +375,7 @@ public class EffectUtil {
 				JButton cancelButton = new JButton("Cancel");
 				buttonPanel.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed (ActionEvent evt) {
 						setVisible(false);
 					}

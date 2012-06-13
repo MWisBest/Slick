@@ -117,6 +117,7 @@ public class RoundedRectangle extends Rectangle {
 	 * 
 	 * @return The height of this rectangle.
 	 */
+	@Override
 	public float getHeight() {
 		return height;
 	}
@@ -126,6 +127,7 @@ public class RoundedRectangle extends Rectangle {
 	 * 
 	 * @param height The height to set.
 	 */
+	@Override
 	public void setHeight(float height) {
 		if (this.height != height) {
 			this.height = height;
@@ -138,6 +140,7 @@ public class RoundedRectangle extends Rectangle {
 	 * 
 	 * @return The width of this rectangle.
 	 */
+	@Override
 	public float getWidth() {
 		return width;
 	}
@@ -147,6 +150,7 @@ public class RoundedRectangle extends Rectangle {
 	 * 
 	 * @param width The width to set.
 	 */
+	@Override
 	public void setWidth(float width) {
 		if (width != this.width) {
 			this.width = width;
@@ -154,6 +158,7 @@ public class RoundedRectangle extends Rectangle {
 		}
 	}
 
+	@Override
 	protected void createPoints() {
 		maxX = x + width;
 		maxY = y + height;
@@ -270,6 +275,7 @@ public class RoundedRectangle extends Rectangle {
 	 * @param transform The transform to be applied
 	 * @return The transformed shape.
 	 */
+	@Override
 	public Shape transform(Transform transform) {
 		checkPoints();
 

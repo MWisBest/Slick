@@ -105,6 +105,7 @@ public class SVGMorph extends Diagram {
 	/**
 	 * @see Diagram#getFigureCount()
 	 */
+	@Override
 	public int getFigureCount() {
 		return figures.size();
 	}
@@ -112,6 +113,7 @@ public class SVGMorph extends Diagram {
 	/**
 	 * @see Diagram#getFigure(int)
 	 */
+	@Override
 	public Figure getFigure(int index) {
 		return figures.get(index);
 	}

@@ -288,6 +288,7 @@ public class SoundStore {
 		inited = true;
 
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			@Override
 			public Object run() {
 				try {
 					AL.create();

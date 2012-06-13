@@ -27,6 +27,7 @@ public class FileSystemLocation implements ResourceLocation {
 	/**
 	 * @see ResourceLocation#getResource(String)
 	 */
+	@Override
 	public URL getResource(String ref) {
 		try {
 			File file = new File(root, ref);
@@ -46,6 +47,7 @@ public class FileSystemLocation implements ResourceLocation {
 	/**
 	 * @see ResourceLocation#getResourceAsStream(String)
 	 */
+	@Override
 	public InputStream getResourceAsStream(String ref) {
 		try {
 			File file = new File(root, ref);

@@ -32,6 +32,7 @@ public class UnicodeFontTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setShowFPS(false);
 
@@ -55,6 +56,7 @@ public class UnicodeFontTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.setColor(Color.white);
 
@@ -77,6 +79,7 @@ public class UnicodeFontTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update (GameContainer container, int delta) throws SlickException {
 		unicodeFont.loadGlyphs(1);
 	}

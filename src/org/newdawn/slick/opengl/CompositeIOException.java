@@ -33,6 +33,7 @@ public class CompositeIOException extends IOException {
 	/**
 	 * @see java.lang.Throwable#getMessage()
 	 */
+	@Override
 	public String getMessage() {
 		String msg = "Composite Exception: \n";
 		for (int i=0;i<exceptions.size();i++) {

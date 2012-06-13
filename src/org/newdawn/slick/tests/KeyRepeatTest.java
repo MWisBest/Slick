@@ -28,6 +28,7 @@ public class KeyRepeatTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		input = container.getInput();
 		input.enableKeyRepeat();
@@ -36,6 +37,7 @@ public class KeyRepeatTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) {
 		g.drawString("Key Press Count: "+count, 100,100);
 		g.drawString("Press Space to Toggle Key Repeat", 100,150);
@@ -45,6 +47,7 @@ public class KeyRepeatTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) {
 	}
 
@@ -66,6 +69,7 @@ public class KeyRepeatTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
+	@Override
 	public void keyPressed(int key, char c) {
 		count++;
 		if (key == Input.KEY_SPACE) {

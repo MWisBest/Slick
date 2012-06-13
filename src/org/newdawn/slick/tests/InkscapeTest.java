@@ -36,6 +36,7 @@ public class InkscapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.getGraphics().setBackground(Color.white);
 
@@ -53,6 +54,7 @@ public class InkscapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (container.getInput().isKeyDown(Input.KEY_Q)) {
 			zoom += (delta * 0.01f);
@@ -83,6 +85,7 @@ public class InkscapeTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.scale(zoom,zoom);
 		g.translate(x, y);

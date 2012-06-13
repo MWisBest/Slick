@@ -34,6 +34,7 @@ public class LineRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
+	@Override
 	public void init(GameContainer container) throws SlickException {
 		polygon.addPoint(100,100);
 		polygon.addPoint(200,80);
@@ -49,6 +50,7 @@ public class LineRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
+	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		if (container.getInput().isKeyPressed(Input.KEY_SPACE)) {
 			antialias = !antialias;
@@ -58,6 +60,7 @@ public class LineRenderTest extends BasicGame {
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
+	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.setAntiAlias(antialias);
 		g.setLineWidth(50);

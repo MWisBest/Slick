@@ -479,6 +479,7 @@ public class NeatTriangulator implements Triangulator {
 	/**
 	 * Upate the triangles
 	 */
+	@Override
 	public boolean triangulate()
 	{
 		try
@@ -497,6 +498,7 @@ public class NeatTriangulator implements Triangulator {
 	/**
 	 * Add a point to the polygon
 	 */
+	@Override
 	public void addPolyPoint(float x, float y)
 	{
 		for (int i=0;i<numPoints;i++) {
@@ -599,6 +601,7 @@ public class NeatTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTriangleCount()
 	 */
+	@Override
 	public int getTriangleCount() {
 		return numTriangles;
 	}
@@ -606,6 +609,7 @@ public class NeatTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#getTrianglePoint(int, int)
 	 */
+	@Override
 	public float[] getTrianglePoint(int tri, int i) {
 		float xp = pointsX[triangles[tri].v[i]];
 		float yp = pointsY[triangles[tri].v[i]];
@@ -616,6 +620,7 @@ public class NeatTriangulator implements Triangulator {
 	/**
 	 * @see org.newdawn.slick.geom.Triangulator#startHole()
 	 */
+	@Override
 	public void startHole() {
 	}
 }

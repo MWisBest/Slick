@@ -459,6 +459,7 @@ public class ParticleSystem {
 	 */
 	private void loadSystemParticleImage() {
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			@Override
 			public Object run() {
 				try {
 					if (mask != null) {

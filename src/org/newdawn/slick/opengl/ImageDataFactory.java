@@ -31,6 +31,7 @@ public class ImageDataFactory {
 
 			try {
 				AccessController.doPrivileged(new PrivilegedAction<Object>() {
+					@Override
 					public Object run() {
 						String val = System.getProperty(PNG_LOADER);
 						if ("false".equalsIgnoreCase(val)) {

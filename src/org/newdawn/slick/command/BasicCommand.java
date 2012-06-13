@@ -30,6 +30,7 @@ public class BasicCommand implements Command {
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
+	@Override
 	public int hashCode() {
 		return name.hashCode();
 	}
@@ -37,6 +38,7 @@ public class BasicCommand implements Command {
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object other) {
 		if (other instanceof BasicCommand) {
 			return ((BasicCommand) other).name.equals(name);
@@ -48,6 +50,7 @@ public class BasicCommand implements Command {
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return "[Command="+name+"]";
 	}
