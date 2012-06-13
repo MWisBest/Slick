@@ -317,6 +317,7 @@ public class OggDecoder {
 		OggData ogg = new OggData();
 		ogg.channels = oggInput.getChannels();
 		ogg.rate = oggInput.getRate();
+		oggInput.close();
 
 		byte[] data = dataout.toByteArray();
 		ogg.data = ByteBuffer.allocateDirect(data.length);
