@@ -376,6 +376,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 	 * @see org.newdawn.slick.particles.ParticleEmitter#updateParticle(org.newdawn.slick.particles.Particle,
 	 *      int)
 	 */
+	@SuppressWarnings( "null" )
 	@Override
 	public void updateParticle(Particle particle, int delta) {
 		particleCount++;

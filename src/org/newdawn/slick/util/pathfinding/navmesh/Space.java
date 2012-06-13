@@ -288,6 +288,7 @@ public class Space {
 	 * @param path The path to add the steps to
 	 * @return True if the path was found
 	 */
+	@SuppressWarnings( "null" )
 	public boolean pickLowestCost(Space target, NavPath path) {
 		if (target == this) {
 			return true;

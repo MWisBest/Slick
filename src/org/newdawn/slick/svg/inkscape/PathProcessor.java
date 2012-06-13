@@ -27,6 +27,7 @@ public class PathProcessor implements ElementProcessor {
 	 * @return The number of points found
 	 * @throws ParsingException Indicates an invalid token in the path
 	 */
+	@SuppressWarnings( "null" )
 	private static Path processPoly(Element element, StringTokenizer tokens) throws ParsingException {
 		boolean moved = false;
 		boolean reasonToBePath = false;

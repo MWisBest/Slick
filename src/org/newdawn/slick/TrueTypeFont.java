@@ -167,6 +167,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font {
 	 * 
 	 * @param customCharsArray Characters that should be also added to the cache.
 	 */
+	@SuppressWarnings( "null" )
 	private void createSet( char[] customCharsArray ) {
 		// If there are custom chars then I expand the font texture twice
 		if	(customCharsArray != null && customCharsArray.length > 0) {
