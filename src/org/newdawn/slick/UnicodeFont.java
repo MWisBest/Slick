@@ -458,7 +458,7 @@ public class UnicodeFont implements org.newdawn.slick.Font {
 					GL.glTranslatef(-x, -y, 0);
 					return displayList;
 				}
-			} else if (displayList == null) {
+			} else {
 				// Compile a new display list.
 				displayList = new DisplayList();
 				int displayListCount = displayLists.size();
