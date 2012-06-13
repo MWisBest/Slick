@@ -143,6 +143,7 @@ public class SavedState {
 	 * 
 	 * @throws IOException Indicates it wasn't possible to load the state
 	 */
+	@SuppressWarnings( "unchecked" )
 	public void load() throws IOException {
 		numericData = (HashMap<String, Double>) muffin.loadFile(fileName + "_Number");
 		stringData = (HashMap<String, String>) muffin.loadFile(fileName + "_String");

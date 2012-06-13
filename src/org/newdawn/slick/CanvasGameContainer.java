@@ -111,6 +111,7 @@ public class CanvasGameContainer extends Canvas {
 	 * 
 	 * @return The game container providing this canvas
 	 */
+	@SuppressWarnings( "all" )
 	public GameContainer getContainer() {
 		return container;
 	}

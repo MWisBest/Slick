@@ -165,6 +165,7 @@ public class AppletGameContainer extends Applet {
 	 *
 	 * @return The game container providing this applet
 	 */
+	@SuppressWarnings( "all" )
 	public GameContainer getContainer() {
 		return container;
 	}
