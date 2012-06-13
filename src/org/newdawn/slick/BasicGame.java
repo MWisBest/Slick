@@ -1,12 +1,12 @@
 package org.newdawn.slick;
 
-
 /**
  * A basic implementation of a game to take out the boring bits
- *
+ * 
  * @author kevin
  */
-public abstract class BasicGame implements Game, InputListener {
+public abstract class BasicGame implements Game, InputListener
+{
 	/** The maximum number of controllers supported by the basic game */
 	private static final int MAX_CONTROLLERS = 20;
 	/** The maximum number of controller buttons supported by the basic game */
@@ -23,209 +23,234 @@ public abstract class BasicGame implements Game, InputListener {
 	protected boolean[] controllerDown = new boolean[MAX_CONTROLLERS];
 	/** The state of the button controlls */
 	protected boolean[][] controllerButton = new boolean[MAX_CONTROLLERS][MAX_CONTROLLER_BUTTONS];
-
+	
 	/**
 	 * Create a new basic game
 	 * 
 	 * @param title The title for the game
 	 */
-	public BasicGame(String title) {
+	public BasicGame( String title )
+	{
 		this.title = title;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#setInput(org.newdawn.slick.Input)
 	 */
 	@Override
-	public void setInput(Input input) {
+	public void setInput( Input input )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#closeRequested()
 	 */
 	@Override
-	public boolean closeRequested() {
+	public boolean closeRequested()
+	{
 		return true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#getTitle()
 	 */
 	@Override
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#init(org.newdawn.slick.GameContainer)
 	 */
 	@Override
-	public abstract void init(GameContainer container) throws SlickException;
-
+	public abstract void init( GameContainer container ) throws SlickException;
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#keyPressed(int, char)
 	 */
 	@Override
-	public void keyPressed(int key, char c) {
+	public void keyPressed( int key, char c )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#keyReleased(int, char)
 	 */
 	@Override
-	public void keyReleased(int key, char c) {
+	public void keyReleased( int key, char c )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseMoved(int, int, int, int)
 	 */
 	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+	public void mouseMoved( int oldx, int oldy, int newx, int newy )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseDragged(int, int, int, int)
 	 */
 	@Override
-	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
+	public void mouseDragged( int oldx, int oldy, int newx, int newy )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseClicked(int, int, int, int)
 	 */
 	@Override
-	public void mouseClicked(int button, int x, int y, int clickCount) {
+	public void mouseClicked( int button, int x, int y, int clickCount )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mousePressed(int, int, int)
 	 */
 	@Override
-	public void mousePressed(int button, int x, int y) {
-
+	public void mousePressed( int button, int x, int y )
+	{
+		
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerButtonPressed(int, int)
 	 */
 	@Override
-	public void controllerButtonPressed(int controller, int button) {
+	public void controllerButtonPressed( int controller, int button )
+	{
 		controllerButton[controller][button] = true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerButtonReleased(int, int)
 	 */
 	@Override
-	public void controllerButtonReleased(int controller, int button) {
+	public void controllerButtonReleased( int controller, int button )
+	{
 		controllerButton[controller][button] = false;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerDownPressed(int)
 	 */
 	@Override
-	public void controllerDownPressed(int controller) {
+	public void controllerDownPressed( int controller )
+	{
 		controllerDown[controller] = true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerDownReleased(int)
 	 */
 	@Override
-	public void controllerDownReleased(int controller) {
+	public void controllerDownReleased( int controller )
+	{
 		controllerDown[controller] = false;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerLeftPressed(int)
 	 */
 	@Override
-	public void controllerLeftPressed(int controller) {
+	public void controllerLeftPressed( int controller )
+	{
 		controllerLeft[controller] = true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerLeftReleased(int)
 	 */
 	@Override
-	public void controllerLeftReleased(int controller) {
+	public void controllerLeftReleased( int controller )
+	{
 		controllerLeft[controller] = false;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerRightPressed(int)
 	 */
 	@Override
-	public void controllerRightPressed(int controller) {
+	public void controllerRightPressed( int controller )
+	{
 		controllerRight[controller] = true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerRightReleased(int)
 	 */
 	@Override
-	public void controllerRightReleased(int controller) {
+	public void controllerRightReleased( int controller )
+	{
 		controllerRight[controller] = false;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerUpPressed(int)
 	 */
 	@Override
-	public void controllerUpPressed(int controller) {
+	public void controllerUpPressed( int controller )
+	{
 		controllerUp[controller] = true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#controllerUpReleased(int)
 	 */
 	@Override
-	public void controllerUpReleased(int controller) {
+	public void controllerUpReleased( int controller )
+	{
 		controllerUp[controller] = false;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseReleased(int, int, int)
 	 */
 	@Override
-	public void mouseReleased(int button, int x, int y) {
+	public void mouseReleased( int button, int x, int y )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#update(org.newdawn.slick.GameContainer, int)
 	 */
 	@Override
-	public abstract void update(GameContainer container, int delta) throws SlickException;
-
+	public abstract void update( GameContainer container, int delta ) throws SlickException;
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseWheelMoved(int)
 	 */
 	@Override
-	public void mouseWheelMoved(int change) {
+	public void mouseWheelMoved( int change )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#isAcceptingInput()
 	 */
 	@Override
-	public boolean isAcceptingInput() {
+	public boolean isAcceptingInput()
+	{
 		return true;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#inputEnded()
 	 */
 	@Override
-	public void inputEnded() {
-
+	public void inputEnded()
+	{
+		
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.ControlledInputReciever#inputStarted()
 	 */
 	@Override
-	public void inputStarted() {
-
+	public void inputStarted()
+	{
+		
 	}
 }

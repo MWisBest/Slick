@@ -1,4 +1,3 @@
-
 package org.newdawn.slick.font.effects;
 
 import java.awt.Graphics2D;
@@ -14,50 +13,56 @@ import org.newdawn.slick.font.Glyph;
  * 
  * @author Nathan Sweet <misc@n4te.com>
  */
-public class FilterEffect implements Effect {
+public class FilterEffect implements Effect
+{
 	/** The filter to be applied */
 	private BufferedImageOp filter;
-
+	
 	/**
 	 * Default constructor for injection
 	 */
-	public FilterEffect () {
+	public FilterEffect()
+	{
 	}
-
+	
 	/**
 	 * Create a new filtering effect based on a convolution operation
 	 * 
 	 * @param filter The filter to apply
 	 */
-	public FilterEffect (BufferedImageOp filter) {
+	public FilterEffect( BufferedImageOp filter )
+	{
 		this.filter = filter;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.font.effects.Effect#draw(java.awt.image.BufferedImage, java.awt.Graphics2D, org.newdawn.slick.UnicodeFont, org.newdawn.slick.font.Glyph)
 	 */
 	@Override
-	public void draw(BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph) {
+	public void draw( BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph )
+	{
 		BufferedImage scratchImage = EffectUtil.getScratchImage();
-		filter.filter(image, scratchImage);
-		image.getGraphics().drawImage(scratchImage, 0, 0, null);
+		filter.filter( image, scratchImage );
+		image.getGraphics().drawImage( scratchImage, 0, 0, null );
 	}
-
+	
 	/**
 	 * Get the filter being applied by this effect
 	 * 
 	 * @return The filter being applied by this effect
 	 */
-	public BufferedImageOp getFilter() {
+	public BufferedImageOp getFilter()
+	{
 		return filter;
 	}
-
+	
 	/**
 	 * Set the filter being applied by this effect
 	 * 
 	 * @param filter The filter being used by this effect
 	 */
-	public void setFilter(BufferedImageOp filter) {
+	public void setFilter( BufferedImageOp filter )
+	{
 		this.filter = filter;
 	}
 }

@@ -31,22 +31,23 @@ import org.newdawn.slick.util.ResourceLoader;
  * @author kevin
  * @author Nathan Sweet <misc@n4te.com>
  */
-public class AngelCodeFont implements Font {
+public class AngelCodeFont implements Font
+{
 	/** The renderer to use for all GL operations */
 	private static SGL GL = Renderer.get();
-
+	
 	/**
 	 * The line cache size, this is how many lines we can render before starting
 	 * to regenerate lists
 	 */
 	private static final int DISPLAY_LIST_CACHE_SIZE = 200;
-
+	
 	/** The highest character that AngelCodeFont will support. */
 	private static final int MAX_CHAR = 255;
-
+	
 	/** True if this font should use display list caching */
 	private boolean displayListCaching = true;
-
+	
 	/** The image containing the bitmap font */
 	private Image fontImage;
 	/** The characters building up the font */
@@ -57,23 +58,24 @@ public class AngelCodeFont implements Font {
 	private int baseDisplayListID = -1;
 	/** The eldest display list ID */
 	private int eldestDisplayListID;
-	/** The eldest display list  */
+	/** The eldest display list */
 	private DisplayList eldestDisplayList;
-
+	
 	/** The display list cache for rendered lines */
-	private final LinkedHashMap<String, DisplayList> displayLists = new LinkedHashMap<String, DisplayList>(DISPLAY_LIST_CACHE_SIZE, 1, true) {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		protected boolean removeEldestEntry(Entry<String, DisplayList> eldest) {
-			eldestDisplayList = (DisplayList)eldest.getValue();
-			eldestDisplayListID = eldestDisplayList.id;
-
-			return false;
-		}
-	};
-
-
+	private final LinkedHashMap<String, DisplayList> displayLists = new LinkedHashMap<String, DisplayList>( DISPLAY_LIST_CACHE_SIZE, 1, true )
+		{
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			protected boolean removeEldestEntry( Entry<String, DisplayList> eldest )
+			{
+				eldestDisplayList = (DisplayList)eldest.getValue();
+				eldestDisplayListID = eldestDisplayList.id;
+				
+				return false;
+			}
+		};
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -85,12 +87,13 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String fntFile, Image image) throws SlickException {
+	public AngelCodeFont( String fntFile, Image image ) throws SlickException
+	{
 		fontImage = image;
-
-		parseFnt(ResourceLoader.getResourceAsStream(fntFile));
+		
+		parseFnt( ResourceLoader.getResourceAsStream( fntFile ) );
 	}
-
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -102,12 +105,13 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String fntFile, String imgFile) throws SlickException {
-		fontImage = new Image(imgFile);
-
-		parseFnt(ResourceLoader.getResourceAsStream(fntFile));
+	public AngelCodeFont( String fntFile, String imgFile ) throws SlickException
+	{
+		fontImage = new Image( imgFile );
+		
+		parseFnt( ResourceLoader.getResourceAsStream( fntFile ) );
 	}
-
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -121,13 +125,13 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String fntFile, Image image, boolean caching)
-			throws SlickException {
+	public AngelCodeFont( String fntFile, Image image, boolean caching ) throws SlickException
+	{
 		fontImage = image;
 		displayListCaching = caching;
-		parseFnt(ResourceLoader.getResourceAsStream(fntFile));
+		parseFnt( ResourceLoader.getResourceAsStream( fntFile ) );
 	}
-
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -141,13 +145,13 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String fntFile, String imgFile, boolean caching)
-			throws SlickException {
-		fontImage = new Image(imgFile);
+	public AngelCodeFont( String fntFile, String imgFile, boolean caching ) throws SlickException
+	{
+		fontImage = new Image( imgFile );
 		displayListCaching = caching;
-		parseFnt(ResourceLoader.getResourceAsStream(fntFile));
+		parseFnt( ResourceLoader.getResourceAsStream( fntFile ) );
 	}
-
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -161,13 +165,13 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String name, InputStream fntFile, InputStream imgFile)
-			throws SlickException {
-		fontImage = new Image(imgFile, name, false);
-
-		parseFnt(fntFile);
+	public AngelCodeFont( String name, InputStream fntFile, InputStream imgFile ) throws SlickException
+	{
+		fontImage = new Image( imgFile, name, false );
+		
+		parseFnt( fntFile );
 	}
-
+	
 	/**
 	 * Create a new font based on a font definition from AngelCode's tool and
 	 * the font image generated from the tool.
@@ -183,14 +187,14 @@ public class AngelCodeFont implements Font {
 	 * @throws SlickException
 	 *             Indicates a failure to load either file
 	 */
-	public AngelCodeFont(String name, InputStream fntFile, InputStream imgFile,
-			boolean caching) throws SlickException {
-		fontImage = new Image(imgFile, name, false);
-
+	public AngelCodeFont( String name, InputStream fntFile, InputStream imgFile, boolean caching ) throws SlickException
+	{
+		fontImage = new Image( imgFile, name, false );
+		
 		displayListCaching = caching;
-		parseFnt(fntFile);
+		parseFnt( fntFile );
 	}
-
+	
 	/**
 	 * Parse the font definition file
 	 * 
@@ -198,86 +202,105 @@ public class AngelCodeFont implements Font {
 	 *            The stream from which the font file can be read
 	 * @throws SlickException
 	 */
-	private void parseFnt(InputStream fntFile) throws SlickException {
-		if (displayListCaching) {
-			baseDisplayListID = GL.glGenLists(DISPLAY_LIST_CACHE_SIZE);
-			if (baseDisplayListID == 0) displayListCaching = false;
+	private void parseFnt( InputStream fntFile ) throws SlickException
+	{
+		if( displayListCaching )
+		{
+			baseDisplayListID = GL.glGenLists( DISPLAY_LIST_CACHE_SIZE );
+			if( baseDisplayListID == 0 ) displayListCaching = false;
 		}
-
-		try {
+		
+		try
+		{
 			// now parse the font file
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					fntFile));
-			@SuppressWarnings("unused")
+			BufferedReader in = new BufferedReader( new InputStreamReader( fntFile ) );
+			@SuppressWarnings( "unused" )
 			String info = in.readLine();
-			@SuppressWarnings("unused")
+			@SuppressWarnings( "unused" )
 			String common = in.readLine();
-			@SuppressWarnings("unused")
+			@SuppressWarnings( "unused" )
 			String page = in.readLine();
-
-			Map<Short, List<Short>> kerning = new HashMap<Short, List<Short>>(64);
-			List<CharDef> charDefs = new ArrayList<CharDef>(MAX_CHAR);
+			
+			Map<Short, List<Short>> kerning = new HashMap<Short, List<Short>>( 64 );
+			List<CharDef> charDefs = new ArrayList<CharDef>( MAX_CHAR );
 			int maxChar = 0;
 			boolean done = false;
-			while (!done) {
+			while( !done )
+			{
 				String line = in.readLine();
-				if (line == null) {
+				if( line == null )
+				{
 					done = true;
-				} else {
-					if (line.startsWith("chars c")) {
+				}
+				else
+				{
+					if( line.startsWith( "chars c" ) )
+					{
 						// ignore
-					} else if (line.startsWith("char")) {
-						CharDef def = parseChar(line);
-						if (def != null) {
-							maxChar = Math.max(maxChar, def.id);
-							charDefs.add(def);
+					}
+					else if( line.startsWith( "char" ) )
+					{
+						CharDef def = parseChar( line );
+						if( def != null )
+						{
+							maxChar = Math.max( maxChar, def.id );
+							charDefs.add( def );
 						}
 					}
-					if (line.startsWith("kernings c")) {
+					if( line.startsWith( "kernings c" ) )
+					{
 						// ignore
-					} else if (line.startsWith("kerning")) {
-						StringTokenizer tokens = new StringTokenizer(line, " =");
+					}
+					else if( line.startsWith( "kerning" ) )
+					{
+						StringTokenizer tokens = new StringTokenizer( line, " =" );
 						tokens.nextToken(); // kerning
 						tokens.nextToken(); // first
-						short first = Short.parseShort(tokens.nextToken()); // first value
+						short first = Short.parseShort( tokens.nextToken() ); // first value
 						tokens.nextToken(); // second
-						int second = Integer.parseInt(tokens.nextToken()); // second value
+						int second = Integer.parseInt( tokens.nextToken() ); // second value
 						tokens.nextToken(); // offset
-						int offset = Integer.parseInt(tokens.nextToken()); // offset value
-						List<Short> values = kerning.get(new Short(first));
-						if (values == null) {
+						int offset = Integer.parseInt( tokens.nextToken() ); // offset value
+						List<Short> values = kerning.get( new Short( first ) );
+						if( values == null )
+						{
 							values = new ArrayList<Short>();
-							kerning.put(new Short(first), values);
+							kerning.put( new Short( first ), values );
 						}
 						// Pack the character and kerning offset into a short.
-						values.add(new Short((short)((offset << 8) | second)));
+						values.add( new Short( (short)( ( offset << 8 ) | second ) ) );
 					}
 				}
 			}
-
+			
 			chars = new CharDef[maxChar + 1];
-			for (CharDef def : charDefs) {
+			for( CharDef def : charDefs )
+			{
 				chars[def.id] = def;
 			}
-
+			
 			// Turn each list of kerning values into a short[] and set on the chardef.
-			for (Entry<Short, List<Short>> entry : kerning.entrySet()) {
+			for( Entry<Short, List<Short>> entry : kerning.entrySet() )
+			{
 				short first = entry.getKey();
 				List<Short> valueList = (List<Short>)entry.getValue();
 				short[] valueArray = new short[valueList.size()];
 				int i = 0;
-				for (Short value : valueList) {
+				for( Short value : valueList )
+				{
 					valueArray[i] = value;
 					++i;
 				}
 				chars[first].kerning = valueArray;
 			}
-		} catch (IOException e) {
-			Log.error(e);
-			throw new SlickException("Failed to parse font file: " + fntFile);
+		}
+		catch( IOException e )
+		{
+			Log.error( e );
+			throw new SlickException( "Failed to parse font file: " + fntFile );
 		}
 	}
-
+	
 	/**
 	 * Parse a single character line from the definition
 	 * 
@@ -286,100 +309,113 @@ public class AngelCodeFont implements Font {
 	 * @return The character definition from the line
 	 * @throws SlickException Indicates a given character is not valid in an angel code font
 	 */
-	private CharDef parseChar(String line) throws SlickException {
+	private CharDef parseChar( String line ) throws SlickException
+	{
 		CharDef def = new CharDef();
-		StringTokenizer tokens = new StringTokenizer(line, " =");
-
+		StringTokenizer tokens = new StringTokenizer( line, " =" );
+		
 		tokens.nextToken(); // char
 		tokens.nextToken(); // id
-		def.id = Short.parseShort(tokens.nextToken()); // id value
-		if (def.id < 0) {
+		def.id = Short.parseShort( tokens.nextToken() ); // id value
+		if( def.id < 0 )
+		{
 			return null;
 		}
-		if (def.id > MAX_CHAR) {
-			throw new SlickException("Invalid character '" + def.id
-					+ "': AngelCodeFont does not support characters above " + MAX_CHAR);
+		if( def.id > MAX_CHAR )
+		{
+			throw new SlickException( "Invalid character '" + def.id + "': AngelCodeFont does not support characters above " + MAX_CHAR );
 		}
-
+		
 		tokens.nextToken(); // x
-		def.x = Short.parseShort(tokens.nextToken()); // x value
+		def.x = Short.parseShort( tokens.nextToken() ); // x value
 		tokens.nextToken(); // y
-		def.y = Short.parseShort(tokens.nextToken()); // y value
+		def.y = Short.parseShort( tokens.nextToken() ); // y value
 		tokens.nextToken(); // width
-		def.width = Short.parseShort(tokens.nextToken()); // width value
+		def.width = Short.parseShort( tokens.nextToken() ); // width value
 		tokens.nextToken(); // height
-		def.height = Short.parseShort(tokens.nextToken()); // height value
+		def.height = Short.parseShort( tokens.nextToken() ); // height value
 		tokens.nextToken(); // x offset
-		def.xoffset = Short.parseShort(tokens.nextToken()); // xoffset value
+		def.xoffset = Short.parseShort( tokens.nextToken() ); // xoffset value
 		tokens.nextToken(); // y offset
-		def.yoffset = Short.parseShort(tokens.nextToken()); // yoffset value
+		def.yoffset = Short.parseShort( tokens.nextToken() ); // yoffset value
 		tokens.nextToken(); // xadvance
-		def.xadvance = Short.parseShort(tokens.nextToken()); // xadvance
-
+		def.xadvance = Short.parseShort( tokens.nextToken() ); // xadvance
+		
 		def.init();
-
-		if (def.id != ' ') {
-			lineHeight = Math.max(def.height + def.yoffset, lineHeight);
+		
+		if( def.id != ' ' )
+		{
+			lineHeight = Math.max( def.height + def.yoffset, lineHeight );
 		}
-
+		
 		return def;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String)
 	 */
 	@Override
-	public void drawString(float x, float y, String text) {
-		drawString(x, y, text, Color.white);
+	public void drawString( float x, float y, String text )
+	{
+		drawString( x, y, text, Color.white );
 	}
-
+	
 	/**
-	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String,
-	 *      org.newdawn.slick.Color)
+	 * @see org.newdawn.slick.Font#drawString(float, float, java.lang.String, org.newdawn.slick.Color)
 	 */
 	@Override
-	public void drawString(float x, float y, String text, Color col) {
-		drawString(x, y, text, col, 0, text.length() - 1);
+	public void drawString( float x, float y, String text, Color col )
+	{
+		drawString( x, y, text, col, 0, text.length() - 1 );
 	}
-
+	
 	/**
 	 * @see Font#drawString(float, float, String, Color, int, int)
 	 */
 	@Override
-	public void drawString(float x, float y, String text, Color col,
-			int startIndex, int endIndex) {
+	public void drawString( float x, float y, String text, Color col, int startIndex, int endIndex )
+	{
 		fontImage.bind();
 		col.bind();
-
-		GL.glTranslatef(x, y, 0);
-		if (displayListCaching && startIndex == 0 && endIndex == text.length() - 1) {
-			DisplayList displayList = displayLists.get(text);
-			if (displayList != null) {
-				GL.glCallList(displayList.id);
-			} else {
+		
+		GL.glTranslatef( x, y, 0 );
+		if( displayListCaching && startIndex == 0 && endIndex == text.length() - 1 )
+		{
+			DisplayList displayList = displayLists.get( text );
+			if( displayList != null )
+			{
+				GL.glCallList( displayList.id );
+			}
+			else
+			{
 				// Compile a new display list.
 				displayList = new DisplayList();
 				displayList.text = text;
 				int displayListCount = displayLists.size();
-				if (displayListCount < DISPLAY_LIST_CACHE_SIZE) {
+				if( displayListCount < DISPLAY_LIST_CACHE_SIZE )
+				{
 					displayList.id = baseDisplayListID + displayListCount;
-				} else {
-					displayList.id = eldestDisplayListID;
-					displayLists.remove(eldestDisplayList.text);
 				}
-
-				displayLists.put(text, displayList);
-
-				GL.glNewList(displayList.id, SGL.GL_COMPILE_AND_EXECUTE);
-				render(text, startIndex, endIndex);
+				else
+				{
+					displayList.id = eldestDisplayListID;
+					displayLists.remove( eldestDisplayList.text );
+				}
+				
+				displayLists.put( text, displayList );
+				
+				GL.glNewList( displayList.id, SGL.GL_COMPILE_AND_EXECUTE );
+				render( text, startIndex, endIndex );
 				GL.glEndList();
 			}
-		} else {
-			render(text, startIndex, endIndex);
 		}
-		GL.glTranslatef(-x, -y, 0);
+		else
+		{
+			render( text, startIndex, endIndex );
+		}
+		GL.glTranslatef( -x, -y, 0 );
 	}
-
+	
 	/**
 	 * Render based on immediate rendering
 	 * 
@@ -387,39 +423,45 @@ public class AngelCodeFont implements Font {
 	 * @param start The index of the first character in the string to render
 	 * @param end The index of the last character in the string to render
 	 */
-	private void render(String text, int start, int end) {
-		GL.glBegin(SGL.GL_QUADS);
-
+	private void render( String text, int start, int end )
+	{
+		GL.glBegin( SGL.GL_QUADS );
+		
 		int x = 0, y = 0;
 		CharDef lastCharDef = null;
 		char[] data = text.toCharArray();
-		for (int i = 0; i < data.length; i++) {
+		for( int i = 0; i < data.length; i++ )
+		{
 			int id = data[i];
-			if (id == '\n') {
+			if( id == '\n' )
+			{
 				x = 0;
 				y += getLineHeight();
 				continue;
 			}
-			if (id >= chars.length) {
+			if( id >= chars.length )
+			{
 				continue;
 			}
 			CharDef charDef = chars[id];
-			if (charDef == null) {
+			if( charDef == null )
+			{
 				continue;
 			}
-
-			if (lastCharDef != null) x += lastCharDef.getKerning(id);
+			
+			if( lastCharDef != null ) x += lastCharDef.getKerning( id );
 			lastCharDef = charDef;
-
-			if ((i >= start) && (i <= end)) {
-				charDef.draw(x, y);
+			
+			if( ( i >= start ) && ( i <= end ) )
+			{
+				charDef.draw( x, y );
 			}
-
+			
 			x += charDef.xadvance;
 		}
 		GL.glEnd();
 	}
-
+	
 	/**
 	 * Returns the distance from the y drawing location to the top most pixel of the specified text.
 	 * 
@@ -427,122 +469,141 @@ public class AngelCodeFont implements Font {
 	 *            The text that is to be tested
 	 * @return The yoffset from the y draw location at which text will start
 	 */
-	public int getYOffset(String text) {
+	public int getYOffset( String text )
+	{
 		DisplayList displayList = null;
-		if (displayListCaching) {
-			displayList = displayLists.get(text);
-			if (displayList != null && displayList.yOffset != null) return displayList.yOffset.intValue();
+		if( displayListCaching )
+		{
+			displayList = displayLists.get( text );
+			if( displayList != null && displayList.yOffset != null ) return displayList.yOffset.intValue();
 		}
-
-		int stopIndex = text.indexOf('\n');
-		if (stopIndex == -1) stopIndex = text.length();
-
+		
+		int stopIndex = text.indexOf( '\n' );
+		if( stopIndex == -1 ) stopIndex = text.length();
+		
 		int minYOffset = 10000;
-		for (int i = 0; i < stopIndex; i++) {
-			int id = text.charAt(i);
+		for( int i = 0; i < stopIndex; i++ )
+		{
+			int id = text.charAt( i );
 			CharDef charDef = chars[id];
-			if (charDef == null) {
+			if( charDef == null )
+			{
 				continue;
 			}
-			minYOffset = Math.min(charDef.yoffset, minYOffset);
+			minYOffset = Math.min( charDef.yoffset, minYOffset );
 		}
-
-		if (displayList != null) displayList.yOffset = new Short((short)minYOffset);
-
+		
+		if( displayList != null ) displayList.yOffset = new Short( (short)minYOffset );
+		
 		return minYOffset;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Font#getHeight(java.lang.String)
 	 */
 	@Override
-	public int getHeight(String text) {
+	public int getHeight( String text )
+	{
 		DisplayList displayList = null;
-		if (displayListCaching) {
-			displayList = displayLists.get(text);
-			if (displayList != null && displayList.height != null) return displayList.height.intValue();
+		if( displayListCaching )
+		{
+			displayList = displayLists.get( text );
+			if( displayList != null && displayList.height != null ) return displayList.height.intValue();
 		}
-
+		
 		int lines = 0;
 		int maxHeight = 0;
-		for (int i = 0; i < text.length(); i++) {
-			int id = text.charAt(i);
-			if (id == '\n') {
+		for( int i = 0; i < text.length(); i++ )
+		{
+			int id = text.charAt( i );
+			if( id == '\n' )
+			{
 				lines++;
 				maxHeight = 0;
 				continue;
 			}
 			// ignore space, it doesn't contribute to height
-			if (id == ' ') {
+			if( id == ' ' )
+			{
 				continue;
 			}
 			CharDef charDef = chars[id];
-			if (charDef == null) {
+			if( charDef == null )
+			{
 				continue;
 			}
-
-			maxHeight = Math.max(charDef.height + charDef.yoffset,
-					maxHeight);
+			
+			maxHeight = Math.max( charDef.height + charDef.yoffset, maxHeight );
 		}
-
+		
 		maxHeight += lines * getLineHeight();
-
-		if (displayList != null) displayList.height = new Short((short)maxHeight);
-
+		
+		if( displayList != null ) displayList.height = new Short( (short)maxHeight );
+		
 		return maxHeight;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Font#getWidth(java.lang.String)
 	 */
 	@Override
-	public int getWidth(String text) {
+	public int getWidth( String text )
+	{
 		DisplayList displayList = null;
-		if (displayListCaching) {
-			displayList = displayLists.get(text);
-			if (displayList != null && displayList.width != null) return displayList.width.intValue();
+		if( displayListCaching )
+		{
+			displayList = displayLists.get( text );
+			if( displayList != null && displayList.width != null ) return displayList.width.intValue();
 		}
-
+		
 		int maxWidth = 0;
 		int width = 0;
 		CharDef lastCharDef = null;
-		for (int i = 0, n = text.length(); i < n; i++) {
-			int id = text.charAt(i);
-			if (id == '\n') {
+		for( int i = 0, n = text.length(); i < n; i++ )
+		{
+			int id = text.charAt( i );
+			if( id == '\n' )
+			{
 				width = 0;
 				continue;
 			}
-			if (id >= chars.length) {
+			if( id >= chars.length )
+			{
 				continue;
 			}
 			CharDef charDef = chars[id];
-			if (charDef == null) {
+			if( charDef == null )
+			{
 				continue;
 			}
-
-			if (lastCharDef != null) width += lastCharDef.getKerning(id);
+			
+			if( lastCharDef != null ) width += lastCharDef.getKerning( id );
 			lastCharDef = charDef;
-
-			if (i < n - 1) {
+			
+			if( i < n - 1 )
+			{
 				width += charDef.xadvance;
-			} else {
+			}
+			else
+			{
 				width += charDef.width;
 			}
-			maxWidth = Math.max(maxWidth, width);
+			maxWidth = Math.max( maxWidth, width );
 		}
-
-		if (displayList != null) displayList.width = new Short((short)maxWidth);
-
+		
+		if( displayList != null ) displayList.width = new Short( (short)maxWidth );
+		
 		return maxWidth;
 	}
-
+	
 	/**
 	 * The definition of a single character as defined in the AngelCode file
 	 * format
 	 * 
 	 * @author kevin
 	 */
-	private class CharDef {
+	private class CharDef
+	{
 		/** The id of the character */
 		public short id;
 		/** The x location on the sprite sheet */
@@ -557,30 +618,32 @@ public class AngelCodeFont implements Font {
 		public short xoffset;
 		/** The amount the y position should be offset when drawing the image */
 		public short yoffset;
-
+		
 		/** The amount to move the current position after drawing the character */
 		public short xadvance;
 		/** The image containing the character */
 		public Image image;
 		/** The kerning info for this character */
 		public short[] kerning;
-
+		
 		/**
 		 * Initialise the image by cutting the right section from the map
 		 * produced by the AngelCode tool.
 		 */
-		public void init() {
-			image = fontImage.getSubImage(x, y, width, height);
+		public void init()
+		{
+			image = fontImage.getSubImage( x, y, width, height );
 		}
-
+		
 		/**
 		 * @see java.lang.Object#toString()
 		 */
 		@Override
-		public String toString() {
+		public String toString()
+		{
 			return "[CharDef id=" + id + " x=" + x + " y=" + y + "]";
 		}
-
+		
 		/**
 		 * Draw this character embedded in a image draw
 		 * 
@@ -589,48 +652,51 @@ public class AngelCodeFont implements Font {
 		 * @param y
 		 *            The y position at which to draw the text
 		 */
-		public void draw(float x, float y) {
-			image.drawEmbedded(x + xoffset, y + yoffset, width, height);
+		public void draw( float x, float y )
+		{
+			image.drawEmbedded( x + xoffset, y + yoffset, width, height );
 		}
-
+		
 		/**
 		 * Get the kerning offset between this character and the specified character.
+		 * 
 		 * @param otherCodePoint The other code point
 		 * @return the kerning offset
 		 */
-		public int getKerning (int otherCodePoint) {
-			if (kerning == null) return 0;
+		public int getKerning( int otherCodePoint )
+		{
+			if( kerning == null ) return 0;
 			int low = 0;
 			int high = kerning.length - 1;
-			while (low <= high) {
-				int midIndex = (low + high) >>> 1;
-			int value = kerning[midIndex];
-			int foundCodePoint = value & 0xff;
-			if (foundCodePoint < otherCodePoint)
-				low = midIndex + 1;
-			else if (foundCodePoint > otherCodePoint)
-				high = midIndex - 1;
-			else
-				return value >> 8;
+			while( low <= high )
+			{
+				int midIndex = ( low + high ) >>> 1;
+				int value = kerning[midIndex];
+				int foundCodePoint = value & 0xff;
+				if( foundCodePoint < otherCodePoint ) low = midIndex + 1;
+				else if( foundCodePoint > otherCodePoint ) high = midIndex - 1;
+				else return value >> 8;
 			}
 			return 0;
 		}
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Font#getLineHeight()
 	 */
 	@Override
-	public int getLineHeight() {
+	public int getLineHeight()
+	{
 		return lineHeight;
 	}
-
+	
 	/**
 	 * A descriptor for a single display list
 	 * 
 	 * @author Nathan Sweet <misc@n4te.com>
 	 */
-	static private class DisplayList {
+	static private class DisplayList
+	{
 		/** The if of the distance list */
 		int id;
 		/** The offset of the line rendered */

@@ -9,69 +9,77 @@ import org.lwjgl.BufferUtils;
  * 
  * @author kevin
  */
-public class EmptyImageData implements ImageData {
+public class EmptyImageData implements ImageData
+{
 	/** The width of the data */
 	private int width;
 	/** The height of the data */
 	private int height;
-
+	
 	/**
 	 * Create an empty image data source
 	 * 
 	 * @param width The width of the source
 	 * @param height The height of the source
 	 */
-	public EmptyImageData(int width, int height) {
+	public EmptyImageData( int width, int height )
+	{
 		this.width = width;
 		this.height = height;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
 	 */
 	@Override
-	public int getDepth() {
+	public int getDepth()
+	{
 		return 32;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getHeight()
 	 */
 	@Override
-	public int getHeight() {
+	public int getHeight()
+	{
 		return height;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getImageBufferData()
 	 */
 	@Override
-	public ByteBuffer getImageBufferData() {
-		return BufferUtils.createByteBuffer(getTexWidth() * getTexHeight() * 4);
+	public ByteBuffer getImageBufferData()
+	{
+		return BufferUtils.createByteBuffer( getTexWidth() * getTexHeight() * 4 );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexHeight()
 	 */
 	@Override
-	public int getTexHeight() {
-		return InternalTextureLoader.get2Fold(height);
+	public int getTexHeight()
+	{
+		return InternalTextureLoader.get2Fold( height );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getTexWidth()
 	 */
 	@Override
-	public int getTexWidth() {
-		return InternalTextureLoader.get2Fold(width);
+	public int getTexWidth()
+	{
+		return InternalTextureLoader.get2Fold( width );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.ImageData#getWidth()
 	 */
 	@Override
-	public int getWidth() {
+	public int getWidth()
+	{
 		return width;
 	}
-
+	
 }

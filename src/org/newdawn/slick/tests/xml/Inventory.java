@@ -7,29 +7,33 @@ import java.util.ArrayList;
  * 
  * @author kevin
  */
-public class Inventory {
+public class Inventory
+{
 	/** The items held in the inventory */
 	private ArrayList<Item> items = new ArrayList<Item>();
-
+	
 	/**
 	 * Called by XML parser to add a configured item to the entity
 	 * 
 	 * @param item The item to be added
 	 */
-	@SuppressWarnings("unused")
-	private void add(Item item) {
-		items.add(item);
+	@SuppressWarnings( "unused" )
+	private void add( Item item )
+	{
+		items.add( item );
 	}
-
+	
 	/**
 	 * Dump this object to sysout
 	 * 
 	 * @param prefix The prefix to apply to all lines
 	 */
-	public void dump(String prefix) {
-		System.out.println(prefix+"Inventory");
-		for (int i=0;i<items.size();i++) {
-			items.get(i).dump(prefix+"\t");
+	public void dump( String prefix )
+	{
+		System.out.println( prefix + "Inventory" );
+		for( int i = 0; i < items.size(); i++ )
+		{
+			items.get( i ).dump( prefix + "\t" );
 		}
 	}
 }

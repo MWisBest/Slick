@@ -5,10 +5,11 @@ import org.w3c.dom.Element;
 
 /**
  * Description of a simple XML loader
- *
+ * 
  * @author kevin
  */
-public interface Loader {
+public interface Loader
+{
 	/**
 	 * Load the children of a given element
 	 * 
@@ -16,5 +17,5 @@ public interface Loader {
 	 * @param t The transform to apply to all the children
 	 * @throws ParsingException Indicates a failure to read the XML
 	 */
-	public void loadChildren(Element element, Transform t) throws ParsingException;
+	public void loadChildren( Element element, Transform t ) throws ParsingException;
 }

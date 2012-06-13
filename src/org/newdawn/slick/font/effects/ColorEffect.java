@@ -1,4 +1,3 @@
-
 package org.newdawn.slick.font.effects;
 
 import java.awt.Color;
@@ -15,79 +14,90 @@ import org.newdawn.slick.font.Glyph;
  * 
  * @author Nathan Sweet <misc@n4te.com>
  */
-public class ColorEffect implements ConfigurableEffect {
+public class ColorEffect implements ConfigurableEffect
+{
 	/** The colour that will be applied across the text */
 	private Color color = Color.white;
-
+	
 	/**
 	 * Default constructor for injection
 	 */
-	public ColorEffect() {
+	public ColorEffect()
+	{
 	}
-
+	
 	/**
 	 * Create a new effect to colour the text
 	 * 
 	 * @param color The colour to apply across the text
 	 */
-	public ColorEffect(Color color) {
+	public ColorEffect( Color color )
+	{
 		this.color = color;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.font.effects.Effect#draw(java.awt.image.BufferedImage, java.awt.Graphics2D, org.newdawn.slick.UnicodeFont, org.newdawn.slick.font.Glyph)
 	 */
 	@Override
-	public void draw(BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph) {
-		g.setColor(color);
-		g.fill(glyph.getShape());
+	public void draw( BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph )
+	{
+		g.setColor( color );
+		g.fill( glyph.getShape() );
 	}
-
+	
 	/**
 	 * Get the colour being applied by this effect
 	 * 
 	 * @return The colour being applied by this effect
 	 */
-	public Color getColor() {
+	public Color getColor()
+	{
 		return color;
 	}
-
+	
 	/**
 	 * Set the colour being applied by this effect
 	 * 
 	 * @param color The colour being applied by this effect
 	 */
-	public void setColor(Color color) {
-		if (color == null) throw new IllegalArgumentException("color cannot be null.");
+	public void setColor( Color color )
+	{
+		if( color == null ) throw new IllegalArgumentException( "color cannot be null." );
 		this.color = color;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString () {
+	public String toString()
+	{
 		return "Color";
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.font.effects.ConfigurableEffect#getValues()
 	 */
 	@Override
-	public List<Value> getValues() {
+	public List<Value> getValues()
+	{
 		List<Value> values = new ArrayList<Value>();
-		values.add(EffectUtil.colorValue("Color", color));
+		values.add( EffectUtil.colorValue( "Color", color ) );
 		return values;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.font.effects.ConfigurableEffect#setValues(java.util.List)
 	 */
 	@Override
-	public void setValues(List<Value> values) {
-		for (Value value : values) {
-			if (value.getName().equals("Color")) {
-				setColor((Color)value.getObject());
+	public void setValues( List<Value> values )
+	{
+		for( Value value : values )
+		{
+			if( value.getName().equals( "Color" ) )
+			{
+				setColor( (Color)value.getObject() );
 			}
 		}
 	}

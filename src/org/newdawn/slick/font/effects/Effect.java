@@ -1,4 +1,3 @@
-
 package org.newdawn.slick.font.effects;
 
 import java.awt.Graphics2D;
@@ -12,7 +11,8 @@ import org.newdawn.slick.font.Glyph;
  * 
  * @author Nathan Sweet <misc@n4te.com>
  */
-public interface Effect {
+public interface Effect
+{
 	/**
 	 * Called to draw the effect.
 	 * 
@@ -21,5 +21,5 @@ public interface Effect {
 	 * @param unicodeFont The font being rendered
 	 * @param glyph The particular glyph being rendered
 	 */
-	public void draw(BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph);
+	public void draw( BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph );
 }

@@ -15,10 +15,11 @@ import org.newdawn.slick.util.Log;
 /**
  * A test box containing a bunch of tests that can be used for quickly sanity
  * checking tests.
- *
+ * 
  * @author kevin
  */
-public class TestBox extends BasicGame {
+public class TestBox extends BasicGame
+{
 	/** The games that have been added */
 	private ArrayList<Class<?>> games = new ArrayList<Class<?>>();
 	/** The current game */
@@ -27,269 +28,309 @@ public class TestBox extends BasicGame {
 	private int index;
 	/** The game container */
 	private AppGameContainer container;
-
+	
 	/**
 	 * Create a new box containing all the tests
 	 */
-	public TestBox() {
-		super("Test Box");
+	public TestBox()
+	{
+		super( "Test Box" );
 	}
-
+	
 	/**
 	 * Add a game to the box
 	 * 
 	 * @param game The game to add to the test box
 	 */
-	public void addGame(Class<?> game) {
-		games.add(game);
+	public void addGame( Class<?> game )
+	{
+		games.add( game );
 	}
-
+	
 	/**
 	 * Move to the next game
 	 */
-	private void nextGame() {
-		if (index == -1) {
+	private void nextGame()
+	{
+		if( index == -1 )
+		{
 			return;
 		}
-
+		
 		index++;
-		if (index >= games.size()) {
-			index=0;
+		if( index >= games.size() )
+		{
+			index = 0;
 		}
-
+		
 		startGame();
 	}
-
+	
 	/**
 	 * Start a particular game
 	 */
-	private void startGame() {
-		try {
-			currentGame = (BasicGame) games.get(index).newInstance();
-			container.getGraphics().setBackground(Color.black);
-			currentGame.init(container);
-			currentGame.render(container, container.getGraphics());
-		} catch (Exception e) {
-			Log.error(e);
+	private void startGame()
+	{
+		try
+		{
+			currentGame = (BasicGame)games.get( index ).newInstance();
+			container.getGraphics().setBackground( Color.black );
+			currentGame.init( container );
+			currentGame.render( container, container.getGraphics() );
 		}
-
-		container.setTitle(currentGame.getTitle());
+		catch( Exception e )
+		{
+			Log.error( e );
+		}
+		
+		container.setTitle( currentGame.getTitle() );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
 	@Override
-	public void init(GameContainer c) throws SlickException {
-		if (games.size() == 0) {
-			currentGame = new BasicGame("NULL") {
-				@Override
-				public void init(GameContainer container) throws SlickException {
-				}
-
-				@Override
-				public void update(GameContainer container, int delta) throws SlickException {
-				}
-
-				@Override
-				public void render(GameContainer container, Graphics g) throws SlickException {
-				}
-			};
-			currentGame.init(c);
+	public void init( GameContainer c ) throws SlickException
+	{
+		if( games.size() == 0 )
+		{
+			currentGame = new BasicGame( "NULL" )
+				{
+					@Override
+					public void init( GameContainer container ) throws SlickException
+					{
+					}
+					
+					@Override
+					public void update( GameContainer container, int delta ) throws SlickException
+					{
+					}
+					
+					@Override
+					public void render( GameContainer container, Graphics g ) throws SlickException
+					{
+					}
+				};
+			currentGame.init( c );
 			index = -1;
-		} else {
+		}
+		else
+		{
 			index = 0;
-			container = (AppGameContainer) c;
+			container = (AppGameContainer)c;
 			startGame();
 		}
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
-		currentGame.update(container, delta);
+	public void update( GameContainer container, int delta ) throws SlickException
+	{
+		currentGame.update( container, delta );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render( GameContainer container, Graphics g ) throws SlickException
+	{
 		SlickCallable.enterSafeBlock();
-		currentGame.render(container, g);
+		currentGame.render( container, g );
 		SlickCallable.leaveSafeBlock();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerButtonPressed(int, int)
 	 */
 	@Override
-	public void controllerButtonPressed(int controller, int button) {
-		currentGame.controllerButtonPressed(controller, button);
+	public void controllerButtonPressed( int controller, int button )
+	{
+		currentGame.controllerButtonPressed( controller, button );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerButtonReleased(int, int)
 	 */
 	@Override
-	public void controllerButtonReleased(int controller, int button) {
-		currentGame.controllerButtonReleased(controller, button);
+	public void controllerButtonReleased( int controller, int button )
+	{
+		currentGame.controllerButtonReleased( controller, button );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerDownPressed(int)
 	 */
 	@Override
-	public void controllerDownPressed(int controller) {
-		currentGame.controllerDownPressed(controller);
+	public void controllerDownPressed( int controller )
+	{
+		currentGame.controllerDownPressed( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerDownReleased(int)
 	 */
 	@Override
-	public void controllerDownReleased(int controller) {
-		currentGame.controllerDownReleased(controller);
+	public void controllerDownReleased( int controller )
+	{
+		currentGame.controllerDownReleased( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerLeftPressed(int)
 	 */
 	@Override
-	public void controllerLeftPressed(int controller) {
-		currentGame.controllerLeftPressed(controller);
+	public void controllerLeftPressed( int controller )
+	{
+		currentGame.controllerLeftPressed( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerLeftReleased(int)
 	 */
 	@Override
-	public void controllerLeftReleased(int controller) {
-		currentGame.controllerLeftReleased(controller);
+	public void controllerLeftReleased( int controller )
+	{
+		currentGame.controllerLeftReleased( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerRightPressed(int)
 	 */
 	@Override
-	public void controllerRightPressed(int controller) {
-		currentGame.controllerRightPressed(controller);
+	public void controllerRightPressed( int controller )
+	{
+		currentGame.controllerRightPressed( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerRightReleased(int)
 	 */
 	@Override
-	public void controllerRightReleased(int controller) {
-		currentGame.controllerRightReleased(controller);
+	public void controllerRightReleased( int controller )
+	{
+		currentGame.controllerRightReleased( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerUpPressed(int)
 	 */
 	@Override
-	public void controllerUpPressed(int controller) {
-		currentGame.controllerUpPressed(controller);
+	public void controllerUpPressed( int controller )
+	{
+		currentGame.controllerUpPressed( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#controllerUpReleased(int)
 	 */
 	@Override
-	public void controllerUpReleased(int controller) {
-		currentGame.controllerUpReleased(controller);
+	public void controllerUpReleased( int controller )
+	{
+		currentGame.controllerUpReleased( controller );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
 	@Override
-	public void keyPressed(int key, char c) {
-		currentGame.keyPressed(key, c);
-
-		if (key == Input.KEY_ENTER) {
+	public void keyPressed( int key, char c )
+	{
+		currentGame.keyPressed( key, c );
+		
+		if( key == Input.KEY_ENTER )
+		{
 			nextGame();
 		}
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyReleased(int, char)
 	 */
 	@Override
-	public void keyReleased(int key, char c) {
-		currentGame.keyReleased(key, c);
+	public void keyReleased( int key, char c )
+	{
+		currentGame.keyReleased( key, c );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseMoved(int, int, int, int)
 	 */
 	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
-		currentGame.mouseMoved(oldx, oldy, newx, newy);
+	public void mouseMoved( int oldx, int oldy, int newx, int newy )
+	{
+		currentGame.mouseMoved( oldx, oldy, newx, newy );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#mousePressed(int, int, int)
 	 */
 	@Override
-	public void mousePressed(int button, int x, int y) {
-		currentGame.mousePressed(button, x, y);
+	public void mousePressed( int button, int x, int y )
+	{
+		currentGame.mousePressed( button, x, y );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseReleased(int, int, int)
 	 */
 	@Override
-	public void mouseReleased(int button, int x, int y) {
-		currentGame.mouseReleased(button, x, y);
+	public void mouseReleased( int button, int x, int y )
+	{
+		currentGame.mouseReleased( button, x, y );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#mouseWheelMoved(int)
 	 */
 	@Override
-	public void mouseWheelMoved(int change) {
-		currentGame.mouseWheelMoved(change);
+	public void mouseWheelMoved( int change )
+	{
+		currentGame.mouseWheelMoved( change );
 	}
-
+	
 	/**
 	 * Entry point to our test
 	 * 
 	 * @param argv The arguments to pass into the test
 	 */
-	public static void main(String[] argv) {
-		try {
+	public static void main( String[] argv )
+	{
+		try
+		{
 			TestBox box = new TestBox();
-			box.addGame(AnimationTest.class);
-			box.addGame(AntiAliasTest.class);
-			box.addGame(BigImageTest.class);
-			box.addGame(ClipTest.class);
-			box.addGame(DuplicateEmitterTest.class);
-			box.addGame(FlashTest.class);
-			box.addGame(FontPerformanceTest.class);
-			box.addGame(FontTest.class);
-			box.addGame(GeomTest.class);
-			box.addGame(GradientTest.class);
-			box.addGame(GraphicsTest.class);
-			box.addGame(ImageBufferTest.class);
-			box.addGame(ImageReadTest.class);
-			box.addGame(ImageTest.class);
-			box.addGame(KeyRepeatTest.class);
-			box.addGame(MusicListenerTest.class);
-			box.addGame(PackedSheetTest.class);
-			box.addGame(PedigreeTest.class);
-			box.addGame(PureFontTest.class);
-			box.addGame(ShapeTest.class);
-			box.addGame(SoundTest.class);
-			box.addGame(SpriteSheetFontTest.class);
-			box.addGame(TransparentColorTest.class);
-
-			AppGameContainer container = new AppGameContainer(box);
-			container.setDisplayMode(800,600,false);
+			box.addGame( AnimationTest.class );
+			box.addGame( AntiAliasTest.class );
+			box.addGame( BigImageTest.class );
+			box.addGame( ClipTest.class );
+			box.addGame( DuplicateEmitterTest.class );
+			box.addGame( FlashTest.class );
+			box.addGame( FontPerformanceTest.class );
+			box.addGame( FontTest.class );
+			box.addGame( GeomTest.class );
+			box.addGame( GradientTest.class );
+			box.addGame( GraphicsTest.class );
+			box.addGame( ImageBufferTest.class );
+			box.addGame( ImageReadTest.class );
+			box.addGame( ImageTest.class );
+			box.addGame( KeyRepeatTest.class );
+			box.addGame( MusicListenerTest.class );
+			box.addGame( PackedSheetTest.class );
+			box.addGame( PedigreeTest.class );
+			box.addGame( PureFontTest.class );
+			box.addGame( ShapeTest.class );
+			box.addGame( SoundTest.class );
+			box.addGame( SpriteSheetFontTest.class );
+			box.addGame( TransparentColorTest.class );
+			
+			AppGameContainer container = new AppGameContainer( box );
+			container.setDisplayMode( 800, 600, false );
 			container.start();
-		} catch (SlickException e) {
+		}
+		catch( SlickException e )
+		{
 			e.printStackTrace();
 		}
 	}

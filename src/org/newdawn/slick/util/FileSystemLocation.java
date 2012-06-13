@@ -11,53 +11,66 @@ import java.net.URL;
  * 
  * @author kevin
  */
-public class FileSystemLocation implements ResourceLocation {
+public class FileSystemLocation implements ResourceLocation
+{
 	/** The root of the file system to search */
 	private File root;
-
+	
 	/**
 	 * Create a new resoruce location based on the file system
 	 * 
 	 * @param root The root of the file system to search
 	 */
-	public FileSystemLocation(File root) {
+	public FileSystemLocation( File root )
+	{
 		this.root = root;
 	}
-
+	
 	/**
 	 * @see ResourceLocation#getResource(String)
 	 */
 	@Override
-	public URL getResource(String ref) {
-		try {
-			File file = new File(root, ref);
-			if (!file.exists()) {
-				file = new File(ref);
+	public URL getResource( String ref )
+	{
+		try
+		{
+			File file = new File( root, ref );
+			if( !file.exists() )
+			{
+				file = new File( ref );
 			}
-			if (!file.exists()) {
+			if( !file.exists() )
+			{
 				return null;
 			}
-
+			
 			return file.toURI().toURL();
-		} catch (IOException e) {
+		}
+		catch( IOException e )
+		{
 			return null;
 		}
 	}
-
+	
 	/**
 	 * @see ResourceLocation#getResourceAsStream(String)
 	 */
 	@Override
-	public InputStream getResourceAsStream(String ref) {
-		try {
-			File file = new File(root, ref);
-			if (!file.exists()) {
-				file = new File(ref);
+	public InputStream getResourceAsStream( String ref )
+	{
+		try
+		{
+			File file = new File( root, ref );
+			if( !file.exists() )
+			{
+				file = new File( ref );
 			}
-			return new FileInputStream(file);
-		} catch (IOException e) {
+			return new FileInputStream( file );
+		}
+		catch( IOException e )
+		{
 			return null;
 		}
 	}
-
+	
 }

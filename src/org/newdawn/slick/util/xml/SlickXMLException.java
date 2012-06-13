@@ -8,26 +8,29 @@ import org.newdawn.slick.SlickException;
  * 
  * @author kevin
  */
-public class SlickXMLException extends SlickException {
+public class SlickXMLException extends SlickException
+{
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Create a new exception
 	 * 
 	 * @param message The message describing the failure
 	 */
-	public SlickXMLException(String message) {
-		super(message);
+	public SlickXMLException( String message )
+	{
+		super( message );
 	}
-
+	
 	/**
 	 * Create a new exception
 	 * 
 	 * @param message The message describing the failure
 	 * @param e The exception causing this failure
 	 */
-	public SlickXMLException(String message, Throwable e) {
-		super(message, e);
+	public SlickXMLException( String message, Throwable e )
+	{
+		super( message, e );
 	}
-
+	
 }

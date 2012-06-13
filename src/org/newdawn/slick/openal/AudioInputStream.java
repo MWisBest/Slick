@@ -5,24 +5,25 @@ import java.io.IOException;
 /**
  * The description of an input stream that supplied audio data suitable for
  * use in OpenAL buffers
- *
+ * 
  * @author kevin
  */
-interface AudioInputStream {
+interface AudioInputStream
+{
 	/**
 	 * Get the number of channels used by the audio
 	 * 
 	 * @return The number of channels used by the audio
 	 */
 	public int getChannels();
-
+	
 	/**
 	 * The play back rate described in the underling audio file
 	 * 
 	 * @return The playback rate
 	 */
 	public int getRate();
-
+	
 	/**
 	 * Read a single byte from the stream
 	 * 
@@ -31,7 +32,7 @@ interface AudioInputStream {
 	 * @see java.io.InputStream#read()
 	 */
 	public int read() throws IOException;
-
+	
 	/**
 	 * Read up to data.length bytes from the stream
 	 * 
@@ -40,8 +41,8 @@ interface AudioInputStream {
 	 * @throws IOException Indicates a failure to read the underlying media
 	 * @see java.io.InputStream#read(byte[])
 	 */
-	public int read(byte[] data) throws IOException;
-
+	public int read( byte[] data ) throws IOException;
+	
 	/**
 	 * Read up to len bytes from the stream
 	 * 
@@ -52,15 +53,15 @@ interface AudioInputStream {
 	 * @throws IOException Indicates a failure to read the underlying media
 	 * @see java.io.InputStream#read(byte[], int, int)
 	 */
-	public int read(byte[] data, int ofs, int len) throws IOException;
-
+	public int read( byte[] data, int ofs, int len ) throws IOException;
+	
 	/**
 	 * Check if the stream is at the end, i.e. end of file or URL
 	 * 
 	 * @return True if the stream has no more data available
 	 */
 	public boolean atEnd();
-
+	
 	/**
 	 * Close the stream
 	 * 

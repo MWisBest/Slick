@@ -32,40 +32,43 @@ import org.xml.sax.SAXException;
  * 
  * @author kevin
  */
-public class InkscapeLoader implements Loader {
+public class InkscapeLoader implements Loader
+{
 	/**
 	 * The number of times to over trigulate to get enough tesselation for
 	 * smooth shading
 	 */
 	public static int RADIAL_TRIANGULATION_LEVEL = 1;
-
+	
 	/** The list of XML element processors */
 	private static ArrayList<ElementProcessor> processors = new ArrayList<ElementProcessor>();
-
+	
 	/** The diagram loaded */
 	private Diagram diagram;
-
-	static {
-		addElementProcessor(new RectProcessor());
-		addElementProcessor(new EllipseProcessor());
-		addElementProcessor(new PolygonProcessor());
-		addElementProcessor(new PathProcessor());
-		addElementProcessor(new LineProcessor());
-		addElementProcessor(new GroupProcessor());
-		addElementProcessor(new DefsProcessor());
-		addElementProcessor(new UseProcessor());
+	
+	static
+	{
+		addElementProcessor( new RectProcessor() );
+		addElementProcessor( new EllipseProcessor() );
+		addElementProcessor( new PolygonProcessor() );
+		addElementProcessor( new PathProcessor() );
+		addElementProcessor( new LineProcessor() );
+		addElementProcessor( new GroupProcessor() );
+		addElementProcessor( new DefsProcessor() );
+		addElementProcessor( new UseProcessor() );
 	}
-
+	
 	/**
 	 * Add an <code>ElementProcessor</code> which will be passed
 	 * each element read as the Inkscape SVG document is processed.
 	 * 
 	 * @param proc The processor to be added
 	 */
-	public static void addElementProcessor(ElementProcessor proc) {
-		processors.add(proc);
+	public static void addElementProcessor( ElementProcessor proc )
+	{
+		processors.add( proc );
 	}
-
+	
 	/**
 	 * Load a SVG document into a diagram
 	 * 
@@ -77,11 +80,11 @@ public class InkscapeLoader implements Loader {
 	 * @throws SlickException
 	 *             Indicates a failure to process the document
 	 */
-	public static Diagram load(String ref, boolean offset)
-			throws SlickException {
-		return load(ResourceLoader.getResourceAsStream(ref), offset);
+	public static Diagram load( String ref, boolean offset ) throws SlickException
+	{
+		return load( ResourceLoader.getResourceAsStream( ref ), offset );
 	}
-
+	
 	/**
 	 * Load a SVG document into a diagram
 	 * 
@@ -91,10 +94,11 @@ public class InkscapeLoader implements Loader {
 	 * @throws SlickException
 	 *             Indicates a failure to process the document
 	 */
-	public static Diagram load(String ref) throws SlickException {
-		return load(ResourceLoader.getResourceAsStream(ref), false);
+	public static Diagram load( String ref ) throws SlickException
+	{
+		return load( ResourceLoader.getResourceAsStream( ref ), false );
 	}
-
+	
 	/**
 	 * Load a SVG document into a diagram
 	 * 
@@ -106,17 +110,18 @@ public class InkscapeLoader implements Loader {
 	 * @throws SlickException
 	 *             Indicates a failure to process the document
 	 */
-	public static Diagram load(InputStream in, boolean offset)
-			throws SlickException {
-		return new InkscapeLoader().loadDiagram(in, offset);
+	public static Diagram load( InputStream in, boolean offset ) throws SlickException
+	{
+		return new InkscapeLoader().loadDiagram( in, offset );
 	}
-
+	
 	/**
 	 * Private, you should be using the static method
 	 */
-	private InkscapeLoader() {
+	private InkscapeLoader()
+	{
 	}
-
+	
 	/**
 	 * Load a SVG document into a diagram
 	 * 
@@ -128,70 +133,73 @@ public class InkscapeLoader implements Loader {
 	 * @throws SlickException
 	 *             Indicates a failure to process the document
 	 */
-	private Diagram loadDiagram(InputStream in, boolean offset)
-			throws SlickException {
-		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory
-					.newInstance();
-			factory.setValidating(false);
-			factory.setNamespaceAware(true);
-
+	private Diagram loadDiagram( InputStream in, boolean offset ) throws SlickException
+	{
+		try
+		{
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			factory.setValidating( false );
+			factory.setNamespaceAware( true );
+			
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			builder.setEntityResolver(new EntityResolver() {
-				@Override
-				public InputSource resolveEntity(String publicId,
-						String systemId) throws SAXException, IOException {
-					return new InputSource(
-							new ByteArrayInputStream(new byte[0]));
-				}
-			});
-
-			Document doc = builder.parse(in);
+			builder.setEntityResolver( new EntityResolver()
+				{
+					@Override
+					public InputSource resolveEntity( String publicId, String systemId ) throws SAXException, IOException
+					{
+						return new InputSource( new ByteArrayInputStream( new byte[0] ) );
+					}
+				} );
+			
+			Document doc = builder.parse( in );
 			Element root = doc.getDocumentElement();
-
-			String widthString = root.getAttribute("width");
-			while (Character.isLetter(widthString
-					.charAt(widthString.length() - 1))) {
-				widthString = widthString.substring(0, widthString.length() - 1);
+			
+			String widthString = root.getAttribute( "width" );
+			while( Character.isLetter( widthString.charAt( widthString.length() - 1 ) ) )
+			{
+				widthString = widthString.substring( 0, widthString.length() - 1 );
 			}
-
-			String heightString = root.getAttribute("height");
-			while (Character.isLetter(heightString
-					.charAt(heightString.length() - 1))) {
-				heightString = heightString.substring(0,heightString.length() - 1);
+			
+			String heightString = root.getAttribute( "height" );
+			while( Character.isLetter( heightString.charAt( heightString.length() - 1 ) ) )
+			{
+				heightString = heightString.substring( 0, heightString.length() - 1 );
 			}
-
-			float docWidth = Float.parseFloat(widthString);
-			float docHeight = Float.parseFloat(heightString);
-
-			diagram = new Diagram(docWidth, docHeight);
-			if (!offset) {
+			
+			float docWidth = Float.parseFloat( widthString );
+			float docHeight = Float.parseFloat( heightString );
+			
+			diagram = new Diagram( docWidth, docHeight );
+			if( !offset )
+			{
 				docHeight = 0;
 			}
-			loadChildren(root, Transform
-					.createTranslateTransform(0, -docHeight));
-
+			loadChildren( root, Transform.createTranslateTransform( 0, -docHeight ) );
+			
 			return diagram;
-		} catch (Exception e) {
-			throw new SlickException("Failed to load inkscape document", e);
+		}
+		catch( Exception e )
+		{
+			throw new SlickException( "Failed to load inkscape document", e );
 		}
 	}
-
+	
 	/**
-	 * @see org.newdawn.slick.svg.Loader#loadChildren(org.w3c.dom.Element,
-	 *      org.newdawn.slick.geom.Transform)
+	 * @see org.newdawn.slick.svg.Loader#loadChildren(org.w3c.dom.Element, org.newdawn.slick.geom.Transform)
 	 */
 	@Override
-	public void loadChildren(Element element, Transform t)
-			throws ParsingException {
+	public void loadChildren( Element element, Transform t ) throws ParsingException
+	{
 		NodeList list = element.getChildNodes();
-		for (int i = 0; i < list.getLength(); i++) {
-			if (list.item(i) instanceof Element) {
-				loadElement((Element) list.item(i), t);
+		for( int i = 0; i < list.getLength(); i++ )
+		{
+			if( list.item( i ) instanceof Element )
+			{
+				loadElement( (Element)list.item( i ), t );
 			}
 		}
 	}
-
+	
 	/**
 	 * Load a single element into the diagram
 	 * 
@@ -202,13 +210,15 @@ public class InkscapeLoader implements Loader {
 	 * @throws ParsingException
 	 *             Indicates a failure to parse the element
 	 */
-	private void loadElement(Element element, Transform t)
-			throws ParsingException {
-		for (int i = 0; i < processors.size(); i++) {
-			ElementProcessor processor = processors.get(i);
-
-			if (processor.handles(element)) {
-				processor.process(this, element, diagram, t);
+	private void loadElement( Element element, Transform t ) throws ParsingException
+	{
+		for( int i = 0; i < processors.size(); i++ )
+		{
+			ElementProcessor processor = processors.get( i );
+			
+			if( processor.handles( element ) )
+			{
+				processor.process( this, element, diagram, t );
 			}
 		}
 	}

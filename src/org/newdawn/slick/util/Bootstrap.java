@@ -8,8 +8,9 @@ import org.newdawn.slick.Game;
  * 
  * @author kevin
  */
-public class Bootstrap {
-
+public class Bootstrap
+{
+	
 	/**
 	 * Start the game as an application
 	 * 
@@ -18,11 +19,15 @@ public class Bootstrap {
 	 * @param height The height of the window
 	 * @param fullscreen True if the window should be fullscreen
 	 */
-	public static void runAsApplication(Game game, int width, int height, boolean fullscreen) {
-		try {
-			AppGameContainer container = new AppGameContainer(game, width, height, fullscreen);
+	public static void runAsApplication( Game game, int width, int height, boolean fullscreen )
+	{
+		try
+		{
+			AppGameContainer container = new AppGameContainer( game, width, height, fullscreen );
 			container.start();
-		} catch (Exception e) {
+		}
+		catch( Exception e )
+		{
 			e.printStackTrace();
 		}
 	}

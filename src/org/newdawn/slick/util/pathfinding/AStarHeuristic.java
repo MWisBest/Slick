@@ -7,8 +7,9 @@ package org.newdawn.slick.util.pathfinding;
  * 
  * @author Kevin Glass
  */
-public interface AStarHeuristic {
-
+public interface AStarHeuristic
+{
+	
 	/**
 	 * Get the additional heuristic cost of the given tile. This controls the
 	 * order in which tiles are searched while attempting to find a path to the
@@ -23,5 +24,5 @@ public interface AStarHeuristic {
 	 * @param ty Teh y coordinate of the target location
 	 * @return The cost associated with the given tile
 	 */
-	public float getCost(TileBasedMap map, Mover mover, int x, int y, int tx, int ty);
+	public float getCost( TileBasedMap map, Mover mover, int x, int y, int tx, int ty );
 }

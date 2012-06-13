@@ -10,7 +10,8 @@ import java.net.URL;
  * 
  * @author kevin
  */
-public class AudioLoader {
+public class AudioLoader
+{
 	/** AIF Format Indicator */
 	private static final String AIF = "AIF";
 	/** WAV Format Indicator */
@@ -21,20 +22,22 @@ public class AudioLoader {
 	private static final String MOD = "MOD";
 	/** MOD/XM Format Indicator */
 	private static final String XM = "XM";
-
+	
 	/** True if the audio loader has be initialised */
 	private static boolean inited = false;
-
+	
 	/**
 	 * Initialise the audio loader
 	 */
-	private static void init() {
-		if (!inited) {
+	private static void init()
+	{
+		if( !inited )
+		{
 			SoundStore.get().init();
 			inited = true;
 		}
 	}
-
+	
 	/**
 	 * Get audio data in a playable state by loading the complete audio into
 	 * memory.
@@ -44,22 +47,26 @@ public class AudioLoader {
 	 * @return An object representing the audio data
 	 * @throws IOException Indicates a failure to access the audio data
 	 */
-	public static Audio getAudio(String format, InputStream in) throws IOException {
+	public static Audio getAudio( String format, InputStream in ) throws IOException
+	{
 		init();
-
-		if (format.equals(AIF)) {
-			return SoundStore.get().getAIF(in);
+		
+		if( format.equals( AIF ) )
+		{
+			return SoundStore.get().getAIF( in );
 		}
-		if (format.equals(WAV)) {
-			return SoundStore.get().getWAV(in);
+		if( format.equals( WAV ) )
+		{
+			return SoundStore.get().getWAV( in );
 		}
-		if (format.equals(OGG)) {
-			return SoundStore.get().getOgg(in);
+		if( format.equals( OGG ) )
+		{
+			return SoundStore.get().getOgg( in );
 		}
-
-		throw new IOException("Unsupported format for non-streaming Audio: "+format);
+		
+		throw new IOException( "Unsupported format for non-streaming Audio: " + format );
 	}
-
+	
 	/**
 	 * Get audio data in a playable state by setting up a stream that can be piped into
 	 * OpenAL - i.e. streaming audio
@@ -69,28 +76,33 @@ public class AudioLoader {
 	 * @return An object representing the audio data
 	 * @throws IOException Indicates a failure to access the audio data
 	 */
-	public static Audio getStreamingAudio(String format, URL url) throws IOException {
+	public static Audio getStreamingAudio( String format, URL url ) throws IOException
+	{
 		init();
-
-		if (format.equals(OGG)) {
-			return SoundStore.get().getOggStream(url);
+		
+		if( format.equals( OGG ) )
+		{
+			return SoundStore.get().getOggStream( url );
 		}
-		if (format.equals(MOD)) {
-			return SoundStore.get().getMOD(url.openStream());
+		if( format.equals( MOD ) )
+		{
+			return SoundStore.get().getMOD( url.openStream() );
 		}
-		if (format.equals(XM)) {
-			return SoundStore.get().getMOD(url.openStream());
+		if( format.equals( XM ) )
+		{
+			return SoundStore.get().getMOD( url.openStream() );
 		}
-
-		throw new IOException("Unsupported format for streaming Audio: "+format);
+		
+		throw new IOException( "Unsupported format for streaming Audio: " + format );
 	}
-
+	
 	/**
 	 * Allow the streaming system to update itself
 	 */
-	public static void update() {
+	public static void update()
+	{
 		init();
-
-		SoundStore.get().poll(0);
+		
+		SoundStore.get().poll( 0 );
 	}
 }

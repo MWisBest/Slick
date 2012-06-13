@@ -7,7 +7,8 @@ package org.newdawn.slick.geom;
  * 
  * @author kevin
  */
-public interface TexCoordGenerator {
+public interface TexCoordGenerator
+{
 	/**
 	 * Get the texture coordinate for a given render position
 	 * 
@@ -15,5 +16,5 @@ public interface TexCoordGenerator {
 	 * @param y The y coordinate of the vertex being rendered
 	 * @return The texture coordinate to apply
 	 */
-	public Vector2f getCoordFor(float x, float y);
+	public Vector2f getCoordFor( float x, float y );
 }

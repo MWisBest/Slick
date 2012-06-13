@@ -24,21 +24,23 @@ import org.newdawn.slick.util.ResourceLoader;
  * 
  * @author kevin
  */
-public class InternalTextureLoader {
+public class InternalTextureLoader
+{
 	/** The renderer to use for all GL operations */
 	protected static SGL GL = Renderer.get();
 	/** The standard texture loaded used everywhere */
 	private static final InternalTextureLoader loader = new InternalTextureLoader();
-
+	
 	/**
 	 * Get the single instance of this texture loader
 	 * 
 	 * @return The single instance of the texture loader
 	 */
-	public static InternalTextureLoader get() {
+	public static InternalTextureLoader get()
+	{
 		return loader;
 	}
-
+	
 	/** The table of textures that have been loaded in this loader */
 	private HashMap<String, Object> texturesLinear = new HashMap<String, Object>();
 	/** The table of textures that have been loaded in this loader */
@@ -49,79 +51,86 @@ public class InternalTextureLoader {
 	private boolean deferred;
 	/** True if we should hold texture data */
 	private boolean holdTextureData;
-
+	
 	/**
 	 * Create a new texture loader based on the game panel
 	 */
-	private InternalTextureLoader() {
+	private InternalTextureLoader()
+	{
 	}
-
+	
 	/**
 	 * Indicate where texture data should be held for reinitialising at a future
 	 * point.
 	 * 
 	 * @param holdTextureData True if we should hold texture data
 	 */
-	public void setHoldTextureData(boolean holdTextureData) {
+	public void setHoldTextureData( boolean holdTextureData )
+	{
 		this.holdTextureData = holdTextureData;
 	}
-
+	
 	/**
 	 * True if we should only record the request to load in the intention
 	 * of loading the texture later
 	 * 
 	 * @param deferred True if the we should load a token
 	 */
-	public void setDeferredLoading(boolean deferred) {
+	public void setDeferredLoading( boolean deferred )
+	{
 		this.deferred = deferred;
 	}
-
+	
 	/**
 	 * Check if we're using deferred loading
 	 * 
 	 * @return True if we're loading deferred textures
 	 */
-	public boolean isDeferredLoading() {
+	public boolean isDeferredLoading()
+	{
 		return deferred;
 	}
-
+	
 	/**
 	 * Remove a particular named image from the cache
 	 * 
 	 * @param name The name of the image to be cleared
 	 */
-	public void clear(String name) {
-		texturesLinear.remove(name);
-		texturesNearest.remove(name);
+	public void clear( String name )
+	{
+		texturesLinear.remove( name );
+		texturesNearest.remove( name );
 	}
-
+	
 	/**
 	 * Clear out the cached textures
 	 */
-	public void clear() {
+	public void clear()
+	{
 		texturesLinear.clear();
 		texturesNearest.clear();
 	}
-
+	
 	/**
 	 * Tell the loader to produce 16 bit textures
 	 */
-	public void set16BitMode() {
+	public void set16BitMode()
+	{
 		dstPixelFormat = SGL.GL_RGBA16;
 	}
-
+	
 	/**
 	 * Create a new texture ID
-	 *
+	 * 
 	 * @return A new texture ID
 	 */
 	public static int createTextureID()
 	{
-		IntBuffer tmp = createIntBuffer(1);
-		GL.glGenTextures(tmp);
-		return tmp.get(0);
+		IntBuffer tmp = createIntBuffer( 1 );
+		GL.glGenTextures( tmp );
+		return tmp.get( 0 );
 	}
-
+	
 	/**
 	 * Get a texture from a specific file
 	 * 
@@ -131,13 +140,14 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public Texture getTexture(File source, boolean flipped,int filter) throws IOException {
+	public Texture getTexture( File source, boolean flipped, int filter ) throws IOException
+	{
 		String resourceName = source.getAbsolutePath();
-		InputStream in = new FileInputStream(source);
-
-		return getTexture(in, resourceName, flipped, filter, null);
+		InputStream in = new FileInputStream( source );
+		
+		return getTexture( in, resourceName, flipped, filter, null );
 	}
-
+	
 	/**
 	 * Get a texture from a specific file
 	 * 
@@ -148,13 +158,14 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public Texture getTexture(File source, boolean flipped,int filter, int[] transparent) throws IOException {
+	public Texture getTexture( File source, boolean flipped, int filter, int[] transparent ) throws IOException
+	{
 		String resourceName = source.getAbsolutePath();
-		InputStream in = new FileInputStream(source);
-
-		return getTexture(in, resourceName, flipped, filter, transparent);
+		InputStream in = new FileInputStream( source );
+		
+		return getTexture( in, resourceName, flipped, filter, transparent );
 	}
-
+	
 	/**
 	 * Get a texture from a resource location
 	 * 
@@ -164,12 +175,13 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public Texture getTexture(String resourceName, boolean flipped, int filter) throws IOException {
-		InputStream in = ResourceLoader.getResourceAsStream(resourceName);
-
-		return getTexture(in, resourceName, flipped, filter, null);
+	public Texture getTexture( String resourceName, boolean flipped, int filter ) throws IOException
+	{
+		InputStream in = ResourceLoader.getResourceAsStream( resourceName );
+		
+		return getTexture( in, resourceName, flipped, filter, null );
 	}
-
+	
 	/**
 	 * Get a texture from a resource location
 	 * 
@@ -180,11 +192,13 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public Texture getTexture(String resourceName, boolean flipped, int filter, int[] transparent) throws IOException {
-		InputStream in = ResourceLoader.getResourceAsStream(resourceName);
-
-		return getTexture(in, resourceName, flipped, filter, transparent);
+	public Texture getTexture( String resourceName, boolean flipped, int filter, int[] transparent ) throws IOException
+	{
+		InputStream in = ResourceLoader.getResourceAsStream( resourceName );
+		
+		return getTexture( in, resourceName, flipped, filter, transparent );
 	}
+	
 	/**
 	 * Get a texture from a image file
 	 * 
@@ -195,10 +209,11 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public Texture getTexture(InputStream in, String resourceName, boolean flipped, int filter) throws IOException {
-		return getTexture(in, resourceName, flipped, filter, null);
+	public Texture getTexture( InputStream in, String resourceName, boolean flipped, int filter ) throws IOException
+	{
+		return getTexture( in, resourceName, flipped, filter, null );
 	}
-
+	
 	/**
 	 * Get a texture from a image file
 	 * 
@@ -210,62 +225,77 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	public TextureImpl getTexture(InputStream in, String resourceName, boolean flipped, int filter, int[] transparent) throws IOException {
-		if (deferred) {
-			return new DeferredTexture(in, resourceName, flipped, filter, transparent);
+	public TextureImpl getTexture( InputStream in, String resourceName, boolean flipped, int filter, int[] transparent ) throws IOException
+	{
+		if( deferred )
+		{
+			return new DeferredTexture( in, resourceName, flipped, filter, transparent );
 		}
-
+		
 		HashMap<String, Object> hash = texturesLinear;
-		if (filter == SGL.GL_NEAREST) {
+		if( filter == SGL.GL_NEAREST )
+		{
 			hash = texturesNearest;
 		}
-
+		
 		String resName = resourceName;
-		if (transparent != null) {
-			resName += ":"+transparent[0]+":"+transparent[1]+":"+transparent[2];
+		if( transparent != null )
+		{
+			resName += ":" + transparent[0] + ":" + transparent[1] + ":" + transparent[2];
 		}
-		resName += ":"+flipped;
-
-		if (holdTextureData) {
-			TextureImpl tex = (TextureImpl)  hash.get(resName);
-			if (tex != null) {
+		resName += ":" + flipped;
+		
+		if( holdTextureData )
+		{
+			TextureImpl tex = (TextureImpl)hash.get( resName );
+			if( tex != null )
+			{
 				return tex;
 			}
-		} else {
-			@SuppressWarnings("unchecked")
-			SoftReference<TextureImpl> ref = (SoftReference<TextureImpl>) hash.get(resName);
-			if (ref != null) {
-				TextureImpl tex = (TextureImpl) ref.get();
-				if (tex != null) {
+		}
+		else
+		{
+			@SuppressWarnings( "unchecked" )
+			SoftReference<TextureImpl> ref = (SoftReference<TextureImpl>)hash.get( resName );
+			if( ref != null )
+			{
+				TextureImpl tex = (TextureImpl)ref.get();
+				if( tex != null )
+				{
 					return tex;
-				} else {
-					hash.remove(resName);
+				}
+				else
+				{
+					hash.remove( resName );
 				}
 			}
 		}
-
+		
 		// horrible test until I can find something more suitable
-		try {
+		try
+		{
 			GL.glGetError();
-		} catch (NullPointerException e) {
-			throw new RuntimeException("Image based resources must be loaded as part of init() or the game loop. They cannot be loaded before initialisation.");
 		}
-
-		TextureImpl tex = getTexture(in, resourceName,
-				SGL.GL_TEXTURE_2D,
-				filter,
-				filter, flipped, transparent);
-
-		tex.setCacheName(resName);
-		if (holdTextureData) {
-			hash.put(resName, tex);
-		} else {
-			hash.put(resName, new SoftReference<TextureImpl>(tex));
+		catch( NullPointerException e )
+		{
+			throw new RuntimeException( "Image based resources must be loaded as part of init() or the game loop. They cannot be loaded before initialisation." );
 		}
-
+		
+		TextureImpl tex = getTexture( in, resourceName, SGL.GL_TEXTURE_2D, filter, filter, flipped, transparent );
+		
+		tex.setCacheName( resName );
+		if( holdTextureData )
+		{
+			hash.put( resName, tex );
+		}
+		else
+		{
+			hash.put( resName, new SoftReference<TextureImpl>( tex ) );
+		}
+		
 		return tex;
 	}
-
+	
 	/**
 	 * Get a texture from a image file
 	 * 
@@ -279,75 +309,65 @@ public class InternalTextureLoader {
 	 * @return The texture loaded
 	 * @throws IOException Indicates a failure to load the image
 	 */
-	private TextureImpl getTexture(InputStream in,
-			String resourceName,
-			int target,
-			int magFilter,
-			int minFilter, boolean flipped, int[] transparent) throws IOException
-			{
+	private TextureImpl getTexture( InputStream in, String resourceName, int target, int magFilter, int minFilter, boolean flipped, int[] transparent ) throws IOException
+	{
 		// create the texture ID for this texture
 		ByteBuffer textureBuffer;
-
-		LoadableImageData imageData = ImageDataFactory.getImageDataFor(resourceName);
-		textureBuffer = imageData.loadImage(new BufferedInputStream(in), flipped, transparent);
-
+		
+		LoadableImageData imageData = ImageDataFactory.getImageDataFor( resourceName );
+		textureBuffer = imageData.loadImage( new BufferedInputStream( in ), flipped, transparent );
+		
 		int textureID = createTextureID();
-		TextureImpl texture = new TextureImpl(resourceName, target, textureID);
+		TextureImpl texture = new TextureImpl( resourceName, target, textureID );
 		// bind this texture
-		GL.glBindTexture(target, textureID);
-
+		GL.glBindTexture( target, textureID );
+		
 		int width;
 		int height;
 		int texWidth;
 		int texHeight;
-
+		
 		boolean hasAlpha;
-
+		
 		width = imageData.getWidth();
 		height = imageData.getHeight();
 		hasAlpha = imageData.getDepth() == 32;
-
-		texture.setTextureWidth(imageData.getTexWidth());
-		texture.setTextureHeight(imageData.getTexHeight());
-
+		
+		texture.setTextureWidth( imageData.getTexWidth() );
+		texture.setTextureHeight( imageData.getTexHeight() );
+		
 		texWidth = texture.getTextureWidth();
 		texHeight = texture.getTextureHeight();
-
-		IntBuffer temp = BufferUtils.createIntBuffer(16);
-		GL.glGetInteger(SGL.GL_MAX_TEXTURE_SIZE, temp);
-		int max = temp.get(0);
-		if ((texWidth > max) || (texHeight > max)) {
-			throw new IOException("Attempt to allocate a texture to big for the current hardware");
+		
+		IntBuffer temp = BufferUtils.createIntBuffer( 16 );
+		GL.glGetInteger( SGL.GL_MAX_TEXTURE_SIZE, temp );
+		int max = temp.get( 0 );
+		if( ( texWidth > max ) || ( texHeight > max ) )
+		{
+			throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
 		}
-
+		
 		int srcPixelFormat = hasAlpha ? SGL.GL_RGBA : SGL.GL_RGB;
 		int componentCount = hasAlpha ? 4 : 3;
-
-		texture.setWidth(width);
-		texture.setHeight(height);
-		texture.setAlpha(hasAlpha);
-
-		if (holdTextureData) {
-			texture.setTextureData(srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer);
+		
+		texture.setWidth( width );
+		texture.setHeight( height );
+		texture.setAlpha( hasAlpha );
+		
+		if( holdTextureData )
+		{
+			texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
 		}
-
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MIN_FILTER, minFilter);
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MAG_FILTER, magFilter);
-
+		
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
+		
 		// produce a texture from the byte buffer
-		GL.glTexImage2D(target,
-				0,
-				dstPixelFormat,
-				get2Fold(width),
-				get2Fold(height),
-				0,
-				srcPixelFormat,
-				SGL.GL_UNSIGNED_BYTE,
-				textureBuffer);
-
+		GL.glTexImage2D( target, 0, dstPixelFormat, get2Fold( width ), get2Fold( height ), 0, srcPixelFormat, SGL.GL_UNSIGNED_BYTE, textureBuffer );
+		
 		return texture;
-			}
-
+	}
+	
 	/**
 	 * Create an empty texture
 	 * 
@@ -356,10 +376,11 @@ public class InternalTextureLoader {
 	 * @return The created empty texture
 	 * @throws IOException Indicates a failure to create the texture on the graphics hardware
 	 */
-	public Texture createTexture(final int width, final int height) throws IOException {
-		return createTexture(width, height, SGL.GL_NEAREST);
+	public Texture createTexture( final int width, final int height ) throws IOException
+	{
+		return createTexture( width, height, SGL.GL_NEAREST );
 	}
-
+	
 	/**
 	 * Create an empty texture
 	 * 
@@ -368,12 +389,13 @@ public class InternalTextureLoader {
 	 * @return The created empty texture
 	 * @throws IOException Indicates a failure to create the texture on the graphics hardware
 	 */
-	public Texture createTexture(final int width, final int height, final int filter) throws IOException {
-		ImageData ds = new EmptyImageData(width, height);
-
-		return getTexture(ds, filter);
+	public Texture createTexture( final int width, final int height, final int filter ) throws IOException
+	{
+		ImageData ds = new EmptyImageData( width, height );
+		
+		return getTexture( ds, filter );
 	}
-
+	
 	/**
 	 * Get a texture from a image file
 	 * 
@@ -382,115 +404,115 @@ public class InternalTextureLoader {
 	 * @return The texture created
 	 * @throws IOException Indicates the texture is too big for the hardware
 	 */
-	public Texture getTexture(ImageData dataSource, int filter) throws IOException
+	public Texture getTexture( ImageData dataSource, int filter ) throws IOException
 	{
 		int target = SGL.GL_TEXTURE_2D;
-
+		
 		ByteBuffer textureBuffer;
 		textureBuffer = dataSource.getImageBufferData();
-
+		
 		// create the texture ID for this texture
 		int textureID = createTextureID();
-		TextureImpl texture = new TextureImpl("generated:"+dataSource, target ,textureID);
-
+		TextureImpl texture = new TextureImpl( "generated:" + dataSource, target, textureID );
+		
 		int minFilter = filter;
 		int magFilter = filter;
-
+		
 		// bind this texture
-		GL.glBindTexture(target, textureID);
-
+		GL.glBindTexture( target, textureID );
+		
 		int width;
 		int height;
 		int texWidth;
 		int texHeight;
-
+		
 		boolean hasAlpha;
-
+		
 		width = dataSource.getWidth();
 		height = dataSource.getHeight();
 		hasAlpha = dataSource.getDepth() == 32;
-
-		texture.setTextureWidth(dataSource.getTexWidth());
-		texture.setTextureHeight(dataSource.getTexHeight());
-
+		
+		texture.setTextureWidth( dataSource.getTexWidth() );
+		texture.setTextureHeight( dataSource.getTexHeight() );
+		
 		texWidth = texture.getTextureWidth();
 		texHeight = texture.getTextureHeight();
-
+		
 		int srcPixelFormat = hasAlpha ? SGL.GL_RGBA : SGL.GL_RGB;
 		int componentCount = hasAlpha ? 4 : 3;
-
-		texture.setWidth(width);
-		texture.setHeight(height);
-		texture.setAlpha(hasAlpha);
-
-		IntBuffer temp = BufferUtils.createIntBuffer(16);
-		GL.glGetInteger(SGL.GL_MAX_TEXTURE_SIZE, temp);
-		int max = temp.get(0);
-		if ((texWidth > max) || (texHeight > max)) {
-			throw new IOException("Attempt to allocate a texture to big for the current hardware");
+		
+		texture.setWidth( width );
+		texture.setHeight( height );
+		texture.setAlpha( hasAlpha );
+		
+		IntBuffer temp = BufferUtils.createIntBuffer( 16 );
+		GL.glGetInteger( SGL.GL_MAX_TEXTURE_SIZE, temp );
+		int max = temp.get( 0 );
+		if( ( texWidth > max ) || ( texHeight > max ) )
+		{
+			throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
 		}
-
-		if (holdTextureData) {
-			texture.setTextureData(srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer);
+		
+		if( holdTextureData )
+		{
+			texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
 		}
-
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MIN_FILTER, minFilter);
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MAG_FILTER, magFilter);
-
+		
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
+		
 		// produce a texture from the byte buffer
-		GL.glTexImage2D(target,
-				0,
-				dstPixelFormat,
-				get2Fold(width),
-				get2Fold(height),
-				0,
-				srcPixelFormat,
-				SGL.GL_UNSIGNED_BYTE,
-				textureBuffer);
-
+		GL.glTexImage2D( target, 0, dstPixelFormat, get2Fold( width ), get2Fold( height ), 0, srcPixelFormat, SGL.GL_UNSIGNED_BYTE, textureBuffer );
+		
 		return texture;
 	}
-
+	
 	/**
 	 * Get the closest greater power of 2 to the fold number
 	 * 
 	 * @param fold The target number
 	 * @return The power of 2
 	 */
-	public static int get2Fold(int fold) {
+	public static int get2Fold( int fold )
+	{
 		int ret = 2;
-		while (ret < fold) {
+		while( ret < fold )
+		{
 			ret *= 2;
 		}
 		return ret;
 	}
-
+	
 	/**
 	 * Creates an integer buffer to hold specified ints
 	 * - strictly a utility method
-	 *
+	 * 
 	 * @param size how many int to contain
 	 * @return created IntBuffer
 	 */
-	public static IntBuffer createIntBuffer(int size) {
-		ByteBuffer temp = ByteBuffer.allocateDirect(4 * size);
-		temp.order(ByteOrder.nativeOrder());
-
+	public static IntBuffer createIntBuffer( int size )
+	{
+		ByteBuffer temp = ByteBuffer.allocateDirect( 4 * size );
+		temp.order( ByteOrder.nativeOrder() );
+		
 		return temp.asIntBuffer();
 	}
-
+	
 	/**
 	 * Reload all the textures loaded in this loader
 	 */
-	public void reload() {
-		for (Object texture : texturesLinear.values()) {
-			((TextureImpl) texture).reload();
+	public void reload()
+	{
+		for( Object texture : texturesLinear.values() )
+		{
+			( (TextureImpl)texture ).reload();
 		}
-		for (Object texture : texturesNearest.values()) {
-			((TextureImpl) texture).reload();
+		for( Object texture : texturesNearest.values() )
+		{
+			( (TextureImpl)texture ).reload();
 		}
 	}
-
+	
 	/**
 	 * Reload a given texture blob
 	 * 
@@ -502,26 +524,18 @@ public class InternalTextureLoader {
 	 * @param textureBuffer The pixel data
 	 * @return The ID of the newly created texture
 	 */
-	public int reload(TextureImpl texture, int srcPixelFormat, int componentCount,
-			int minFilter, int magFilter, ByteBuffer textureBuffer) {
+	public int reload( TextureImpl texture, int srcPixelFormat, int componentCount, int minFilter, int magFilter, ByteBuffer textureBuffer )
+	{
 		int target = SGL.GL_TEXTURE_2D;
 		int textureID = createTextureID();
-		GL.glBindTexture(target, textureID);
-
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MIN_FILTER, minFilter);
-		GL.glTexParameteri(target, SGL.GL_TEXTURE_MAG_FILTER, magFilter);
-
+		GL.glBindTexture( target, textureID );
+		
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
+		GL.glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
+		
 		// produce a texture from the byte buffer
-		GL.glTexImage2D(target,
-				0,
-				dstPixelFormat,
-				texture.getTextureWidth(),
-				texture.getTextureHeight(),
-				0,
-				srcPixelFormat,
-				SGL.GL_UNSIGNED_BYTE,
-				textureBuffer);
-
+		GL.glTexImage2D( target, 0, dstPixelFormat, texture.getTextureWidth(), texture.getTextureHeight(), 0, srcPixelFormat, SGL.GL_UNSIGNED_BYTE, textureBuffer );
+		
 		return textureID;
 	}
 }

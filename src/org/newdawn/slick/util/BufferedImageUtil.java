@@ -21,8 +21,9 @@ import org.newdawn.slick.opengl.renderer.SGL;
  * @author Kevin Glass (kevglass)
  */
 
-public class BufferedImageUtil {
-
+public class BufferedImageUtil
+{
+	
 	/**
 	 * Load a texture
 	 * 
@@ -34,17 +35,16 @@ public class BufferedImageUtil {
 	 * @throws IOException
 	 *             Indicates a failure to access the resource
 	 */
-	public static Texture getTexture(String resourceName,
-			BufferedImage resourceImage) throws IOException {
-		Texture tex = getTexture(resourceName, resourceImage,
-				SGL.GL_TEXTURE_2D, // target
+	public static Texture getTexture( String resourceName, BufferedImage resourceImage ) throws IOException
+	{
+		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, // target
 				SGL.GL_RGBA8, // dest pixel format
 				SGL.GL_LINEAR, // min filter (unused)
-				SGL.GL_LINEAR);
-
+				SGL.GL_LINEAR );
+		
 		return tex;
 	}
-
+	
 	/**
 	 * Load a texture
 	 * 
@@ -56,17 +56,16 @@ public class BufferedImageUtil {
 	 * @throws IOException
 	 *             Indicates a failure to access the resource
 	 */
-	public static Texture getTexture(String resourceName,
-			BufferedImage resourceImage, int filter) throws IOException {
-		Texture tex = getTexture(resourceName, resourceImage,
-				SGL.GL_TEXTURE_2D, // target
+	public static Texture getTexture( String resourceName, BufferedImage resourceImage, int filter ) throws IOException
+	{
+		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, // target
 				SGL.GL_RGBA8, // dest pixel format
 				filter, // min filter (unused)
-				filter);
-
+				filter );
+		
 		return tex;
 	}
-
+	
 	/**
 	 * Load a texture into OpenGL from a BufferedImage
 	 * 
@@ -86,63 +85,62 @@ public class BufferedImageUtil {
 	 * @throws IOException
 	 *             Indicates a failure to access the resource
 	 */
-	public static Texture getTexture(String resourceName,
-			BufferedImage resourceimage, int target, int dstPixelFormat,
-			int minFilter, int magFilter) throws IOException {
-		ImageIOImageData data = new ImageIOImageData();int srcPixelFormat = 0;
-
+	public static Texture getTexture( String resourceName, BufferedImage resourceimage, int target, int dstPixelFormat, int minFilter, int magFilter ) throws IOException
+	{
+		ImageIOImageData data = new ImageIOImageData();
+		int srcPixelFormat = 0;
+		
 		// create the texture ID for this texture
 		int textureID = InternalTextureLoader.createTextureID();
-		TextureImpl texture = new TextureImpl(resourceName, target, textureID);
-
+		TextureImpl texture = new TextureImpl( resourceName, target, textureID );
+		
 		// Enable texturing
-		Renderer.get().glEnable(SGL.GL_TEXTURE_2D);
-
+		Renderer.get().glEnable( SGL.GL_TEXTURE_2D );
+		
 		// bind this texture
-		Renderer.get().glBindTexture(target, textureID);
-
+		Renderer.get().glBindTexture( target, textureID );
+		
 		BufferedImage bufferedImage = resourceimage;
-		texture.setWidth(bufferedImage.getWidth());
-		texture.setHeight(bufferedImage.getHeight());
-
-		if (bufferedImage.getColorModel().hasAlpha()) {
+		texture.setWidth( bufferedImage.getWidth() );
+		texture.setHeight( bufferedImage.getHeight() );
+		
+		if( bufferedImage.getColorModel().hasAlpha() )
+		{
 			srcPixelFormat = SGL.GL_RGBA;
-		} else {
+		}
+		else
+		{
 			srcPixelFormat = SGL.GL_RGB;
 		}
-
+		
 		// convert that image into a byte buffer of texture data
-		ByteBuffer textureBuffer = data.imageToByteBuffer(bufferedImage, false, false, null);
-		texture.setTextureHeight(data.getTexHeight());
-		texture.setTextureWidth(data.getTexWidth());
-		texture.setAlpha(data.getDepth() == 32);
-
-		if (target == SGL.GL_TEXTURE_2D) {
-			Renderer.get().glTexParameteri(target, SGL.GL_TEXTURE_MIN_FILTER, minFilter);
-			Renderer.get().glTexParameteri(target, SGL.GL_TEXTURE_MAG_FILTER, magFilter);
-
-			if (Renderer.get().canTextureMirrorClamp()) {
-				Renderer.get().glTexParameteri(SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_S, SGL.GL_MIRROR_CLAMP_TO_EDGE_EXT);
-				Renderer.get().glTexParameteri(SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_T, SGL.GL_MIRROR_CLAMP_TO_EDGE_EXT);
-			} else {
-				Renderer.get().glTexParameteri(SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_S, SGL.GL_CLAMP);
-				Renderer.get().glTexParameteri(SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_T, SGL.GL_CLAMP);
+		ByteBuffer textureBuffer = data.imageToByteBuffer( bufferedImage, false, false, null );
+		texture.setTextureHeight( data.getTexHeight() );
+		texture.setTextureWidth( data.getTexWidth() );
+		texture.setAlpha( data.getDepth() == 32 );
+		
+		if( target == SGL.GL_TEXTURE_2D )
+		{
+			Renderer.get().glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
+			Renderer.get().glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
+			
+			if( Renderer.get().canTextureMirrorClamp() )
+			{
+				Renderer.get().glTexParameteri( SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_S, SGL.GL_MIRROR_CLAMP_TO_EDGE_EXT );
+				Renderer.get().glTexParameteri( SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_T, SGL.GL_MIRROR_CLAMP_TO_EDGE_EXT );
+			}
+			else
+			{
+				Renderer.get().glTexParameteri( SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_S, SGL.GL_CLAMP );
+				Renderer.get().glTexParameteri( SGL.GL_TEXTURE_2D, SGL.GL_TEXTURE_WRAP_T, SGL.GL_CLAMP );
 			}
 		}
-
-		Renderer.get().glTexImage2D(target,
-				0,
-				dstPixelFormat,
-				texture.getTextureWidth(),
-				texture.getTextureHeight(),
-				0,
-				srcPixelFormat,
-				SGL.GL_UNSIGNED_BYTE,
-				textureBuffer);
-
+		
+		Renderer.get().glTexImage2D( target, 0, dstPixelFormat, texture.getTextureWidth(), texture.getTextureHeight(), 0, srcPixelFormat, SGL.GL_UNSIGNED_BYTE, textureBuffer );
+		
 		return texture;
 	}
-
+	
 	/**
 	 * Implement of transform copy area for 1.4
 	 * 
@@ -154,10 +152,11 @@ public class BufferedImageUtil {
 	 * @param dx The transform on the x axis
 	 * @param dy The transform on the y axis
 	 */
-	@SuppressWarnings("unused")
-	private static void copyArea(BufferedImage image, int x, int y, int width, int height, int dx, int dy) {
-		Graphics2D g = (Graphics2D) image.getGraphics();
-
-		g.drawImage(image.getSubimage(x, y, width, height),x+dx,y+dy,null);
+	@SuppressWarnings( "unused" )
+	private static void copyArea( BufferedImage image, int x, int y, int width, int height, int dx, int dy )
+	{
+		Graphics2D g = (Graphics2D)image.getGraphics();
+		
+		g.drawImage( image.getSubimage( x, y, width, height ), x + dx, y + dy, null );
 	}
 }

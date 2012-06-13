@@ -15,16 +15,18 @@ import org.w3c.dom.Document;
  * 
  * @author kevin
  */
-public class XMLParser {
+public class XMLParser
+{
 	/** The factory used to to create document builders that parse XML into the DOM */
 	private static DocumentBuilderFactory factory;
-
+	
 	/**
 	 * Create a new parser
 	 */
-	public XMLParser() {
+	public XMLParser()
+	{
 	}
-
+	
 	/**
 	 * Parse the XML document located by the slick resource loader using the
 	 * reference given.
@@ -32,12 +34,13 @@ public class XMLParser {
 	 * @param ref The reference to the XML document
 	 * @return The root element of the newly parse document
 	 * @throws SlickException Indicates a failure to parse the XML, most likely the
-	 * XML is malformed in some way.
+	 *             XML is malformed in some way.
 	 */
-	public XMLElement parse(String ref) throws SlickException {
-		return parse(ref, ResourceLoader.getResourceAsStream(ref));
+	public XMLElement parse( String ref ) throws SlickException
+	{
+		return parse( ref, ResourceLoader.getResourceAsStream( ref ) );
 	}
-
+	
 	/**
 	 * Parse the XML document that can be read from the given input stream
 	 * 
@@ -45,19 +48,24 @@ public class XMLParser {
 	 * @param in The input stream from which the document can be read
 	 * @return The root element of the newly parse document
 	 * @throws SlickXMLException Indicates a failure to parse the XML, most likely the
-	 * XML is malformed in some way.
+	 *             XML is malformed in some way.
 	 */
-	public XMLElement parse(String name, InputStream in) throws SlickXMLException {
-		try {
-			if (factory == null) {
+	public XMLElement parse( String name, InputStream in ) throws SlickXMLException
+	{
+		try
+		{
+			if( factory == null )
+			{
 				factory = DocumentBuilderFactory.newInstance();
 			}
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(in);
-
-			return new XMLElement(doc.getDocumentElement());
-		} catch (Exception e) {
-			throw new SlickXMLException("Failed to parse document: "+name, e);
+			Document doc = builder.parse( in );
+			
+			return new XMLElement( doc.getDocumentElement() );
+		}
+		catch( Exception e )
+		{
+			throw new SlickXMLException( "Failed to parse document: " + name, e );
 		}
 	}
 }

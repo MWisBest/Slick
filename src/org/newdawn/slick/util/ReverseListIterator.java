@@ -2,55 +2,66 @@ package org.newdawn.slick.util;
 
 import java.util.ListIterator;
 
-public class ReverseListIterator<T> implements ListIterator<T> {
+public class ReverseListIterator<T> implements ListIterator<T>
+{
 	private final ListIterator<T> iter;
-
-	public ReverseListIterator(ListIterator<T> iter) {
+	
+	public ReverseListIterator( ListIterator<T> iter )
+	{
 		this.iter = iter;
 	}
-
+	
 	@Override
-	public boolean hasNext() {
+	public boolean hasNext()
+	{
 		return iter.hasPrevious();
 	}
-
+	
 	@Override
-	public T next() {
+	public T next()
+	{
 		return iter.previous();
 	}
-
+	
 	@Override
-	public void remove() {
+	public void remove()
+	{
 		iter.remove();
 	}
-
+	
 	@Override
-	public boolean hasPrevious() {
+	public boolean hasPrevious()
+	{
 		return iter.hasNext();
 	}
-
+	
 	@Override
-	public T previous() {
+	public T previous()
+	{
 		return iter.next();
 	}
-
+	
 	@Override
-	public int nextIndex() {
+	public int nextIndex()
+	{
 		return iter.previousIndex();
 	}
-
+	
 	@Override
-	public int previousIndex() {
+	public int previousIndex()
+	{
 		return iter.nextIndex();
 	}
-
+	
 	@Override
-	public void set(T e) {
-		iter.set(e);
+	public void set( T e )
+	{
+		iter.set( e );
 	}
-
+	
 	@Override
-	public void add(T e) {
-		iter.add(e);
+	public void add( T e )
+	{
+		iter.add( e );
 	}
 }

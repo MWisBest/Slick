@@ -17,79 +17,90 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  * A simple test state to display a message describing the test
- *
+ * 
  * @author kevin
  */
-public class TestState1 extends BasicGameState {
+public class TestState1 extends BasicGameState
+{
 	/** The ID given to this state */
 	public static final int ID = 1;
 	/** The font to write the message with */
 	private Font font;
 	/** The game holding this state */
 	private StateBasedGame game;
-
+	
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#getID()
 	 */
 	@Override
-	public int getID() {
+	public int getID()
+	{
 		return ID;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#init(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
 	 */
 	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+	public void init( GameContainer container, StateBasedGame game ) throws SlickException
+	{
 		this.game = game;
-		font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
+		font = new AngelCodeFont( "testdata/demo2.fnt", "testdata/demo2_00.tga" );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#render(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.Graphics)
 	 */
 	@Override
-	public void render(GameContainer container, StateBasedGame game, Graphics g) {
-		g.setFont(font);
-		g.setColor(Color.white);
-		g.drawString("State Based Game Test", 100, 100);
-		g.drawString("Numbers 1-3 will switch between states.", 150, 300);
-		g.setColor(Color.red);
-		g.drawString("This is State 1", 200, 50);
+	public void render( GameContainer container, StateBasedGame game, Graphics g )
+	{
+		g.setFont( font );
+		g.setColor( Color.white );
+		g.drawString( "State Based Game Test", 100, 100 );
+		g.drawString( "Numbers 1-3 will switch between states.", 150, 300 );
+		g.setColor( Color.red );
+		g.drawString( "This is State 1", 200, 50 );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#update(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, int)
 	 */
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta) {
+	public void update( GameContainer container, StateBasedGame game, int delta )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#keyReleased(int, char)
 	 */
 	@Override
-	public void keyReleased(int key, char c) {
-
-		if (key == Input.KEY_2) {
-			GameState target = game.getState(TestState2.ID);
-
+	public void keyReleased( int key, char c )
+	{
+		
+		if( key == Input.KEY_2 )
+		{
+			GameState target = game.getState( TestState2.ID );
+			
 			final long start = System.currentTimeMillis();
-			CrossStateTransition t = new CrossStateTransition(target) {
-				@Override
-				public boolean isComplete() {
-					return (System.currentTimeMillis() - start) > 2000;
-				}
-
-				@Override
-				public void init(GameState firstState, GameState secondState) {
-				}
-			};
-
-			game.enterState(TestState2.ID, t, new EmptyTransition());
+			CrossStateTransition t = new CrossStateTransition( target )
+				{
+					@Override
+					public boolean isComplete()
+					{
+						return ( System.currentTimeMillis() - start ) > 2000;
+					}
+					
+					@Override
+					public void init( GameState firstState, GameState secondState )
+					{
+					}
+				};
+			
+			game.enterState( TestState2.ID, t, new EmptyTransition() );
 		}
-		if (key == Input.KEY_3) {
-			game.enterState(TestState3.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		if( key == Input.KEY_3 )
+		{
+			game.enterState( TestState3.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
 		}
 	}
 }

@@ -17,60 +17,67 @@ import org.newdawn.slick.util.Log;
  * 
  * @author kappaOne
  */
-public class FileMuffin implements Muffin {
-
+public class FileMuffin implements Muffin
+{
+	
 	/**
-	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap,
-	 *      java.lang.String)
+	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap, java.lang.String)
 	 */
 	@Override
-	public void saveFile(HashMap<String, ?> scoreMap, String fileName) throws IOException {
-		String userHome = System.getProperty("user.home");
-		File file = new File(userHome);
-		file = new File(file, ".java");
-		if (!file.exists()) {
+	public void saveFile( HashMap<String, ?> scoreMap, String fileName ) throws IOException
+	{
+		String userHome = System.getProperty( "user.home" );
+		File file = new File( userHome );
+		file = new File( file, ".java" );
+		if( !file.exists() )
+		{
 			file.mkdir();
 		}
-
-		file = new File(file, fileName);
-		FileOutputStream fos = new FileOutputStream(file);
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-
+		
+		file = new File( file, fileName );
+		FileOutputStream fos = new FileOutputStream( file );
+		ObjectOutputStream oos = new ObjectOutputStream( fos );
+		
 		// save hashMap
-		oos.writeObject(scoreMap);
-
+		oos.writeObject( scoreMap );
+		
 		oos.close();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#loadFile(java.lang.String)
 	 */
 	@Override
-	public HashMap<?, ?> loadFile(String fileName) throws IOException {
-		String userHome = System.getProperty("user.home");
-
-		File file = new File(userHome);
-		file = new File(file, ".java");
-		file = new File(file, fileName);
-
-		if (!file.exists())
-			return new HashMap<String, Object>();
-
-		try {
-			FileInputStream fis = new FileInputStream(file);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-
-			HashMap<?, ?> hashMap = (HashMap<?, ?>) ois.readObject();
-
+	public HashMap<?, ?> loadFile( String fileName ) throws IOException
+	{
+		String userHome = System.getProperty( "user.home" );
+		
+		File file = new File( userHome );
+		file = new File( file, ".java" );
+		file = new File( file, fileName );
+		
+		if( !file.exists() ) return new HashMap<String, Object>();
+		
+		try
+		{
+			FileInputStream fis = new FileInputStream( file );
+			ObjectInputStream ois = new ObjectInputStream( fis );
+			
+			HashMap<?, ?> hashMap = (HashMap<?, ?>)ois.readObject();
+			
 			ois.close();
-
+			
 			return hashMap;
-		} catch (EOFException e) {
+		}
+		catch( EOFException e )
+		{
 			// End of the file reached, return empty map
 			return new HashMap<String, Object>();
-		} catch (ClassNotFoundException e) {
-			Log.error(e);
-			throw new IOException("Failed to pull state from store - class not found");
+		}
+		catch( ClassNotFoundException e )
+		{
+			Log.error( e );
+			throw new IOException( "Failed to pull state from store - class not found" );
 		}
 	}
 }

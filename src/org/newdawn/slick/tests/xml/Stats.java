@@ -5,7 +5,8 @@ package org.newdawn.slick.tests.xml;
  * 
  * @author kevin
  */
-public class Stats {
+public class Stats
+{
 	/** hit points */
 	private int hp;
 	/** magic points */
@@ -14,13 +15,14 @@ public class Stats {
 	private float age;
 	/** experience points */
 	private int exp;
-
+	
 	/**
 	 * Dump this object to sysout
 	 * 
 	 * @param prefix The prefix to apply to all lines
 	 */
-	public void dump(String prefix) {
-		System.out.println(prefix+"Stats "+hp+","+mp+","+age+","+exp);
+	public void dump( String prefix )
+	{
+		System.out.println( prefix + "Stats " + hp + "," + mp + "," + age + "," + exp );
 	}
 }

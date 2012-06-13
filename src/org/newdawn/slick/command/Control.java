@@ -5,5 +5,6 @@ package org.newdawn.slick.command;
  * 
  * @author joverton
  */
-public interface Control {
+public interface Control
+{
 }

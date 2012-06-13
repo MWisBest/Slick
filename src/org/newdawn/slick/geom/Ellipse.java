@@ -10,14 +10,15 @@ import org.newdawn.slick.util.FastTrig;
  * 
  * @author Mark
  */
-public class Ellipse extends Shape {
+public class Ellipse extends Shape
+{
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Default number of segments to draw this ellipse with
 	 */
 	protected static final int DEFAULT_SEGMENT_COUNT = 50;
-
+	
 	/**
 	 * The number of segments for graphical representation.
 	 */
@@ -30,29 +31,31 @@ public class Ellipse extends Shape {
 	 * vertical radius
 	 */
 	private float radius2;
-
+	
 	/**
 	 * Creates a new Ellipse object.
-	 *
+	 * 
 	 * @param centerPointX x coordinate of the center of the ellipse
 	 * @param centerPointY y coordinate of the center of the ellipse
 	 * @param radius1 horizontal radius
 	 * @param radius2 vertical radius
 	 */
-	public Ellipse(float centerPointX, float centerPointY, float radius1, float radius2) {
-		this(centerPointX, centerPointY, radius1, radius2, DEFAULT_SEGMENT_COUNT);
+	public Ellipse( float centerPointX, float centerPointY, float radius1, float radius2 )
+	{
+		this( centerPointX, centerPointY, radius1, radius2, DEFAULT_SEGMENT_COUNT );
 	}
-
+	
 	/**
 	 * Creates a new Ellipse object.
-	 *
+	 * 
 	 * @param centerPointX x coordinate of the center of the ellipse
 	 * @param centerPointY y coordinate of the center of the ellipse
 	 * @param radius1 horizontal radius
 	 * @param radius2 vertical radius
 	 * @param segmentCount how fine to make the ellipse.
 	 */
-	public Ellipse(float centerPointX, float centerPointY, float radius1, float radius2, int segmentCount) {
+	public Ellipse( float centerPointX, float centerPointY, float radius1, float radius2, int segmentCount )
+	{
 		this.x = centerPointX - radius1;
 		this.y = centerPointY - radius2;
 		this.radius1 = radius1;
@@ -60,143 +63,161 @@ public class Ellipse extends Shape {
 		this.segmentCount = segmentCount;
 		checkPoints();
 	}
-
+	
 	/**
 	 * Change the shape of this Ellipse
 	 * 
 	 * @param radius1 horizontal radius
 	 * @param radius2 vertical radius
 	 */
-	public void setRadii(float radius1, float radius2) {
-		setRadius1(radius1);
-		setRadius2(radius2);
+	public void setRadii( float radius1, float radius2 )
+	{
+		setRadius1( radius1 );
+		setRadius2( radius2 );
 	}
-
+	
 	/**
 	 * Get the horizontal radius of the ellipse
 	 * 
 	 * @return The horizontal radius of the ellipse
 	 */
-	public float getRadius1() {
+	public float getRadius1()
+	{
 		return radius1;
 	}
-
+	
 	/**
 	 * Set the horizontal radius of the ellipse
 	 * 
 	 * @param radius1 The horizontal radius to set
 	 */
-	public void setRadius1(float radius1) {
-		if (radius1 != this.radius1) {
+	public void setRadius1( float radius1 )
+	{
+		if( radius1 != this.radius1 )
+		{
 			this.radius1 = radius1;
 			pointsDirty = true;
 		}
 	}
-
+	
 	/**
 	 * Get the vertical radius of the ellipse
 	 * 
 	 * @return The vertical radius of the ellipse
 	 */
-	public float getRadius2() {
+	public float getRadius2()
+	{
 		return radius2;
 	}
-
+	
 	/**
 	 * Set the vertical radius of the ellipse
 	 * 
 	 * @param radius2 The vertical radius to set
 	 */
-	public void setRadius2(float radius2) {
-		if (radius2 != this.radius2) {
+	public void setRadius2( float radius2 )
+	{
+		if( radius2 != this.radius2 )
+		{
 			this.radius2 = radius2;
 			pointsDirty = true;
 		}
 	}
-
+	
 	/**
 	 * Generate the points to outline this ellipse.
-	 *
+	 * 
 	 */
 	@Override
-	protected void createPoints() {
+	protected void createPoints()
+	{
 		ArrayList<Float> tempPoints = new ArrayList<Float>();
-
+		
 		maxX = -Float.MIN_VALUE;
 		maxY = -Float.MIN_VALUE;
 		minX = Float.MAX_VALUE;
 		minY = Float.MAX_VALUE;
-
+		
 		float start = 0;
 		float end = 359;
-
+		
 		float cx = x + radius1;
 		float cy = y + radius2;
-
+		
 		int step = 360 / segmentCount;
-
-		for (float a=start;a<=end+step;a+=step) {
+		
+		for( float a = start; a <= end + step; a += step )
+		{
 			float ang = a;
-			if (ang > end) {
+			if( ang > end )
+			{
 				ang = end;
 			}
-			float newX = (float) (cx + (FastTrig.cos(Math.toRadians(ang)) * radius1));
-			float newY = (float) (cy + (FastTrig.sin(Math.toRadians(ang)) * radius2));
-
-			if(newX > maxX) {
+			float newX = (float)( cx + ( FastTrig.cos( Math.toRadians( ang ) ) * radius1 ) );
+			float newY = (float)( cy + ( FastTrig.sin( Math.toRadians( ang ) ) * radius2 ) );
+			
+			if( newX > maxX )
+			{
 				maxX = newX;
 			}
-			if(newY > maxY) {
+			if( newY > maxY )
+			{
 				maxY = newY;
 			}
-			if(newX < minX) {
+			if( newX < minX )
+			{
 				minX = newX;
 			}
-			if(newY < minY) {
+			if( newY < minY )
+			{
 				minY = newY;
 			}
-
-			tempPoints.add(new Float(newX));
-			tempPoints.add(new Float(newY));
+			
+			tempPoints.add( new Float( newX ) );
+			tempPoints.add( new Float( newY ) );
 		}
 		points = new float[tempPoints.size()];
-		for(int i=0;i<points.length;i++) {
-			points[i] = tempPoints.get(i).floatValue();
+		for( int i = 0; i < points.length; i++ )
+		{
+			points[i] = tempPoints.get( i ).floatValue();
 		}
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.geom.Shape#transform(org.newdawn.slick.geom.Transform)
 	 */
 	@Override
-	public Shape transform(Transform transform) {
+	public Shape transform( Transform transform )
+	{
 		checkPoints();
-
+		
 		Polygon resultPolygon = new Polygon();
-
+		
 		float result[] = new float[points.length];
-		transform.transform(points, 0, result, 0, points.length / 2);
+		transform.transform( points, 0, result, 0, points.length / 2 );
 		resultPolygon.points = result;
 		resultPolygon.checkPoints();
-
+		
 		return resultPolygon;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.geom.Shape#findCenter()
 	 */
 	@Override
-	protected void findCenter() {
+	protected void findCenter()
+	{
 		center = new float[2];
 		center[0] = x + radius1;
 		center[1] = y + radius2;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.geom.Shape#calculateRadius()
 	 */
 	@Override
-	protected void calculateRadius() {
-		boundingCircleRadius = (radius1 > radius2) ? radius1 : radius2;
+	protected void calculateRadius()
+	{
+		boundingCircleRadius = ( radius1 > radius2 ) ? radius1 : radius2;
 	}
 }

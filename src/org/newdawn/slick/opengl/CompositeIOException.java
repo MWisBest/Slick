@@ -8,38 +8,43 @@ import java.util.ArrayList;
  * 
  * @author kevin
  */
-public class CompositeIOException extends IOException {
+public class CompositeIOException extends IOException
+{
 	private static final long serialVersionUID = 1L;
-
+	
 	/** The list of exceptions causing this one */
 	private ArrayList<Exception> exceptions = new ArrayList<Exception>();
-
+	
 	/**
 	 * Create a new composite IO Exception
 	 */
-	public CompositeIOException() {
+	public CompositeIOException()
+	{
 		super();
 	}
-
+	
 	/**
 	 * Add an exception that caused this exceptino
 	 * 
 	 * @param e The exception
 	 */
-	public void addException(Exception e) {
-		exceptions.add(e);
+	public void addException( Exception e )
+	{
+		exceptions.add( e );
 	}
-
+	
 	/**
 	 * @see java.lang.Throwable#getMessage()
 	 */
 	@Override
-	public String getMessage() {
+	public String getMessage()
+	{
 		String msg = "Composite Exception: \n";
-		for (int i=0;i<exceptions.size();i++) {
-			msg += "\t"+((IOException) exceptions.get(i)).getMessage()+"\n";
+		for( int i = 0; i < exceptions.size(); i++ )
+		{
+			msg += "\t" + ( (IOException)exceptions.get( i ) ).getMessage() + "\n";
 		}
-
+		
 		return msg;
 	}
 }

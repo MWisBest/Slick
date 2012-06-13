@@ -12,72 +12,83 @@ import org.newdawn.slick.SlickException;
 
 /**
  * A test of the font rendering capabilities
- *
+ * 
  * @author kevin
  */
-public class PureFontTest extends BasicGame {
+public class PureFontTest extends BasicGame
+{
 	/** The font we're going to use to render */
 	private Font font;
 	/** The image */
 	private Image image;
-
+	
 	/**
 	 * Create a new test for font rendering
 	 */
-	public PureFontTest() {
-		super("Hiero Font Test");
+	public PureFontTest()
+	{
+		super( "Hiero Font Test" );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#init(org.newdawn.slick.GameContainer)
 	 */
 	@Override
-	public void init(GameContainer container) throws SlickException {
-		image = new Image("testdata/sky.jpg");
-		font = new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
+	public void init( GameContainer container ) throws SlickException
+	{
+		image = new Image( "testdata/sky.jpg" );
+		font = new AngelCodeFont( "testdata/hiero.fnt", "testdata/hiero.png" );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g) {
-		image.draw(0,0,800,600);
-		font.drawString(100, 32, "On top of old smokey, all");
-		font.drawString(100, 80, "covered with sand..");
+	public void render( GameContainer container, Graphics g )
+	{
+		image.draw( 0, 0, 800, 600 );
+		font.drawString( 100, 32, "On top of old smokey, all" );
+		font.drawString( 100, 80, "covered with sand.." );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update( GameContainer container, int delta ) throws SlickException
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
 	@Override
-	public void keyPressed(int key, char c) {
-		if (key == Input.KEY_ESCAPE) {
-			System.exit(0);
+	public void keyPressed( int key, char c )
+	{
+		if( key == Input.KEY_ESCAPE )
+		{
+			System.exit( 0 );
 		}
 	}
-
+	
 	/** The container we're using */
 	private static AppGameContainer container;
-
+	
 	/**
 	 * Entry point to our test
 	 * 
 	 * @param argv The arguments passed in the test
 	 */
-	public static void main(String[] argv) {
-		try {
-			container = new AppGameContainer(new PureFontTest());
-			container.setDisplayMode(800,600,false);
+	public static void main( String[] argv )
+	{
+		try
+		{
+			container = new AppGameContainer( new PureFontTest() );
+			container.setDisplayMode( 800, 600, false );
 			container.start();
-		} catch (SlickException e) {
+		}
+		catch( SlickException e )
+		{
 			e.printStackTrace();
 		}
 	}

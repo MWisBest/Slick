@@ -9,15 +9,16 @@ import org.newdawn.slick.opengl.renderer.SGL;
  * normal width/height of the game - i.e. the dimensions that the game is
  * expecting to be run at. The wrapper then takes the size of the container
  * and scales rendering and input based on the ratio.
- *
+ * 
  * Note: Using OpenGL directly within a ScalableGame can break it
  * 
  * @author kevin
  */
-public class ScalableGame implements Game {
+public class ScalableGame implements Game
+{
 	/** The renderer to use for all GL operations */
 	private static SGL GL = Renderer.get();
-
+	
 	/** The normal or native width of the game */
 	private float normalWidth;
 	/** The normal or native height of the game */
@@ -32,7 +33,7 @@ public class ScalableGame implements Game {
 	private int targetHeight;
 	/** The game container wrapped */
 	private GameContainer container;
-
+	
 	/**
 	 * Create a new scalable game wrapper
 	 * 
@@ -40,10 +41,11 @@ public class ScalableGame implements Game {
 	 * @param normalWidth The normal width of the game
 	 * @param normalHeight The noral height of the game
 	 */
-	public ScalableGame(Game held, int normalWidth, int normalHeight) {
-		this(held, normalWidth, normalHeight, false);
+	public ScalableGame( Game held, int normalWidth, int normalHeight )
+	{
+		this( held, normalWidth, normalHeight, false );
 	}
-
+	
 	/**
 	 * Create a new scalable game wrapper
 	 * 
@@ -52,142 +54,159 @@ public class ScalableGame implements Game {
 	 * @param normalHeight The noral height of the game
 	 * @param maintainAspect True if we should maintain the aspect ratio
 	 */
-	public ScalableGame(Game held, int normalWidth, int normalHeight, boolean maintainAspect) {
+	public ScalableGame( Game held, int normalWidth, int normalHeight, boolean maintainAspect )
+	{
 		this.held = held;
 		this.normalWidth = normalWidth;
 		this.normalHeight = normalHeight;
 		this.maintainAspect = maintainAspect;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#init(org.newdawn.slick.GameContainer)
 	 */
 	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init( GameContainer container ) throws SlickException
+	{
 		this.container = container;
-
+		
 		recalculateScale();
-		held.init(container);
+		held.init( container );
 	}
-
+	
 	/**
 	 * Recalculate the scale of the game
 	 * 
 	 * @throws SlickException Indicates a failure to reinit the game
 	 */
-	public void recalculateScale() throws SlickException {
+	public void recalculateScale() throws SlickException
+	{
 		targetWidth = container.getWidth();
 		targetHeight = container.getHeight();
-
-		if (maintainAspect) {
-			boolean normalIsWide = (normalWidth / normalHeight > 1.6 ? true : false);
-			boolean containerIsWide = ((float) targetWidth / (float) targetHeight > 1.6 ? true : false);
+		
+		if( maintainAspect )
+		{
+			boolean normalIsWide = ( normalWidth / normalHeight > 1.6 ? true : false );
+			boolean containerIsWide = ( (float)targetWidth / (float)targetHeight > 1.6 ? true : false );
 			float wScale = targetWidth / normalWidth;
 			float hScale = targetHeight / normalHeight;
-
-			if (normalIsWide & containerIsWide) {
-				float scale = (wScale < hScale ? wScale : hScale);
-				targetWidth = (int) (normalWidth * scale);
-				targetHeight = (int) (normalHeight * scale);
-			} else if (normalIsWide & !containerIsWide) {
-				targetWidth = (int) (normalWidth * wScale);
-				targetHeight = (int) (normalHeight * wScale);
-			} else if (!normalIsWide & containerIsWide) {
-				targetWidth = (int) (normalWidth * hScale);
-				targetHeight = (int) (normalHeight * hScale);
-			} else {
-				float scale = (wScale < hScale ? wScale : hScale);
-				targetWidth = (int) (normalWidth * scale);
-				targetHeight = (int) (normalHeight * scale);
+			
+			if( normalIsWide & containerIsWide )
+			{
+				float scale = ( wScale < hScale ? wScale : hScale );
+				targetWidth = (int)( normalWidth * scale );
+				targetHeight = (int)( normalHeight * scale );
 			}
-
+			else if( normalIsWide & !containerIsWide )
+			{
+				targetWidth = (int)( normalWidth * wScale );
+				targetHeight = (int)( normalHeight * wScale );
+			}
+			else if( !normalIsWide & containerIsWide )
+			{
+				targetWidth = (int)( normalWidth * hScale );
+				targetHeight = (int)( normalHeight * hScale );
+			}
+			else
+			{
+				float scale = ( wScale < hScale ? wScale : hScale );
+				targetWidth = (int)( normalWidth * scale );
+				targetHeight = (int)( normalHeight * scale );
+			}
+			
 		}
-
-		if (held instanceof InputListener) {
-			container.getInput().addListener((InputListener) held);
+		
+		if( held instanceof InputListener )
+		{
+			container.getInput().addListener( (InputListener)held );
 		}
-		container.getInput().setScale(normalWidth / targetWidth,
-				normalHeight / targetHeight);
-
-
+		container.getInput().setScale( normalWidth / targetWidth, normalHeight / targetHeight );
+		
 		int yoffset = 0;
 		int xoffset = 0;
-
-		if (targetHeight < container.getHeight()) {
-			yoffset = (container.getHeight() - targetHeight) / 2;
+		
+		if( targetHeight < container.getHeight() )
+		{
+			yoffset = ( container.getHeight() - targetHeight ) / 2;
 		}
-		if (targetWidth < container.getWidth()) {
-			xoffset = (container.getWidth() - targetWidth) / 2;
+		if( targetWidth < container.getWidth() )
+		{
+			xoffset = ( container.getWidth() - targetWidth ) / 2;
 		}
-		container.getInput().setOffset(-xoffset / (targetWidth / normalWidth),
-				-yoffset / (targetHeight / normalHeight));
-
+		container.getInput().setOffset( -xoffset / ( targetWidth / normalWidth ), -yoffset / ( targetHeight / normalHeight ) );
+		
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer, int)
 	 */
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
-		if ((targetHeight != container.getHeight()) ||
-				(targetWidth != container.getWidth())) {
+	public void update( GameContainer container, int delta ) throws SlickException
+	{
+		if( ( targetHeight != container.getHeight() ) || ( targetWidth != container.getWidth() ) )
+		{
 			recalculateScale();
 		}
-
-		held.update(container, delta);
+		
+		held.update( container, delta );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
 	@Override
-	public final void render(GameContainer container, Graphics g)
-			throws SlickException {
+	public final void render( GameContainer container, Graphics g ) throws SlickException
+	{
 		int yoffset = 0;
 		int xoffset = 0;
-
-		if (targetHeight < container.getHeight()) {
-			yoffset = (container.getHeight() - targetHeight) / 2;
+		
+		if( targetHeight < container.getHeight() )
+		{
+			yoffset = ( container.getHeight() - targetHeight ) / 2;
 		}
-		if (targetWidth < container.getWidth()) {
-			xoffset = (container.getWidth() - targetWidth) / 2;
+		if( targetWidth < container.getWidth() )
+		{
+			xoffset = ( container.getWidth() - targetWidth ) / 2;
 		}
-
+		
 		SlickCallable.enterSafeBlock();
-		g.setClip(xoffset, yoffset, targetWidth, targetHeight);
-		GL.glTranslatef(xoffset, yoffset, 0);
-		g.scale(targetWidth / normalWidth, targetHeight / normalHeight);
+		g.setClip( xoffset, yoffset, targetWidth, targetHeight );
+		GL.glTranslatef( xoffset, yoffset, 0 );
+		g.scale( targetWidth / normalWidth, targetHeight / normalHeight );
 		GL.glPushMatrix();
-		held.render(container, g);
+		held.render( container, g );
 		GL.glPopMatrix();
 		g.clearClip();
 		SlickCallable.leaveSafeBlock();
-
-		renderOverlay(container, g);
+		
+		renderOverlay( container, g );
 	}
-
+	
 	/**
 	 * Render the overlay that will sit over the scaled screen
 	 * 
 	 * @param container The container holding the game being render
 	 * @param g Graphics context on which to render
 	 */
-	protected void renderOverlay(GameContainer container, Graphics g) {
+	protected void renderOverlay( GameContainer container, Graphics g )
+	{
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#closeRequested()
 	 */
 	@Override
-	public boolean closeRequested() {
+	public boolean closeRequested()
+	{
 		return held.closeRequested();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.Game#getTitle()
 	 */
 	@Override
-	public String getTitle() {
+	public String getTitle()
+	{
 		return held.getTitle();
 	}
 }

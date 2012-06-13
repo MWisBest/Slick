@@ -12,6 +12,7 @@ package org.newdawn.slick.util.pathfinding;
  * 
  * @author Kevin Glass
  */
-public interface Mover {
-
+public interface Mover
+{
+	
 }

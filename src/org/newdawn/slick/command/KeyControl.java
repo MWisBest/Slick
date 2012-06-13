@@ -6,36 +6,41 @@ package org.newdawn.slick.command;
  * 
  * @author joverton
  */
-public class KeyControl implements Control {
+public class KeyControl implements Control
+{
 	/** The key code that needs to be pressed */
 	private int keycode;
-
+	
 	/**
 	 * Create a new control that caused an command to be fired on a key pressed/released
 	 * 
 	 * @param keycode The code of the key that causes the command
 	 */
-	public KeyControl(int keycode) {
+	public KeyControl( int keycode )
+	{
 		this.keycode = keycode;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof KeyControl) {
-			return ((KeyControl)o).keycode == keycode;
+	public boolean equals( Object o )
+	{
+		if( o instanceof KeyControl )
+		{
+			return ( (KeyControl)o ).keycode == keycode;
 		}
-
+		
 		return false;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return keycode;
 	}
 }

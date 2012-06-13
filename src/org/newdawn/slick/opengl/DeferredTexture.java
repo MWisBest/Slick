@@ -9,10 +9,11 @@ import org.newdawn.slick.loading.LoadingList;
 /**
  * A texture proxy that can be used to load a texture at a later date while still
  * allowing elements to reference it
- *
+ * 
  * @author kevin
  */
-public class DeferredTexture extends TextureImpl implements DeferredResource {
+public class DeferredTexture extends TextureImpl implements DeferredResource
+{
 	/** The stream to read the texture from */
 	private InputStream in;
 	/** The name of the resource to load */
@@ -25,7 +26,7 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	private TextureImpl target;
 	/** The color to be transparent */
 	private int[] trans;
-
+	
 	/**
 	 * Create a new deferred texture
 	 * 
@@ -35,220 +36,247 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	 * @param filter The filter to apply
 	 * @param trans The colour to defined as transparent
 	 */
-	public DeferredTexture(InputStream in, String resourceName, boolean flipped, int filter, int[] trans) {
+	public DeferredTexture( InputStream in, String resourceName, boolean flipped, int filter, int[] trans )
+	{
 		this.in = in;
 		this.resourceName = resourceName;
 		this.flipped = flipped;
 		this.filter = filter;
 		this.trans = trans;
-
-		LoadingList.get().add(this);
+		
+		LoadingList.get().add( this );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#load()
 	 */
 	@Override
-	public void load() throws IOException {
+	public void load() throws IOException
+	{
 		boolean before = InternalTextureLoader.get().isDeferredLoading();
-		InternalTextureLoader.get().setDeferredLoading(false);
-		target = InternalTextureLoader.get().getTexture(in, resourceName, flipped, filter, trans);
-		InternalTextureLoader.get().setDeferredLoading(before);
+		InternalTextureLoader.get().setDeferredLoading( false );
+		target = InternalTextureLoader.get().getTexture( in, resourceName, flipped, filter, trans );
+		InternalTextureLoader.get().setDeferredLoading( before );
 	}
-
+	
 	/**
 	 * Check if the target has been obtained already
 	 */
-	private void checkTarget() {
-		if (target == null) {
-			try {
+	private void checkTarget()
+	{
+		if( target == null )
+		{
+			try
+			{
 				load();
-				LoadingList.get().remove(this);
+				LoadingList.get().remove( this );
 				return;
-			} catch (IOException e) {
-				throw new RuntimeException("Attempt to use deferred texture before loading and resource not found: "+resourceName);
+			}
+			catch( IOException e )
+			{
+				throw new RuntimeException( "Attempt to use deferred texture before loading and resource not found: " + resourceName );
 			}
 		}
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#bind()
 	 */
 	@Override
-	public void bind() {
+	public void bind()
+	{
 		checkTarget();
-
+		
 		target.bind();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getHeight()
 	 */
 	@Override
-	public float getHeight() {
+	public float getHeight()
+	{
 		checkTarget();
-
+		
 		return target.getHeight();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getImageHeight()
 	 */
 	@Override
-	public int getImageHeight() {
+	public int getImageHeight()
+	{
 		checkTarget();
 		return target.getImageHeight();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getImageWidth()
 	 */
 	@Override
-	public int getImageWidth() {
+	public int getImageWidth()
+	{
 		checkTarget();
 		return target.getImageWidth();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureHeight()
 	 */
 	@Override
-	public int getTextureHeight() {
+	public int getTextureHeight()
+	{
 		checkTarget();
 		return target.getTextureHeight();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureID()
 	 */
 	@Override
-	public int getTextureID() {
+	public int getTextureID()
+	{
 		checkTarget();
 		return target.getTextureID();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureRef()
 	 */
 	@Override
-	public String getTextureRef() {
+	public String getTextureRef()
+	{
 		checkTarget();
 		return target.getTextureRef();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureWidth()
 	 */
 	@Override
-	public int getTextureWidth() {
+	public int getTextureWidth()
+	{
 		checkTarget();
 		return target.getTextureWidth();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getWidth()
 	 */
 	@Override
-	public float getWidth() {
+	public float getWidth()
+	{
 		checkTarget();
 		return target.getWidth();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#release()
 	 */
 	@Override
-	public void release() {
+	public void release()
+	{
 		checkTarget();
 		target.release();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setAlpha(boolean)
 	 */
 	@Override
-	public void setAlpha(boolean alpha) {
+	public void setAlpha( boolean alpha )
+	{
 		checkTarget();
-		target.setAlpha(alpha);
+		target.setAlpha( alpha );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setHeight(int)
 	 */
 	@Override
-	public void setHeight(int height) {
+	public void setHeight( int height )
+	{
 		checkTarget();
-		target.setHeight(height);
+		target.setHeight( height );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureHeight(int)
 	 */
 	@Override
-	public void setTextureHeight(int texHeight) {
+	public void setTextureHeight( int texHeight )
+	{
 		checkTarget();
-		target.setTextureHeight(texHeight);
+		target.setTextureHeight( texHeight );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureID(int)
 	 */
 	@Override
-	public void setTextureID(int textureID) {
+	public void setTextureID( int textureID )
+	{
 		checkTarget();
-		target.setTextureID(textureID);
+		target.setTextureID( textureID );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureWidth(int)
 	 */
 	@Override
-	public void setTextureWidth(int texWidth) {
+	public void setTextureWidth( int texWidth )
+	{
 		checkTarget();
-		target.setTextureWidth(texWidth);
+		target.setTextureWidth( texWidth );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setWidth(int)
 	 */
 	@Override
-	public void setWidth(int width) {
+	public void setWidth( int width )
+	{
 		checkTarget();
-		target.setWidth(width);
+		target.setWidth( width );
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureData()
 	 */
 	@Override
-	public byte[] getTextureData() {
+	public byte[] getTextureData()
+	{
 		checkTarget();
 		return target.getTextureData();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#getDescription()
 	 */
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
 		return resourceName;
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.Texture#hasAlpha()
 	 */
 	@Override
-	public boolean hasAlpha() {
+	public boolean hasAlpha()
+	{
 		checkTarget();
 		return target.hasAlpha();
 	}
-
+	
 	/**
 	 * @see org.newdawn.slick.opengl.Texture#setTextureFilter(int)
 	 */
 	@Override
-	public void setTextureFilter(int textureFilter) {
+	public void setTextureFilter( int textureFilter )
+	{
 		checkTarget();
-		target.setTextureFilter(textureFilter);
+		target.setTextureFilter( textureFilter );
 	}
 }

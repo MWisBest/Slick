@@ -6,13 +6,14 @@ package org.newdawn.slick.openal;
  * @author kevin
  * @author Nathan Sweet <misc@n4te.com>
  */
-public interface Audio {
-
+public interface Audio
+{
+	
 	/**
 	 * Stop the sound effect
 	 */
 	public void stop();
-
+	
 	/**
 	 * Get the ID of the OpenAL buffer holding this data (if any). This method
 	 * is not valid with streaming resources.
@@ -20,14 +21,14 @@ public interface Audio {
 	 * @return The ID of the OpenAL buffer holding this data
 	 */
 	public int getBufferID();
-
+	
 	/**
 	 * Check if the sound is playing as sound fx
 	 * 
 	 * @return True if the sound is playing
 	 */
 	public boolean isPlaying();
-
+	
 	/**
 	 * Play this sound as a sound effect
 	 * 
@@ -36,8 +37,8 @@ public interface Audio {
 	 * @param loop True if we should loop
 	 * @return The ID of the source playing the sound
 	 */
-	public int playAsSoundEffect(float pitch, float gain, boolean loop);
-
+	public int playAsSoundEffect( float pitch, float gain, boolean loop );
+	
 	/**
 	 * Play this sound as a sound effect
 	 * 
@@ -49,9 +50,8 @@ public interface Audio {
 	 * @param z The z position of the sound
 	 * @return The ID of the source playing the sound
 	 */
-	public int playAsSoundEffect(float pitch, float gain, boolean loop,
-			float x, float y, float z);
-
+	public int playAsSoundEffect( float pitch, float gain, boolean loop, float x, float y, float z );
+	
 	/**
 	 * Play this sound as music
 	 * 
@@ -60,16 +60,16 @@ public interface Audio {
 	 * @param loop True if we should loop
 	 * @return The ID of the source playing the sound
 	 */
-	public int playAsMusic(float pitch, float gain, boolean loop);
-
+	public int playAsMusic( float pitch, float gain, boolean loop );
+	
 	/**
 	 * Seeks to a position in the music.
 	 * 
 	 * @param position Position in seconds.
 	 * @return True if the setting of the position was successful
 	 */
-	public boolean setPosition(float position);
-
+	public boolean setPosition( float position );
+	
 	/**
 	 * Return the current playing position in the sound
 	 * 
