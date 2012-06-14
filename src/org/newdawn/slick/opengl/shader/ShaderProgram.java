@@ -148,7 +148,6 @@ public class ShaderProgram
 	 * @param in the input stream
 	 * @return the resulting source code String
 	 * @throws SlickException if there was an issue reading the source
-	 * @author Nitram
 	 */
 	public static String readFile( InputStream in ) throws SlickException
 	{
@@ -320,7 +319,7 @@ public class ShaderProgram
 	 * Enables this shader for use -- only one shader can be bound at a time. Calling
 	 * bind() when another program is bound will simply make this object the active program.
 	 * 
-	 * @throw IllegalStateException if this program is invalid
+	 * @throws IllegalStateException if this program is invalid
 	 */
 	public void bind()
 	{

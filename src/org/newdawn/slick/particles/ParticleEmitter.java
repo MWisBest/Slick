@@ -35,8 +35,6 @@ public interface ParticleEmitter
 	
 	/**
 	 * Resumes a particle emitter if it is not completed, after wrapUp() was invoked
-	 * 
-	 * @author liamzebedee
 	 */
 	public void resume();
 	

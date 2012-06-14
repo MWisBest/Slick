@@ -375,7 +375,6 @@ public class Layer
 	 * Gets all Tiles from this layer, formatted into Tile objects Can only be
 	 * used if the layer was loaded using TiledMapPlus
 	 * 
-	 * @author liamzebedee
 	 * @throws SlickException
 	 */
 	public ArrayList<Tile> getTiles() throws SlickException
@@ -401,7 +400,6 @@ public class Layer
 	 * Get all tiles from this layer that are part of a tileset Can only be used
 	 * if the layer was loaded using TiledMapPlus
 	 * 
-	 * @author liamzebedee
 	 * @param tilesetName
 	 *            The name of the tileset that the tiles are part of
 	 * @throws SlickException
@@ -431,7 +429,6 @@ public class Layer
 	/**
 	 * Removes a tile
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            Tile X
 	 * @param y
@@ -446,7 +443,6 @@ public class Layer
 	 * Sets a tile's tileSet Can only be used if the layer was loaded using
 	 * TiledMapPlus
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            Tile X
 	 * @param y
@@ -475,7 +471,6 @@ public class Layer
 	 * Returns true if this tile is part of that tileset Can only be used if the
 	 * layer was loaded using TiledMapPlus
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            The x co-ordinate of the tile
 	 * @param y

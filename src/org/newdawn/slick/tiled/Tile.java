@@ -25,15 +25,12 @@ public class Tile
 	/**
 	 * Constructor for a Tile
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            The x co-ordinate of the tile
 	 * @param y
 	 *            The y co-ordinate of the tile
 	 * @param layerName
 	 *            The layer name on which this tile is on
-	 * @param id
-	 *            The Global ID of the Tile
 	 * @param tileset
 	 *            The name of the Tile's tileset
 	 */

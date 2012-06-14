@@ -445,7 +445,6 @@ public class TiledMap
 	/**
 	 * Render a section of the tile map
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            The x location to render at
 	 * @param y

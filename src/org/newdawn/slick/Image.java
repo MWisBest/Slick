@@ -1735,7 +1735,6 @@ public class Image implements Renderable
 	/**
 	 * Draws an image according to a transform (Flip, FlipX, FlipY) <li>0x01 - Flip top-left corner with bottom right <li>0x02 - Flip on X axis <li>0x04 - Flip on Y axis
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            The x location to draw the image at
 	 * @param y

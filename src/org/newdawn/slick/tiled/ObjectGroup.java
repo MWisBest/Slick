@@ -43,8 +43,6 @@ public class ObjectGroup
 	/**
 	 * Create a new group based on the XML definition
 	 * 
-	 * @author kulpae
-	 * @author liamzebedee
 	 * @param element
 	 *            The XML element describing the layer
 	 * @param map
@@ -136,7 +134,6 @@ public class ObjectGroup
 	/**
 	 * Gets an object by its name
 	 * 
-	 * @author liamzebedee
 	 * @param objectName
 	 *            The name of the object
 	 */
@@ -149,7 +146,6 @@ public class ObjectGroup
 	/**
 	 * Gets all objects of a specific type on a layer
 	 * 
-	 * @author liamzebedee
 	 * @param type
 	 *            The name of the type
 	 */
@@ -169,7 +165,6 @@ public class ObjectGroup
 	/**
 	 * Removes an object
 	 * 
-	 * @author liamzebedee
 	 * @param objectName
 	 *            The name of the object
 	 */
@@ -181,7 +176,6 @@ public class ObjectGroup
 	/**
 	 * Sets the mapping from object names to their offsets
 	 * 
-	 * @author liamzebedee
 	 * @param map
 	 *            The name of the map
 	 */
@@ -193,7 +187,6 @@ public class ObjectGroup
 	/**
 	 * Adds an object to the object group
 	 * 
-	 * @author liamzebedee
 	 * @param object
 	 *            The object to be added
 	 */
@@ -206,7 +199,6 @@ public class ObjectGroup
 	/**
 	 * Gets all the objects from this group
 	 * 
-	 * @author liamzebedee
 	 */
 	public ArrayList<GroupObject> getObjects()
 	{

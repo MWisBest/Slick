@@ -173,7 +173,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Gets a layer by its name
 	 * 
-	 * @author liamzebedee
 	 * @param layerName
 	 *            The name of the layer to get
 	 */
@@ -186,7 +185,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Gets an ObjectGroup
 	 * 
-	 * @author liamzebedee
 	 * @param groupName
 	 *            The name of the group
 	 */
@@ -197,8 +195,6 @@ public class TiledMapPlus extends TiledMap
 	
 	/**
 	 * Gets all ObjectGroup's
-	 * 
-	 * @author liamzebedee
 	 */
 	public ArrayList<ObjectGroup> getObjectGroups()
 	{
@@ -208,7 +204,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Get all tiles from all layers that are part of a specific tileset
 	 * 
-	 * @author liamzebedee
 	 * @param tilesetName
 	 *            The name of the tileset that the tiles are part of
 	 */
@@ -238,12 +233,11 @@ public class TiledMapPlus extends TiledMap
 	 * Writes the current TiledMap to a stream <br>
 	 * Map is written using GZIP Base64 encoding in TiledMap V0.8
 	 * 
-	 * @author liamzebedee
 	 * @param stream
 	 *            The stream in which the TiledMap is to be written to
 	 * @throws SlickException
 	 */
-	public void write( OutputStream o ) throws SlickException
+	public void write( OutputStream stream ) throws SlickException
 	{
 		try
 		{
@@ -432,7 +426,7 @@ public class TiledMapPlus extends TiledMap
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource( doc );
-			StreamResult result = new StreamResult( o );
+			StreamResult result = new StreamResult( stream );
 			transformer.transform( source, result );
 			
 		}
@@ -445,8 +439,6 @@ public class TiledMapPlus extends TiledMap
 	
 	/**
 	 * Gets an arrayList of all layers in the TiledMap
-	 * 
-	 * @author liamzebedee
 	 */
 	public ArrayList<Layer> getLayers()
 	{
@@ -455,8 +447,6 @@ public class TiledMapPlus extends TiledMap
 	
 	/**
 	 * Gets an arrayList of all tilesets in the TiledMap
-	 * 
-	 * @author liamzebedee
 	 */
 	public ArrayList<TileSet> getTilesets()
 	{
@@ -466,7 +456,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Gets the visible tile's image at the co-ordinates
 	 * 
-	 * @author liamzebedee
 	 * @param x
 	 *            The x co-ordinate of the tile
 	 * @param y
@@ -495,7 +484,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Gets the ID of a tileset from its name
 	 * 
-	 * @author liamzebedee
 	 * @param tilesetName
 	 *            The name of the tileset to get the id of
 	 */
@@ -508,7 +496,6 @@ public class TiledMapPlus extends TiledMap
 	/**
 	 * Gets the ID of a layer from its name
 	 * 
-	 * @author liamzebedee
 	 * @param layerName
 	 *            The name of the layer to get the id of
 	 */

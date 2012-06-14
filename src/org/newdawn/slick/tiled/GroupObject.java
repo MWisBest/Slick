@@ -56,8 +56,6 @@ public class GroupObject
 	/**
 	 * Create a new group based on the XML definition
 	 * 
-	 * @author kulpae
-	 * @author liamzebedee
 	 * @param element
 	 *            The XML element describing the layer
 	 * @throws SlickException
@@ -146,8 +144,6 @@ public class GroupObject
 	/**
 	 * Create a new group based on the XML definition
 	 * 
-	 * @author kulpae
-	 * @author liamzebedee
 	 * @param element
 	 *            The XML element describing the layer
 	 * @param map
@@ -229,7 +225,6 @@ public class GroupObject
 	/**
 	 * Puts a property to an object
 	 * 
-	 * @author liamzebedee
 	 * @param propertyKey
 	 *            The key of the property to be put to the object
 	 * @param propertyValue
@@ -244,12 +239,8 @@ public class GroupObject
 	/**
 	 * Puts a property to an object
 	 * 
-	 * @author liamzebedee
 	 * @param propertyKey
 	 *            The key of the property to be put to the object
-	 * @param propertyValue
-	 *            The value mappped to the key of the property to be put to the
-	 *            object
 	 */
 	public void removeProperty( String propertyKey )
 	{
@@ -259,7 +250,6 @@ public class GroupObject
 	/**
 	 * Gets the image of this object, if it is an image object
 	 * 
-	 * @author liamzebedee
 	 * @throws SlickException
 	 */
 	public Image getImage() throws SlickException

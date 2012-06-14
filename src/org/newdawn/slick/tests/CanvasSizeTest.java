@@ -64,7 +64,7 @@ public class CanvasSizeTest extends BasicGame
 	/**
 	 * Entry point to the test
 	 * 
-	 * @param args The command line arguments passed in (none honoured)
+	 * @param argv The command line arguments passed in (none honoured)
 	 */
 	public static void main( String[] argv )
 	{
