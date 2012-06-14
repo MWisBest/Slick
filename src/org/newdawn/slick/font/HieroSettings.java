@@ -134,7 +134,7 @@ public class HieroSettings
 				{
 					try
 					{
-						Class<? extends ConfigurableEffect> effectClass = Class.forName(value).asSubclass(ConfigurableEffect.class);
+						Class<? extends ConfigurableEffect> effectClass = Class.forName( value ).asSubclass( ConfigurableEffect.class );
 						effects.add( effectClass.newInstance() );
 					}
 					catch( Exception ex )

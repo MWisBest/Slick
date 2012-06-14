@@ -15,7 +15,7 @@ import org.newdawn.slick.util.pathfinding.heuristics.ClosestHeuristic;
 public class AStarPathFinder implements PathFinder, PathFindingContext
 {
 	/** The set of nodes that have been searched through */
-	private ArrayList<Node> closed = new ArrayList<Node>();
+	private ArrayList<Node> closed = new ArrayList<>();
 	/** The set of nodes that we do not yet consider fully searched */
 	private PriorityList open = new PriorityList();
 	
@@ -408,7 +408,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	private class PriorityList
 	{
 		/** The list of elements */
-		private List<Object> list = new LinkedList<Object>();
+		private List<Object> list = new LinkedList<>();
 		
 		/**
 		 * Retrieve the first element from the list

@@ -50,7 +50,7 @@ public class TileSet
 	/** The properties for this tileset */
 	Properties tilesetProperties = new Properties();
 	/** The properties for each tile */
-	private HashMap<Integer, Properties> tileProperties = new HashMap<Integer, Properties>();
+	private HashMap<Integer, Properties> tileProperties = new HashMap<>();
 	/** The padding of the tiles */
 	public int tileSpacing = 0;
 	/** The margin of the tileset */

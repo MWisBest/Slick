@@ -73,7 +73,7 @@ public class ObjectGroup
 		}
 		if( width == 0 || height == 0 ) Log.warn( "ObjectGroup " + name + " has zero size (width or height equal to 0)" );
 		
-		objects = new ArrayList<GroupObject>();
+		objects = new ArrayList<>();
 		String opacityS = element.getAttribute( "opacity" );
 		if( opacityS != null && opacityS.length() != 0 )
 		{
@@ -155,7 +155,7 @@ public class ObjectGroup
 	 */
 	public ArrayList<GroupObject> getObjectsOfType( String type )
 	{
-		ArrayList<GroupObject> foundObjects = new ArrayList<GroupObject>();
+		ArrayList<GroupObject> foundObjects = new ArrayList<>();
 		for( GroupObject object : this.objects )
 		{
 			if( object.type.equals( type ) )

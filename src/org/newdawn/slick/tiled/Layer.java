@@ -384,7 +384,7 @@ public class Layer
 		{
 			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		}
-		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		ArrayList<Tile> tiles = new ArrayList<>();
 		for( int x = 0; x < this.width; x++ )
 		{
 			for( int y = 0; y < this.height; y++ )
@@ -412,7 +412,7 @@ public class Layer
 		{
 			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		}
-		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		ArrayList<Tile> tiles = new ArrayList<>();
 		int tilesetID = tmap.getTilesetID( tilesetName );
 		for( int x = 0; x < tmap.getWidth(); x++ )
 		{

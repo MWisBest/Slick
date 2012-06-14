@@ -133,7 +133,7 @@ public class TiledMapPlus extends TiledMap
 		{
 			ObjectGroup g = this.objectGroups.get( i );
 			this.objectGroupNameToOffset.put( g.name, i );
-			HashMap<String, Integer> nameToObjectMap = new HashMap<String, Integer>();
+			HashMap<String, Integer> nameToObjectMap = new HashMap<>();
 			for( int ib = 0; ib < this.getObjectCount( i ); ib++ )
 			{
 				nameToObjectMap.put( this.getObjectName( i, ib ), ib );
@@ -214,7 +214,7 @@ public class TiledMapPlus extends TiledMap
 	 */
 	public ArrayList<Tile> getAllTilesFromAllLayers( String tilesetName )
 	{
-		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		ArrayList<Tile> tiles = new ArrayList<>();
 		int tilesetID = this.tilesetNameToIDMap.get( tilesetName );
 		for( int x = 0; x < this.getWidth(); x++ )
 		{
@@ -281,7 +281,7 @@ public class TiledMapPlus extends TiledMap
 				Properties tilesetPropertiesData = tilesetData.tilesetProperties;
 				if( tilesetProperties != null )
 				{
-					Enumeration propertyEnum = tilesetPropertiesData.propertyNames();
+					Enumeration<?> propertyEnum = tilesetPropertiesData.propertyNames();
 					while( propertyEnum.hasMoreElements() )
 					{
 						String key = (String)propertyEnum.nextElement();
@@ -306,7 +306,7 @@ public class TiledMapPlus extends TiledMap
 						tile.setAttribute( "id", "" + tileID );
 						Element tileProps = doc.createElement( "properties" );
 						
-						Enumeration propertyEnum = tilesetData.getProperties( tileI ).propertyNames();
+						Enumeration<?> propertyEnum = tilesetData.getProperties( tileI ).propertyNames();
 						while( propertyEnum.hasMoreElements() )
 						{
 							String key = (String)propertyEnum.nextElement();
@@ -412,7 +412,7 @@ public class TiledMapPlus extends TiledMap
 					if( groupObject.props != null )
 					{
 						Element objectProps = doc.createElement( "properties" );
-						Enumeration propertyEnum = groupObject.props.propertyNames();
+						Enumeration<?> propertyEnum = groupObject.props.propertyNames();
 						while( propertyEnum.hasMoreElements() )
 						{
 							String key = (String)propertyEnum.nextElement();
