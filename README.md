@@ -1,7 +1,7 @@
-![Slick](http://slick.cokeandcode.com/images/logo.gif)  
+﻿![Slick](http://slick.cokeandcode.com/images/logo.gif)  
 2D game Java library based on LWJGL.
 
-Copyright (c) 2007, Slick 2D  
+Copyright © 2007, Slick 2D  
 All rights reserved.
 
 Tools
