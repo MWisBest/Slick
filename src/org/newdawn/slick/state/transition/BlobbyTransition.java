@@ -32,7 +32,7 @@ public class BlobbyTransition implements Transition
 	/** The background applied under the previous state if any */
 	private Color background;
 	/** ArrayList blobs */
-	private ArrayList<Blob> blobs = new ArrayList<Blob>();
+	private ArrayList<Blob> blobs = new ArrayList<>();
 	/** The time it will run for */
 	private int timer = 1000;
 	/** The number of blobs to create */

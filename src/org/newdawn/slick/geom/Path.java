@@ -12,7 +12,7 @@ public class Path extends Shape
 {
 	private static final long serialVersionUID = -226507065124611881L;
 	/** The local list of points */
-	private ArrayList<float[]> localPoints = new ArrayList<float[]>();
+	private ArrayList<float[]> localPoints = new ArrayList<>();
 	/** The current x coordinate */
 	private float cx;
 	/** The current y coordiante */
@@ -20,7 +20,7 @@ public class Path extends Shape
 	/** True if the path has been closed */
 	private boolean closed;
 	/** The list of holes placed */
-	private ArrayList<ArrayList<float[]>> holes = new ArrayList<ArrayList<float[]>>();
+	private ArrayList<ArrayList<float[]>> holes = new ArrayList<>();
 	/** The current hole being built */
 	private ArrayList<float[]> hole;
 	
@@ -46,7 +46,7 @@ public class Path extends Shape
 	 */
 	public void startHole( float sx, float sy )
 	{
-		hole = new ArrayList<float[]>();
+		hole = new ArrayList<>();
 		holes.add( hole );
 	}
 	
@@ -186,7 +186,7 @@ public class Path extends Shape
 		}
 		t.transform( in, 0, out, 0, pts.size() );
 		
-		ArrayList<float[]> outList = new ArrayList<float[]>();
+		ArrayList<float[]> outList = new ArrayList<>();
 		for( int i = 0; i < pts.size(); i++ )
 		{
 			outList.add( new float[] { out[( i * 2 )], out[( i * 2 ) + 1] } );

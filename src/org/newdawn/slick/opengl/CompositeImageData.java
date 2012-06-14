@@ -17,7 +17,7 @@ import org.newdawn.slick.util.Log;
 public class CompositeImageData implements LoadableImageData
 {
 	/** The list of images sources in order of preference to try loading the data with */
-	private ArrayList<LoadableImageData> sources = new ArrayList<LoadableImageData>();
+	private ArrayList<LoadableImageData> sources = new ArrayList<>();
 	/** The data source that worked and was used - or null if no luck */
 	private LoadableImageData picked;
 	

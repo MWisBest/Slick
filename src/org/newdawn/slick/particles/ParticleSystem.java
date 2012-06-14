@@ -71,7 +71,7 @@ public class ParticleSystem
 		public ParticlePool( ParticleSystem system, int maxParticles )
 		{
 			particles = new Particle[maxParticles];
-			available = new ArrayList<Particle>();
+			available = new ArrayList<>();
 			
 			for( int i = 0; i < particles.length; i++ )
 			{
@@ -108,7 +108,7 @@ public class ParticleSystem
 	protected int maxParticlesPerEmitter;
 	
 	/** The list of emittered producing and controlling particles */
-	protected ArrayList<ParticleEmitter> emitters = new ArrayList<ParticleEmitter>();
+	protected ArrayList<ParticleEmitter> emitters = new ArrayList<>();
 	
 	/** The dummy particle to return should no more particles be available */
 	protected Particle dummy;
@@ -541,7 +541,7 @@ public class ParticleSystem
 		}
 		
 		removeMe.clear();
-		ArrayList<ParticleEmitter> emitters = new ArrayList<ParticleEmitter>( this.emitters );
+		ArrayList<ParticleEmitter> emitters = new ArrayList<>( this.emitters );
 		for( int i = 0; i < emitters.size(); i++ )
 		{
 			ParticleEmitter emitter = emitters.get( i );

@@ -110,7 +110,7 @@ public class Polygon extends Shape
 			return;
 		}
 		
-		ArrayList<Float> tempPoints = new ArrayList<Float>();
+		ArrayList<Float> tempPoints = new ArrayList<>();
 		for( int i = 0; i < points.length; i++ )
 		{
 			tempPoints.add( new Float( points[i] ) );

@@ -80,7 +80,7 @@ public class InputProvider
 	 */
 	public List<Control> getControlsFor( Command command )
 	{
-		List<Control> controlsForCommand = new ArrayList<Control>();
+		List<Control> controlsForCommand = new ArrayList<>();
 		
 		for( Entry<Control, Command> entry : commands.entrySet() )
 		{

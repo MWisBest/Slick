@@ -131,7 +131,7 @@ public class Ellipse extends Shape
 	@Override
 	protected void createPoints()
 	{
-		ArrayList<Float> tempPoints = new ArrayList<Float>();
+		ArrayList<Float> tempPoints = new ArrayList<>();
 		
 		maxX = -Float.MIN_VALUE;
 		maxY = -Float.MIN_VALUE;

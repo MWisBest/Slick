@@ -27,14 +27,14 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 	private GeomUtil util = new GeomUtil();
 	
 	/** The original list of shapes */
-	private ArrayList<Shape> original = new ArrayList<Shape>();
+	private ArrayList<Shape> original = new ArrayList<>();
 	/** The original list of shapes */
-	private ArrayList<Shape> combined = new ArrayList<Shape>();
+	private ArrayList<Shape> combined = new ArrayList<>();
 	
 	/** The list of intersection points */
-	private ArrayList<Vector2f> intersections = new ArrayList<Vector2f>();
+	private ArrayList<Vector2f> intersections = new ArrayList<>();
 	/** The list of used points */
-	private ArrayList<Vector2f> used = new ArrayList<Vector2f>();
+	private ArrayList<Vector2f> used = new ArrayList<>();
 	
 	/** The quad space of shapes that need to be checked against each other */
 	private ArrayList<Shape>[][] quadSpace;
@@ -74,7 +74,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		{
 			for( int y = 0; y < segments; y++ )
 			{
-				quadSpace[x][y] = new ArrayList<Shape>();
+				quadSpace[x][y] = new ArrayList<>();
 				
 				// quad for this segment
 				Polygon segmentPolygon = new Polygon();
@@ -250,7 +250,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		
 		// at this stage all the shapes that can be combined within their quads
 		// will have gone on - we may need to combine stuff on the boundary tho
-		HashSet<Shape> result = new HashSet<Shape>();
+		HashSet<Shape> result = new HashSet<>();
 		
 		for( int x = 0; x < quadSpace.length; x++ )
 		{
@@ -260,7 +260,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 			}
 		}
 		
-		return new ArrayList<Shape>( result );
+		return new ArrayList<>( result );
 	}
 	
 	/**
@@ -283,7 +283,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 			current = combineImpl( current );
 		}
 		
-		ArrayList<Shape> pruned = new ArrayList<Shape>();
+		ArrayList<Shape> pruned = new ArrayList<>();
 		for( int i = 0; i < current.size(); i++ )
 		{
 			pruned.add( current.get( i ).prune() );
@@ -301,7 +301,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 	 */
 	private ArrayList<Shape> combineImpl( ArrayList<Shape> shapes )
 	{
-		ArrayList<Shape> result = new ArrayList<Shape>( shapes );
+		ArrayList<Shape> result = new ArrayList<>( shapes );
 		if( quadSpace != null )
 		{
 			result = shapes;

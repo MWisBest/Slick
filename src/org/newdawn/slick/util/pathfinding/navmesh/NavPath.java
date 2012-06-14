@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class NavPath
 {
 	/** The list of links that form this path */
-	private ArrayList<Link> links = new ArrayList<Link>();
+	private ArrayList<Link> links = new ArrayList<>();
 	
 	/**
 	 * Create a new path

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class GameData
 {
 	/** The list of entities added */
-	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	private ArrayList<Entity> entities = new ArrayList<>();
 	
 	/**
 	 * Called by XML parser to add a configured entity to the GameData

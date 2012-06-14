@@ -248,7 +248,7 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	 */
 	private void initializeFont( Font baseFont, int size, boolean bold, boolean italic )
 	{
-		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>( baseFont.getAttributes() );
+		Map<TextAttribute, Object> attributes = new HashMap<>( baseFont.getAttributes() );
 		attributes.put( TextAttribute.SIZE, new Float( size ) );
 		attributes.put( TextAttribute.WEIGHT, bold ? TextAttribute.WEIGHT_BOLD : TextAttribute.WEIGHT_REGULAR );
 		attributes.put( TextAttribute.POSTURE, italic ? TextAttribute.POSTURE_OBLIQUE : TextAttribute.POSTURE_REGULAR );

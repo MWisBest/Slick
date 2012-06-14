@@ -59,7 +59,7 @@ public class DefsProcessor implements ElementProcessor
 		}
 		
 		NodeList linear = element.getElementsByTagName( "linearGradient" );
-		ArrayList<Gradient> toResolve = new ArrayList<Gradient>();
+		ArrayList<Gradient> toResolve = new ArrayList<>();
 		
 		for( int i = 0; i < linear.getLength(); i++ )
 		{

@@ -93,9 +93,9 @@ public class ShaderProgram
 	/** The log for this program. */
 	protected String log = "";
 	/** A map of uniforms by <name, int>. */
-	protected HashMap<String, Integer> uniforms = new HashMap<String, Integer>();
+	protected HashMap<String, Integer> uniforms = new HashMap<>();
 	/** A map of attributes by <name, int>. */
-	protected HashMap<String, Integer> attributes = new HashMap<String, Integer>();
+	protected HashMap<String, Integer> attributes = new HashMap<>();
 	/** The vertex shader source. */
 	protected String vertShaderSource;
 	/** The fragment shader source. */

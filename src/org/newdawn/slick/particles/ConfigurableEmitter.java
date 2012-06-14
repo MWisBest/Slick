@@ -73,7 +73,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 	 * 
 	 * @see ColorRecord
 	 */
-	public ArrayList<ColorRecord> colors = new ArrayList<ColorRecord>();
+	public ArrayList<ColorRecord> colors = new ArrayList<>();
 	/** The starting alpha value */
 	public SimpleValue startAlpha = new SimpleValue( 255 );
 	/** The ending alpha value */
@@ -154,22 +154,22 @@ public class ConfigurableEmitter implements ParticleEmitter
 		colors.add( new ColorRecord( 0, Color.white ) );
 		colors.add( new ColorRecord( 1, Color.red ) );
 		
-		ArrayList<Vector2f> curve = new ArrayList<Vector2f>();
+		ArrayList<Vector2f> curve = new ArrayList<>();
 		curve.add( new Vector2f( 0.0f, 0.0f ) );
 		curve.add( new Vector2f( 1.0f, 255.0f ) );
 		alpha = new LinearInterpolator( curve, 0, 255 );
 		
-		curve = new ArrayList<Vector2f>();
+		curve = new ArrayList<>();
 		curve.add( new Vector2f( 0.0f, 0.0f ) );
 		curve.add( new Vector2f( 1.0f, 255.0f ) );
 		size = new LinearInterpolator( curve, 0, 255 );
 		
-		curve = new ArrayList<Vector2f>();
+		curve = new ArrayList<>();
 		curve.add( new Vector2f( 0.0f, 0.0f ) );
 		curve.add( new Vector2f( 1.0f, 1.0f ) );
 		velocity = new LinearInterpolator( curve, 0, 1 );
 		
-		curve = new ArrayList<Vector2f>();
+		curve = new ArrayList<>();
 		curve.add( new Vector2f( 0.0f, 0.0f ) );
 		curve.add( new Vector2f( 1.0f, 1.0f ) );
 		scaleY = new LinearInterpolator( curve, 0, 1 );

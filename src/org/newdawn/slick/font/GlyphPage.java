@@ -89,7 +89,7 @@ public class GlyphPage
 	/** True if the glyphs are ordered */
 	private boolean orderAscending;
 	/** The list of glyphs on this page */
-	private final List<Glyph> pageGlyphs = new ArrayList<Glyph>( 32 );
+	private final List<Glyph> pageGlyphs = new ArrayList<>( 32 );
 	
 	/**
 	 * Create a new page of glyphs
@@ -129,9 +129,8 @@ public class GlyphPage
 			int testX = pageX;
 			int testY = pageY;
 			int testRowHeight = rowHeight;
-			for( Iterator<Glyph> iter = getIterator( glyphs ); iter.hasNext(); )
+			for( Glyph glyph : glyphs )
 			{
-				Glyph glyph = iter.next();
 				int width = glyph.getWidth();
 				int height = glyph.getHeight();
 				if( testX + width >= pageWidth )
@@ -247,7 +246,7 @@ public class GlyphPage
 	private Iterator<Glyph> getIterator( List<Glyph> glyphs )
 	{
 		if( orderAscending ) return glyphs.iterator();
-		return new ReverseListIterator<Glyph>( glyphs.listIterator( glyphs.size() ) );
+		return new ReverseListIterator<>( glyphs.listIterator( glyphs.size() ) );
 	}
 	
 	/**

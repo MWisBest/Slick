@@ -513,7 +513,7 @@ public class TiledMap
 		ArrayList<Layer> drawLayers = layers;
 		if( layer != null )
 		{
-			drawLayers = new ArrayList<Layer>();
+			drawLayers = new ArrayList<>();
 			drawLayers.add( layer );
 		}
 		

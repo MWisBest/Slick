@@ -48,11 +48,11 @@ import org.newdawn.slick.util.ResourceLoader;
 public class ObjectTreeParser
 {
 	/** The mapping of XML element names to class names */
-	private HashMap<String, Class<?>> nameToClass = new HashMap<String, Class<?>>();
+	private HashMap<String, Class<?>> nameToClass = new HashMap<>();
 	/** The default package where classes will be searched for */
 	private String defaultPackage;
 	/** The list of elements to ignore */
-	private ArrayList<String> ignored = new ArrayList<String>();
+	private ArrayList<String> ignored = new ArrayList<>();
 	/** The name of the method to add an child object to it's parent */
 	private String addMethod = "add";
 	

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ResourceLoader
 {
 	/** The list of locations to be searched */
-	private static ArrayList<ResourceLocation> locations = new ArrayList<ResourceLocation>();
+	private static ArrayList<ResourceLocation> locations = new ArrayList<>();
 	
 	static
 	{

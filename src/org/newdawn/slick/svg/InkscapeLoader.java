@@ -41,7 +41,7 @@ public class InkscapeLoader implements Loader
 	public static int RADIAL_TRIANGULATION_LEVEL = 1;
 	
 	/** The list of XML element processors */
-	private static ArrayList<ElementProcessor> processors = new ArrayList<ElementProcessor>();
+	private static ArrayList<ElementProcessor> processors = new ArrayList<>();
 	
 	/** The diagram loaded */
 	private Diagram diagram;

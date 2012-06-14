@@ -74,7 +74,7 @@ public class ShapeTest extends BasicGame
 	@Override
 	public void init( GameContainer container ) throws SlickException
 	{
-		shapes = new ArrayList<Shape>();
+		shapes = new ArrayList<>();
 		rect = new Rectangle( 10, 10, 100, 80 );
 		shapes.add( rect );
 		roundRect = new RoundedRectangle( 150, 10, 60, 80, 20 );

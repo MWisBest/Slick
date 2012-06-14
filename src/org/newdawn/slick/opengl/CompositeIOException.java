@@ -12,7 +12,7 @@ public class CompositeIOException extends IOException
 {
 	private static final long serialVersionUID = -1342507957680865679L;
 	/** The list of exceptions causing this one */
-	private ArrayList<Exception> exceptions = new ArrayList<Exception>();
+	private ArrayList<Exception> exceptions = new ArrayList<>();
 	
 	/**
 	 * Create a new composite IO Exception

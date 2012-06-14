@@ -253,13 +253,13 @@ public class ShadowEffect implements ConfigurableEffect
 	@Override
 	public List<Value> getValues()
 	{
-		List<Value> values = new ArrayList<Value>();
+		List<Value> values = new ArrayList<>();
 		values.add( EffectUtil.colorValue( "Color", color ) );
 		values.add( EffectUtil.floatValue( "Opacity", opacity, 0, 1, "This setting sets the translucency of the shadow." ) );
 		values.add( EffectUtil.floatValue( "X distance", xDistance, Float.MIN_VALUE, Float.MAX_VALUE, "This setting is the amount of pixels to offset the shadow on the" + " x axis. The glyphs will need padding so the shadow doesn't get clipped." ) );
 		values.add( EffectUtil.floatValue( "Y distance", yDistance, Float.MIN_VALUE, Float.MAX_VALUE, "This setting is the amount of pixels to offset the shadow on the" + " y axis. The glyphs will need padding so the shadow doesn't get clipped." ) );
 		
-		List<String[]> options = new ArrayList<String[]>();
+		List<String[]> options = new ArrayList<>();
 		options.add( new String[] { "None", "0" } );
 		for( int i = 2; i < NUM_KERNELS; i++ )
 			options.add( new String[] { String.valueOf( i ) } );

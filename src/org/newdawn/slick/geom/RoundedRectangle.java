@@ -210,7 +210,7 @@ public class RoundedRectangle extends Rectangle
 				cornerRadius = doubleRadius / 2;
 			}
 			
-			ArrayList<Float> tempPoints = new ArrayList<Float>();
+			ArrayList<Float> tempPoints = new ArrayList<>();
 			// the outer most set of points for each arc will also ac as the points that start the
 			// straight sides, so the straight sides do not have to be added.
 			
@@ -282,7 +282,7 @@ public class RoundedRectangle extends Rectangle
 	 */
 	private List<Float> createPoints( int numberOfSegments, float radius, float cx, float cy, float start, float end )
 	{
-		ArrayList<Float> tempPoints = new ArrayList<Float>();
+		ArrayList<Float> tempPoints = new ArrayList<>();
 		
 		int step = 360 / numberOfSegments;
 		

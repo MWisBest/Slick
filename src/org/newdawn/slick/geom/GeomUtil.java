@@ -183,8 +183,8 @@ public class GeomUtil
 	{
 		if( subtract )
 		{
-			ArrayList<Shape> shapes = new ArrayList<Shape>();
-			ArrayList<Vector2f> used = new ArrayList<Vector2f>();
+			ArrayList<Shape> shapes = new ArrayList<>();
+			ArrayList<Vector2f> used = new ArrayList<>();
 			
 			// remove any points that are contianed in the shape we're removing, these
 			// are implicitly used

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ItemContainer extends Item
 {
 	/** The items held in this container */
-	private ArrayList<Item> items = new ArrayList<Item>();
+	private ArrayList<Item> items = new ArrayList<>();
 	
 	/**
 	 * Called by XML parser to add a configured item to the entity

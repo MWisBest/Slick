@@ -797,7 +797,7 @@ public class ParticleIO
 				
 				NodeList points = element.getElementsByTagName( "point" );
 				
-				ArrayList<Vector2f> curve = new ArrayList<Vector2f>();
+				ArrayList<Vector2f> curve = new ArrayList<>();
 				for( int i = 0; i < points.getLength(); i++ )
 				{
 					Element point = (Element)points.item( i );

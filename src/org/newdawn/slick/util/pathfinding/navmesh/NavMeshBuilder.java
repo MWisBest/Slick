@@ -47,7 +47,7 @@ public class NavMeshBuilder implements PathFindingContext
 	{
 		this.tileBased = tileBased;
 		
-		ArrayList<Space> spaces = new ArrayList<Space>();
+		ArrayList<Space> spaces = new ArrayList<>();
 		
 		if( tileBased )
 		{

@@ -16,7 +16,7 @@ public class Path implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	/** The list of steps building up this path */
-	private ArrayList<Step> steps = new ArrayList<Step>();
+	private ArrayList<Step> steps = new ArrayList<>();
 	
 	/**
 	 * Create an empty path

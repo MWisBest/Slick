@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.MorphShape;
 public class SVGMorph extends Diagram
 {
 	/** The list of figures being morphed */
-	private ArrayList<Figure> figures = new ArrayList<Figure>();
+	private ArrayList<Figure> figures = new ArrayList<>();
 	
 	/**
 	 * Create a new morph with a first diagram base

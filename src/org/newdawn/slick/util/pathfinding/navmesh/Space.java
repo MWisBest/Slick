@@ -20,9 +20,9 @@ public class Space
 	private float height;
 	
 	/** A map from spaces to the links that connect them to this space */
-	private HashMap<Space, Link> links = new HashMap<Space, Link>();
+	private HashMap<Space, Link> links = new HashMap<>();
 	/** A list of the links from this space to others */
-	private ArrayList<Link> linksList = new ArrayList<Link>();
+	private ArrayList<Link> linksList = new ArrayList<>();
 	/** The cost to get to this node */
 	private float cost;
 	

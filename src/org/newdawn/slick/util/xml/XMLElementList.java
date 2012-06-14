@@ -11,7 +11,7 @@ import java.util.Collection;
 public class XMLElementList
 {
 	/** The list of elements */
-	private ArrayList<XMLElement> list = new ArrayList<XMLElement>();
+	private ArrayList<XMLElement> list = new ArrayList<>();
 	
 	/**
 	 * Create a new list
