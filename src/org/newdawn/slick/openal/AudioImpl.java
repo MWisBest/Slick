@@ -12,14 +12,14 @@ import org.lwjgl.openal.AL11;
 public class AudioImpl implements Audio
 {
 	/** The store from which this sound was loaded */
-	private SoundStore store;
+	protected SoundStore store;
 	/** The buffer containing the sound */
-	private int buffer;
+	protected int buffer;
 	/** The index of the source being used to play this sound */
-	private int index = -1;
+	protected int index = -1;
 	
 	/** The length of the audio */
-	private float length;
+	protected float length;
 	
 	/**
 	 * Create a new sound
@@ -42,8 +42,31 @@ public class AudioImpl implements Audio
 	}
 	
 	/**
+	 * Calls stop() and releases this buffer from memory. For music, this will
+	 * stop the source, remove any queued buffers, and close the stream.
+	 * For sound, this will stop the source and release the buffer contained by
+	 * the Sound.
+	 */
+	@Override
+	public void release()
+	{
+		stop();
+		if( index != -1 )
+		{
+			// detach buffer from source
+			AL10.alSourcei( SoundStore.get().getSource( index ), AL10.AL_BUFFER, 0 );
+		}
+		// delete buffer
+		if( buffer != 0 ) AL10.alDeleteBuffers( buffer );
+		index = -1;
+		buffer = 0;
+	}
+	
+	/**
 	 * Get the ID of the OpenAL buffer holding this data (if any). This method
 	 * is not valid with streaming resources.
+	 * 
+	 * If the source has been released, this will return zero.
 	 * 
 	 * @return The ID of the OpenAL buffer holding this data
 	 */
@@ -51,6 +74,18 @@ public class AudioImpl implements Audio
 	public int getBufferID()
 	{
 		return buffer;
+	}
+	
+	/**
+	 * Returns the index of the source found in the SoundStore;
+	 * the source ID can then be retrieved with SoundStore.getSource().
+	 * This may be -1 if the sound is not attached to a source.
+	 * 
+	 * @return the last attached source
+	 */
+	protected int getSourceIndex()
+	{
+		return index;
 	}
 	
 	/**
@@ -82,9 +117,22 @@ public class AudioImpl implements Audio
 	{
 		if( index != -1 )
 		{
-			return store.isPlaying( index );
+			return SoundStore.get().isPlaying( index );
 		}
 		
+		return false;
+	}
+	
+	/**
+	 * Returns true if this audio has a source attached and that source
+	 * is currently paused.
+	 * 
+	 * @return true if paused
+	 */
+	@Override
+	public boolean isPaused()
+	{
+		if( index != -1 ) return SoundStore.get().isPaused( index );
 		return false;
 	}
 	
@@ -94,6 +142,7 @@ public class AudioImpl implements Audio
 	@Override
 	public int playAsSoundEffect( float pitch, float gain, boolean loop )
 	{
+		if( buffer == 0 ) return 0;
 		index = store.playAsSound( buffer, pitch, gain, loop );
 		return store.getSource( index );
 	}
@@ -104,6 +153,7 @@ public class AudioImpl implements Audio
 	@Override
 	public int playAsSoundEffect( float pitch, float gain, boolean loop, float x, float y, float z )
 	{
+		if( buffer == 0 ) return 0;
 		index = store.playAsSoundAt( buffer, pitch, gain, loop, x, y, z );
 		return store.getSource( index );
 	}
@@ -114,6 +164,7 @@ public class AudioImpl implements Audio
 	@Override
 	public int playAsMusic( float pitch, float gain, boolean loop )
 	{
+		if( buffer == 0 ) return 0;
 		store.playAsMusic( buffer, pitch, gain, loop );
 		index = 0;
 		return store.getSource( 0 );

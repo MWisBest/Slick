@@ -101,14 +101,14 @@ public class CompositeImageData implements LoadableImageData
 	}
 	
 	/**
-	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
+	 * @see org.newdawn.slick.opengl.ImageData#getFormat()
 	 */
 	@Override
-	public int getDepth()
+	public Format getFormat()
 	{
 		checkPicked();
 		
-		return picked.getDepth();
+		return picked.getFormat();
 	}
 	
 	/**

@@ -7,8 +7,8 @@ package org.newdawn.slick;
  */
 public class SlickException extends Exception
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 2950311176027676754L;
+
 	/**
 	 * Create a new exception with a detail message
 	 * 

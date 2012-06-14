@@ -9,8 +9,7 @@ package org.newdawn.slick.geom;
  */
 public class Line extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 2279396975216456809L;
 	/** The start point of the line */
 	private Vector2f start;
 	/** The end point of the line */
@@ -20,6 +19,9 @@ public class Line extends Shape
 	
 	/** Temporary storage - declared globally to reduce GC */
 	private Vector2f loc = new Vector2f( 0, 0 );
+	
+	/** Temporary storage - declared globally to reduce GC */
+	private Vector2f closest = new Vector2f( 0, 0 );
 	
 	/**
 	 * Create a new line based on the origin and a single point
@@ -318,7 +320,6 @@ public class Line extends Shape
 	 */
 	public boolean on( Vector2f point )
 	{
-		Vector2f closest = new Vector2f();
 		getClosestPoint( point, closest );
 		
 		return point.equals( closest );
@@ -333,7 +334,6 @@ public class Line extends Shape
 	 */
 	public float distanceSquared( Vector2f point )
 	{
-		Vector2f closest = new Vector2f();
 		getClosestPoint( point, closest );
 		closest.sub( point );
 		

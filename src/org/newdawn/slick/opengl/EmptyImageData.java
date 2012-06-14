@@ -29,12 +29,12 @@ public class EmptyImageData implements ImageData
 	}
 	
 	/**
-	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
+	 * @see org.newdawn.slick.opengl.ImageData#getFormat()
 	 */
 	@Override
-	public int getDepth()
+	public Format getFormat()
 	{
-		return 32;
+		return Format.RGBA;
 	}
 	
 	/**

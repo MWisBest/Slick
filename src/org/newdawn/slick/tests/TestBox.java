@@ -80,6 +80,7 @@ public class TestBox extends BasicGame
 		}
 		catch( Exception e )
 		{
+			e.printStackTrace();
 			Log.error( e );
 		}
 		
@@ -92,6 +93,7 @@ public class TestBox extends BasicGame
 	@Override
 	public void init( GameContainer c ) throws SlickException
 	{
+		c.setShowFPS( false );
 		if( games.size() == 0 )
 		{
 			currentGame = new BasicGame( "NULL" )
@@ -311,8 +313,9 @@ public class TestBox extends BasicGame
 			box.addGame( FontTest.class );
 			box.addGame( GeomTest.class );
 			box.addGame( GradientTest.class );
-			box.addGame( GraphicsTest.class );
+			// box.addGame(GraphicsTest.class);
 			box.addGame( ImageBufferTest.class );
+			box.addGame( ImageFormatTest.class );
 			box.addGame( ImageReadTest.class );
 			box.addGame( ImageTest.class );
 			box.addGame( KeyRepeatTest.class );

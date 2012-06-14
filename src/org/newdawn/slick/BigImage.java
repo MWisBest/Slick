@@ -2,7 +2,6 @@ package org.newdawn.slick;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.newdawn.slick.opengl.ImageData;
@@ -33,21 +32,6 @@ public class BigImage extends Image
 {
 	/** The renderer to use for all GL operations */
 	protected static SGL GL = Renderer.get();
-	
-	/**
-	 * Get the maximum size of an image supported by the underlying
-	 * hardware.
-	 * 
-	 * @return The maximum size of the textures supported by the underlying
-	 *         hardware.
-	 */
-	public static final int getMaxSingleImageSize()
-	{
-		IntBuffer buffer = BufferUtils.createIntBuffer( 16 );
-		GL.glGetInteger( SGL.GL_MAX_TEXTURE_SIZE, buffer );
-		
-		return buffer.get( 0 );
-	}
 	
 	/** The last image that we put into "in use" mode */
 	private static Image lastBind;
@@ -189,9 +173,9 @@ public class BigImage extends Image
 			ImageData tempData = new ImageData()
 				{
 					@Override
-					public int getDepth()
+					public Format getFormat()
 					{
-						return data.getDepth();
+						return data.getFormat();
 					}
 					
 					@Override
@@ -235,7 +219,7 @@ public class BigImage extends Image
 		ycount = ( ( realHeight - 1 ) / tileSize ) + 1;
 		
 		images = new Image[xcount][ycount];
-		int components = data.getDepth() / 8;
+		int components = data.getFormat().getColorComponents();
 		
 		for( int x = 0; x < xcount; x++ )
 		{
@@ -264,9 +248,9 @@ public class BigImage extends Image
 				ImageData imgData = new ImageData()
 					{
 						@Override
-						public int getDepth()
+						public Format getFormat()
 						{
-							return data.getDepth();
+							return data.getFormat();
 						}
 						
 						@Override

@@ -184,13 +184,13 @@ public class EffectUtil
 				public void showDialog()
 				{
 					int selectedIndex = -1;
-					DefaultComboBoxModel model = new DefaultComboBoxModel();
+					DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 					for( int i = 0; i < options.length; i++ )
 					{
 						model.addElement( options[i][0] );
 						if( getValue( i ).equals( currentValue ) ) selectedIndex = i;
 					}
-					JComboBox comboBox = new JComboBox( model );
+					JComboBox<String> comboBox = new JComboBox<>( model );
 					comboBox.setSelectedIndex( selectedIndex );
 					if( showValueDialog( comboBox, description ) ) value = getValue( comboBox.getSelectedIndex() );
 				}
@@ -341,8 +341,7 @@ public class EffectUtil
 	 */
 	static private class ValueDialog extends JDialog
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = -7803773720151408837L;
 		/** True if OK was pressed */
 		public boolean okPressed = false;
 		

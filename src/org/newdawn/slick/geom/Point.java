@@ -10,8 +10,8 @@ import org.newdawn.slick.geom.Transform;
  */
 public class Point extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 7358918173283184318L;
+
 	/**
 	 * Create a new point
 	 * 

@@ -23,7 +23,7 @@ public class PackedSpriteSheet
 	/** The base path where the image is expected to be found based on the original definition file */
 	private String basePath;
 	/** The section definitions */
-	private HashMap<String, Section> sections = new HashMap<String, Section>();
+	private HashMap<String, Section> sections = new HashMap<>();
 	/** The filter used when loading the image */
 	private int filter = Image.FILTER_NEAREST;
 	

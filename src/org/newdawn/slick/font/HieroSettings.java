@@ -46,7 +46,7 @@ public class HieroSettings
 	/** The height of the glyph page generated */
 	private int glyphPageHeight = 512;
 	/** The list of effects applied */
-	private final List<ConfigurableEffect> effects = new ArrayList<ConfigurableEffect>();
+	private final List<ConfigurableEffect> effects = new ArrayList<>();
 	
 	/**
 	 * Default constructor for injection
@@ -134,7 +134,7 @@ public class HieroSettings
 				{
 					try
 					{
-						Class<? extends ConfigurableEffect> effectClass = Class.forName( value ).asSubclass( ConfigurableEffect.class );
+						Class<? extends ConfigurableEffect> effectClass = Class.forName(value).asSubclass(ConfigurableEffect.class);
 						effects.add( effectClass.newInstance() );
 					}
 					catch( Exception ex )
@@ -146,7 +146,7 @@ public class HieroSettings
 				{
 					// Set an effect value on the last added effect.
 					name = name.substring( 7 );
-					ConfigurableEffect effect = (ConfigurableEffect)effects.get( effects.size() - 1 );
+					ConfigurableEffect effect = effects.get( effects.size() - 1 );
 					List<Value> values = effect.getValues();
 					for( Value effectValue : values )
 					{

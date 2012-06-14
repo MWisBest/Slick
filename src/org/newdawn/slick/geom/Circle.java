@@ -7,8 +7,7 @@ package org.newdawn.slick.geom;
  */
 public strictfp class Circle extends Ellipse
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 6751534846536943277L;
 	/** The radius of the circle */
 	public float radius;
 	

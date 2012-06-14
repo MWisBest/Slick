@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 public class ImageWriterFactory
 {
 	/** The map from format names to image writer instances */
-	private static HashMap<String, ImageWriter> writers = new HashMap<String, ImageWriter>();
+	private static HashMap<String, ImageWriter> writers = new HashMap<>();
 	
 	// Initialise the list of writers based on the classes we know about
 	static

@@ -50,34 +50,30 @@ public class FileMuffin implements Muffin
 	@Override
 	public HashMap<?, ?> loadFile( String fileName ) throws IOException
 	{
+		HashMap<?, ?> hashMap = new HashMap<>();
 		String userHome = System.getProperty( "user.home" );
 		
 		File file = new File( userHome );
 		file = new File( file, ".java" );
 		file = new File( file, fileName );
 		
-		if( !file.exists() ) return new HashMap<String, Object>();
+		if( file.exists() )
+		{
+			try( FileInputStream fis = new FileInputStream( file ); ObjectInputStream ois = new ObjectInputStream( fis ); )
+			{
+				hashMap = (HashMap<?, ?>)ois.readObject();
+			}
+			catch( EOFException e )
+			{
+				// End of the file reached, do nothing
+			}
+			catch( ClassNotFoundException e )
+			{
+				Log.error( e );
+				throw new IOException( "Failed to pull state from store - class not found" );
+			}
+		}
 		
-		try
-		{
-			FileInputStream fis = new FileInputStream( file );
-			ObjectInputStream ois = new ObjectInputStream( fis );
-			
-			HashMap<?, ?> hashMap = (HashMap<?, ?>)ois.readObject();
-			
-			ois.close();
-			
-			return hashMap;
-		}
-		catch( EOFException e )
-		{
-			// End of the file reached, return empty map
-			return new HashMap<String, Object>();
-		}
-		catch( ClassNotFoundException e )
-		{
-			Log.error( e );
-			throw new IOException( "Failed to pull state from store - class not found" );
-		}
+		return hashMap;
 	}
 }

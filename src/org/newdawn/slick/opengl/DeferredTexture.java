@@ -182,16 +182,6 @@ public class DeferredTexture extends TextureImpl implements DeferredResource
 	}
 	
 	/**
-	 * @see org.newdawn.slick.opengl.TextureImpl#setAlpha(boolean)
-	 */
-	@Override
-	public void setAlpha( boolean alpha )
-	{
-		checkTarget();
-		target.setAlpha( alpha );
-	}
-	
-	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setHeight(int)
 	 */
 	@Override

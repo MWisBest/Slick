@@ -670,7 +670,7 @@ public abstract class GameContainer implements GUIContext
 	{
 		if( getTime() - lastFPS > 1000 )
 		{
-			lastFPS = getTime();
+			lastFPS += 1000;
 			recordedFPS = fps;
 			fps = 0;
 		}
@@ -774,7 +774,7 @@ public abstract class GameContainer implements GUIContext
 			}
 			
 			GL.glLoadIdentity();
-			
+			// Graphics.setCurrent ??
 			graphics.resetTransform();
 			graphics.resetFont();
 			graphics.resetLineWidth();
@@ -825,6 +825,25 @@ public abstract class GameContainer implements GUIContext
 	}
 	
 	/**
+	 * Called when the GL context is resized. This does not resize
+	 * the GL view; instead, it simply re-enters orthographic projection.
+	 */
+	protected void onResize()
+	{
+		if( getInput() != null )
+		{
+			getInput().init( getHeight() );
+		}
+		
+		if( getGraphics() != null )
+		{
+			getGraphics().setDimensions( getWidth(), getHeight() );
+		}
+		
+		enterOrtho();
+	}
+	
+	/**
 	 * Initialise the GL context
 	 */
 	protected void initGL()
@@ -865,6 +884,8 @@ public abstract class GameContainer implements GUIContext
 		
 		graphics = new Graphics( width, height );
 		defaultFont = graphics.getFont();
+		
+		lastFPS = getTime();
 	}
 	
 	/**

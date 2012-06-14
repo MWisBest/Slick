@@ -45,16 +45,16 @@ import java.util.zip.Inflater;
  */
 public class PNGDecoder
 {
-	public static Format ALPHA = new Format( 1, true );
-	public static Format LUMINANCE = new Format( 1, false );
-	public static Format LUMINANCE_ALPHA = new Format( 2, true );
-	public static Format RGB = new Format( 3, false );
-	public static Format RGBA = new Format( 4, true );
-	public static Format BGRA = new Format( 4, true );
-	public static Format ABGR = new Format( 4, true );
 	
-	public static class Format
+	public enum Format
 	{
+		ALPHA( 1, true ),
+		LUMINANCE( 1, false ),
+		LUMINANCE_ALPHA( 2, true ),
+		RGB( 3, false ),
+		RGBA( 4, true ),
+		BGRA( 4, true ),
+		ABGR( 4, true );
 		
 		final int numComponents;
 		final boolean hasAlpha;
@@ -157,9 +157,29 @@ public class PNGDecoder
 		return width;
 	}
 	
+	/**
+	 * Checks if the image has a real alpha channel. This method does not check
+	 * for the presence of a tRNS chunk.
+	 * 
+	 * @return true if the image has an alpha channel
+	 * @see #hasAlpha()
+	 */
+	public boolean hasAlphaChannel()
+	{
+		return colorType == COLOR_TRUEALPHA || colorType == COLOR_GREYALPHA;
+	}
+	
+	/**
+	 * Checks if the image has transparency information either from an alpha
+	 * channel or from a tRNS chunk.
+	 * 
+	 * @return true if the image has transparency
+	 * @see #hasAlphaChannel()
+	 * @see #overwriteTRNS(byte, byte, byte)
+	 */
 	public boolean hasAlpha()
 	{
-		return colorType == COLOR_TRUEALPHA || paletteA != null || transPixel != null;
+		return hasAlphaChannel() || paletteA != null || transPixel != null;
 	}
 	
 	public boolean isRGB()
@@ -168,51 +188,128 @@ public class PNGDecoder
 	}
 	
 	/**
+	 * Overwrites the tRNS chunk entry to make a selected color transparent.
+	 * <p>
+	 * This can only be invoked when the image has no alpha channel.
+	 * </p>
+	 * <p>
+	 * Calling this method causes {@link #hasAlpha()} to return true.
+	 * </p>
+	 * 
+	 * @param r
+	 *            the red component of the color to make transparent
+	 * @param g
+	 *            the green component of the color to make transparent
+	 * @param b
+	 *            the blue component of the color to make transparent
+	 * @throws UnsupportedOperationException
+	 *             if the tRNS chunk data can't be set
+	 * @see #hasAlphaChannel()
+	 */
+	public void overwriteTRNS( byte r, byte g, byte b )
+	{
+		if( hasAlphaChannel() )
+		{
+			throw new UnsupportedOperationException( "image has an alpha channel" );
+		}
+		byte[] pal = this.palette;
+		if( pal == null )
+		{
+			transPixel = new byte[] { 0, r, 0, g, 0, b };
+		}
+		else
+		{
+			paletteA = new byte[pal.length / 3];
+			for( int i = 0, j = 0; i < pal.length; i += 3, j++ )
+			{
+				if( pal[i] != r || pal[i + 1] != g || pal[i + 2] != b )
+				{
+					paletteA[j] = (byte)0xFF;
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Computes the implemented format conversion for the desired format.
 	 * 
-	 * @param fmt the desired format
+	 * @param fmt
+	 *            the desired format
 	 * @return format which best matches the desired format
-	 * @throws UnsupportedOperationException if this PNG file can't be decoded
+	 * @throws UnsupportedOperationException
+	 *             if this PNG file can't be decoded
 	 */
 	public Format decideTextureFormat( Format fmt )
 	{
 		switch( colorType )
 		{
 			case COLOR_TRUECOLOR:
-				if( ( fmt == ABGR ) || ( fmt == RGBA ) || ( fmt == BGRA ) || ( fmt == RGB ) )
+				switch( fmt )
 				{
-					return fmt;
+					case ABGR:
+					case RGBA:
+					case BGRA:
+					case RGB:
+						return fmt;
+					default:
+						return Format.RGB;
 				}
-				
-				return RGB;
 			case COLOR_TRUEALPHA:
-				if( ( fmt == ABGR ) || ( fmt == RGBA ) || ( fmt == BGRA ) || ( fmt == RGB ) )
+				switch( fmt )
 				{
-					return fmt;
+					case ABGR:
+					case RGBA:
+					case BGRA:
+					case RGB:
+						return fmt;
+					default:
+						return Format.RGBA;
 				}
-				
-				return RGBA;
 			case COLOR_GREYSCALE:
-				if( ( fmt == LUMINANCE ) || ( fmt == ALPHA ) )
+				switch( fmt )
 				{
-					return fmt;
+					case LUMINANCE:
+					case ALPHA:
+						return fmt;
+					default:
+						return Format.LUMINANCE;
 				}
-				
-				return LUMINANCE;
 			case COLOR_GREYALPHA:
-				return LUMINANCE_ALPHA;
+				return Format.LUMINANCE_ALPHA;
 			case COLOR_INDEXED:
-				if( ( fmt == ABGR ) || ( fmt == RGBA ) || ( fmt == BGRA ) )
+				switch( fmt )
 				{
-					return fmt;
+					case ABGR:
+					case RGBA:
+					case BGRA:
+						return fmt;
+					default:
+						return Format.RGBA;
 				}
-				
-				return RGBA;
 			default:
 				throw new UnsupportedOperationException( "Not yet implemented" );
 		}
 	}
 	
+	/**
+	 * Decodes the image into the specified buffer. The first line is placed at
+	 * the current position. After decode the buffer position is at the end of
+	 * the last line.
+	 * 
+	 * @param buffer
+	 *            the buffer
+	 * @param stride
+	 *            the stride in bytes from start of a line to start of the next
+	 *            line, can be negative.
+	 * @param fmt
+	 *            the target format into which the image should be decoded.
+	 * @throws IOException
+	 *             if a read or data error occurred
+	 * @throws IllegalArgumentException
+	 *             if the start position of a line falls outside the buffer
+	 * @throws UnsupportedOperationException
+	 *             if the image can't be decoded into the desired format
+	 */
 	public void decode( ByteBuffer buffer, int stride, Format fmt ) throws IOException
 	{
 		final int offset = buffer.position();
@@ -234,69 +331,62 @@ public class PNGDecoder
 				switch( colorType )
 				{
 					case COLOR_TRUECOLOR:
-						if( fmt == ABGR )
+						switch( fmt )
 						{
-							copyRGBtoABGR( buffer, curLine );
-						}
-						else if( fmt == RGBA )
-						{
-							copyRGBtoRGBA( buffer, curLine );
-						}
-						else if( fmt == BGRA )
-						{
-							copyRGBtoBGRA( buffer, curLine );
-						}
-						else if( fmt == RGB )
-						{
-							copy( buffer, curLine );
-						}
-						else
-						{
-							throw new UnsupportedOperationException( "Unsupported format for this image" );
+							case ABGR:
+								copyRGBtoABGR( buffer, curLine );
+								break;
+							case RGBA:
+								copyRGBtoRGBA( buffer, curLine );
+								break;
+							case BGRA:
+								copyRGBtoBGRA( buffer, curLine );
+								break;
+							case RGB:
+								copy( buffer, curLine );
+								break;
+							default:
+								throw new UnsupportedOperationException( "Unsupported format for this image" );
 						}
 						break;
 					case COLOR_TRUEALPHA:
-						if( fmt == ABGR )
+						switch( fmt )
 						{
-							copyRGBAtoABGR( buffer, curLine );
-						}
-						else if( fmt == RGBA )
-						{
-							copy( buffer, curLine );
-						}
-						else if( fmt == BGRA )
-						{
-							copyRGBAtoBGRA( buffer, curLine );
-							break;
-						}
-						else if( fmt == RGB )
-						{
-							copyRGBAtoRGB( buffer, curLine );
-							break;
-						}
-						else
-						{
-							throw new UnsupportedOperationException( "Unsupported format for this image" );
+							case ABGR:
+								copyRGBAtoABGR( buffer, curLine );
+								break;
+							case RGBA:
+								copy( buffer, curLine );
+								break;
+							case BGRA:
+								copyRGBAtoBGRA( buffer, curLine );
+								break;
+							case RGB:
+								copyRGBAtoRGB( buffer, curLine );
+								break;
+							default:
+								throw new UnsupportedOperationException( "Unsupported format for this image" );
 						}
 						break;
 					case COLOR_GREYSCALE:
-						if( ( fmt == LUMINANCE ) || ( fmt == ALPHA ) )
+						switch( fmt )
 						{
-							copy( buffer, curLine );
-						}
-						else
-						{
-							throw new UnsupportedOperationException( "Unsupported format for this image" );
+							case LUMINANCE:
+							case ALPHA:
+								copy( buffer, curLine );
+								break;
+							default:
+								throw new UnsupportedOperationException( "Unsupported format for this image" );
 						}
 						break;
 					case COLOR_GREYALPHA:
-						if( fmt == LUMINANCE_ALPHA )
+						switch( fmt )
 						{
-							copy( buffer, curLine );
-						}
-						else
-						{
-							throw new UnsupportedOperationException( "Unsupported format for this image" );
+							case LUMINANCE_ALPHA:
+								copy( buffer, curLine );
+								break;
+							default:
+								throw new UnsupportedOperationException( "Unsupported format for this image" );
 						}
 						break;
 					case COLOR_INDEXED:
@@ -317,21 +407,19 @@ public class PNGDecoder
 							default:
 								throw new UnsupportedOperationException( "Unsupported bitdepth for this image" );
 						}
-						if( fmt == ABGR )
+						switch( fmt )
 						{
-							copyPALtoABGR( buffer, palLine );
-						}
-						else if( fmt == RGBA )
-						{
-							copyPALtoRGBA( buffer, palLine );
-						}
-						else if( fmt == BGRA )
-						{
-							copyPALtoBGRA( buffer, palLine );
-						}
-						else
-						{
-							throw new UnsupportedOperationException( "Unsupported format for this image" );
+							case ABGR:
+								copyPALtoABGR( buffer, palLine );
+								break;
+							case RGBA:
+								copyPALtoRGBA( buffer, palLine );
+								break;
+							case BGRA:
+								copyPALtoBGRA( buffer, palLine );
+								break;
+							default:
+								throw new UnsupportedOperationException( "Unsupported format for this image" );
 						}
 						break;
 					default:
@@ -347,6 +435,38 @@ public class PNGDecoder
 		{
 			inflater.end();
 		}
+	}
+	
+	/**
+	 * Decodes the image into the specified buffer. The last line is placed at
+	 * the current position. After decode the buffer position is at the end of
+	 * the first line.
+	 * 
+	 * @param buffer
+	 *            the buffer
+	 * @param stride
+	 *            the stride in bytes from start of a line to start of the next
+	 *            line, must be positive.
+	 * @param fmt
+	 *            the target format into which the image should be decoded.
+	 * @throws IOException
+	 *             if a read or data error occurred
+	 * @throws IllegalArgumentException
+	 *             if the start position of a line falls outside the buffer
+	 * @throws UnsupportedOperationException
+	 *             if the image can't be decoded into the desired format
+	 */
+	public void decodeFlipped( ByteBuffer buffer, int stride, Format fmt ) throws IOException
+	{
+		if( stride <= 0 )
+		{
+			throw new IllegalArgumentException( "stride" );
+		}
+		int pos = buffer.position();
+		int posDelta = ( height - 1 ) * stride;
+		buffer.position( pos + posDelta );
+		decode( buffer, -stride, fmt );
+		buffer.position( buffer.position() + posDelta );
 	}
 	
 	private void copy( ByteBuffer buffer, byte[] curLine )
@@ -453,7 +573,7 @@ public class PNGDecoder
 	{
 		for( int i = 1, n = curLine.length; i < n; i += 4 )
 		{
-			buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i + 0] ).put( curLine[i + 3] );
+			buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] ).put( curLine[i + 3] );
 		}
 	}
 	
@@ -875,6 +995,7 @@ public class PNGDecoder
 	
 	private void readChunkUnzip( Inflater inflater, byte[] buffer, int offset, int length ) throws IOException
 	{
+		assert ( buffer != this.buffer );
 		try
 		{
 			do

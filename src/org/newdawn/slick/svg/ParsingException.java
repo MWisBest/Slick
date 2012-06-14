@@ -10,8 +10,8 @@ import org.w3c.dom.Element;
  */
 public class ParsingException extends SlickException
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 5948077882602940147L;
+
 	/**
 	 * Create a new exception
 	 * 

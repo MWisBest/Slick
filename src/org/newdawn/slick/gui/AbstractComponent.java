@@ -42,7 +42,7 @@ public abstract class AbstractComponent extends InputAdapter
 	{
 		this.container = container;
 		
-		listeners = new HashSet<ComponentListener>();
+		listeners = new HashSet<>();
 		
 		input = container.getInput();
 		input.addPrimaryListener( this );

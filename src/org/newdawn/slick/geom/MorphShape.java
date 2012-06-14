@@ -9,10 +9,9 @@ import java.util.ArrayList;
  */
 public class MorphShape extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -4879953547386869042L;
 	/** The shapes to morph between */
-	private ArrayList<Shape> shapes = new ArrayList<Shape>();
+	private ArrayList<Shape> shapes = new ArrayList<>();
 	/** The offset between the shapes */
 	private float offset;
 	

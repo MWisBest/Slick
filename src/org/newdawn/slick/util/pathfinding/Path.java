@@ -111,8 +111,7 @@ public class Path implements Serializable
 	 */
 	public class Step implements Serializable
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = -8854174566485052630L;
 		/** The x coordinate at the given step */
 		private int x;
 		/** The y coordinate at the given step */

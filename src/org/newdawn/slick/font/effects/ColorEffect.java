@@ -82,7 +82,7 @@ public class ColorEffect implements ConfigurableEffect
 	@Override
 	public List<Value> getValues()
 	{
-		List<Value> values = new ArrayList<Value>();
+		List<Value> values = new ArrayList<>();
 		values.add( EffectUtil.colorValue( "Color", color ) );
 		return values;
 	}

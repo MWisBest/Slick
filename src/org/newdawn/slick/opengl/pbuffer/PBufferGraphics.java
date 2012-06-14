@@ -36,7 +36,7 @@ public class PBufferGraphics extends Graphics
 	 */
 	public PBufferGraphics( Image image ) throws SlickException
 	{
-		super( image.getTexture().getTextureWidth(), image.getTexture().getTextureHeight() );
+		super( InternalTextureLoader.get2Fold( image.getWidth() ), InternalTextureLoader.get2Fold( image.getHeight() ) );
 		this.image = image;
 		
 		Log.debug( "Creating pbuffer(rtt) " + image.getWidth() + "x" + image.getHeight() );
@@ -72,7 +72,9 @@ public class PBufferGraphics extends Graphics
 			initGL();
 			GL.glBindTexture( GL11.GL_TEXTURE_2D, tex.getTextureID() );
 			pbuffer.releaseTexImage( Pbuffer.FRONT_LEFT_BUFFER );
-			image.draw( 0, 0 );
+			
+			if( image.getTexture() != null ) image.draw( 0, 0 );
+			Graphics.setCurrent( this ); // this means you need to call flush() after getGraphics()
 			image.setTexture( tex );
 			
 			Display.makeCurrent();
@@ -171,6 +173,13 @@ public class PBufferGraphics extends Graphics
 		GL11.glLoadIdentity();
 		GL11.glOrtho( 0, screenWidth, 0, screenHeight, 1, -1 );
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
+	}
+	
+	/** glOrtho is called with (0, screenWidth, 0, screenHeight, 1, -1) meaning the Y value is flipped */
+	@Override
+	protected boolean isYFlipped()
+	{
+		return true;
 	}
 	
 	/**

@@ -14,7 +14,7 @@ import org.newdawn.slick.util.Log;
 public class Animation implements Renderable
 {
 	/** The list of frames to render in this animation */
-	private ArrayList<Frame> frames = new ArrayList<Frame>();
+	private ArrayList<Frame> frames = new ArrayList<>();
 	/** The frame currently being displayed */
 	private int currentFrame = -1;
 	/** The time the next frame change should take place */
@@ -153,6 +153,7 @@ public class Animation implements Renderable
 	 */
 	public Animation( SpriteSheet frames, int x1, int y1, int x2, int y2, boolean horizontalScan, int duration, boolean autoUpdate )
 	{
+		this.spriteSheet = frames;
 		this.autoUpdate = autoUpdate;
 		
 		if( !horizontalScan )

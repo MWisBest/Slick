@@ -1017,6 +1017,12 @@ public class ConfigurableEmitter implements ParticleEmitter
 	}
 	
 	@Override
+	public void resume()
+	{
+		if( !completed ) wrapUp = false;
+	}
+	
+	@Override
 	public void resetState()
 	{
 		wrapUp = false;

@@ -24,9 +24,9 @@ public class SavedState
 	/** Type of Muffin to use */
 	private Muffin muffin;
 	/** hash map where int data will be stored */
-	private HashMap<String, Double> numericData = new HashMap<String, Double>();
+	private HashMap<String, Double> numericData = new HashMap<>();
 	/** hash map where string data will be stored */
-	private HashMap<String, String> stringData = new HashMap<String, String>();
+	private HashMap<String, String> stringData = new HashMap<>();
 	
 	/**
 	 * Create and Test to see if the app is running
@@ -79,7 +79,7 @@ public class SavedState
 	 */
 	public double getNumber( String nameOfField, double defaultValue )
 	{
-		Double value = ( (Double)numericData.get( nameOfField ) );
+		Double value = ( numericData.get( nameOfField ) );
 		
 		if( value == null )
 		{
@@ -121,7 +121,7 @@ public class SavedState
 	 */
 	public String getString( String nameOfField, String defaultValue )
 	{
-		String value = (String)stringData.get( nameOfField );
+		String value = stringData.get( nameOfField );
 		
 		if( value == null )
 		{

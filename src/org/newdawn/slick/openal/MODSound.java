@@ -35,7 +35,19 @@ public class MODSound extends AudioImpl
 	public MODSound( SoundStore store, InputStream in ) throws IOException
 	{
 		this.store = store;
+		index = 0;
 		module = OpenALMODPlayer.loadModule( in );
+	}
+	
+	/**
+	 * Stops the music, removes any queued buffers, and closes the stream.
+	 */
+	@Override
+	public void release()
+	{
+		cleanUpSource();
+		super.release();
+		index = 0;
 	}
 	
 	/**

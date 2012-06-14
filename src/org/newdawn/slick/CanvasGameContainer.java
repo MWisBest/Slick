@@ -15,12 +15,12 @@ import org.newdawn.slick.util.Log;
  */
 public class CanvasGameContainer extends Canvas
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -334869564388121755L;
 	/** The actual container implementation */
 	protected Container container;
 	/** The game being held in this container */
 	protected Game game;
+	private boolean destroyed = false;
 	
 	/**
 	 * Create a new panel
@@ -61,6 +61,7 @@ public class CanvasGameContainer extends Canvas
 	 */
 	public void start() throws SlickException
 	{
+		destroyed = false;
 		SwingUtilities.invokeLater( new Runnable()
 			{
 				@Override
@@ -96,8 +97,15 @@ public class CanvasGameContainer extends Canvas
 	 */
 	private void scheduleUpdate()
 	{
-		if( !isVisible() )
+		if( destroyed || !isVisible() )
 		{
+			return;
+		}
+		
+		if( !container.running() )
+		{
+			container.destroy();
+			destroyed = true;
 			return;
 		}
 		
@@ -106,6 +114,7 @@ public class CanvasGameContainer extends Canvas
 				@Override
 				public void run()
 				{
+					if( destroyed ) return;
 					try
 					{
 						container.gameLoop();
@@ -185,6 +194,17 @@ public class CanvasGameContainer extends Canvas
 			return super.running() && CanvasGameContainer.this.isDisplayable();
 		}
 		
+		@Override
+		public void exit()
+		{
+			super.exit(); // superclass exit just changes a boolean
+			if( !destroyed )
+			{
+				destroy();
+				destroyed = true;
+			}
+		}
+		
 		/**
 		 * @see org.newdawn.slick.GameContainer#getHeight()
 		 */
@@ -212,7 +232,7 @@ public class CanvasGameContainer extends Canvas
 			{
 				
 				try
-				{
+				{ // is this really necessary? it causes a flicker
 					setDisplayMode( CanvasGameContainer.this.getWidth(), CanvasGameContainer.this.getHeight(), false );
 				}
 				catch( SlickException e )

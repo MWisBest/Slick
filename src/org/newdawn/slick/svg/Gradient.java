@@ -15,7 +15,7 @@ import org.newdawn.slick.geom.Transform;
 public class Gradient
 {
 	/** The steps in colour of the gradient */
-	private ArrayList<Step> steps = new ArrayList<Step>();
+	private ArrayList<Step> steps = new ArrayList<>();
 	/** The first x coordiante given in the gradient (cx in radial) */
 	private float x1;
 	/** The second x coordiante given in the gradient (fx in radial) */
@@ -268,8 +268,8 @@ public class Gradient
 		
 		for( int i = 1; i < steps.size(); i++ )
 		{
-			Step prev = steps.get( i - 1 );
-			Step current = steps.get( i );
+			Step prev = ( steps.get( i - 1 ) );
+			Step current = ( steps.get( i ) );
 			
 			if( p <= current.location )
 			{

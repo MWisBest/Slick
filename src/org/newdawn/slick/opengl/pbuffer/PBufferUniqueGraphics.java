@@ -35,7 +35,7 @@ public class PBufferUniqueGraphics extends Graphics
 	 */
 	public PBufferUniqueGraphics( Image image ) throws SlickException
 	{
-		super( image.getTexture().getTextureWidth(), image.getTexture().getTextureHeight() );
+		super( InternalTextureLoader.get2Fold( image.getWidth() ), InternalTextureLoader.get2Fold( image.getHeight() ) );
 		this.image = image;
 		
 		Log.debug( "Creating pbuffer(unique) " + image.getWidth() + "x" + image.getHeight() );
@@ -63,9 +63,13 @@ public class PBufferUniqueGraphics extends Graphics
 			pbuffer.makeCurrent();
 			
 			initGL();
-			image.draw( 0, 0 );
-			GL11.glBindTexture( GL11.GL_TEXTURE_2D, tex.getTextureID() );
-			GL11.glCopyTexImage2D( GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, 0, 0, tex.getTextureWidth(), tex.getTextureHeight(), 0 );
+			if( image.getTexture() != null )
+			{
+				image.draw( 0, 0 );
+				GL11.glBindTexture( GL11.GL_TEXTURE_2D, tex.getTextureID() );
+				GL11.glCopyTexImage2D( GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, 0, 0, tex.getTextureWidth(), tex.getTextureHeight(), 0 );
+			}
+			Graphics.setCurrent( this ); // this means you need to call flush() after getGraphics
 			image.setTexture( tex );
 			
 			Display.makeCurrent();
@@ -161,6 +165,13 @@ public class PBufferUniqueGraphics extends Graphics
 		GL11.glLoadIdentity();
 		GL11.glOrtho( 0, screenWidth, 0, screenHeight, 1, -1 );
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
+	}
+	
+	/** glOrtho is called with (0, screenWidth, 0, screenHeight, 1, -1) meaning the Y value is flipped */
+	@Override
+	protected boolean isYFlipped()
+	{
+		return true;
 	}
 	
 	/**

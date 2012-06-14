@@ -21,7 +21,7 @@ public class InputTest extends BasicGame
 	/** The message to be displayed */
 	private String message = "Press any key, mouse button, or drag the mouse";
 	/** The lines to be drawn on the screen */
-	private ArrayList<Line> lines = new ArrayList<Line>();
+	private ArrayList<Line> lines = new ArrayList<>();
 	/** True if the mouse button is down */
 	private boolean buttonDown;
 	/** The x position of our controlled stuff */

@@ -12,8 +12,8 @@ import org.newdawn.slick.util.FastTrig;
  */
 public class Ellipse extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 7281134500426236863L;
+
 	/**
 	 * Default number of segments to draw this ellipse with
 	 */

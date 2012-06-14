@@ -64,7 +64,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 	@SuppressWarnings( "unchecked" )
 	private void generateSpace( ArrayList<Shape> shapes, float minx, float miny, float maxx, float maxy, int segments )
 	{
-		quadSpace = (ArrayList<Shape>[][])new ArrayList[segments][segments];
+		quadSpace = new ArrayList[segments][segments];
 		quadSpaceShapes = new Shape[segments][segments];
 		
 		float dx = ( maxx - minx ) / segments;
@@ -418,7 +418,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		for( int i = 0; i < combined.size(); i++ )
 		{
 			g.setColor( Color.white );
-			Shape shape = (Shape)combined.get( i );
+			Shape shape = combined.get( i );
 			g.draw( shape );
 			for( int j = 0; j < shape.getPointCount(); j++ )
 			{

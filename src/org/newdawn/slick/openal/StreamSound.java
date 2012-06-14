@@ -28,6 +28,19 @@ public class StreamSound extends AudioImpl
 	public StreamSound( OpenALStreamPlayer player )
 	{
 		this.player = player;
+		this.index = 0;
+	}
+	
+	/**
+	 * Stops the music, removes any queued buffers, and closes the stream.
+	 */
+	@Override
+	public void release()
+	{
+		cleanUpSource();
+		super.release();
+		index = 0;
+		player.close();
 	}
 	
 	/**

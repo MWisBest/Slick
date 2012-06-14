@@ -407,7 +407,7 @@ public strictfp class Vector2f implements Serializable
 		float dx = other.getX() - getX();
 		float dy = other.getY() - getY();
 		
-		return (float)( dx * dx ) + ( dy * dy );
+		return dx * dx + ( dy * dy );
 	}
 	
 	/**

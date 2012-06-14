@@ -1,12 +1,17 @@
 package org.newdawn.slick.tests;
 
-import java.awt.Frame;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JFrame;
+
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.CanvasGameContainer;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -35,6 +40,11 @@ public class CanvasContainerTest extends BasicGame
 	/** The current rotation of our test image */
 	private float rot;
 	
+	/** The fixed width of our game (but not necessarily our window). */
+	public static final int GAME_WIDTH = 800;
+	/** The fixed height of our game (but not necessarily our window). */
+	public static final int GAME_HEIGHT = 600;
+	
 	/**
 	 * Create a new image rendering test
 	 */
@@ -49,6 +59,7 @@ public class CanvasContainerTest extends BasicGame
 	@Override
 	public void init( GameContainer container ) throws SlickException
 	{
+		container.getGraphics().setBackground( Color.darkGray );
 		image = tga = new Image( "testdata/logo.tga" );
 		scaleMe = new Image( "testdata/logo.tga", true, Image.FILTER_NEAREST );
 		gif = new Image( "testdata/logo.gif" );
@@ -63,8 +74,11 @@ public class CanvasContainerTest extends BasicGame
 	@Override
 	public void render( GameContainer container, Graphics g )
 	{
+		// generally speaking, GAME_WIDTH should be used instead of
+		// container.getWidth(), since our game now expects a fixed resolution
+		image.draw( GAME_WIDTH - image.getWidth(), 0 );
+		
 		image.draw( 0, 0 );
-		image.draw( 500, 0, 200, 100 );
 		scaleMe.draw( 500, 100, 200, 100 );
 		scaled.draw( 400, 500 );
 		Image flipped = scaled.getFlippedCopy( true, false );
@@ -108,27 +122,57 @@ public class CanvasContainerTest extends BasicGame
 	{
 		try
 		{
-			CanvasGameContainer container = new CanvasGameContainer( new CanvasContainerTest() );
+			// below we're utilizing Swing layout to keep our game at a fixed
+			// resolution, regardless of JFrame size!
 			
-			Frame frame = new Frame( "Test" );
-			frame.setLayout( new GridLayout( 1, 2 ) );
-			frame.setSize( 500, 500 );
-			frame.add( container );
-			
+			final Game game = new CanvasContainerTest();
+			final CanvasGameContainer container = new CanvasGameContainer( game );
+			final JFrame frame = new JFrame( game.getTitle() );
+			// exit on close
+			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 			frame.addWindowListener( new WindowAdapter()
 				{
 					@Override
-					public void windowClosing( WindowEvent e )
+					public void windowClosing( WindowEvent we )
 					{
-						System.exit( 0 );
+						// to avoid ugly flicker when closing, we
+						// can hide the window before destroying OpenGL
+						frame.setVisible( false );
+						
+						// destroys GL/AL context
+						container.getContainer().exit();
 					}
 				} );
+			
+			// background color of frame
+			frame.getContentPane().setBackground( java.awt.Color.black );
+			
+			// the size of our game
+			Dimension size = new Dimension( GAME_WIDTH, GAME_HEIGHT );
+			container.setPreferredSize( size );
+			container.setMinimumSize( size );
+			container.setMaximumSize( size );
+			
+			// layout our game canvas so that it's centred
+			GridBagConstraints c = new GridBagConstraints();
+			c.fill = GridBagConstraints.CENTER;
+			frame.getContentPane().setLayout( new GridBagLayout() );
+			frame.getContentPane().add( container, c );
+			
+			frame.pack();
+			frame.setResizable( true );
+			// centre the frame to the screen
+			frame.setLocationRelativeTo( null );
+			
+			// request focus so that it begins rendering immediately
+			// alternatively we could use GameContainer.setAlwaysRender(true)
+			container.requestFocusInWindow();
 			frame.setVisible( true );
 			container.start();
 		}
-		catch( Exception e )
+		catch( SlickException ex )
 		{
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 	}
 	

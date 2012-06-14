@@ -10,8 +10,7 @@ import java.util.ArrayList;
  */
 public class CompositeIOException extends IOException
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -1342507957680865679L;
 	/** The list of exceptions causing this one */
 	private ArrayList<Exception> exceptions = new ArrayList<Exception>();
 	

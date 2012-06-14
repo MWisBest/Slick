@@ -1,6 +1,7 @@
 package org.newdawn.slick.state;
 
 import java.util.HashMap;
+
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,7 +20,7 @@ import org.newdawn.slick.state.transition.Transition;
 public abstract class StateBasedGame implements Game, InputListener
 {
 	/** The list of states making up this game */
-	private HashMap<Integer, GameState> states = new HashMap<Integer, GameState>();
+	private HashMap<Integer, GameState> states = new HashMap<>();
 	/** The current state */
 	private GameState currentState;
 	/** The next state we're moving into */

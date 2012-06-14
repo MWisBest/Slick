@@ -221,4 +221,14 @@ public class Sound
 	{
 		sound.stop();
 	}
+	
+	/**
+	 * Releases this buffer from memory. The music should be
+	 * stopped before calling this. Using sounds after
+	 * they have been released has undefined effects.
+	 */
+	public void release()
+	{
+		sound.release();
+	}
 }

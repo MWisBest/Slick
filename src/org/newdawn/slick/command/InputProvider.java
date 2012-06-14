@@ -22,13 +22,13 @@ public class InputProvider
 	private HashMap<Control, Command> commands;
 	
 	/** The list of listeners that may be listening */
-	private ArrayList<InputProviderListener> listeners = new ArrayList<InputProviderListener>();
+	private ArrayList<InputProviderListener> listeners = new ArrayList<>();
 	
 	/** The input context we're responding to */
 	private Input input;
 	
 	/** The command input states */
-	private HashMap<Command, CommandState> commandState = new HashMap<Command, CommandState>();
+	private HashMap<Command, CommandState> commandState = new HashMap<>();
 	
 	/** True if this provider is actively sending events */
 	private boolean active = true;
@@ -45,7 +45,7 @@ public class InputProvider
 		this.input = input;
 		
 		this.input.addListener( new InputListenerImpl() );
-		commands = new HashMap<Control, Command>();
+		commands = new HashMap<>();
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class InputProvider
 	 */
 	public List<Command> getUniqueCommands()
 	{
-		List<Command> uniqueCommands = new ArrayList<Command>();
+		List<Command> uniqueCommands = new ArrayList<>();
 		
 		for( Command command : commands.values() )
 		{
@@ -84,8 +84,8 @@ public class InputProvider
 		
 		for( Entry<Control, Command> entry : commands.entrySet() )
 		{
-			Control key = (Control)entry.getKey();
-			Command value = (Command)entry.getValue();
+			Control key = entry.getKey();
+			Command value = entry.getValue();
 			
 			if( value == command )
 			{

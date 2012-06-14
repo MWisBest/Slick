@@ -7,6 +7,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -36,7 +37,7 @@ public class ParticleSystem
 	private static final int DEFAULT_PARTICLES = 100;
 	
 	/** List of emitters to be removed */
-	private ArrayList<ParticleEmitter> removeMe = new ArrayList<ParticleEmitter>();
+	private ArrayList<ParticleEmitter> removeMe = new ArrayList<>();
 	
 	/**
 	 * Set the path from which images should be loaded
@@ -102,7 +103,7 @@ public class ParticleSystem
 	 * each emitter. actually this is used to allow setting an individual blend mode for
 	 * each emitter
 	 */
-	protected HashMap<ParticleEmitter, ParticlePool> particlesByEmitter = new HashMap<ParticleEmitter, ParticlePool>();
+	protected HashMap<ParticleEmitter, ParticlePool> particlesByEmitter = new HashMap<>();
 	/** The maximum number of particles allows per emitter */
 	protected int maxParticlesPerEmitter;
 	

@@ -20,7 +20,7 @@ public class XMLPackedSheet
 	/** The full sheet image */
 	private Image image;
 	/** The sprites stored on the image */
-	private HashMap<String, Image> sprites = new HashMap<String, Image>();
+	private HashMap<String, Image> sprites = new HashMap<>();
 	
 	/**
 	 * Create a new XML packed sheet from the XML output by the slick tool

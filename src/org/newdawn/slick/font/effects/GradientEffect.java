@@ -179,7 +179,7 @@ public class GradientEffect implements ConfigurableEffect
 	@Override
 	public List<Value> getValues()
 	{
-		List<Value> values = new ArrayList<Value>();
+		List<Value> values = new ArrayList<>();
 		values.add( EffectUtil.colorValue( "Top color", topColor ) );
 		values.add( EffectUtil.colorValue( "Bottom color", bottomColor ) );
 		values.add( EffectUtil.intValue( "Offset", offset, "This setting allows you to move the gradient up or down. The gradient is normally centered on the glyph." ) );

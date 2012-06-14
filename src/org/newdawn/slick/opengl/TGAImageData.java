@@ -29,8 +29,8 @@ public class TGAImageData implements LoadableImageData
 	private int width;
 	/** The height of the TGA image */
 	private int height;
-	/** The bit depth of the image */
-	private short pixelDepth;
+	/** The format of this image */
+	private Format format;
 	
 	/**
 	 * Create a new TGA Loader
@@ -52,12 +52,12 @@ public class TGAImageData implements LoadableImageData
 	}
 	
 	/**
-	 * @see org.newdawn.slick.opengl.ImageData#getDepth()
+	 * @see org.newdawn.slick.opengl.ImageData#getFormat()
 	 */
 	@Override
-	public int getDepth()
+	public Format getFormat()
 	{
-		return pixelDepth;
+		return format;
 	}
 	
 	/**
@@ -134,19 +134,7 @@ public class TGAImageData implements LoadableImageData
 		
 		// Read in the Header
 		short idLength = (short)dis.read();
-		@SuppressWarnings( "unused" )
-		short colorMapType = (short)dis.read();
 		short imageType = (short)dis.read();
-		@SuppressWarnings( "unused" )
-		short cMapStart = flipEndian( dis.readShort() );
-		@SuppressWarnings( "unused" )
-		short cMapLength = flipEndian( dis.readShort() );
-		@SuppressWarnings( "unused" )
-		short cMapDepth = (short)dis.read();
-		@SuppressWarnings( "unused" )
-		short xOffset = flipEndian( dis.readShort() );
-		@SuppressWarnings( "unused" )
-		short yOffset = flipEndian( dis.readShort() );
 		
 		if( imageType != 2 )
 		{
@@ -155,7 +143,7 @@ public class TGAImageData implements LoadableImageData
 		
 		width = flipEndian( dis.readShort() );
 		height = flipEndian( dis.readShort() );
-		pixelDepth = (short)dis.read();
+		short pixelDepth = (short)dis.read();
 		if( pixelDepth == 32 )
 		{
 			forceAlpha = false;
@@ -180,10 +168,12 @@ public class TGAImageData implements LoadableImageData
 		if( ( pixelDepth == 32 ) || ( forceAlpha ) )
 		{
 			pixelDepth = 32;
+			format = Format.RGBA;
 			rawData = new byte[texWidth * texHeight * 4];
 		}
 		else if( pixelDepth == 24 )
 		{
+			format = Format.RGB;
 			rawData = new byte[texWidth * texHeight * 3];
 		}
 		else

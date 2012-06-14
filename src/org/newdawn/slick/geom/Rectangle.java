@@ -7,8 +7,7 @@ package org.newdawn.slick.geom;
  */
 public class Rectangle extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -639317913239703198L;
 	/** The width of the box */
 	protected float width;
 	/** The height of the box */

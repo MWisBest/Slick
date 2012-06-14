@@ -6,8 +6,8 @@ import java.nio.FloatBuffer;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
-
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -19,8 +19,7 @@ import org.newdawn.slick.util.FastTrig;
 import org.newdawn.slick.util.Log;
 
 /**
- * A graphics context that can be used to render primatives to the accelerated
- * canvas provided by LWJGL.
+ * A graphics context that can be used to render primatives to the accelerated canvas provided by LWJGL.
  * 
  * @author kevin
  */
@@ -49,6 +48,12 @@ public class Graphics
 	/** Draw blending the new image into the old one by a factor of it's colour */
 	public static int MODE_SCREEN = 6;
 	
+	/** Draw adding the existing colour to the new colour including alpha */
+	public static int MODE_ADD_ALPHA = 7;
+	
+	/** Draw multiplying the source and destination colours */
+	public static int MODE_COLOR_MULTIPLY_ALPHA = 8;
+	
 	/** The default number of segments that will be used when drawing an oval */
 	private static final int DEFAULT_SEGMENTS = 50;
 	
@@ -66,7 +71,8 @@ public class Graphics
 	/**
 	 * Set the current graphics context in use
 	 * 
-	 * @param current The graphics context that should be considered current
+	 * @param current
+	 *            The graphics context that should be considered current
 	 */
 	public static void setCurrent( Graphics current )
 	{
@@ -118,7 +124,7 @@ public class Graphics
 	private float lineWidth = 1;
 	
 	/** The matrix stack */
-	private ArrayList<FloatBuffer> stack = new ArrayList<FloatBuffer>();
+	private ArrayList<FloatBuffer> stack = new ArrayList<>();
 	/** The index into the stack we're using */
 	private int stackIndex;
 	
@@ -130,8 +136,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Create a new graphics context. Only the container should be doing this
-	 * really
+	 * Create a new graphics context. Only the container should be doing this really
 	 * 
 	 * @param width
 	 *            The width of the screen for this context
@@ -168,8 +173,10 @@ public class Graphics
 	/**
 	 * Set the dimensions considered by the graphics context
 	 * 
-	 * @param width The width of the graphics context
-	 * @param height The height of the graphics context
+	 * @param width
+	 *            The width of the graphics context
+	 * @param height
+	 *            The height of the graphics context
 	 */
 	void setDimensions( int width, int height )
 	{
@@ -178,8 +185,8 @@ public class Graphics
 	}
 	
 	/**
-	 * Set the drawing mode to use. This mode defines how pixels are drawn to
-	 * the graphics context. It can be used to draw into the alpha map.
+	 * Set the drawing mode to use. This mode defines how pixels are drawn to the graphics context. It can be used to
+	 * draw into the alpha map.
 	 * 
 	 * The mode supplied should be one of {@link Graphics#MODE_NORMAL} or {@link Graphics#MODE_ALPHA_MAP} or {@link Graphics#MODE_ALPHA_BLEND}
 	 * 
@@ -225,12 +232,23 @@ public class Graphics
 			GL.glColorMask( true, true, true, true );
 			GL.glBlendFunc( SGL.GL_ONE, SGL.GL_ONE_MINUS_SRC_COLOR );
 		}
+		if( currentDrawingMode == MODE_ADD_ALPHA )
+		{
+			GL.glEnable( SGL.GL_BLEND );
+			GL.glColorMask( true, true, true, true );
+			GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE );
+		}
+		if( currentDrawingMode == MODE_COLOR_MULTIPLY_ALPHA )
+		{
+			GL.glEnable( SGL.GL_BLEND );
+			GL.glColorMask( true, true, true, true );
+			GL.glBlendFunc( SGL.GL_ONE_MINUS_SRC_COLOR, SGL.GL_ONE_MINUS_SRC_ALPHA );
+		}
 		postdraw();
 	}
 	
 	/**
-	 * Clear the state of the alpha map across the entire screen. This sets
-	 * alpha to 0 everywhere, meaning in {@link Graphics#MODE_ALPHA_BLEND} nothing will be drawn.
+	 * Clear the state of the alpha map across the entire screen. This sets alpha to 0 everywhere, meaning in {@link Graphics#MODE_ALPHA_BLEND} nothing will be drawn.
 	 */
 	public void clearAlphaMap()
 	{
@@ -248,8 +266,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Must be called before all OpenGL operations to maintain context for
-	 * dynamic images
+	 * Must be called before all OpenGL operations to maintain context for dynamic images
 	 */
 	private void predraw()
 	{
@@ -257,8 +274,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Must be called after all OpenGL operations to maintain context for
-	 * dynamic images
+	 * Must be called after all OpenGL operations to maintain context for dynamic images
 	 */
 	private void postdraw()
 	{
@@ -301,9 +317,8 @@ public class Graphics
 	}
 	
 	/**
-	 * Set the background colour of the graphics context. This colour
-	 * is used when clearing the context. Note that calling this method
-	 * alone does not cause the context to be cleared.
+	 * Set the background colour of the graphics context. This colour is used when clearing the context. Note that
+	 * calling this method alone does not cause the context to be cleared.
 	 * 
 	 * @param color
 	 *            The background color of the graphics context
@@ -752,8 +767,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Clear the clipping being applied. This will allow graphics to be drawn
-	 * anywhere on the screen
+	 * Clear the clipping being applied. This will allow graphics to be drawn anywhere on the screen
 	 */
 	public void clearClip()
 	{
@@ -764,10 +778,9 @@ public class Graphics
 	}
 	
 	/**
-	 * Set clipping that controls which areas of the world will be drawn to.
-	 * Note that world clip is different from standard screen clip in that it's
-	 * defined in the space of the current world coordinate - i.e. it's affected
-	 * by translate, rotate, scale etc.
+	 * Set clipping that controls which areas of the world will be drawn to. Note that world clip is different from
+	 * standard screen clip in that it's defined in the space of the current world coordinate - i.e. it's affected by
+	 * translate, rotate, scale etc.
 	 * 
 	 * @param x
 	 *            The x coordinate of the top left corner of the allowed area
@@ -843,9 +856,8 @@ public class Graphics
 	}
 	
 	/**
-	 * Set the clipping to apply to the drawing. Note that this clipping takes
-	 * no note of the transforms that have been applied to the context and is
-	 * always in absolute screen space coordinates.
+	 * Set the clipping to apply to the drawing. Note that this clipping takes no note of the transforms that have been
+	 * applied to the context and is always in absolute screen space coordinates.
 	 * 
 	 * @param x
 	 *            The x coordinate of the top left corner of the allowed area
@@ -875,13 +887,11 @@ public class Graphics
 	}
 	
 	/**
-	 * Set the clipping to apply to the drawing. Note that this clipping takes
-	 * no note of the transforms that have been applied to the context and is
-	 * always in absolute screen space coordinates.
+	 * Set the clipping to apply to the drawing. Note that this clipping takes no note of the transforms that have been
+	 * applied to the context and is always in absolute screen space coordinates.
 	 * 
 	 * @param rect
-	 *            The rectangle describing the clipped area in screen
-	 *            coordinates
+	 *            The rectangle describing the clipped area in screen coordinates
 	 */
 	public void setClip( Rectangle rect )
 	{
@@ -897,8 +907,7 @@ public class Graphics
 	/**
 	 * Return the currently applied clipping rectangle
 	 * 
-	 * @return The current applied clipping rectangle or null if no clipping is
-	 *         applied
+	 * @return The current applied clipping rectangle or null if no clipping is applied
 	 */
 	public Rectangle getClip()
 	{
@@ -906,8 +915,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Tile a rectangle with a pattern specifing the offset from the top corner
-	 * that one tile should match
+	 * Tile a rectangle with a pattern specifing the offset from the top corner that one tile should match
 	 * 
 	 * @param x
 	 *            The x coordinate of the rectangle
@@ -977,11 +985,9 @@ public class Graphics
 	 * Draw an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The x coordinate of the top left corner of a box containing the oval
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The y coordinate of the top left corner of a box containing the oval
 	 * @param width
 	 *            The width of the oval
 	 * @param height
@@ -996,11 +1002,9 @@ public class Graphics
 	 * Draw an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The x coordinate of the top left corner of a box containing the oval
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The y coordinate of the top left corner of a box containing the oval
 	 * @param width
 	 *            The width of the oval
 	 * @param height
@@ -1017,11 +1021,9 @@ public class Graphics
 	 * Draw an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The x coordinate of the top left corner of a box containing the arc
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The y coordinate of the top left corner of a box containing the arc
 	 * @param width
 	 *            The width of the arc
 	 * @param height
@@ -1040,11 +1042,9 @@ public class Graphics
 	 * Draw an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The x coordinate of the top left corner of a box containing the arc
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The y coordinate of the top left corner of a box containing the arc
 	 * @param width
 	 *            The width of the arc
 	 * @param height
@@ -1093,11 +1093,9 @@ public class Graphics
 	 * Fill an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The x coordinate of the top left corner of a box containing the oval
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The y coordinate of the top left corner of a box containing the oval
 	 * @param width
 	 *            The width of the oval
 	 * @param height
@@ -1112,11 +1110,9 @@ public class Graphics
 	 * Fill an oval to the canvas
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The x coordinate of the top left corner of a box containing the oval
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the oval
+	 *            The y coordinate of the top left corner of a box containing the oval
 	 * @param width
 	 *            The width of the oval
 	 * @param height
@@ -1133,11 +1129,9 @@ public class Graphics
 	 * Fill an arc to the canvas (a wedge)
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The x coordinate of the top left corner of a box containing the arc
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The y coordinate of the top left corner of a box containing the arc
 	 * @param width
 	 *            The width of the arc
 	 * @param height
@@ -1156,11 +1150,9 @@ public class Graphics
 	 * Fill an arc to the canvas (a wedge)
 	 * 
 	 * @param x1
-	 *            The x coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The x coordinate of the top left corner of a box containing the arc
 	 * @param y1
-	 *            The y coordinate of the top left corner of a box containing
-	 *            the arc
+	 *            The y coordinate of the top left corner of a box containing the arc
 	 * @param width
 	 *            The width of the arc
 	 * @param height
@@ -1374,8 +1366,7 @@ public class Graphics
 	 * Set the with of the line to be used when drawing line based primitives
 	 * 
 	 * @param width
-	 *            The width of the line to be used when drawing line based
-	 *            primitives
+	 *            The width of the line to be used when drawing line based primitives
 	 */
 	public void setLineWidth( float width )
 	{
@@ -1530,8 +1521,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Draw a section of an image at a particular location and scale on the
-	 * screen
+	 * Draw a section of an image at a particular location and scale on the screen
 	 * 
 	 * @param image
 	 *            The image to draw a section of
@@ -1544,17 +1534,15 @@ public class Graphics
 	 * @param y2
 	 *            The y position of the bottom right corner of the drawn image
 	 * @param srcx
-	 *            The x position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The x position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcy
-	 *            The y position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The y position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcx2
-	 *            The x position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The x position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param srcy2
-	 *            The t position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The t position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 */
 	public void drawImage( Image image, float x, float y, float x2, float y2, float srcx, float srcy, float srcx2, float srcy2 )
 	{
@@ -1565,8 +1553,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Draw a section of an image at a particular location and scale on the
-	 * screen
+	 * Draw a section of an image at a particular location and scale on the screen
 	 * 
 	 * @param image
 	 *            The image to draw a section of
@@ -1575,17 +1562,15 @@ public class Graphics
 	 * @param y
 	 *            The y position to draw the image
 	 * @param srcx
-	 *            The x position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The x position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcy
-	 *            The y position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The y position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcx2
-	 *            The x position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The x position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param srcy2
-	 *            The t position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The t position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 */
 	public void drawImage( Image image, float x, float y, float srcx, float srcy, float srcx2, float srcy2 )
 	{
@@ -1593,8 +1578,8 @@ public class Graphics
 	}
 	
 	/**
-	 * Copy an area of the rendered screen into an image. The width and height
-	 * of the area are assumed to match that of the image
+	 * Copy an area of the rendered screen into an image. The width and height of the area are assumed to match that of
+	 * the image, and the destination offset is (0, 0).
 	 * 
 	 * @param target
 	 *            The target image
@@ -1605,10 +1590,40 @@ public class Graphics
 	 */
 	public void copyArea( Image target, int x, int y )
 	{
-		int format = target.getTexture().hasAlpha() ? SGL.GL_RGBA : SGL.GL_RGB;
+		copyArea( target, x, y, 0, 0, target.getWidth(), target.getHeight() );
+	}
+	
+	/**
+	 * Copies a sub-section of the rendered screen into the given image. The x/y offset determines where
+	 * on the target image to place the copied data; the width/height values determine how much to copy
+	 * from the screen.
+	 * 
+	 * Note that invalid values, such as a height that is larger than the image's texture, may lead to
+	 * unexpected results.
+	 * 
+	 * @param target the target image to copy the screen into
+	 * @param x the x position of the screen to start copying
+	 * @param y the y position of the screen to start copying
+	 * @param xoff the x destination on the target at which to place the copied data
+	 * @param yoff the y destination on the target at which to place the copied data
+	 * @param width the width of the data to copy from the screen
+	 * @param height the height of the data to copy from the screen
+	 */
+	public void copyArea( Image target, int x, int y, int xoff, int yoff, int width, int height )
+	{
+		predraw();
 		target.bind();
-		GL.glCopyTexImage2D( SGL.GL_TEXTURE_2D, 0, format, x, screenHeight - ( y + target.getHeight() ), target.getTexture().getTextureWidth(), target.getTexture().getTextureHeight(), 0 );
-		target.ensureInverted();
+		if( isYFlipped() )
+		{
+			GL11.glCopyTexSubImage2D( SGL.GL_TEXTURE_2D, 0, xoff, yoff, x, y, width, height );
+		}
+		else
+		{
+			int yoff2 = target.getHeight() - height - yoff;
+			GL11.glCopyTexSubImage2D( SGL.GL_TEXTURE_2D, 0, xoff, yoff2, x, screenHeight - ( y + height ), width, height );
+			target.ensureInverted();
+		}
+		postdraw();
 	}
 	
 	/**
@@ -1649,11 +1664,16 @@ public class Graphics
 	/**
 	 * Get an ara of pixels as RGBA values into a buffer
 	 * 
-	 * @param x The x position in the context to grab from
-	 * @param y The y position in the context to grab from
-	 * @param width The width of the area to grab from
-	 * @param height The hiehgt of the area to grab from
-	 * @param target The target buffer to grab into
+	 * @param x
+	 *            The x position in the context to grab from
+	 * @param y
+	 *            The y position in the context to grab from
+	 * @param width
+	 *            The width of the area to grab from
+	 * @param height
+	 *            The hiehgt of the area to grab from
+	 * @param target
+	 *            The target buffer to grab into
 	 */
 	public void getArea( int x, int y, int width, int height, ByteBuffer target )
 	{
@@ -1668,8 +1688,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Draw a section of an image at a particular location and scale on the
-	 * screen
+	 * Draw a section of an image at a particular location and scale on the screen
 	 * 
 	 * @param image
 	 *            The image to draw a section of
@@ -1682,17 +1701,15 @@ public class Graphics
 	 * @param y2
 	 *            The y position of the bottom right corner of the drawn image
 	 * @param srcx
-	 *            The x position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The x position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcy
-	 *            The y position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The y position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcx2
-	 *            The x position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The x position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param srcy2
-	 *            The t position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The t position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param col
 	 *            The color to apply to the image as a filter
 	 */
@@ -1705,8 +1722,7 @@ public class Graphics
 	}
 	
 	/**
-	 * Draw a section of an image at a particular location and scale on the
-	 * screen
+	 * Draw a section of an image at a particular location and scale on the screen
 	 * 
 	 * @param image
 	 *            The image to draw a section of
@@ -1715,17 +1731,15 @@ public class Graphics
 	 * @param y
 	 *            The y position to draw the image
 	 * @param srcx
-	 *            The x position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The x position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcy
-	 *            The y position of the rectangle to draw from this image (i.e.
-	 *            relative to the image)
+	 *            The y position of the rectangle to draw from this image (i.e. relative to the image)
 	 * @param srcx2
-	 *            The x position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The x position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param srcy2
-	 *            The t position of the bottom right cornder of rectangle to
-	 *            draw from this image (i.e. relative to the image)
+	 *            The t position of the bottom right cornder of rectangle to draw from this image (i.e. relative to the
+	 *            image)
 	 * @param col
 	 *            The color to apply to the image as a filter
 	 */
@@ -1817,10 +1831,9 @@ public class Graphics
 	}
 	
 	/**
-	 * Push the current state of the transform from this graphics contexts
-	 * onto the underlying graphics stack's transform stack. An associated
-	 * popTransform() must be performed to restore the state before the end
-	 * of the rendering loop.
+	 * Push the current state of the transform from this graphics contexts onto the underlying graphics stack's
+	 * transform stack. An associated popTransform() must be performed to restore the state before the end of the
+	 * rendering loop.
 	 */
 	public void pushTransform()
 	{
@@ -1846,8 +1859,8 @@ public class Graphics
 	}
 	
 	/**
-	 * Pop a previously pushed transform from the stack to the current. This should
-	 * only be called if a transform has been previously pushed.
+	 * Pop a previously pushed transform from the stack to the current. This should only be called if a transform has
+	 * been previously pushed.
 	 */
 	public void popTransform()
 	{
@@ -1868,11 +1881,16 @@ public class Graphics
 	}
 	
 	/**
-	 * Dispose this graphics context, this will release any underlying resourses. However
-	 * this will also invalidate it's use
+	 * Dispose this graphics context, this will release any underlying resourses. However this will also invalidate it's
+	 * use
 	 */
 	public void destroy()
 	{
 		
+	}
+	
+	protected boolean isYFlipped()
+	{
+		return false;
 	}
 }

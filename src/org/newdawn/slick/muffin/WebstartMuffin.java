@@ -30,7 +30,6 @@ public class WebstartMuffin implements Muffin
 	@Override
 	public void saveFile( HashMap<String, ?> scoreMap, String fileName ) throws IOException
 	{
-		
 		PersistenceService ps;
 		BasicService bs;
 		URL configURL;
@@ -101,7 +100,7 @@ public class WebstartMuffin implements Muffin
 	@Override
 	public HashMap<String, Object> loadFile( String fileName ) throws IOException
 	{
-		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		HashMap<String, Object> hashMap = new HashMap<>();
 		
 		try
 		{

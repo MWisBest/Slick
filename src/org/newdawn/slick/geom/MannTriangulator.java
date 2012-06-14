@@ -38,8 +38,8 @@ import java.util.List;
  */
 public class MannTriangulator implements Triangulator
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 3460371293975572064L;
+
 	/** The allowed error value */
 	private static final double EPSILON = 1e-5;
 	
@@ -335,8 +335,7 @@ public class MannTriangulator implements Triangulator
 	 */
 	private static class Point implements Serializable
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = -1268254549366351189L;
 		/** The location of the point */
 		protected Vector2f pt;
 		/** The previous point in the contour */
@@ -520,8 +519,7 @@ public class MannTriangulator implements Triangulator
 	 */
 	protected class PointBag implements Serializable
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = -3488911027530446871L;
 		/** The first point in the bag - head of the list */
 		protected Point first;
 		/** The next bag in the list of bags */

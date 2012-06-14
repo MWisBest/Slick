@@ -327,7 +327,7 @@ public class Input
 	/** True if the controllers system has been initialised */
 	private static boolean controllersInited = false;
 	/** The list of controllers */
-	private static ArrayList<Controller> controllers = new ArrayList<Controller>();
+	private static ArrayList<Controller> controllers = new ArrayList<>();
 	
 	/** The last recorded mouse x position */
 	private int lastMouseX;
@@ -350,17 +350,17 @@ public class Input
 	/** True if the event has been consumed */
 	protected boolean consumed = false;
 	/** A list of listeners to be notified of input events */
-	protected HashSet<ControlledInputReciever> allListeners = new HashSet<ControlledInputReciever>();
+	protected HashSet<ControlledInputReciever> allListeners = new HashSet<>();
 	/** The listeners to notify of key events */
-	protected ArrayList<KeyListener> keyListeners = new ArrayList<KeyListener>();
+	protected ArrayList<KeyListener> keyListeners = new ArrayList<>();
 	/** The listener to add */
-	protected ArrayList<KeyListener> keyListenersToAdd = new ArrayList<KeyListener>();
+	protected ArrayList<KeyListener> keyListenersToAdd = new ArrayList<>();
 	/** The listeners to notify of mouse events */
-	protected ArrayList<MouseListener> mouseListeners = new ArrayList<MouseListener>();
+	protected ArrayList<MouseListener> mouseListeners = new ArrayList<>();
 	/** The listener to add */
-	protected ArrayList<MouseListener> mouseListenersToAdd = new ArrayList<MouseListener>();
+	protected ArrayList<MouseListener> mouseListenersToAdd = new ArrayList<>();
 	/** The listener to nofiy of controller events */
-	protected ArrayList<ControllerListener> controllerListeners = new ArrayList<ControllerListener>();
+	protected ArrayList<ControllerListener> controllerListeners = new ArrayList<>();
 	/** The current value of the wheel */
 	@SuppressWarnings( "unused" )
 	private int wheel;
@@ -823,7 +823,7 @@ public class Input
 	 */
 	public int getAbsoluteMouseY()
 	{
-		return height - Mouse.getY();
+		return height - Mouse.getY() - 1;
 	}
 	
 	/**
@@ -843,7 +843,7 @@ public class Input
 	 */
 	public int getMouseY()
 	{
-		return (int)( ( ( height - Mouse.getY() ) * scaleY ) + yoffset );
+		return (int)( ( ( height - Mouse.getY() - 1 ) * scaleY ) + yoffset );
 	}
 	
 	/**

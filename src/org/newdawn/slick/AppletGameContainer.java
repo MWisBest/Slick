@@ -17,6 +17,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
@@ -36,8 +37,7 @@ import org.newdawn.slick.util.Log;
  */
 public class AppletGameContainer extends Applet
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -9141719718210190213L;
 	/** The GL Canvas used for this container */
 	protected ContainerPanel canvas;
 	/** The actual container implementation */
@@ -116,6 +116,7 @@ public class AppletGameContainer extends Applet
 						{
 							Display.destroy();
 						}
+						if( AL.isCreated() ) AL.destroy();
 						displayParent.setVisible( false );// removeAll();
 						add( new ConsolePanel( e ) );
 						validate();
@@ -152,8 +153,8 @@ public class AppletGameContainer extends Applet
 			canvas = new ContainerPanel( container );
 			displayParent = new Canvas()
 				{
-					private static final long serialVersionUID = 1L;
-					
+					private static final long serialVersionUID = -7262770081084837242L;
+
 					@Override
 					public final void addNotify()
 					{
@@ -635,6 +636,7 @@ public class AppletGameContainer extends Applet
 			}
 			
 			Display.destroy();
+			if( AL.isCreated() ) AL.destroy();
 		}
 	}
 	
@@ -646,8 +648,7 @@ public class AppletGameContainer extends Applet
 	 */
 	public class ConsolePanel extends Panel
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = -2209298033492616458L;
 		/** The area display the console output */
 		TextArea textArea = new TextArea();
 		

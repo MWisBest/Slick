@@ -636,7 +636,7 @@ public class ParticleIO
 		ArrayList<ColorRecord> list = emitter.colors;
 		for( int i = 0; i < list.size(); i++ )
 		{
-			ColorRecord record = (ColorRecord)list.get( i );
+			ColorRecord record = list.get( i );
 			Element step = document.createElement( "step" );
 			step.setAttribute( "offset", "" + record.pos );
 			step.setAttribute( "r", "" + record.col.r );
@@ -695,24 +695,20 @@ public class ParticleIO
 		}
 		else if( value instanceof RandomValue )
 		{
-			final RandomValue randomValue = (RandomValue)value;
-			
 			element.setAttribute( "type", "random" );
-			element.setAttribute( "value", "" + randomValue.getValue() );
+			element.setAttribute( "value", "" + ( (RandomValue)value ).getValue() );
 		}
 		else if( value instanceof LinearInterpolator )
 		{
-			final LinearInterpolator linearInterpolator = (LinearInterpolator)value;
-			
 			element.setAttribute( "type", "linear" );
-			element.setAttribute( "min", "" + linearInterpolator.getMin() );
-			element.setAttribute( "max", "" + linearInterpolator.getMax() );
-			element.setAttribute( "active", "" + linearInterpolator.isActive() );
+			element.setAttribute( "min", "" + ( (LinearInterpolator)value ).getMin() );
+			element.setAttribute( "max", "" + ( (LinearInterpolator)value ).getMax() );
+			element.setAttribute( "active", "" + ( (LinearInterpolator)value ).isActive() );
 			
-			ArrayList<Vector2f> curve = linearInterpolator.getCurve();
+			ArrayList<Vector2f> curve = ( (LinearInterpolator)value ).getCurve();
 			for( int i = 0; i < curve.size(); i++ )
 			{
-				Vector2f point = (Vector2f)curve.get( i );
+				Vector2f point = curve.get( i );
 				
 				Element pointElement = document.createElement( "point" );
 				pointElement.setAttribute( "x", "" + point.x );

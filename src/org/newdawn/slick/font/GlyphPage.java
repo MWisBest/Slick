@@ -12,6 +12,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -104,6 +105,7 @@ public class GlyphPage
 		this.pageWidth = pageWidth;
 		this.pageHeight = pageHeight;
 		
+		// Note: since we use glTexSubImage2D instead of getGraphics, this doesn't need Image.createOffscreenGraphics
 		pageImage = new Image( pageWidth, pageHeight );
 	}
 	
@@ -129,7 +131,7 @@ public class GlyphPage
 			int testRowHeight = rowHeight;
 			for( Iterator<Glyph> iter = getIterator( glyphs ); iter.hasNext(); )
 			{
-				Glyph glyph = (Glyph)iter.next();
+				Glyph glyph = iter.next();
 				int width = glyph.getWidth();
 				int height = glyph.getHeight();
 				if( testX + width >= pageWidth )
@@ -153,7 +155,7 @@ public class GlyphPage
 		int i = 0;
 		for( Iterator<Glyph> iter = getIterator( glyphs ); iter.hasNext(); )
 		{
-			Glyph glyph = (Glyph)iter.next();
+			Glyph glyph = iter.next();
 			int width = Math.min( MAX_GLYPH_SIZE, glyph.getWidth() );
 			int height = Math.min( MAX_GLYPH_SIZE, glyph.getHeight() );
 			

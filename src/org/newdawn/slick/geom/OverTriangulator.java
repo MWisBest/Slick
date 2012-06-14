@@ -8,8 +8,7 @@ package org.newdawn.slick.geom;
  */
 public class OverTriangulator implements Triangulator
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -8468233471544654916L;
 	/** The triangles data */
 	private float[][] triangles;
 	

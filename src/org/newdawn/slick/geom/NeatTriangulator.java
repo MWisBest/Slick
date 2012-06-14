@@ -7,8 +7,8 @@ package org.newdawn.slick.geom;
  */
 public class NeatTriangulator implements Triangulator
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 2181630687948961826L;
+
 	/** The error factor */
 	static final float EPSILON = 1E-006F;
 	
@@ -596,8 +596,8 @@ public class NeatTriangulator implements Triangulator
 	 */
 	class InternalException extends Exception
 	{
-		private static final long serialVersionUID = 1L;
-		
+		private static final long serialVersionUID = 3579922400170013665L;
+
 		/**
 		 * Create an internal exception
 		 * 

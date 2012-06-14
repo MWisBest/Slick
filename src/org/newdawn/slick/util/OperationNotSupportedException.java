@@ -8,8 +8,8 @@ package org.newdawn.slick.util;
  */
 public class OperationNotSupportedException extends RuntimeException
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 4530559934748205261L;
+
 	/**
 	 * Create a new exception
 	 * 

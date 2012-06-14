@@ -102,11 +102,11 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	/** The glyphs that are available in this font */
 	private final Glyph[][] glyphs = new Glyph[PAGES][];
 	/** The pages that have been loaded for this font */
-	private final List<GlyphPage> glyphPages = new ArrayList<GlyphPage>();
+	private final List<GlyphPage> glyphPages = new ArrayList<>();
 	/** The glyphs queued up to be rendered */
-	private final List<Glyph> queuedGlyphs = new ArrayList<Glyph>( 256 );
+	private final List<Glyph> queuedGlyphs = new ArrayList<>( 256 );
 	/** The effects that need to be applied to the font */
-	private final List<Effect> effects = new ArrayList<Effect>();
+	private final List<Effect> effects = new ArrayList<>();
 	
 	/** The padding applied in pixels to the top of the glyph rendered area */
 	private int paddingTop;
@@ -138,8 +138,8 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	/** The map fo the display list generated and cached - modified to allow removal of the oldest entry */
 	private final LinkedHashMap<String, DisplayList> displayLists = new LinkedHashMap<String, DisplayList>( DISPLAY_LIST_CACHE_SIZE, 1, true )
 		{
-			private static final long serialVersionUID = 1L;
-			
+			private static final long serialVersionUID = 1365336879730980072L;
+
 			@Override
 			protected boolean removeEldestEntry( Entry<String, DisplayList> eldest )
 			{
@@ -1039,7 +1039,7 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	 */
 	public String getFontFile()
 	{
-		if( ttfFileRef == null )
+		if( ttfFileRef == null || ttfFileRef.length() == 0 )
 		{
 			// Worst case if this UnicodeFont was loaded without a ttfFileRef, try to get the font file from Sun's classes.
 			try
@@ -1051,6 +1051,7 @@ public class UnicodeFont implements org.newdawn.slick.Font
 			}
 			catch( Throwable ignored )
 			{
+				// System.out.println(ignored.getMessage());
 			}
 			if( ttfFileRef == null ) ttfFileRef = "";
 		}

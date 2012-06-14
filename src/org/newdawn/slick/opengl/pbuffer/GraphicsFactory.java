@@ -19,7 +19,7 @@ import org.newdawn.slick.util.Log;
 public class GraphicsFactory
 {
 	/** The graphics list of graphics contexts created */
-	private static HashMap<Texture, Graphics> graphics = new HashMap<Texture, Graphics>();
+	private static HashMap<Texture, Graphics> graphics = new HashMap<>();
 	/** True if pbuffers are supported */
 	private static boolean pbuffer = true;
 	/** True if pbuffer render to texture are supported */

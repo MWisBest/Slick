@@ -9,8 +9,7 @@ import java.util.ArrayList;
  */
 public class Polygon extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -1099458559197386014L;
 	/** Allow duplicated points */
 	private boolean allowDups = false;
 	/** True if the polygon is closed */

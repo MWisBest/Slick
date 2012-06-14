@@ -30,6 +30,13 @@ public interface Audio
 	public boolean isPlaying();
 	
 	/**
+	 * Check if the sound is paused.
+	 * 
+	 * @return true if sound is paused
+	 */
+	public boolean isPaused();
+	
+	/**
 	 * Play this sound as a sound effect
 	 * 
 	 * @param pitch The pitch of the play back
@@ -76,4 +83,12 @@ public interface Audio
 	 * @return The current position in seconds.
 	 */
 	public float getPosition();
+	
+	/**
+	 * Calls stop() and releases this buffer from memory. For music, this will
+	 * stop the source, remove any queued buffers, and close the stream.
+	 * For sound, this will stop the source and release the buffer contained by
+	 * the Sound.
+	 */
+	public void release();
 }

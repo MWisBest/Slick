@@ -9,8 +9,7 @@ package org.newdawn.slick.geom;
  */
 public class Curve extends Shape
 {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -6300507899916111536L;
 	/** The start point of the curve */
 	private Vector2f p1;
 	/** The first control point */
