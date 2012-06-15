@@ -21,10 +21,7 @@ public class ImageWriterFactory
 	{
 		String[] formats = ImageIO.getWriterFormatNames();
 		ImageIOWriter writer = new ImageIOWriter();
-		for( int i = 0; i < formats.length; i++ )
-		{
-			registerWriter( formats[i], writer );
-		}
+		for( int i = 0; i < formats.length; i++ ) registerWriter( formats[i], writer );
 		
 		TGAWriter tga = new TGAWriter();
 		registerWriter( "tga", tga );
@@ -62,22 +59,13 @@ public class ImageWriterFactory
 	public static ImageWriter getWriterForFormat( String format ) throws SlickException
 	{
 		ImageWriter writer = writers.get( format );
-		if( writer != null )
-		{
-			return writer;
-		}
+		if( writer != null ) return writer;
 		
 		writer = writers.get( format.toLowerCase() );
-		if( writer != null )
-		{
-			return writer;
-		}
+		if( writer != null ) return writer;
 		
 		writer = writers.get( format.toUpperCase() );
-		if( writer != null )
-		{
-			return writer;
-		}
+		if( writer != null ) return writer;
 		
 		throw new SlickException( "No image writer available for: " + format );
 	}

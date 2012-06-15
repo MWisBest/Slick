@@ -34,10 +34,7 @@ public class ImageIOWriter implements ImageWriter
 	{
 		// conver the image into a byte buffer by reading each pixel in turn
 		int len = 4 * image.getWidth() * image.getHeight();
-		if( !hasAlpha )
-		{
-			len = 3 * image.getWidth() * image.getHeight();
-		}
+		if( !hasAlpha ) len = 3 * image.getWidth() * image.getHeight();
 		
 		ByteBuffer out = ByteBuffer.allocate( len );
 		Color c;
@@ -51,10 +48,7 @@ public class ImageIOWriter implements ImageWriter
 				out.put( (byte)( c.r * 255.0f ) );
 				out.put( (byte)( c.g * 255.0f ) );
 				out.put( (byte)( c.b * 255.0f ) );
-				if( hasAlpha )
-				{
-					out.put( (byte)( c.a * 255.0f ) );
-				}
+				if( hasAlpha ) out.put( (byte)( c.a * 255.0f ) );
 			}
 		}
 		

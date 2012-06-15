@@ -98,10 +98,7 @@ public class ImageOut
 		try
 		{
 			int ext = dest.lastIndexOf( '.' );
-			if( ext < 0 )
-			{
-				throw new SlickException( "Unable to determine format from: " + dest );
-			}
+			if( ext < 0 ) throw new SlickException( "Unable to determine format from: " + dest );
 			
 			String format = dest.substring( ext + 1 );
 			write( image, format, new FileOutputStream( dest ), writeAlpha );

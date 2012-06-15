@@ -83,10 +83,7 @@ public class TGAWriter implements ImageWriter
 				out.writeByte( (byte)( c.b * 255.0f ) );
 				out.writeByte( (byte)( c.g * 255.0f ) );
 				out.writeByte( (byte)( c.r * 255.0f ) );
-				if( writeAlpha )
-				{
-					out.writeByte( (byte)( c.a * 255.0f ) );
-				}
+				if( writeAlpha ) out.writeByte( (byte)( c.a * 255.0f ) );
 			}
 		}
 		
