@@ -153,10 +153,7 @@ public class AppGameContainer extends GameContainer
 	 */
 	public void setDisplayMode( int width, int height, boolean fullscreen ) throws SlickException
 	{
-		if( ( this.width == width ) && ( this.height == height ) && ( isFullscreen() == fullscreen ) )
-		{
-			return;
-		}
+		if( ( this.width == width ) && ( this.height == height ) && ( isFullscreen() == fullscreen ) ) return;
 		Color oldBG = null;
 		Graphics g = getGraphics();
 		if( g != null )
@@ -179,13 +176,10 @@ public class AppGameContainer extends GameContainer
 					
 					if( ( current.getWidth() == width ) && ( current.getHeight() == height ) )
 					{
-						if( ( targetDisplayMode == null ) || ( current.getFrequency() >= freq ) )
+						if( ( targetDisplayMode == null ) || ( ( current.getFrequency() >= freq ) || ( current.getBitsPerPixel() > targetDisplayMode.getBitsPerPixel() ) ) )
 						{
-							if( ( targetDisplayMode == null ) || ( current.getBitsPerPixel() > targetDisplayMode.getBitsPerPixel() ) )
-							{
-								targetDisplayMode = current;
-								freq = targetDisplayMode.getFrequency();
-							}
+							targetDisplayMode = current;
+							freq = targetDisplayMode.getFrequency();
 						}
 						
 						// if we've found a match for bpp and frequence against the
@@ -199,15 +193,9 @@ public class AppGameContainer extends GameContainer
 					}
 				}
 			}
-			else
-			{
-				targetDisplayMode = new DisplayMode( width, height );
-			}
+			else targetDisplayMode = new DisplayMode( width, height );
 			
-			if( targetDisplayMode == null )
-			{
-				throw new SlickException( "Failed to find value mode: " + width + "x" + height + " fs=" + fullscreen );
-			}
+			if( targetDisplayMode == null ) throw new SlickException( "Failed to find value mode: " + width + "x" + height + " fs=" + fullscreen );
 			
 			this.width = width;
 			this.height = height;
@@ -222,15 +210,9 @@ public class AppGameContainer extends GameContainer
 			}
 			
 			// initGL will reset the clear color... so let's reset it
-			if( oldBG != null && g != null )
-			{
-				g.setBackground( oldBG );
-			}
+			if( oldBG != null && g != null ) g.setBackground( oldBG );
 			
-			if( targetDisplayMode.getBitsPerPixel() == 16 )
-			{
-				InternalTextureLoader.get().set16BitMode();
-			}
+			if( targetDisplayMode.getBitsPerPixel() == 16 ) InternalTextureLoader.get().set16BitMode();
 		}
 		catch( LWJGLException e )
 		{
@@ -261,10 +243,7 @@ public class AppGameContainer extends GameContainer
 	@Override
 	public void setFullscreen( boolean fullscreen ) throws SlickException
 	{
-		if( isFullscreen() == fullscreen )
-		{
-			return;
-		}
+		if( isFullscreen() == fullscreen ) return;
 		
 		if( !fullscreen )
 		{
@@ -277,10 +256,7 @@ public class AppGameContainer extends GameContainer
 				throw new SlickException( "Unable to set fullscreen=" + fullscreen, e );
 			}
 		}
-		else
-		{
-			setDisplayMode( width, height, fullscreen );
-		}
+		else setDisplayMode( width, height, fullscreen );
 		getDelta();
 	}
 	
@@ -346,10 +322,7 @@ public class AppGameContainer extends GameContainer
 	private int get2Fold( int fold )
 	{
 		int ret = 2;
-		while( ret < fold )
-		{
-			ret *= 2;
-		}
+		while( ret < fold ) ret *= 2;
 		return ret;
 	}
 	
@@ -409,14 +382,8 @@ public class AppGameContainer extends GameContainer
 	 */
 	private void tryCreateDisplay( PixelFormat format ) throws LWJGLException
 	{
-		if( SHARED_DRAWABLE == null )
-		{
-			Display.create( format );
-		}
-		else
-		{
-			Display.create( format, SHARED_DRAWABLE );
-		}
+		if( SHARED_DRAWABLE == null ) Display.create( format );
+		else Display.create( format, SHARED_DRAWABLE );
 	}
 	
 	/**
@@ -431,20 +398,15 @@ public class AppGameContainer extends GameContainer
 			setup();
 			
 			getDelta();
-			while( running() )
-			{
-				gameLoop();
-			}
+			
+			while( running() ) gameLoop();
 		}
 		finally
 		{
 			destroy();
 		}
 		
-		if( forceExit )
-		{
-			System.exit( 0 );
-		}
+		if( forceExit ) System.exit( 0 );
 	}
 	
 	/**
@@ -454,10 +416,7 @@ public class AppGameContainer extends GameContainer
 	 */
 	protected void setup() throws SlickException
 	{
-		if( targetDisplayMode == null )
-		{
-			setDisplayMode( 640, 480, false );
-		}
+		if( targetDisplayMode == null ) setDisplayMode( 640, 480, false );
 		
 		Display.setTitle( game.getTitle() );
 		
@@ -507,10 +466,7 @@ public class AppGameContainer extends GameContainer
 				}
 			} );
 		
-		if( !Display.isCreated() )
-		{
-			throw new SlickException( "Failed to initialise the LWJGL display" );
-		}
+		if( !Display.isCreated() ) throw new SlickException( "Failed to initialise the LWJGL display" );
 		
 		initSystem();
 		enterOrtho();
@@ -583,10 +539,7 @@ public class AppGameContainer extends GameContainer
 		
 		if( Display.isCloseRequested() )
 		{
-			if( game.closeRequested() )
-			{
-				running = false;
-			}
+			if( game.closeRequested() ) running = false;
 		}
 	}
 	
@@ -684,10 +637,7 @@ public class AppGameContainer extends GameContainer
 			LoadableImageData data;
 			boolean flip = true;
 			
-			if( refs[i].endsWith( ".tga" ) )
-			{
-				data = new TGAImageData();
-			}
+			if( refs[i].endsWith( ".tga" ) ) data = new TGAImageData();
 			else
 			{
 				flip = false;

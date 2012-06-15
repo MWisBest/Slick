@@ -22,5 +22,4 @@ public interface KeyListener extends ControlledInputReciever
 	 * @param c The character of the key that was released
 	 */
 	public abstract void keyReleased( int key, char c );
-	
 }

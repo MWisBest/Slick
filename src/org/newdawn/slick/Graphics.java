@@ -79,10 +79,7 @@ public class Graphics
 	{
 		if( currentGraphics != current )
 		{
-			if( currentGraphics != null )
-			{
-				currentGraphics.disable();
-			}
+			if( currentGraphics != null ) currentGraphics.disable();
 			currentGraphics = current;
 			currentGraphics.enable();
 		}
@@ -472,10 +469,7 @@ public class Graphics
 	 */
 	public void setColor( Color color )
 	{
-		if( color == null )
-		{
-			return;
-		}
+		if( color == null ) return;
 		
 		currentColor = new Color( color );
 		predraw();
@@ -663,14 +657,8 @@ public class Graphics
 	 */
 	public void texture( Shape shape, Image image, boolean fit )
 	{
-		if( fit )
-		{
-			texture( shape, image, 1, 1, true );
-		}
-		else
-		{
-			texture( shape, image, 0.01f, 0.01f, false );
-		}
+		if( fit ) texture( shape, image, 1, 1, true );
+		else texture( shape, image, 0.01f, 0.01f, false );
 	}
 	
 	/**
@@ -710,14 +698,8 @@ public class Graphics
 		TextureImpl.bindNone();
 		currentColor.bind();
 		
-		if( fit )
-		{
-			ShapeRenderer.textureFit( shape, image, scaleX, scaleY );
-		}
-		else
-		{
-			ShapeRenderer.texture( shape, image, scaleX, scaleY );
-		}
+		if( fit ) ShapeRenderer.textureFit( shape, image, scaleX, scaleY );
+		else ShapeRenderer.texture( shape, image, scaleX, scaleY );
 		
 		postdraw();
 	}
@@ -836,14 +818,8 @@ public class Graphics
 	 */
 	public void setWorldClip( Rectangle clip )
 	{
-		if( clip == null )
-		{
-			clearWorldClip();
-		}
-		else
-		{
-			setWorldClip( clip.getX(), clip.getY(), clip.getWidth(), clip.getHeight() );
-		}
+		if( clip == null ) clearWorldClip();
+		else setWorldClip( clip.getX(), clip.getY(), clip.getWidth(), clip.getHeight() );
 	}
 	
 	/**
@@ -878,10 +854,7 @@ public class Graphics
 			GL.glEnable( SGL.GL_SCISSOR_TEST );
 			clip = new Rectangle( x, y, width, height );
 		}
-		else
-		{
-			clip.setBounds( x, y, width, height );
-		}
+		else clip.setBounds( x, y, width, height );
 		
 		GL.glScissor( x, screenHeight - y - height, width, height );
 		postdraw();
@@ -945,10 +918,7 @@ public class Graphics
 		// Draw all the quads we need
 		for( int c = 0; c < cols; c++ )
 		{
-			for( int r = 0; r < rows; r++ )
-			{
-				pattern.draw( c * pattern.getWidth() + x - offX, r * pattern.getHeight() + y - offY );
-			}
+			for( int r = 0; r < rows; r++ ) pattern.draw( c * pattern.getWidth() + x - offX, r * pattern.getHeight() + y - offY );
 		}
 		postdraw();
 		
@@ -1063,10 +1033,7 @@ public class Graphics
 		TextureImpl.bindNone();
 		currentColor.bind();
 		
-		while( end < start )
-		{
-			end += 360;
-		}
+		while( end < start ) end += 360;
 		
 		float cx = x1 + ( width / 2.0f );
 		float cy = y1 + ( height / 2.0f );
@@ -1077,10 +1044,7 @@ public class Graphics
 		for( int a = (int)start; a < (int)( end + step ); a += step )
 		{
 			float ang = a;
-			if( ang > end )
-			{
-				ang = end;
-			}
+			if( ang > end ) ang = end;
 			float x = (float)( cx + ( FastTrig.cos( Math.toRadians( ang ) ) * width / 2.0f ) );
 			float y = (float)( cy + ( FastTrig.sin( Math.toRadians( ang ) ) * height / 2.0f ) );
 			
@@ -1171,10 +1135,7 @@ public class Graphics
 		TextureImpl.bindNone();
 		currentColor.bind();
 		
-		while( end < start )
-		{
-			end += 360;
-		}
+		while( end < start ) end += 360;
 		
 		float cx = x1 + ( width / 2.0f );
 		float cy = y1 + ( height / 2.0f );
@@ -1187,10 +1148,7 @@ public class Graphics
 		for( int a = (int)start; a < (int)( end + step ); a += step )
 		{
 			float ang = a;
-			if( ang > end )
-			{
-				ang = end;
-			}
+			if( ang > end ) ang = end;
 			
 			float x = (float)( cx + ( FastTrig.cos( Math.toRadians( ang ) ) * width / 2.0f ) );
 			float y = (float)( cy + ( FastTrig.sin( Math.toRadians( ang ) ) * height / 2.0f ) );
@@ -1203,18 +1161,12 @@ public class Graphics
 		{
 			GL.glBegin( SGL.GL_TRIANGLE_FAN );
 			GL.glVertex2f( cx, cy );
-			if( end != 360 )
-			{
-				end -= 10;
-			}
+			if( end != 360 ) end -= 10;
 			
 			for( int a = (int)start; a < (int)( end + step ); a += step )
 			{
 				float ang = a;
-				if( ang > end )
-				{
-					ang = end;
-				}
+				if( ang > end ) ang = end;
 				
 				float x = (float)( cx + ( FastTrig.cos( Math.toRadians( ang + 10 ) ) * width / 2.0f ) );
 				float y = (float)( cy + ( FastTrig.sin( Math.toRadians( ang + 10 ) ) * height / 2.0f ) );
@@ -1273,10 +1225,7 @@ public class Graphics
 		
 		int mr = (int)Math.min( width, height ) / 2;
 		// make sure that w & h are larger than 2*cornerRadius
-		if( cornerRadius > mr )
-		{
-			cornerRadius = mr;
-		}
+		if( cornerRadius > mr ) cornerRadius = mr;
 		
 		drawLine( x + cornerRadius, y, x + width - cornerRadius, y );
 		drawLine( x, y + cornerRadius, x, y + height - cornerRadius );
@@ -1340,10 +1289,7 @@ public class Graphics
 		
 		int mr = (int)Math.min( width, height ) / 2;
 		// make sure that w & h are larger than 2*cornerRadius
-		if( cornerRadius > mr )
-		{
-			cornerRadius = mr;
-		}
+		if( cornerRadius > mr ) cornerRadius = mr;
 		
 		float d = cornerRadius * 2;
 		
@@ -1413,14 +1359,8 @@ public class Graphics
 		predraw();
 		antialias = anti;
 		LSR.setAntiAlias( anti );
-		if( anti )
-		{
-			GL.glEnable( SGL.GL_POLYGON_SMOOTH );
-		}
-		else
-		{
-			GL.glDisable( SGL.GL_POLYGON_SMOOTH );
-		}
+		if( anti ) GL.glEnable( SGL.GL_POLYGON_SMOOTH );
+		else GL.glDisable( SGL.GL_POLYGON_SMOOTH );
 		postdraw();
 	}
 	
@@ -1614,10 +1554,7 @@ public class Graphics
 	{
 		predraw();
 		target.bind();
-		if( isYFlipped() )
-		{
-			GL11.glCopyTexSubImage2D( SGL.GL_TEXTURE_2D, 0, xoff, yoff, x, y, width, height );
-		}
+		if( isYFlipped() ) GL11.glCopyTexSubImage2D( SGL.GL_TEXTURE_2D, 0, xoff, yoff, x, y, width, height );
 		else
 		{
 			int yoff2 = target.getHeight() - height - yoff;
@@ -1636,10 +1573,7 @@ public class Graphics
 	 */
 	private int translate( byte b )
 	{
-		if( b < 0 )
-		{
-			return 256 + b;
-		}
+		if( b < 0 ) return 256 + b;
 		
 		return b;
 	}
@@ -1678,10 +1612,7 @@ public class Graphics
 	 */
 	public void getArea( int x, int y, int width, int height, ByteBuffer target )
 	{
-		if( target.capacity() < width * height * 4 )
-		{
-			throw new IllegalArgumentException( "Byte buffer provided to get area is not big enough" );
-		}
+		if( target.capacity() < width * height * 4 ) throw new IllegalArgumentException( "Byte buffer provided to get area is not big enough" );
 		
 		predraw();
 		GL.glReadPixels( x, screenHeight - y - height, width, height, SGL.GL_RGBA, SGL.GL_UNSIGNED_BYTE, target );
@@ -1846,10 +1777,7 @@ public class Graphics
 			buffer = BufferUtils.createFloatBuffer( 18 );
 			stack.add( buffer );
 		}
-		else
-		{
-			buffer = stack.get( stackIndex );
-		}
+		else buffer = stack.get( stackIndex );
 		
 		GL.glGetFloat( SGL.GL_MODELVIEW_MATRIX, buffer );
 		buffer.put( 16, sx );
@@ -1865,10 +1793,7 @@ public class Graphics
 	 */
 	public void popTransform()
 	{
-		if( stackIndex == 0 )
-		{
-			throw new RuntimeException( "Attempt to pop a transform that hasn't be pushed" );
-		}
+		if( stackIndex == 0 ) throw new RuntimeException( "Attempt to pop a transform that hasn't be pushed" );
 		
 		predraw();
 		
@@ -1887,7 +1812,6 @@ public class Graphics
 	 */
 	public void destroy()
 	{
-		
 	}
 	
 	protected boolean isYFlipped()

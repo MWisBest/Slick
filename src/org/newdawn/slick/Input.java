@@ -515,10 +515,7 @@ public class Input
 	 */
 	private void addKeyListenerImpl( KeyListener listener )
 	{
-		if( keyListeners.contains( listener ) )
-		{
-			return;
-		}
+		if( keyListeners.contains( listener ) ) return;
 		keyListeners.add( listener );
 		allListeners.add( listener );
 	}
@@ -540,10 +537,7 @@ public class Input
 	 */
 	private void addMouseListenerImpl( MouseListener listener )
 	{
-		if( mouseListeners.contains( listener ) )
-		{
-			return;
-		}
+		if( mouseListeners.contains( listener ) ) return;
 		mouseListeners.add( listener );
 		allListeners.add( listener );
 	}
@@ -555,10 +549,7 @@ public class Input
 	 */
 	public void addControllerListener( ControllerListener listener )
 	{
-		if( controllerListeners.contains( listener ) )
-		{
-			return;
-		}
+		if( controllerListeners.contains( listener ) ) return;
 		controllerListeners.add( listener );
 		allListeners.add( listener );
 	}
@@ -638,10 +629,7 @@ public class Input
 	{
 		keyListeners.remove( listener );
 		
-		if( !mouseListeners.contains( listener ) && !controllerListeners.contains( listener ) )
-		{
-			allListeners.remove( listener );
-		}
+		if( !mouseListeners.contains( listener ) && !controllerListeners.contains( listener ) ) allListeners.remove( listener );
 	}
 	
 	/**
@@ -653,10 +641,7 @@ public class Input
 	{
 		controllerListeners.remove( listener );
 		
-		if( !mouseListeners.contains( listener ) && !keyListeners.contains( listener ) )
-		{
-			allListeners.remove( listener );
-		}
+		if( !mouseListeners.contains( listener ) && !keyListeners.contains( listener ) ) allListeners.remove( listener );
 	}
 	
 	/**
@@ -668,10 +653,7 @@ public class Input
 	{
 		mouseListeners.remove( listener );
 		
-		if( !controllerListeners.contains( listener ) && !keyListeners.contains( listener ) )
-		{
-			allListeners.remove( listener );
-		}
+		if( !controllerListeners.contains( listener ) && !keyListeners.contains( listener ) ) allListeners.remove( listener );
 	}
 	
 	/**
@@ -769,10 +751,7 @@ public class Input
 	 */
 	public void clearControlPressedRecord()
 	{
-		for( int i = 0; i < controllers.size(); i++ )
-		{
-			Arrays.fill( controllerPressed[i], false );
-		}
+		for( int i = 0; i < controllers.size(); i++ ) Arrays.fill( controllerPressed[i], false );
 	}
 	
 	/**
@@ -866,10 +845,7 @@ public class Input
 	{
 		for( int i = 0; i < 3; i++ )
 		{
-			if( Mouse.isButtonDown( i ) )
-			{
-				return true;
-			}
+			if( Mouse.isButtonDown( i ) ) return true;
 		}
 		
 		return false;
@@ -937,19 +913,13 @@ public class Input
 	 */
 	public boolean isControllerLeft( int controller )
 	{
-		if( controller >= getControllerCount() )
-		{
-			return false;
-		}
+		if( controller >= getControllerCount() ) return false;
 		
 		if( controller == ANY_CONTROLLER )
 		{
 			for( int i = 0; i < controllers.size(); i++ )
 			{
-				if( isControllerLeft( i ) )
-				{
-					return true;
-				}
+				if( isControllerLeft( i ) ) return true;
 			}
 			
 			return false;
@@ -966,19 +936,13 @@ public class Input
 	 */
 	public boolean isControllerRight( int controller )
 	{
-		if( controller >= getControllerCount() )
-		{
-			return false;
-		}
+		if( controller >= getControllerCount() ) return false;
 		
 		if( controller == ANY_CONTROLLER )
 		{
 			for( int i = 0; i < controllers.size(); i++ )
 			{
-				if( isControllerRight( i ) )
-				{
-					return true;
-				}
+				if( isControllerRight( i ) ) return true;
 			}
 			
 			return false;
@@ -995,19 +959,13 @@ public class Input
 	 */
 	public boolean isControllerUp( int controller )
 	{
-		if( controller >= getControllerCount() )
-		{
-			return false;
-		}
+		if( controller >= getControllerCount() ) return false;
 		
 		if( controller == ANY_CONTROLLER )
 		{
 			for( int i = 0; i < controllers.size(); i++ )
 			{
-				if( isControllerUp( i ) )
-				{
-					return true;
-				}
+				if( isControllerUp( i ) ) return true;
 			}
 			
 			return false;
@@ -1023,19 +981,13 @@ public class Input
 	 */
 	public boolean isControllerDown( int controller )
 	{
-		if( controller >= getControllerCount() )
-		{
-			return false;
-		}
+		if( controller >= getControllerCount() ) return false;
 		
 		if( controller == ANY_CONTROLLER )
 		{
 			for( int i = 0; i < controllers.size(); i++ )
 			{
-				if( isControllerDown( i ) )
-				{
-					return true;
-				}
+				if( isControllerDown( i ) ) return true;
 			}
 			
 			return false;
@@ -1054,19 +1006,13 @@ public class Input
 	 */
 	public boolean isButtonPressed( int index, int controller )
 	{
-		if( controller >= getControllerCount() )
-		{
-			return false;
-		}
+		if( controller >= getControllerCount() ) return false;
 		
 		if( controller == ANY_CONTROLLER )
 		{
 			for( int i = 0; i < controllers.size(); i++ )
 			{
-				if( isButtonPressed( index, i ) )
-				{
-					return true;
-				}
+				if( isButtonPressed( index, i ) ) return true;
 			}
 			
 			return false;
@@ -1115,10 +1061,7 @@ public class Input
 	 */
 	public void initControllers() throws SlickException
 	{
-		if( controllersInited )
-		{
-			return;
-		}
+		if( controllersInited ) return;
 		
 		controllersInited = true;
 		try
@@ -1130,24 +1073,15 @@ public class Input
 			{
 				Controller controller = Controllers.getController( i );
 				
-				if( ( controller.getButtonCount() >= 3 ) && ( controller.getButtonCount() < MAX_BUTTONS ) )
-				{
-					controllers.add( controller );
-				}
+				if( ( controller.getButtonCount() >= 3 ) && ( controller.getButtonCount() < MAX_BUTTONS ) ) controllers.add( controller );
 			}
 			
 			Log.info( "Found " + controllers.size() + " controllers" );
-			for( int i = 0; i < controllers.size(); i++ )
-			{
-				Log.info( i + " : " + controllers.get( i ).getName() );
-			}
+			for( int i = 0; i < controllers.size(); i++ ) Log.info( i + " : " + controllers.get( i ).getName() );
 		}
 		catch( LWJGLException e )
 		{
-			if( e.getCause() instanceof ClassNotFoundException )
-			{
-				throw new SlickException( "Unable to create controller - no jinput found - add jinput.jar to your classpath" );
-			}
+			if( e.getCause() instanceof ClassNotFoundException ) throw new SlickException( "Unable to create controller - no jinput found - add jinput.jar to your classpath" );
 			throw new SlickException( "Unable to create controllers" );
 		}
 		catch( NoClassDefFoundError e )
@@ -1176,10 +1110,7 @@ public class Input
 	{
 		// BUG with LWJGL - equals comes back with keycode = 0
 		// See: http://slick.javaunlimited.net/viewtopic.php?t=617
-		if( ( c == 61 ) || ( key == 0 ) )
-		{
-			return KEY_EQUALS;
-		}
+		if( ( c == 61 ) || ( key == 0 ) ) return KEY_EQUALS;
 		
 		return key;
 	}
@@ -1246,31 +1177,19 @@ public class Input
 		}
 		
 		// add any listeners requested since last time
-		for( int i = 0; i < keyListenersToAdd.size(); i++ )
-		{
-			addKeyListenerImpl( keyListenersToAdd.get( i ) );
-		}
+		for( int i = 0; i < keyListenersToAdd.size(); i++ ) addKeyListenerImpl( keyListenersToAdd.get( i ) );
 		keyListenersToAdd.clear();
-		for( int i = 0; i < mouseListenersToAdd.size(); i++ )
-		{
-			addMouseListenerImpl( mouseListenersToAdd.get( i ) );
-		}
+		for( int i = 0; i < mouseListenersToAdd.size(); i++ ) addMouseListenerImpl( mouseListenersToAdd.get( i ) );
 		mouseListenersToAdd.clear();
 		
 		if( doubleClickTimeout != 0 )
 		{
-			if( System.currentTimeMillis() > doubleClickTimeout )
-			{
-				doubleClickTimeout = 0;
-			}
+			if( System.currentTimeMillis() > doubleClickTimeout ) doubleClickTimeout = 0;
 		}
 		
 		this.height = height;
 		
-		for( ControlledInputReciever listener : allListeners )
-		{
-			listener.inputStarted();
-		}
+		for( ControlledInputReciever listener : allListeners ) listener.inputStarted();
 		
 		while( Keyboard.next() )
 		{
@@ -1290,10 +1209,7 @@ public class Input
 					if( listener.isAcceptingInput() )
 					{
 						listener.keyPressed( eventKey, Keyboard.getEventCharacter() );
-						if( consumed )
-						{
-							break;
-						}
+						if( consumed ) break;
 					}
 				}
 			}
@@ -1309,10 +1225,7 @@ public class Input
 					if( listener.isAcceptingInput() )
 					{
 						listener.keyReleased( eventKey, keys[eventKey] );
-						if( consumed )
-						{
-							break;
-						}
+						if( consumed ) break;
 					}
 				}
 			}
@@ -1336,10 +1249,7 @@ public class Input
 						if( listener.isAcceptingInput() )
 						{
 							listener.mousePressed( Mouse.getEventButton(), pressedX, pressedY );
-							if( consumed )
-							{
-								break;
-							}
+							if( consumed ) break;
 						}
 					}
 				}
@@ -1362,10 +1272,7 @@ public class Input
 						if( listener.isAcceptingInput() )
 						{
 							listener.mouseReleased( Mouse.getEventButton(), releasedX, releasedY );
-							if( consumed )
-							{
-								break;
-							}
+							if( consumed ) break;
 						}
 					}
 				}
@@ -1382,19 +1289,10 @@ public class Input
 							MouseListener listener = mouseListeners.get( i );
 							if( listener.isAcceptingInput() )
 							{
-								if( anyMouseDown() )
-								{
-									listener.mouseDragged( 0, 0, Mouse.getEventDX(), -Mouse.getEventDY() );
-								}
-								else
-								{
-									listener.mouseMoved( 0, 0, Mouse.getEventDX(), -Mouse.getEventDY() );
-								}
+								if( anyMouseDown() ) listener.mouseDragged( 0, 0, Mouse.getEventDX(), -Mouse.getEventDY() );
+								else listener.mouseMoved( 0, 0, Mouse.getEventDX(), -Mouse.getEventDY() );
 								
-								if( consumed )
-								{
-									break;
-								}
+								if( consumed ) break;
 							}
 						}
 					}
@@ -1411,10 +1309,7 @@ public class Input
 						if( listener.isAcceptingInput() )
 						{
 							listener.mouseWheelMoved( dwheel );
-							if( consumed )
-							{
-								break;
-							}
+							if( consumed ) break;
 						}
 					}
 				}
@@ -1436,18 +1331,10 @@ public class Input
 					MouseListener listener = mouseListeners.get( i );
 					if( listener.isAcceptingInput() )
 					{
-						if( anyMouseDown() )
-						{
-							listener.mouseDragged( lastMouseX, lastMouseY, getMouseX(), getMouseY() );
-						}
-						else
-						{
-							listener.mouseMoved( lastMouseX, lastMouseY, getMouseX(), getMouseY() );
-						}
-						if( consumed )
-						{
-							break;
-						}
+						if( anyMouseDown() ) listener.mouseDragged( lastMouseX, lastMouseY, getMouseX(), getMouseY() );
+						else listener.mouseMoved( lastMouseX, lastMouseY, getMouseX(), getMouseY() );
+						
+						if( consumed ) break;
 					}
 				}
 				lastMouseX = getMouseX();
@@ -1495,10 +1382,7 @@ public class Input
 							if( listener.isAcceptingInput() )
 							{
 								listener.keyPressed( i, keys[i] );
-								if( consumed )
-								{
-									break;
-								}
+								if( consumed ) break;
 							}
 						}
 					}
@@ -1506,15 +1390,9 @@ public class Input
 			}
 		}
 		
-		for( ControlledInputReciever listener : allListeners )
-		{
-			listener.inputEnded();
-		}
+		for( ControlledInputReciever listener : allListeners ) listener.inputEnded();
 		
-		if( Display.isCreated() )
-		{
-			displayActive = Display.isActive();
-		}
+		if( Display.isCreated() ) displayActive = Display.isActive();
 	}
 	
 	/**
@@ -1590,10 +1468,7 @@ public class Input
 						listener.controllerButtonPressed( controllerIndex, ( index - BUTTON1 ) + 1 );
 						break;
 				}
-				if( consumed )
-				{
-					break;
-				}
+				if( consumed ) break;
 			}
 		}
 	}
@@ -1631,10 +1506,7 @@ public class Input
 						listener.controllerButtonReleased( controllerIndex, ( index - BUTTON1 ) + 1 );
 						break;
 				}
-				if( consumed )
-				{
-					break;
-				}
+				if( consumed ) break;
 			}
 		}
 	}
@@ -1660,10 +1532,7 @@ public class Input
 				return isControllerDown( controllerIndex );
 		}
 		
-		if( index >= BUTTON1 )
-		{
-			return isButtonPressed( ( index - BUTTON1 ), controllerIndex );
-		}
+		if( index >= BUTTON1 ) return isButtonPressed( ( index - BUTTON1 ), controllerIndex );
 		
 		throw new RuntimeException( "Unknown control index" );
 	}
@@ -1706,10 +1575,7 @@ public class Input
 			if( listener.isAcceptingInput() )
 			{
 				listener.mouseClicked( button, x, y, clickCount );
-				if( consumed )
-				{
-					break;
-				}
+				if( consumed ) break;
 			}
 		}
 	}

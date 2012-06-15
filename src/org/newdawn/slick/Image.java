@@ -23,7 +23,6 @@ import org.newdawn.slick.util.Log;
  */
 public class Image implements Renderable
 {
-	
 	/**
 	 * Get the maximum size of an image supported by the underlying
 	 * hardware.
@@ -462,10 +461,7 @@ public class Image implements Renderable
 	 */
 	public void setColor( int corner, float r, float g, float b, float a )
 	{
-		if( corners == null )
-		{
-			corners = new Color[] { new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ) };
-		}
+		if( corners == null ) corners = new Color[] { new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ) };
 		
 		corners[corner].r = r;
 		corners[corner].g = g;
@@ -484,10 +480,7 @@ public class Image implements Renderable
 	 */
 	public void setColor( int corner, float r, float g, float b )
 	{
-		if( corners == null )
-		{
-			corners = new Color[] { new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ) };
-		}
+		if( corners == null ) corners = new Color[] { new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ), new Color( 1, 1, 1, 1f ) };
 		
 		corners[corner].r = r;
 		corners[corner].g = g;
@@ -600,10 +593,7 @@ public class Image implements Renderable
 	 */
 	protected final void init()
 	{
-		if( inited )
-		{
-			return;
-		}
+		if( inited ) return;
 		
 		inited = true;
 		if( texture != null )
@@ -841,10 +831,7 @@ public class Image implements Renderable
 	public void drawEmbedded( float x, float y, float x2, float y2, float srcx, float srcy, float srcx2, float srcy2, Color filter )
 	{
 		init();
-		if( filter != null )
-		{
-			filter.bind();
-		}
+		if( filter != null ) filter.bind();
 		
 		float mywidth = x2 - x;
 		float myheight = y2 - y;
@@ -991,18 +978,12 @@ public class Image implements Renderable
 		init();
 		if( alpha != 1 )
 		{
-			if( filter == null )
-			{
-				filter = Color.white;
-			}
+			if( filter == null ) filter = Color.white;
 			
 			filter = new Color( filter );
 			filter.a *= alpha;
 		}
-		if( filter != null )
-		{
-			filter.bind();
-		}
+		if( filter != null ) filter.bind();
 		
 		texture.bind();
 		
@@ -1048,18 +1029,12 @@ public class Image implements Renderable
 		init();
 		if( alpha != 1 )
 		{
-			if( filter == null )
-			{
-				filter = Color.white;
-			}
+			if( filter == null ) filter = Color.white;
 			
 			filter = new Color( filter );
 			filter.a *= alpha;
 		}
-		if( filter != null )
-		{
-			filter.bind();
-		}
+		if( filter != null ) filter.bind();
 		
 		float centerX = this.centerX * ( width / getWidth() );
 		float centerY = this.centerY * ( height / getHeight() );
@@ -1184,10 +1159,7 @@ public class Image implements Renderable
 		}
 		GL.glTranslatef( -x, -y, 0 );
 		
-		if( GL.canSecondaryColor() )
-		{
-			GL.glDisable( SGL.GL_COLOR_SUM_EXT );
-		}
+		if( GL.canSecondaryColor() ) GL.glDisable( SGL.GL_COLOR_SUM_EXT );
 	}
 	
 	/**
@@ -1308,10 +1280,7 @@ public class Image implements Renderable
 		
 		if( alpha != 1 )
 		{
-			if( filter == null )
-			{
-				filter = Color.white;
-			}
+			if( filter == null ) filter = Color.white;
 			
 			filter = new Color( filter );
 			filter.a *= alpha;
@@ -1577,10 +1546,7 @@ public class Image implements Renderable
 	 */
 	public void startUse()
 	{
-		if( inUse != null )
-		{
-			throw new RuntimeException( "Attempt to start use of a sprite sheet before ending use with another - see endUse()" );
-		}
+		if( inUse != null ) throw new RuntimeException( "Attempt to start use of a sprite sheet before ending use with another - see endUse()" );
 		inUse = texture;
 		init();
 		
@@ -1632,10 +1598,7 @@ public class Image implements Renderable
 	 */
 	private int translate( byte b )
 	{
-		if( b < 0 )
-		{
-			return 256 + b;
-		}
+		if( b < 0 ) return 256 + b;
 		
 		return b;
 	}
@@ -1659,41 +1622,20 @@ public class Image implements Renderable
 	 */
 	public Color getColor( int x, int y )
 	{
-		if( pixelData == null )
-		{
-			pixelData = texture.getTextureData();
-		}
+		if( pixelData == null ) pixelData = texture.getTextureData();
 		
 		int xo = (int)( textureOffsetX * texture.getTextureWidth() );
 		int yo = (int)( textureOffsetY * texture.getTextureHeight() );
-		if( textureWidth < 0 )
-		{
-			x = xo - x - 1;
-		}
-		else
-		{
-			x = xo + x;
-		}
+		if( textureWidth < 0 ) x = xo - x - 1;
+		else x = xo + x;
 		
-		if( textureHeight < 0 )
-		{
-			y = yo - y - 1;
-		}
-		else
-		{
-			y = yo + y;
-		}
+		if( textureHeight < 0 ) y = yo - y - 1;
+		else y = yo + y;
 		int offset = x + ( y * texture.getTextureWidth() );
 		offset *= texture.hasAlpha() ? 4 : 3;
 		
-		if( texture.hasAlpha() )
-		{
-			return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ), translate( pixelData[offset + 3] ) );
-		}
-		else
-		{
-			return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ) );
-		}
+		if( texture.hasAlpha() ) return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ), translate( pixelData[offset + 3] ) );
+		else return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ) );
 	}
 	
 	/**
@@ -1714,10 +1656,7 @@ public class Image implements Renderable
 	 */
 	public void destroy() throws SlickException
 	{
-		if( isDestroyed() )
-		{
-			return;
-		}
+		if( isDestroyed() ) return;
 		flushPixelData();
 		destroyed = true;
 		texture.release();

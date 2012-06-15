@@ -234,10 +234,7 @@ public class AngelCodeFont implements Font
 			while( !done )
 			{
 				String line = in.readLine();
-				if( line == null )
-				{
-					done = true;
-				}
+				if( line == null ) done = true;
 				else
 				{
 					if( line.startsWith( "chars c" ) )
@@ -262,14 +259,11 @@ public class AngelCodeFont implements Font
 						StringTokenizer tokens = new StringTokenizer( line, " =" );
 						tokens.nextToken(); // kerning
 						tokens.nextToken(); // first
-						short first = Short.parseShort( tokens.nextToken() ); // first
-																				// value
+						short first = Short.parseShort( tokens.nextToken() ); // first value
 						tokens.nextToken(); // second
-						int second = Integer.parseInt( tokens.nextToken() ); // second
-																				// value
+						int second = Integer.parseInt( tokens.nextToken() ); // second value
 						tokens.nextToken(); // offset
-						int offset = Integer.parseInt( tokens.nextToken() ); // offset
-																				// value
+						int offset = Integer.parseInt( tokens.nextToken() ); // offset value
 						List<Short> values = kerning.get( first );
 						if( values == null )
 						{
@@ -283,10 +277,7 @@ public class AngelCodeFont implements Font
 			}
 			
 			chars = new Glyph[maxChar + 1];
-			for( Glyph def : charDefs )
-			{
-				chars[def.id] = def;
-			}
+			for( Glyph def : charDefs ) chars[def.id] = def;
 			
 			// Turn each list of kerning values into a short[] and set on the
 			// chardef.
@@ -295,8 +286,7 @@ public class AngelCodeFont implements Font
 				short first = entry.getKey();
 				List<Short> valueList = entry.getValue();
 				short[] valueArray = new short[valueList.size()];
-				for( int i = 0; i < valueList.size(); i++ )
-					valueArray[i] = valueList.get( i );
+				for( int i = 0; i < valueList.size(); i++ ) valueArray[i] = valueList.get( i );
 				chars[first].kerning = valueArray;
 			}
 		}
@@ -374,14 +364,8 @@ public class AngelCodeFont implements Font
 		tokens.nextToken(); // char
 		tokens.nextToken(); // id
 		short id = Short.parseShort( tokens.nextToken() ); // id value
-		if( id < 0 )
-		{
-			return null;
-		}
-		if( id > MAX_CHAR )
-		{
-			throw new SlickException( "Invalid character '" + id + "': SpriteFont does not support characters above " + MAX_CHAR );
-		}
+		if( id < 0 ) return null;
+		if( id > MAX_CHAR ) throw new SlickException( "Invalid character '" + id + "': SpriteFont does not support characters above " + MAX_CHAR );
 		
 		tokens.nextToken(); // x
 		short x = Short.parseShort( tokens.nextToken() ); // x value
@@ -398,10 +382,7 @@ public class AngelCodeFont implements Font
 		tokens.nextToken(); // xadvance
 		short xadvance = Short.parseShort( tokens.nextToken() ); // xadvance
 		
-		if( id != ' ' )
-		{
-			lineHeight = Math.max( height + yoffset, lineHeight );
-		}
+		if( id != ' ' ) lineHeight = Math.max( height + yoffset, lineHeight );
 		Image img = fontImage.getSubImage( x, y, width, height );
 		return new Glyph( id, x, y, width, height, xoffset, yoffset, xadvance, img );
 	}
@@ -437,20 +418,14 @@ public class AngelCodeFont implements Font
 		if( displayListCaching && startIndex == 0 && endIndex == text.length() - 1 )
 		{
 			DisplayList displayList = displayLists.get( text );
-			if( displayList != null )
-			{
-				GL.glCallList( displayList.id );
-			}
+			if( displayList != null ) GL.glCallList( displayList.id );
 			else
 			{
 				// Compile a new display list.
 				displayList = new DisplayList();
 				displayList.text = text;
 				int displayListCount = displayLists.size();
-				if( displayListCount < DISPLAY_LIST_CACHE_SIZE )
-				{
-					displayList.id = baseDisplayListID + displayListCount;
-				}
+				if( displayListCount < DISPLAY_LIST_CACHE_SIZE ) displayList.id = baseDisplayListID + displayListCount;
 				else
 				{
 					displayList.id = eldestDisplayListID;
@@ -464,10 +439,7 @@ public class AngelCodeFont implements Font
 				GL.glEndList();
 			}
 		}
-		else
-		{
-			render( text, startIndex, endIndex );
-		}
+		else render( text, startIndex, endIndex );
 		GL.glTranslatef( -x, -y, 0 );
 	}
 	
@@ -495,20 +467,13 @@ public class AngelCodeFont implements Font
 				continue;
 			}
 			Glyph charDef = getGlyph( id );
-			if( charDef == null )
-			{
-				continue;
-			}
+			if( charDef == null ) continue;
 			if( lastCharDef != null ) x += lastCharDef.getKerning( id );
 			else x -= charDef.xoffset;
 			
 			lastCharDef = charDef;
 			
-			if( ( i >= start ) && ( i <= end ) )
-			{
-				charDef.image.drawEmbedded( x + charDef.xoffset, y + charDef.yoffset, charDef.width, charDef.height );
-				
-			}
+			if( ( i >= start ) && ( i <= end ) ) charDef.image.drawEmbedded( x + charDef.xoffset, y + charDef.yoffset, charDef.width, charDef.height );
 			
 			x += charDef.xadvance;
 		}
@@ -538,10 +503,7 @@ public class AngelCodeFont implements Font
 		for( int i = 0; i < stopIndex; i++ )
 		{
 			Glyph charDef = getGlyph( text.charAt( i ) );
-			if( charDef == null )
-			{
-				continue;
-			}
+			if( charDef == null ) continue;
 			minYOffset = Math.min( charDef.yoffset, minYOffset );
 		}
 		
@@ -575,15 +537,9 @@ public class AngelCodeFont implements Font
 				continue;
 			}
 			// ignore space, it doesn't contribute to height
-			if( id == ' ' )
-			{
-				continue;
-			}
+			if( id == ' ' ) continue;
 			Glyph charDef = getGlyph( id );
-			if( charDef == null )
-			{
-				continue;
-			}
+			if( charDef == null ) continue;
 			
 			maxHeight = Math.max( charDef.height + charDef.yoffset, maxHeight );
 		}
@@ -620,26 +576,15 @@ public class AngelCodeFont implements Font
 				continue;
 			}
 			Glyph charDef = getGlyph( id );
-			if( charDef == null )
-			{
-				continue;
-			}
+			if( charDef == null ) continue;
 			
 			if( lastCharDef != null ) width += lastCharDef.getKerning( id );
-			// else //first glyph
-			// width -= charDef.xoffset;
-			//
+			// else width -= charDef.xoffset; //first glyph
 			lastCharDef = charDef;
 			
 			// space characters have zero width, so use their xadvance instead
-			if( i < n - 1 || charDef.width == 0 )
-			{
-				width += charDef.xadvance;
-			}
-			else
-			{
-				width += charDef.width + charDef.xoffset;
-			}
+			if( i < n - 1 || charDef.width == 0 ) width += charDef.xadvance;
+			else width += charDef.width + charDef.xoffset;
 			maxWidth = Math.max( maxWidth, width );
 		}
 		if( displayList != null ) displayList.width = new Short( (short)maxWidth );

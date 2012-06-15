@@ -97,10 +97,7 @@ public class CanvasGameContainer extends Canvas
 	 */
 	private void scheduleUpdate()
 	{
-		if( destroyed || !isVisible() )
-		{
-			return;
-		}
+		if( destroyed || !isVisible() ) return;
 		
 		if( !container.running() )
 		{
@@ -170,10 +167,7 @@ public class CanvasGameContainer extends Canvas
 			width = CanvasGameContainer.this.getWidth();
 			height = CanvasGameContainer.this.getHeight();
 			
-			if( shared )
-			{
-				enableSharedContext();
-			}
+			if( shared ) enableSharedContext();
 		}
 		
 		/**
@@ -230,7 +224,6 @@ public class CanvasGameContainer extends Canvas
 		{
 			if( ( width != CanvasGameContainer.this.getWidth() ) || ( height != CanvasGameContainer.this.getHeight() ) )
 			{
-				
 				try
 				{ // is this really necessary? it causes a flicker
 					setDisplayMode( CanvasGameContainer.this.getWidth(), CanvasGameContainer.this.getHeight(), false );

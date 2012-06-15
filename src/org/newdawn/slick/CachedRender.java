@@ -52,10 +52,7 @@ public class CachedRender
 			GL.glEndList();
 			SlickCallable.leaveSafeBlock();
 		}
-		else
-		{
-			throw new RuntimeException( "Attempt to build the display list more than once in CachedRender" );
-		}
+		else throw new RuntimeException( "Attempt to build the display list more than once in CachedRender" );
 	}
 	
 	/**
@@ -64,10 +61,7 @@ public class CachedRender
 	 */
 	public void render()
 	{
-		if( list == -1 )
-		{
-			throw new RuntimeException( "Attempt to render cached operations that have been destroyed" );
-		}
+		if( list == -1 ) throw new RuntimeException( "Attempt to render cached operations that have been destroyed" );
 		
 		SlickCallable.enterSafeBlock();
 		GL.glCallList( list );

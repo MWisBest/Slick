@@ -7,7 +7,6 @@ package org.newdawn.slick;
  */
 public interface ControllerListener extends ControlledInputReciever
 {
-	
 	/**
 	 * Notification that the left control has been pressed on
 	 * the controller.
@@ -99,5 +98,4 @@ public interface ControllerListener extends ControlledInputReciever
 	 * @param button The index of the button released (starting at 1)
 	 */
 	public abstract void controllerButtonReleased( int controller, int button );
-	
 }

@@ -127,10 +127,7 @@ public class ImageBuffer implements ImageData
 	 */
 	public void setRGBA( int x, int y, int r, int g, int b, int a )
 	{
-		if( ( x < 0 ) || ( x >= width ) || ( y < 0 ) || ( y >= height ) )
-		{
-			throw new RuntimeException( "Specified location: " + x + "," + y + " outside of image" );
-		}
+		if( ( x < 0 ) || ( x >= width ) || ( y < 0 ) || ( y >= height ) ) throw new RuntimeException( "Specified location: " + x + "," + y + " outside of image" );
 		
 		int ofs = ( ( x + ( y * texWidth ) ) * 4 );
 		
@@ -180,11 +177,7 @@ public class ImageBuffer implements ImageData
 	private int get2Fold( int fold )
 	{
 		int ret = 2;
-		while( ret < fold )
-		{
-			ret *= 2;
-		}
+		while( ret < fold ) ret *= 2;
 		return ret;
 	}
-	
 }

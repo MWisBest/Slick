@@ -242,7 +242,6 @@ public abstract class BasicGame implements Game, InputListener
 	@Override
 	public void inputEnded()
 	{
-		
 	}
 	
 	/**
@@ -251,6 +250,5 @@ public abstract class BasicGame implements Game, InputListener
 	@Override
 	public void inputStarted()
 	{
-		
 	}
 }

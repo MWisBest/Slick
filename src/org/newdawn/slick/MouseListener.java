@@ -7,7 +7,6 @@ package org.newdawn.slick;
  */
 public interface MouseListener extends ControlledInputReciever
 {
-	
 	/**
 	 * Notification that the mouse wheel position was updated
 	 * 
@@ -66,5 +65,4 @@ public interface MouseListener extends ControlledInputReciever
 	 * @param newy The new y position of the mouse
 	 */
 	public abstract void mouseDragged( int oldx, int oldy, int newx, int newy );
-	
 }

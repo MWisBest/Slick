@@ -117,14 +117,8 @@ public abstract class GameContainer implements GUIContext
 	 */
 	public void setDefaultFont( Font font )
 	{
-		if( font != null )
-		{
-			this.defaultFont = font;
-		}
-		else
-		{
-			Log.warn( "Please provide a non null font" );
-		}
+		if( font != null ) this.defaultFont = font;
+		else Log.warn( "Please provide a non null font" );
 	}
 	
 	/**
@@ -596,11 +590,7 @@ public abstract class GameContainer implements GUIContext
 			cursor = CursorLoader.get().getAnimatedCursor( ref, x, y, width, height, cursorDelays );
 			setMouseCursor( cursor, x, y );
 		}
-		catch( IOException e )
-		{
-			throw new SlickException( "Failed to set mouse cursor", e );
-		}
-		catch( LWJGLException e )
+		catch( IOException|LWJGLException e )
 		{
 			throw new SlickException( "Failed to set mouse cursor", e );
 		}
@@ -709,12 +699,9 @@ public abstract class GameContainer implements GUIContext
 	 */
 	protected void updateAndRender( int delta ) throws SlickException
 	{
-		if( smoothDeltas )
+		if( smoothDeltas && getFPS() != 0 )
 		{
-			if( getFPS() != 0 )
-			{
-				delta = 1000 / getFPS();
-			}
+			delta = 1000 / getFPS();
 		}
 		
 		input.poll( width, height );
@@ -731,10 +718,7 @@ public abstract class GameContainer implements GUIContext
 					if( maximumLogicInterval != 0 )
 					{
 						long cycles = storedDelta / maximumLogicInterval;
-						for( int i = 0; i < cycles; i++ )
-						{
-							game.update( this, (int)maximumLogicInterval );
-						}
+						for( int i = 0; i < cycles; i++ ) game.update( this, (int)maximumLogicInterval );
 						
 						int remainder = (int)( storedDelta % maximumLogicInterval );
 						if( remainder > minimumLogicInterval )
@@ -742,17 +726,13 @@ public abstract class GameContainer implements GUIContext
 							game.update( this, (int)( remainder % maximumLogicInterval ) );
 							storedDelta = 0;
 						}
-						else
-						{
-							storedDelta = remainder;
-						}
+						else storedDelta = remainder;
 					}
 					else
 					{
 						game.update( this, (int)storedDelta );
 						storedDelta = 0;
 					}
-					
 				}
 				catch( Throwable e )
 				{
@@ -761,17 +741,11 @@ public abstract class GameContainer implements GUIContext
 				}
 			}
 		}
-		else
-		{
-			game.update( this, 0 );
-		}
+		else game.update( this, 0 );
 		
 		if( hasFocus() || getAlwaysRender() )
 		{
-			if( clearEachFrame )
-			{
-				GL.glClear( SGL.GL_COLOR_BUFFER_BIT | SGL.GL_DEPTH_BUFFER_BIT );
-			}
+			if( clearEachFrame ) GL.glClear( SGL.GL_COLOR_BUFFER_BIT | SGL.GL_DEPTH_BUFFER_BIT );
 			
 			GL.glLoadIdentity();
 			// Graphics.setCurrent ??
@@ -790,18 +764,12 @@ public abstract class GameContainer implements GUIContext
 			}
 			graphics.resetTransform();
 			
-			if( showFPS )
-			{
-				defaultFont.drawString( 10, 10, "FPS: " + recordedFPS );
-			}
+			if( showFPS ) defaultFont.drawString( 10, 10, "FPS: " + recordedFPS );
 			
 			GL.flush();
 		}
 		
-		if( targetFPS != -1 )
-		{
-			Display.sync( targetFPS );
-		}
+		if( targetFPS != -1 ) Display.sync( targetFPS );
 	}
 	
 	/**
@@ -830,15 +798,9 @@ public abstract class GameContainer implements GUIContext
 	 */
 	protected void onResize()
 	{
-		if( getInput() != null )
-		{
-			getInput().init( getHeight() );
-		}
+		if( getInput() != null ) getInput().init( getHeight() );
 		
-		if( getGraphics() != null )
-		{
-			getGraphics().setDimensions( getWidth(), getHeight() );
-		}
+		if( getGraphics() != null ) getGraphics().setDimensions( getWidth(), getHeight() );
 		
 		enterOrtho();
 	}
@@ -851,10 +813,7 @@ public abstract class GameContainer implements GUIContext
 		Log.info( "Starting display " + width + "x" + height );
 		GL.initDisplay( width, height );
 		
-		if( input == null )
-		{
-			input = new Input( height );
-		}
+		if( input == null ) input = new Input( height );
 		input.init( height );
 		// no need to remove listeners?
 		// input.removeAllListeners();
@@ -864,10 +823,7 @@ public abstract class GameContainer implements GUIContext
 			input.addListener( (InputListener)game );
 		}
 		
-		if( graphics != null )
-		{
-			graphics.setDimensions( getWidth(), getHeight() );
-		}
+		if( graphics != null ) graphics.setDimensions( getWidth(), getHeight() );
 		lastGame = game;
 	}
 	

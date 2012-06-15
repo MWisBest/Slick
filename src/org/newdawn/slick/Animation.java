@@ -94,10 +94,7 @@ public class Animation implements Renderable
 	 */
 	public Animation( Image[] frames, int duration, boolean autoUpdate )
 	{
-		for( int i = 0; i < frames.length; i++ )
-		{
-			addFrame( frames[i], duration );
-		}
+		for( int i = 0; i < frames.length; i++ ) addFrame( frames[i], duration );
 		currentFrame = 0;
 		this.autoUpdate = autoUpdate;
 	}
@@ -113,15 +110,9 @@ public class Animation implements Renderable
 	public Animation( Image[] frames, int[] durations, boolean autoUpdate )
 	{
 		this.autoUpdate = autoUpdate;
-		if( frames.length != durations.length )
-		{
-			throw new RuntimeException( "There must be one duration per frame" );
-		}
+		if( frames.length != durations.length ) throw new RuntimeException( "There must be one duration per frame" );
 		
-		for( int i = 0; i < frames.length; i++ )
-		{
-			addFrame( frames[i], durations[i] );
-		}
+		for( int i = 0; i < frames.length; i++ ) addFrame( frames[i], durations[i] );
 		currentFrame = 0;
 	}
 	
@@ -160,20 +151,14 @@ public class Animation implements Renderable
 		{
 			for( int x = x1; x <= x2; x++ )
 			{
-				for( int y = y1; y <= y2; y++ )
-				{
-					addFrame( frames.getSprite( x, y ), duration );
-				}
+				for( int y = y1; y <= y2; y++ ) addFrame( frames.getSprite( x, y ), duration );
 			}
 		}
 		else
 		{
 			for( int y = y1; y <= y2; y++ )
 			{
-				for( int x = x1; x <= x2; x++ )
-				{
-					addFrame( frames.getSprite( x, y ), duration );
-				}
+				for( int x = x1; x <= x2; x++ ) addFrame( frames.getSprite( x, y ), duration );
 			}
 		}
 	}
@@ -214,10 +199,7 @@ public class Animation implements Renderable
 			throw new RuntimeException( "Invalid duration: " + duration );
 		}
 		
-		if( frames.isEmpty() )
-		{
-			nextChange = (int)( duration / speed );
-		}
+		if( frames.isEmpty() ) nextChange = (int)( duration / speed );
 		
 		frames.add( new Frame( duration, x, y ) );
 		currentFrame = 0;
@@ -287,10 +269,7 @@ public class Animation implements Renderable
 	 */
 	public void stop()
 	{
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( frames.size() == 0 ) return;
 		timeLeft = nextChange;
 		stopped = true;
 	}
@@ -300,14 +279,7 @@ public class Animation implements Renderable
 	 */
 	public void start()
 	{
-		if( !stopped )
-		{
-			return;
-		}
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( ( !stopped ) || ( frames.size() == 0 ) ) return;
 		stopped = false;
 		nextChange = timeLeft;
 	}
@@ -317,10 +289,7 @@ public class Animation implements Renderable
 	 */
 	public void restart()
 	{
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( frames.size() == 0 ) return;
 		stopped = false;
 		currentFrame = 0;
 		nextChange = (int)( frames.get( 0 ).duration / speed );
@@ -342,10 +311,7 @@ public class Animation implements Renderable
 			throw new RuntimeException( "Invalid duration: " + duration );
 		}
 		
-		if( frames.isEmpty() )
-		{
-			nextChange = (int)( duration / speed );
-		}
+		if( frames.isEmpty() ) nextChange = (int)( duration / speed );
 		
 		frames.add( new Frame( frame, duration ) );
 		currentFrame = 0;
@@ -407,10 +373,7 @@ public class Animation implements Renderable
 	 */
 	public void draw( float x, float y, float width, float height, Color col )
 	{
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( frames.size() == 0 ) return;
 		
 		if( autoUpdate )
 		{
@@ -437,10 +400,7 @@ public class Animation implements Renderable
 	 */
 	public void renderInUse( int x, int y )
 	{
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( frames.size() == 0 ) return;
 		
 		if( autoUpdate )
 		{
@@ -503,10 +463,7 @@ public class Animation implements Renderable
 	 */
 	public void drawFlash( float x, float y, float width, float height, Color col )
 	{
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( frames.size() == 0 ) return;
 		
 		if( autoUpdate )
 		{
@@ -619,25 +576,13 @@ public class Animation implements Renderable
 	 */
 	private void nextFrame( long delta )
 	{
-		if( stopped )
-		{
-			return;
-		}
-		if( frames.size() == 0 )
-		{
-			return;
-		}
+		if( ( stopped ) || ( frames.size() == 0 ) ) return;
 		
 		nextChange -= delta;
 		
 		while( nextChange < 0 && ( !stopped ) )
 		{
-			if( currentFrame == stopAt )
-			{
-				stopped = true;
-				break;
-			}
-			if( ( currentFrame == frames.size() - 1 ) && ( !loop ) && ( !pingPong ) )
+			if( currentFrame == stopAt || ( currentFrame == frames.size() - 1 ) && ( !loop ) && ( !pingPong ) )
 			{
 				stopped = true;
 				break;
@@ -728,10 +673,7 @@ public class Animation implements Renderable
 	public int[] getDurations()
 	{
 		int[] durations = new int[frames.size()];
-		for( int i = 0; i < frames.size(); i++ )
-		{
-			durations[i] = getDuration( i );
-		}
+		for( int i = 0; i < frames.size(); i++ ) durations[i] = getDuration( i );
 		
 		return durations;
 	}

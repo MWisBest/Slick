@@ -55,10 +55,7 @@ public class AppletGameContainer extends Applet
 	@Override
 	public void destroy()
 	{
-		if( displayParent != null )
-		{
-			remove( displayParent );
-		}
+		if( displayParent != null ) remove( displayParent );
 		super.destroy();
 		
 		Log.info( "Clear up" );
@@ -87,7 +84,6 @@ public class AppletGameContainer extends Applet
 	@Override
 	public void start()
 	{
-		
 	}
 	
 	/**
@@ -95,10 +91,7 @@ public class AppletGameContainer extends Applet
 	 */
 	public void startLWJGL()
 	{
-		if( gameThread != null )
-		{
-			return;
-		}
+		if( gameThread != null ) return;
 		
 		gameThread = new Thread()
 			{
@@ -112,12 +105,9 @@ public class AppletGameContainer extends Applet
 					catch( Exception e )
 					{
 						e.printStackTrace();
-						if( Display.isCreated() )
-						{
-							Display.destroy();
-						}
+						if( Display.isCreated() ) Display.destroy();
 						if( AL.isCreated() ) AL.destroy();
-						displayParent.setVisible( false );// removeAll();
+						displayParent.setVisible( false ); // removeAll();
 						add( new ConsolePanel( e ) );
 						validate();
 					}
@@ -168,7 +158,6 @@ public class AppletGameContainer extends Applet
 						destroyLWJGL();
 						super.removeNotify();
 					}
-					
 				};
 			
 			displayParent.setSize( getWidth(), getHeight() );
@@ -452,10 +441,7 @@ public class AppletGameContainer extends Applet
 		private int get2Fold( int fold )
 		{
 			int ret = 2;
-			while( ret < fold )
-			{
-				ret *= 2;
-			}
+			while( ret < fold ) ret *= 2;
 			return ret;
 		}
 		
@@ -546,10 +532,7 @@ public class AppletGameContainer extends Applet
 		@Override
 		public void setFullscreen( boolean fullscreen ) throws SlickException
 		{
-			if( fullscreen == isFullscreen() )
-			{
-				return;
-			}
+			if( fullscreen == isFullscreen() ) return;
 			
 			try
 			{

@@ -75,7 +75,6 @@ public class BigImage extends Image
 	 */
 	public BigImage( String ref, int filter ) throws SlickException
 	{
-		
 		build( ref, filter, getMaxSingleImageSize() );
 	}
 	
@@ -364,10 +363,7 @@ public class BigImage extends Image
 				image.draw( xp, yp, image.getWidth(), image.getHeight(), filter );
 				
 				yp += image.getHeight();
-				if( ty == ycount - 1 )
-				{
-					xp += image.getWidth();
-				}
+				if( ty == ycount - 1 ) xp += image.getWidth();
 			}
 			
 		}
@@ -450,22 +446,15 @@ public class BigImage extends Image
 				
 				if( ( lastBind == null ) || ( image.getTexture() != lastBind.getTexture() ) )
 				{
-					if( lastBind != null )
-					{
-						lastBind.endUse();
-					}
+					if( lastBind != null ) lastBind.endUse();
 					lastBind = image;
 					lastBind.startUse();
 				}
 				image.drawEmbedded( xp + x, yp + y, image.getWidth(), image.getHeight() );
 				
 				yp += image.getHeight();
-				if( ty == ycount - 1 )
-				{
-					xp += image.getWidth();
-				}
+				if( ty == ycount - 1 ) xp += image.getWidth();
 			}
-			
 		}
 	}
 	
@@ -494,12 +483,8 @@ public class BigImage extends Image
 				image.drawFlash( xp, yp, image.getWidth(), image.getHeight() );
 				
 				yp += image.getHeight();
-				if( ty == ycount - 1 )
-				{
-					xp += image.getWidth();
-				}
+				if( ty == ycount - 1 ) xp += image.getWidth();
 			}
-			
 		}
 		
 		GL.glScalef( 1.0f / sx, 1.0f / sy, 1 );
@@ -523,10 +508,7 @@ public class BigImage extends Image
 	@Override
 	public void endUse()
 	{
-		if( lastBind != null )
-		{
-			lastBind.endUse();
-		}
+		if( lastBind != null ) lastBind.endUse();
 		lastBind = null;
 	}
 	
@@ -585,10 +567,7 @@ public class BigImage extends Image
 			
 			for( int x = 0; x < xcount; x++ )
 			{
-				for( int y = 0; y < ycount; y++ )
-				{
-					image.images[x][y] = images[xcount - 1 - x][y].getFlippedCopy( true, false );
-				}
+				for( int y = 0; y < ycount; y++ ) image.images[x][y] = images[xcount - 1 - x][y].getFlippedCopy( true, false );
 			}
 		}
 		
@@ -599,10 +578,7 @@ public class BigImage extends Image
 			
 			for( int x = 0; x < xcount; x++ )
 			{
-				for( int y = 0; y < ycount; y++ )
-				{
-					image.images[x][y] = images[x][ycount - 1 - y].getFlippedCopy( false, true );
-				}
+				for( int y = 0; y < ycount; y++ ) image.images[x][y] = images[x][ycount - 1 - y].getFlippedCopy( false, true );
 			}
 		}
 		
@@ -706,10 +682,7 @@ public class BigImage extends Image
 				}
 				
 				yp += current.getHeight();
-				if( yt == ycount - 1 )
-				{
-					xp += current.getWidth();
-				}
+				if( yt == ycount - 1 ) xp += current.getWidth();
 			}
 			if( foundStart )
 			{

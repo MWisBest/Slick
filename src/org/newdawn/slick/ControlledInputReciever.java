@@ -12,7 +12,6 @@ package org.newdawn.slick;
  */
 public interface ControlledInputReciever
 {
-	
 	/**
 	 * Set the input that events are being sent from
 	 * 
@@ -36,5 +35,4 @@ public interface ControlledInputReciever
 	 * Notification that input is about to be processed
 	 */
 	public abstract void inputStarted();
-	
 }
