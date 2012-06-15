@@ -19,7 +19,6 @@ import org.newdawn.slick.util.Log;
  */
 public class FileMuffin implements Muffin
 {
-	
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap, java.lang.String)
 	 */
@@ -29,10 +28,7 @@ public class FileMuffin implements Muffin
 		String userHome = System.getProperty( "user.home" );
 		File file = new File( userHome );
 		file = new File( file, ".java" );
-		if( !file.exists() )
-		{
-			file.mkdir();
-		}
+		if( !file.exists() ) file.mkdir();
 		
 		file = new File( file, fileName );
 		FileOutputStream fos = new FileOutputStream( file );

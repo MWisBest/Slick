@@ -23,7 +23,6 @@ import org.newdawn.slick.util.Log;
  */
 public class WebstartMuffin implements Muffin
 {
-	
 	/**
 	 * @see org.newdawn.slick.muffin.Muffin#saveFile(java.util.HashMap, java.lang.String)
 	 */
