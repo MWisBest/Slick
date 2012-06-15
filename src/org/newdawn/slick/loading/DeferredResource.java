@@ -10,7 +10,6 @@ import java.io.IOException;
  */
 public interface DeferredResource
 {
-	
 	/**
 	 * Load the actual resource
 	 * 

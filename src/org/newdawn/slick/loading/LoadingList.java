@@ -113,10 +113,7 @@ public class LoadingList
 	 */
 	public DeferredResource getNext()
 	{
-		if( deferred.size() == 0 )
-		{
-			return null;
-		}
+		if( deferred.size() == 0 ) return null;
 		
 		return deferred.remove( 0 );
 	}
