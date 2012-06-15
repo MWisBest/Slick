@@ -22,7 +22,6 @@ import org.newdawn.slick.util.Log;
  */
 public class PBufferGraphics extends Graphics
 {
-	
 	/** The pbuffer we're going to render to */
 	private Pbuffer pbuffer;
 	/** The image we're we're sort of rendering to */
@@ -40,14 +39,8 @@ public class PBufferGraphics extends Graphics
 		this.image = image;
 		
 		Log.debug( "Creating pbuffer(rtt) " + image.getWidth() + "x" + image.getHeight() );
-		if( ( Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED ) == 0 )
-		{
-			throw new SlickException( "Your OpenGL card does not support PBuffers and hence can't handle the dynamic images required for this application." );
-		}
-		if( ( Pbuffer.getCapabilities() & Pbuffer.RENDER_TEXTURE_SUPPORTED ) == 0 )
-		{
-			throw new SlickException( "Your OpenGL card does not support Render-To-Texture and hence can't handle the dynamic images required for this application." );
-		}
+		if( ( Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED ) == 0 ) throw new SlickException( "Your OpenGL card does not support PBuffers and hence can't handle the dynamic images required for this application." );
+		if( ( Pbuffer.getCapabilities() & Pbuffer.RENDER_TEXTURE_SUPPORTED ) == 0 ) throw new SlickException( "Your OpenGL card does not support Render-To-Texture and hence can't handle the dynamic images required for this application." );
 		
 		init();
 	}

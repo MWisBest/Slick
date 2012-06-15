@@ -42,10 +42,7 @@ public class FBOGraphics extends Graphics
 		Log.debug( "Creating FBO " + image.getWidth() + "x" + image.getHeight() );
 		
 		boolean FBOEnabled = GLContext.getCapabilities().GL_EXT_framebuffer_object;
-		if( !FBOEnabled )
-		{
-			throw new SlickException( "Your OpenGL card does not support FBO and hence can't handle the dynamic images required for this application." );
-		}
+		if( !FBOEnabled ) throw new SlickException( "Your OpenGL card does not support FBO and hence can't handle the dynamic images required for this application." );
 		
 		init();
 	}
@@ -90,8 +87,7 @@ public class FBOGraphics extends Graphics
 		EXTFramebufferObject.glGenFramebuffersEXT( buffer );
 		FBO = buffer.get();
 		
-		// for some reason FBOs won't work on textures unless you've absolutely just
-		// created them.
+		// for some reason FBOs won't work on textures unless you've absolutely just created them.
 		try
 		{
 			Texture tex = InternalTextureLoader.get().createTexture( image.getWidth(), image.getHeight(), image.getFilter() );
@@ -175,10 +171,7 @@ public class FBOGraphics extends Graphics
 	@Override
 	protected void enable()
 	{
-		if( !valid )
-		{
-			throw new RuntimeException( "Attempt to use a destroy()ed offscreen graphics context." );
-		}
+		if( !valid ) throw new RuntimeException( "Attempt to use a destroy()ed offscreen graphics context." );
 		SlickCallable.enterSafeBlock();
 		
 		GL11.glPushAttrib( GL11.GL_ALL_ATTRIB_BITS );
@@ -259,5 +252,4 @@ public class FBOGraphics extends Graphics
 		
 		image.flushPixelData();
 	}
-	
 }

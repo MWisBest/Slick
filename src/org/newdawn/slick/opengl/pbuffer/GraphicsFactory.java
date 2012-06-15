@@ -35,17 +35,11 @@ public class GraphicsFactory
 	 */
 	private static void init() throws SlickException
 	{
-		if( fbo )
-		{
-			fbo = GLContext.getCapabilities().GL_EXT_framebuffer_object;
-		}
+		if( fbo ) fbo = GLContext.getCapabilities().GL_EXT_framebuffer_object;
 		pbuffer = ( Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED ) != 0;
 		pbufferRT = ( Pbuffer.getCapabilities() & Pbuffer.RENDER_TEXTURE_SUPPORTED ) != 0;
 		
-		if( !fbo && !pbuffer && !pbufferRT )
-		{
-			throw new SlickException( "Your OpenGL card does not support offscreen buffers and hence can't handle the dynamic images required for this application." );
-		}
+		if( !fbo && !pbuffer && !pbufferRT ) throw new SlickException( "Your OpenGL card does not support offscreen buffers and hence can't handle the dynamic images required for this application." );
 		
 		Log.info( "Offscreen Buffers FBO=" + fbo + " PBUFFER=" + pbuffer + " PBUFFERRT=" + pbufferRT );
 	}
@@ -111,10 +105,7 @@ public class GraphicsFactory
 	{
 		Graphics g = graphics.remove( image.getTexture() );
 		
-		if( g != null )
-		{
-			g.destroy();
-		}
+		if( g != null ) g.destroy();
 	}
 	
 	/**
@@ -143,14 +134,8 @@ public class GraphicsFactory
 		
 		if( pbuffer )
 		{
-			if( pbufferRT )
-			{
-				return new PBufferGraphics( image );
-			}
-			else
-			{
-				return new PBufferUniqueGraphics( image );
-			}
+			if( pbufferRT ) return new PBufferGraphics( image );
+			else return new PBufferUniqueGraphics( image );
 		}
 		
 		throw new SlickException( "Failed to create offscreen buffer even though the card reports it's possible" );

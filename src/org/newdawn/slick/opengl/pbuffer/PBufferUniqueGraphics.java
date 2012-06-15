@@ -39,10 +39,7 @@ public class PBufferUniqueGraphics extends Graphics
 		this.image = image;
 		
 		Log.debug( "Creating pbuffer(unique) " + image.getWidth() + "x" + image.getHeight() );
-		if( ( Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED ) == 0 )
-		{
-			throw new SlickException( "Your OpenGL card does not support PBuffers and hence can't handle the dynamic images required for this application." );
-		}
+		if( ( Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED ) == 0 ) throw new SlickException( "Your OpenGL card does not support PBuffers and hence can't handle the dynamic images required for this application." );
 		
 		init();
 	}
