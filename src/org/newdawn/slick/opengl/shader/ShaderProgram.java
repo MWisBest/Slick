@@ -29,7 +29,6 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class ShaderProgram
 {
-	
 	/** The vertex shader type (GL20.GL_VERTEX_SHADER). */
 	public static final int VERTEX_SHADER = GL20.GL_VERTEX_SHADER;
 	/** The fragment shader type (GL20.GL_FRAGMENT_SHADER). */
@@ -158,10 +157,7 @@ public class ShaderProgram
 			final char[] buffer = new char[1024];
 			
 			int cnt;
-			while( ( cnt = br.read( buffer, 0, buffer.length ) ) > -1 )
-			{
-				sBuffer.append( buffer, 0, cnt );
-			}
+			while( ( cnt = br.read( buffer, 0, buffer.length ) ) > -1 ) sBuffer.append( buffer, 0, cnt );
 			br.close();
 			return sBuffer.toString();
 		}
@@ -237,10 +233,17 @@ public class ShaderProgram
 	
 	private String shaderTypeString( int type )
 	{
-		if( type == FRAGMENT_SHADER ) return "FRAGMENT_SHADER";
-		else if( type == VERTEX_SHADER ) return "VERTEX_SHADER";
-		else if( type == GL32.GL_GEOMETRY_SHADER ) return "GEOMETRY_SHADER";
-		else return "shader";
+		switch( type )
+		{
+			case FRAGMENT_SHADER:
+				return "FRAGMENT_SHADER";
+			case VERTEX_SHADER:
+				return "VERTEX_SHADER";
+			case GL32.GL_GEOMETRY_SHADER:
+				return "GEOMETRY_SHADER";
+			default:
+				return "shader";
+		}
 	}
 	
 	/**
