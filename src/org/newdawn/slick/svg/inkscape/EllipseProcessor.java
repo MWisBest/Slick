@@ -17,7 +17,6 @@ import org.w3c.dom.Element;
  */
 public class EllipseProcessor implements ElementProcessor
 {
-	
 	/**
 	 * @see org.newdawn.slick.svg.inkscape.ElementProcessor#process(org.newdawn.slick.svg.Loader, org.w3c.dom.Element, org.newdawn.slick.svg.Diagram, org.newdawn.slick.geom.Transform)
 	 */
@@ -50,19 +49,14 @@ public class EllipseProcessor implements ElementProcessor
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "ellipse" ) )
+		switch( element.getNodeName() )
 		{
-			return true;
-		}
-		if( element.getNodeName().equals( "path" ) )
-		{
-			if( "arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) )
-			{
+			case "ellipse":
 				return true;
-			}
+			case "path":
+				if( "arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) ) return true;
+			default:
+				return false;
 		}
-		
-		return false;
 	}
-	
 }

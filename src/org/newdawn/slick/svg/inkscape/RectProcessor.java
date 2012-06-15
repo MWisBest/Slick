@@ -17,7 +17,6 @@ import org.w3c.dom.Element;
  */
 public class RectProcessor implements ElementProcessor
 {
-	
 	/**
 	 * @see org.newdawn.slick.svg.inkscape.ElementProcessor#process(org.newdawn.slick.svg.Loader, org.w3c.dom.Element, org.newdawn.slick.svg.Diagram, org.newdawn.slick.geom.Transform)
 	 */
@@ -50,10 +49,7 @@ public class RectProcessor implements ElementProcessor
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "rect" ) )
-		{
-			return true;
-		}
+		if( element.getNodeName().equals( "rect" ) ) return true;
 		
 		return false;
 	}

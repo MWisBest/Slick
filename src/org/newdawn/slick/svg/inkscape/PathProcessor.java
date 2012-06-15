@@ -19,7 +19,6 @@ import org.w3c.dom.Element;
  */
 public class PathProcessor implements ElementProcessor
 {
-	
 	/**
 	 * Process the points in a polygon definition
 	 * 
@@ -89,10 +88,7 @@ public class PathProcessor implements ElementProcessor
 			}
 		}
 		
-		if( !reasonToBePath )
-		{
-			return null;
-		}
+		if( !reasonToBePath ) return null;
 		
 		return path;
 	}
@@ -107,10 +103,7 @@ public class PathProcessor implements ElementProcessor
 		transform = new Transform( t, transform );
 		
 		String points = element.getAttribute( "points" );
-		if( element.getNodeName().equals( "path" ) )
-		{
-			points = element.getAttribute( "d" );
-		}
+		if( element.getNodeName().equals( "path" ) ) points = element.getAttribute( "d" );
 		
 		StringTokenizer tokens = new StringTokenizer( points, ", " );
 		Path path = processPoly( element, tokens );
@@ -129,15 +122,8 @@ public class PathProcessor implements ElementProcessor
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "path" ) )
-		{
-			if( !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) )
-			{
-				return true;
-			}
-		}
+		if( element.getNodeName().equals( "path" ) && !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) ) return true;
 		
 		return false;
 	}
-	
 }

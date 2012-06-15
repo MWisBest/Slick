@@ -55,10 +55,7 @@ public class Util
 	static String getMetaData( Element element )
 	{
 		String label = element.getAttributeNS( INKSCAPE, "label" );
-		if( ( label != null ) && ( !label.equals( "" ) ) )
-		{
-			return label;
-		}
+		if( ( label != null ) && ( !label.equals( "" ) ) ) return label;
 		
 		return element.getAttribute( "id" );
 	}
@@ -74,10 +71,7 @@ public class Util
 	{
 		String value = element.getAttribute( styleName );
 		
-		if( ( value != null ) && ( value.length() > 0 ) )
-		{
-			return value;
-		}
+		if( ( value != null ) && ( value.length() > 0 ) ) return value;
 		
 		String style = element.getAttribute( "style" );
 		return extractStyle( style, styleName );
@@ -92,10 +86,7 @@ public class Util
 	 */
 	static String extractStyle( String style, String attribute )
 	{
-		if( style == null )
-		{
-			return "";
-		}
+		if( style == null ) return "";
 		
 		StringTokenizer tokens = new StringTokenizer( style, ";" );
 		
@@ -103,10 +94,7 @@ public class Util
 		{
 			String token = tokens.nextToken();
 			String key = token.substring( 0, token.indexOf( ':' ) );
-			if( key.equals( attribute ) )
-			{
-				return token.substring( token.indexOf( ':' ) + 1 );
-			}
+			if( key.equals( attribute ) ) return token.substring( token.indexOf( ':' ) + 1 );
 		}
 		
 		return "";
@@ -133,15 +121,9 @@ public class Util
 	static Transform getTransform( Element element, String attribute )
 	{
 		String str = element.getAttribute( attribute );
-		if( str == null )
-		{
-			return new Transform();
-		}
+		if( str == null ) return new Transform();
 		
-		if( str.equals( "" ) )
-		{
-			return new Transform();
-		}
+		if( str.equals( "" ) ) return new Transform();
 		else if( str.startsWith( "translate" ) )
 		{
 			str = str.substring( 0, str.length() - 1 );
@@ -159,10 +141,7 @@ public class Util
 			str = str.substring( "matrix(".length() );
 			StringTokenizer tokens = new StringTokenizer( str, ", " );
 			float[] tr = new float[6];
-			for( int j = 0; j < tr.length; j++ )
-			{
-				tr[j] = Float.parseFloat( tokens.nextToken() );
-			}
+			for( int j = 0; j < tr.length; j++ ) tr[j] = Float.parseFloat( tokens.nextToken() );
 			
 			pose[0] = tr[0];
 			pose[1] = tr[2];
@@ -189,10 +168,7 @@ public class Util
 	static float getFloatAttribute( Element element, String attr ) throws ParsingException
 	{
 		String cx = element.getAttribute( attr );
-		if( ( cx == null ) || ( cx.equals( "" ) ) )
-		{
-			cx = element.getAttributeNS( SODIPODI, attr );
-		}
+		if( ( cx == null ) || ( cx.equals( "" ) ) ) cx = element.getAttributeNS( SODIPODI, attr );
 		
 		try
 		{
@@ -212,10 +188,7 @@ public class Util
 	 */
 	public static String getAsReference( String value )
 	{
-		if( value.length() < 2 )
-		{
-			return "";
-		}
+		if( value.length() < 2 ) return "";
 		
 		value = value.substring( 1, value.length() );
 		

@@ -13,17 +13,13 @@ import org.w3c.dom.Element;
  */
 public class GroupProcessor implements ElementProcessor
 {
-	
 	/**
 	 * @see org.newdawn.slick.svg.inkscape.ElementProcessor#handles(org.w3c.dom.Element)
 	 */
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "g" ) )
-		{
-			return true;
-		}
+		if( element.getNodeName().equals( "g" ) ) return true;
 		return false;
 	}
 	
@@ -40,5 +36,4 @@ public class GroupProcessor implements ElementProcessor
 		
 		loader.loadChildren( element, transform );
 	}
-	
 }

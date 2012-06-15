@@ -19,7 +19,6 @@ import org.w3c.dom.Element;
  */
 public class PolygonProcessor implements ElementProcessor
 {
-	
 	/**
 	 * Process the points in a polygon definition
 	 * 
@@ -39,10 +38,7 @@ public class PolygonProcessor implements ElementProcessor
 		while( tokens.hasMoreTokens() )
 		{
 			String nextToken = tokens.nextToken();
-			if( nextToken.equals( "L" ) )
-			{
-				continue;
-			}
+			if( nextToken.equals( "L" ) ) continue;
 			if( nextToken.equals( "z" ) )
 			{
 				closed = true;
@@ -58,10 +54,7 @@ public class PolygonProcessor implements ElementProcessor
 				
 				return 0;
 			}
-			if( nextToken.equals( "C" ) )
-			{
-				return 0;
-			}
+			if( nextToken.equals( "C" ) ) return 0;
 			
 			String tokenX = nextToken;
 			String tokenY = tokens.nextToken();
@@ -94,10 +87,7 @@ public class PolygonProcessor implements ElementProcessor
 		transform = new Transform( t, transform );
 		
 		String points = element.getAttribute( "points" );
-		if( element.getNodeName().equals( "path" ) )
-		{
-			points = element.getAttribute( "d" );
-		}
+		if( element.getNodeName().equals( "path" ) ) points = element.getAttribute( "d" );
 		
 		StringTokenizer tokens = new StringTokenizer( points, ", " );
 		Polygon poly = new Polygon();
@@ -118,19 +108,14 @@ public class PolygonProcessor implements ElementProcessor
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "polygon" ) )
+		switch( element.getNodeName() )
 		{
-			return true;
-		}
-		
-		if( element.getNodeName().equals( "path" ) )
-		{
-			if( !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) )
-			{
+			case "polygon":
 				return true;
-			}
+			case "path":
+				if( !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) ) return true;
+			default:
+				return false;
 		}
-		
-		return false;
 	}
 }

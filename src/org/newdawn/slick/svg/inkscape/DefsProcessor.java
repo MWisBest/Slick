@@ -19,17 +19,13 @@ import org.w3c.dom.NodeList;
  */
 public class DefsProcessor implements ElementProcessor
 {
-	
 	/**
 	 * @see org.newdawn.slick.svg.inkscape.ElementProcessor#handles(org.w3c.dom.Element)
 	 */
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "defs" ) )
-		{
-			return true;
-		}
+		if( element.getNodeName().equals( "defs" ) ) return true;
 		
 		return false;
 	}
@@ -69,22 +65,10 @@ public class DefsProcessor implements ElementProcessor
 			
 			gradient.setTransform( Util.getTransform( lin, "gradientTransform" ) );
 			
-			if( stringLength( lin.getAttribute( "x1" ) ) > 0 )
-			{
-				gradient.setX1( Float.parseFloat( lin.getAttribute( "x1" ) ) );
-			}
-			if( stringLength( lin.getAttribute( "x2" ) ) > 0 )
-			{
-				gradient.setX2( Float.parseFloat( lin.getAttribute( "x2" ) ) );
-			}
-			if( stringLength( lin.getAttribute( "y1" ) ) > 0 )
-			{
-				gradient.setY1( Float.parseFloat( lin.getAttribute( "y1" ) ) );
-			}
-			if( stringLength( lin.getAttribute( "y2" ) ) > 0 )
-			{
-				gradient.setY2( Float.parseFloat( lin.getAttribute( "y2" ) ) );
-			}
+			if( stringLength( lin.getAttribute( "x1" ) ) > 0 ) gradient.setX1( Float.parseFloat( lin.getAttribute( "x1" ) ) );
+			if( stringLength( lin.getAttribute( "x2" ) ) > 0 ) gradient.setX2( Float.parseFloat( lin.getAttribute( "x2" ) ) );
+			if( stringLength( lin.getAttribute( "y1" ) ) > 0 ) gradient.setY1( Float.parseFloat( lin.getAttribute( "y1" ) ) );
+			if( stringLength( lin.getAttribute( "y2" ) ) > 0 ) gradient.setY2( Float.parseFloat( lin.getAttribute( "y2" ) ) );
 			
 			String ref = lin.getAttributeNS( "http://www.w3.org/1999/xlink", "href" );
 			if( stringLength( ref ) > 0 )
@@ -125,26 +109,11 @@ public class DefsProcessor implements ElementProcessor
 			
 			gradient.setTransform( Util.getTransform( rad, "gradientTransform" ) );
 			
-			if( stringLength( rad.getAttribute( "cx" ) ) > 0 )
-			{
-				gradient.setX1( Float.parseFloat( rad.getAttribute( "cx" ) ) );
-			}
-			if( stringLength( rad.getAttribute( "cy" ) ) > 0 )
-			{
-				gradient.setY1( Float.parseFloat( rad.getAttribute( "cy" ) ) );
-			}
-			if( stringLength( rad.getAttribute( "fx" ) ) > 0 )
-			{
-				gradient.setX2( Float.parseFloat( rad.getAttribute( "fx" ) ) );
-			}
-			if( stringLength( rad.getAttribute( "fy" ) ) > 0 )
-			{
-				gradient.setY2( Float.parseFloat( rad.getAttribute( "fy" ) ) );
-			}
-			if( stringLength( rad.getAttribute( "r" ) ) > 0 )
-			{
-				gradient.setR( Float.parseFloat( rad.getAttribute( "r" ) ) );
-			}
+			if( stringLength( rad.getAttribute( "cx" ) ) > 0 ) gradient.setX1( Float.parseFloat( rad.getAttribute( "cx" ) ) );
+			if( stringLength( rad.getAttribute( "cy" ) ) > 0 ) gradient.setY1( Float.parseFloat( rad.getAttribute( "cy" ) ) );
+			if( stringLength( rad.getAttribute( "fx" ) ) > 0 ) gradient.setX2( Float.parseFloat( rad.getAttribute( "fx" ) ) );
+			if( stringLength( rad.getAttribute( "fy" ) ) > 0 ) gradient.setY2( Float.parseFloat( rad.getAttribute( "fy" ) ) );
+			if( stringLength( rad.getAttribute( "r" ) ) > 0 ) gradient.setR( Float.parseFloat( rad.getAttribute( "r" ) ) );
 			
 			String ref = rad.getAttributeNS( "http://www.w3.org/1999/xlink", "href" );
 			if( stringLength( ref ) > 0 )
@@ -191,10 +160,7 @@ public class DefsProcessor implements ElementProcessor
 	 */
 	private int stringLength( String value )
 	{
-		if( value == null )
-		{
-			return 0;
-		}
+		if( value == null ) return 0;
 		
 		return value.length();
 	}

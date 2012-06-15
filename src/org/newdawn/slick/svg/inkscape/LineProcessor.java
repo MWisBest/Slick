@@ -19,7 +19,6 @@ import org.w3c.dom.Element;
  */
 public class LineProcessor implements ElementProcessor
 {
-	
 	/**
 	 * Process the points in a polygon definition
 	 * 
@@ -36,22 +35,10 @@ public class LineProcessor implements ElementProcessor
 		while( tokens.hasMoreTokens() )
 		{
 			String nextToken = tokens.nextToken();
-			if( nextToken.equals( "L" ) )
-			{
-				continue;
-			}
-			if( nextToken.equals( "z" ) )
-			{
-				break;
-			}
-			if( nextToken.equals( "M" ) )
-			{
-				continue;
-			}
-			if( nextToken.equals( "C" ) )
-			{
-				return 0;
-			}
+			if( nextToken.equals( "L" ) ) continue;
+			if( nextToken.equals( "z" ) ) break;
+			if( nextToken.equals( "M" ) ) continue;
+			if( nextToken.equals( "C" ) ) return 0;
 			
 			String tokenX = nextToken;
 			String tokenY = tokens.nextToken();
@@ -106,10 +93,7 @@ public class LineProcessor implements ElementProcessor
 				x2 = poly.getPoint( 1 )[0];
 				y2 = poly.getPoint( 1 )[1];
 			}
-			else
-			{
-				return;
-			}
+			else return;
 		}
 		
 		float[] in = new float[] { x1, y1, x2, y2 };
@@ -133,18 +117,14 @@ public class LineProcessor implements ElementProcessor
 	@Override
 	public boolean handles( Element element )
 	{
-		if( element.getNodeName().equals( "line" ) )
+		switch( element.getNodeName() )
 		{
-			return true;
-		}
-		if( element.getNodeName().equals( "path" ) )
-		{
-			if( !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) )
-			{
+			case "line":
 				return true;
-			}
+			case "path":
+				if( !"arc".equals( element.getAttributeNS( Util.SODIPODI, "type" ) ) ) return true;
+			default:
+				return false;
 		}
-		
-		return false;
 	}
 }

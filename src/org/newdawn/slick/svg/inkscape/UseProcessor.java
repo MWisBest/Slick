@@ -17,7 +17,6 @@ import org.w3c.dom.Element;
  */
 public class UseProcessor implements ElementProcessor
 {
-	
 	/**
 	 * @see org.newdawn.slick.svg.inkscape.ElementProcessor#handles(org.w3c.dom.Element)
 	 */
@@ -38,10 +37,7 @@ public class UseProcessor implements ElementProcessor
 		String href = Util.getAsReference( ref );
 		
 		Figure referenced = diagram.getFigureByID( href );
-		if( referenced == null )
-		{
-			throw new ParsingException( element, "Unable to locate referenced element: " + href );
-		}
+		if( referenced == null ) throw new ParsingException( element, "Unable to locate referenced element: " + href );
 		
 		Transform local = Util.getTransform( element );
 		Transform trans = local.concatenate( referenced.getTransform() );
@@ -56,5 +52,4 @@ public class UseProcessor implements ElementProcessor
 		Figure figure = new Figure( referenced.getType(), shape, data, trans );
 		diagram.addFigure( figure );
 	}
-	
 }

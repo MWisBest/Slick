@@ -34,10 +34,7 @@ public class InkscapeNonGeometricData extends NonGeometricData
 	public String getAttribute( String attribute )
 	{
 		String result = super.getAttribute( attribute );
-		if( result == null )
-		{
-			result = element.getAttribute( attribute );
-		}
+		if( result == null ) result = element.getAttribute( attribute );
 		
 		return result;
 	}
@@ -51,5 +48,4 @@ public class InkscapeNonGeometricData extends NonGeometricData
 	{
 		return element;
 	}
-	
 }
