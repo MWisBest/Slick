@@ -139,10 +139,7 @@ public class GlyphPage
 					testY += testRowHeight;
 					testRowHeight = height;
 				}
-				else if( height > testRowHeight )
-				{
-					testRowHeight = height;
-				}
+				else if( height > testRowHeight ) testRowHeight = height;
 				if( testY + testRowHeight >= pageWidth ) return 0;
 				testX += width;
 			}
@@ -158,11 +155,7 @@ public class GlyphPage
 			int width = Math.min( MAX_GLYPH_SIZE, glyph.getWidth() );
 			int height = Math.min( MAX_GLYPH_SIZE, glyph.getHeight() );
 			
-			if( rowHeight == 0 )
-			{
-				// The first glyph always fits.
-				rowHeight = height;
-			}
+			if( rowHeight == 0 ) rowHeight = height; // The first glyph always fits.
 			else
 			{
 				// Wrap to the next line if needed, or break if no more fit.
@@ -218,10 +211,7 @@ public class GlyphPage
 		scratchGraphics.fillRect( 0, 0, MAX_GLYPH_SIZE, MAX_GLYPH_SIZE );
 		scratchGraphics.setComposite( AlphaComposite.SrcOver );
 		scratchGraphics.setColor( java.awt.Color.white );
-		for( Effect effect : unicodeFont.getEffects() )
-		{
-			effect.draw( scratchImage, scratchGraphics, unicodeFont, glyph );
-		}
+		for( Effect effect : unicodeFont.getEffects() ) effect.draw( scratchImage, scratchGraphics, unicodeFont, glyph );
 		glyph.setShape( null ); // The shape will never be needed again.
 		
 		WritableRaster raster = scratchImage.getRaster();

@@ -86,50 +86,17 @@ public class HieroSettings
 				String[] pieces = line.split( "=", 2 );
 				String name = pieces[0].trim();
 				String value = pieces[1];
-				if( name.equals( "font.size" ) )
-				{
-					fontSize = Integer.parseInt( value );
-				}
-				else if( name.equals( "font.bold" ) )
-				{
-					bold = Boolean.valueOf( value ).booleanValue();
-				}
-				else if( name.equals( "font.italic" ) )
-				{
-					italic = Boolean.valueOf( value ).booleanValue();
-				}
-				else if( name.equals( "pad.top" ) )
-				{
-					paddingTop = Integer.parseInt( value );
-				}
-				else if( name.equals( "pad.right" ) )
-				{
-					paddingRight = Integer.parseInt( value );
-				}
-				else if( name.equals( "pad.bottom" ) )
-				{
-					paddingBottom = Integer.parseInt( value );
-				}
-				else if( name.equals( "pad.left" ) )
-				{
-					paddingLeft = Integer.parseInt( value );
-				}
-				else if( name.equals( "pad.advance.x" ) )
-				{
-					paddingAdvanceX = Integer.parseInt( value );
-				}
-				else if( name.equals( "pad.advance.y" ) )
-				{
-					paddingAdvanceY = Integer.parseInt( value );
-				}
-				else if( name.equals( "glyph.page.width" ) )
-				{
-					glyphPageWidth = Integer.parseInt( value );
-				}
-				else if( name.equals( "glyph.page.height" ) )
-				{
-					glyphPageHeight = Integer.parseInt( value );
-				}
+				if( name.equals( "font.size" ) ) fontSize = Integer.parseInt( value );
+				else if( name.equals( "font.bold" ) ) bold = Boolean.valueOf( value ).booleanValue();
+				else if( name.equals( "font.italic" ) ) italic = Boolean.valueOf( value ).booleanValue();
+				else if( name.equals( "pad.top" ) ) paddingTop = Integer.parseInt( value );
+				else if( name.equals( "pad.right" ) ) paddingRight = Integer.parseInt( value );
+				else if( name.equals( "pad.bottom" ) ) paddingBottom = Integer.parseInt( value );
+				else if( name.equals( "pad.left" ) ) paddingLeft = Integer.parseInt( value );
+				else if( name.equals( "pad.advance.x" ) ) paddingAdvanceX = Integer.parseInt( value );
+				else if( name.equals( "pad.advance.y" ) ) paddingAdvanceY = Integer.parseInt( value );
+				else if( name.equals( "glyph.page.width" ) ) glyphPageWidth = Integer.parseInt( value );
+				else if( name.equals( "glyph.page.height" ) ) glyphPageHeight = Integer.parseInt( value );
 				else if( name.equals( "effect.class" ) )
 				{
 					try
@@ -429,10 +396,7 @@ public class HieroSettings
 		for( ConfigurableEffect effect : effects )
 		{
 			out.println( "effect.class=" + effect.getClass().getName() );
-			for( Value value : effect.getValues() )
-			{
-				out.println( "effect." + value.getName() + "=" + value.getString() );
-			}
+			for( Value value : effect.getValues() ) out.println( "effect." + value.getName() + "=" + value.getString() );
 			out.println();
 		}
 		out.close();
