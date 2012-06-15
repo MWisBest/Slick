@@ -125,13 +125,14 @@ public class OutlineWobbleEffect extends OutlineEffect
 		super.setValues( values );
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Detail" ) )
+			switch( value.getName() )
 			{
-				detail = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Amplitude" ) )
-			{
-				amplitude = ( (Float)value.getObject() ).floatValue();
+				case "Detail":
+					detail = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Amplitude":
+					amplitude = ( (Float)value.getObject() ).floatValue();
+					break;
 			}
 		}
 	}
@@ -173,12 +174,10 @@ public class OutlineWobbleEffect extends OutlineEffect
 						result.moveTo( moveX, moveY );
 						next = 0;
 						break;
-					
 					case PathIterator.SEG_CLOSE:
 						points[0] = moveX;
 						points[1] = moveY;
 						// Fall into....
-						
 					case PathIterator.SEG_LINETO:
 						thisX = randomize( points[0] );
 						thisY = randomize( points[1] );

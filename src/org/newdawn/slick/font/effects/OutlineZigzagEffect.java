@@ -124,13 +124,14 @@ public class OutlineZigzagEffect extends OutlineEffect
 		super.setValues( values );
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Wavelength" ) )
+			switch( value.getName() )
 			{
-				wavelength = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Amplitude" ) )
-			{
-				amplitude = ( (Float)value.getObject() ).floatValue();
+				case "Wavelength":
+					wavelength = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Amplitude":
+					amplitude = ( (Float)value.getObject() ).floatValue();
+					break;
 			}
 		}
 	}
@@ -172,7 +173,6 @@ public class OutlineZigzagEffect extends OutlineEffect
 						result.moveTo( moveX, moveY );
 						next = wavelength / 2;
 						break;
-					
 					case PathIterator.SEG_CLOSE:
 						points[0] = moveX;
 						points[1] = moveY;

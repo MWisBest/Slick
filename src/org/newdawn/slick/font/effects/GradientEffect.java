@@ -196,25 +196,23 @@ public class GradientEffect implements ConfigurableEffect
 	{
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Top color" ) )
+			switch( value.getName() )
 			{
-				topColor = (Color)value.getObject();
-			}
-			else if( value.getName().equals( "Bottom color" ) )
-			{
-				bottomColor = (Color)value.getObject();
-			}
-			else if( value.getName().equals( "Offset" ) )
-			{
-				offset = ( (Integer)value.getObject() ).intValue();
-			}
-			else if( value.getName().equals( "Scale" ) )
-			{
-				scale = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Cyclic" ) )
-			{
-				cyclic = ( (Boolean)value.getObject() ).booleanValue();
+				case "Top color":
+					topColor = (Color)value.getObject();
+					break;
+				case "Bottom color":
+					bottomColor = (Color)value.getObject();
+					break;
+				case "Offset":
+					offset = ( (Integer)value.getObject() ).intValue();
+					break;
+				case "Scale":
+					scale = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Cyclic":
+					cyclic = ( (Boolean)value.getObject() ).booleanValue();
+					break;
 			}
 		}
 	}

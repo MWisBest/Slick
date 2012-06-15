@@ -95,10 +95,7 @@ public class ColorEffect implements ConfigurableEffect
 	{
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Color" ) )
-			{
-				setColor( (Color)value.getObject() );
-			}
+			if( value.getName().equals( "Color" ) ) setColor( (Color)value.getObject() );
 		}
 	}
 }

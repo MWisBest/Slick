@@ -261,8 +261,7 @@ public class ShadowEffect implements ConfigurableEffect
 		
 		List<String[]> options = new ArrayList<>();
 		options.add( new String[] { "None", "0" } );
-		for( int i = 2; i < NUM_KERNELS; i++ )
-			options.add( new String[] { String.valueOf( i ) } );
+		for( int i = 2; i < NUM_KERNELS; i++ ) options.add( new String[] { String.valueOf( i ) } );
 		String[][] optionsArray = options.toArray( new String[options.size()][] );
 		values.add( EffectUtil.optionValue( "Blur kernel size", String.valueOf( blurKernelSize ), optionsArray, "This setting controls how many neighboring pixels are used to blur the shadow. Set to \"None\" for no blur." ) );
 		
@@ -278,29 +277,26 @@ public class ShadowEffect implements ConfigurableEffect
 	{
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Color" ) )
+			switch( value.getName() )
 			{
-				color = (Color)value.getObject();
-			}
-			else if( value.getName().equals( "Opacity" ) )
-			{
-				opacity = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "X distance" ) )
-			{
-				xDistance = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Y distance" ) )
-			{
-				yDistance = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Blur kernel size" ) )
-			{
-				blurKernelSize = Integer.parseInt( (String)value.getObject() );
-			}
-			else if( value.getName().equals( "Blur passes" ) )
-			{
-				blurPasses = ( (Integer)value.getObject() ).intValue();
+				case "Color":
+					color = (Color)value.getObject();
+					break;
+				case "Opacity":
+					opacity = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "X distance":
+					xDistance = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Y distance":
+					yDistance = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Blur kernel size":
+					blurKernelSize = Integer.parseInt( (String)value.getObject() );
+					break;
+				case "Blur passes":
+					blurPasses = ( (Integer)value.getObject() ).intValue();
+					break;
 			}
 		}
 	}
@@ -319,11 +315,9 @@ public class ShadowEffect implements ConfigurableEffect
 		{
 			float total = 0.0f;
 			gaussianTriangle[i] = new float[pascalsTriangle[i].length];
-			for( int j = 0; j < pascalsTriangle[i].length; j++ )
-				total += pascalsTriangle[i][j];
+			for( int j = 0; j < pascalsTriangle[i].length; j++ ) total += pascalsTriangle[i][j];
 			float coefficient = 1 / total;
-			for( int j = 0; j < pascalsTriangle[i].length; j++ )
-				gaussianTriangle[i][j] = coefficient * pascalsTriangle[i][j];
+			for( int j = 0; j < pascalsTriangle[i].length; j++ ) gaussianTriangle[i][j] = coefficient * pascalsTriangle[i][j];
 		}
 		return gaussianTriangle;
 	}
@@ -348,8 +342,7 @@ public class ShadowEffect implements ConfigurableEffect
 			triangle[i] = new float[i + 1];
 			triangle[i][0] = 1.0f;
 			triangle[i][i] = 1.0f;
-			for( int j = 1; j < triangle[i].length - 1; j++ )
-				triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+			for( int j = 1; j < triangle[i].length - 1; j++ ) triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
 		}
 		return triangle;
 	}

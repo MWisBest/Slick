@@ -118,10 +118,7 @@ public class OutlineEffect implements ConfigurableEffect
 	 */
 	public Stroke getStroke()
 	{
-		if( stroke == null )
-		{
-			return new BasicStroke( width, BasicStroke.CAP_SQUARE, join );
-		}
+		if( stroke == null ) return new BasicStroke( width, BasicStroke.CAP_SQUARE, join );
 		
 		return stroke;
 	}
@@ -178,17 +175,17 @@ public class OutlineEffect implements ConfigurableEffect
 	{
 		for( Value value : values )
 		{
-			if( value.getName().equals( "Color" ) )
+			switch( value.getName() )
 			{
-				color = (Color)value.getObject();
-			}
-			else if( value.getName().equals( "Width" ) )
-			{
-				width = ( (Float)value.getObject() ).floatValue();
-			}
-			else if( value.getName().equals( "Join" ) )
-			{
-				join = Integer.parseInt( (String)value.getObject() );
+				case "Color":
+					color = (Color)value.getObject();
+					break;
+				case "Width":
+					width = ( (Float)value.getObject() ).floatValue();
+					break;
+				case "Join":
+					join = Integer.parseInt( (String)value.getObject() );
+					break;
 			}
 		}
 	}

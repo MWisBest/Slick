@@ -205,7 +205,9 @@ public class EffectUtil
 				public String toString()
 				{
 					for( int i = 0; i < options.length; i++ )
+					{
 						if( getValue( i ).equals( value ) ) return options[i][0].toString();
+					}
 					return "";
 				}
 				
@@ -302,10 +304,7 @@ public class EffectUtil
 		@Override
 		public String toString()
 		{
-			if( value == null )
-			{
-				return "";
-			}
+			if( value == null ) return "";
 			return value.toString();
 		}
 		
