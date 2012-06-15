@@ -37,7 +37,6 @@ import org.w3c.dom.NodeList;
  */
 public class ParticleIO
 {
-	
 	/**
 	 * Load a set of configured emitters into a single system
 	 * 
@@ -194,24 +193,12 @@ public class ParticleIO
 			Document document = builder.parse( ref );
 			
 			Element element = document.getDocumentElement();
-			if( !element.getNodeName().equals( "system" ) )
-			{
-				throw new IOException( "Not a particle system file" );
-			}
+			if( !element.getNodeName().equals( "system" ) ) throw new IOException( "Not a particle system file" );
 			
-			if( system == null )
-			{
-				system = new ParticleSystem( "org/newdawn/slick/data/particle.tga", 2000, mask );
-			}
+			if( system == null ) system = new ParticleSystem( "org/newdawn/slick/data/particle.tga", 2000, mask );
 			boolean additive = "true".equals( element.getAttribute( "additive" ) );
-			if( additive )
-			{
-				system.setBlendingMode( ParticleSystem.BLEND_ADDITIVE );
-			}
-			else
-			{
-				system.setBlendingMode( ParticleSystem.BLEND_COMBINE );
-			}
+			if( additive ) system.setBlendingMode( ParticleSystem.BLEND_ADDITIVE );
+			else system.setBlendingMode( ParticleSystem.BLEND_COMBINE );
 			boolean points = "true".equals( element.getAttribute( "points" ) );
 			system.setUsePoints( points );
 			
@@ -285,10 +272,7 @@ public class ParticleIO
 					Element element = emitterToElement( document, (ConfigurableEmitter)current );
 					root.appendChild( element );
 				}
-				else
-				{
-					throw new RuntimeException( "Only ConfigurableEmitter instances can be stored" );
-				}
+				else throw new RuntimeException( "Only ConfigurableEmitter instances can be stored" );
 			}
 			
 			Result result = new StreamResult( new OutputStreamWriter( out, "utf-8" ) );
@@ -417,10 +401,7 @@ public class ParticleIO
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document document = builder.parse( ref );
 			
-			if( !document.getDocumentElement().getNodeName().equals( "emitter" ) )
-			{
-				throw new IOException( "Not a particle emitter file" );
-			}
+			if( !document.getDocumentElement().getNodeName().equals( "emitter" ) ) throw new IOException( "Not a particle emitter file" );
 			
 			ConfigurableEmitter emitter = factory.createEmitter( "new" );
 			elementToEmitter( document.getDocumentElement(), emitter );
@@ -500,10 +481,7 @@ public class ParticleIO
 	private static Element getFirstNamedElement( Element element, String name )
 	{
 		NodeList list = element.getElementsByTagName( name );
-		if( list.getLength() == 0 )
-		{
-			return null;
-		}
+		if( list.getLength() == 0 ) return null;
 		
 		return (Element)list.item( 0 );
 	}
@@ -523,14 +501,8 @@ public class ParticleIO
 		
 		String renderType = element.getAttribute( "renderType" );
 		emitter.usePoints = Particle.INHERIT_POINTS;
-		if( renderType.equals( "quads" ) )
-		{
-			emitter.usePoints = Particle.USE_QUADS;
-		}
-		if( renderType.equals( "points" ) )
-		{
-			emitter.usePoints = Particle.USE_POINTS;
-		}
+		if( renderType.equals( "quads" ) ) emitter.usePoints = Particle.USE_QUADS;
+		if( renderType.equals( "points" ) ) emitter.usePoints = Particle.USE_POINTS;
 		
 		String useOriented = element.getAttribute( "useOriented" );
 		if( useOriented != null ) emitter.useOriented = "true".equals( useOriented );
@@ -596,17 +568,17 @@ public class ParticleIO
 		root.setAttribute( "useOriented", emitter.useOriented ? "true" : "false" );
 		root.setAttribute( "useAdditive", emitter.useAdditive ? "true" : "false" );
 		
-		if( emitter.usePoints == Particle.INHERIT_POINTS )
+		switch( emitter.usePoints )
 		{
-			root.setAttribute( "renderType", "inherit" );
-		}
-		if( emitter.usePoints == Particle.USE_POINTS )
-		{
-			root.setAttribute( "renderType", "points" );
-		}
-		if( emitter.usePoints == Particle.USE_QUADS )
-		{
-			root.setAttribute( "renderType", "quads" );
+			case Particle.INHERIT_POINTS:
+				root.setAttribute( "renderType", "inherit" );
+				break;
+			case Particle.USE_POINTS:
+				root.setAttribute( "renderType", "points" );
+				break;
+			case Particle.USE_QUADS:
+				root.setAttribute( "renderType", "quads" );
+				break;
 		}
 		
 		root.appendChild( createRangeElement( document, "spawnInterval", emitter.spawnInterval ) );
@@ -717,10 +689,7 @@ public class ParticleIO
 				element.appendChild( pointElement );
 			}
 		}
-		else
-		{
-			Log.warn( "unkown value type ignored: " + value.getClass() );
-		}
+		else Log.warn( "unkown value type ignored: " + value.getClass() );
 		
 		return element;
 	}
@@ -735,10 +704,7 @@ public class ParticleIO
 	 */
 	private static void parseRangeElement( Element element, ConfigurableEmitter.Range range )
 	{
-		if( element == null )
-		{
-			return;
-		}
+		if( element == null ) return;
 		range.setMin( Float.parseFloat( element.getAttribute( "min" ) ) );
 		range.setMax( Float.parseFloat( element.getAttribute( "max" ) ) );
 		range.setEnabled( "true".equals( element.getAttribute( "enabled" ) ) );
@@ -754,10 +720,7 @@ public class ParticleIO
 	 */
 	private static void parseValueElement( Element element, ConfigurableEmitter.Value value )
 	{
-		if( element == null )
-		{
-			return;
-		}
+		if( element == null ) return;
 		
 		String type = element.getAttribute( "type" );
 		String v = element.getAttribute( "value" );
@@ -765,57 +728,46 @@ public class ParticleIO
 		if( type == null || type.length() == 0 )
 		{
 			// support for old style which did not write the type
-			if( value instanceof SimpleValue )
-			{
-				( (SimpleValue)value ).setValue( Float.parseFloat( v ) );
-			}
-			else if( value instanceof RandomValue )
-			{
-				( (RandomValue)value ).setValue( Float.parseFloat( v ) );
-			}
-			else
-			{
-				Log.warn( "problems reading element, skipping: " + element );
-			}
+			if( value instanceof SimpleValue ) ( (SimpleValue)value ).setValue( Float.parseFloat( v ) );
+			else if( value instanceof RandomValue ) ( (RandomValue)value ).setValue( Float.parseFloat( v ) );
+			else Log.warn( "problems reading element, skipping: " + element );
 		}
 		else
 		{
-			// type given: this is the new style
-			if( type.equals( "simple" ) )
+			switch( type )
 			{
-				( (SimpleValue)value ).setValue( Float.parseFloat( v ) );
-			}
-			else if( type.equals( "random" ) )
-			{
-				( (RandomValue)value ).setValue( Float.parseFloat( v ) );
-			}
-			else if( type.equals( "linear" ) )
-			{
-				String min = element.getAttribute( "min" );
-				String max = element.getAttribute( "max" );
-				String active = element.getAttribute( "active" );
-				
-				NodeList points = element.getElementsByTagName( "point" );
-				
-				ArrayList<Vector2f> curve = new ArrayList<>();
-				for( int i = 0; i < points.getLength(); i++ )
-				{
-					Element point = (Element)points.item( i );
+				case "simple":
+					( (SimpleValue)value ).setValue( Float.parseFloat( v ) );
+					break;
+				case "random":
+					( (RandomValue)value ).setValue( Float.parseFloat( v ) );
+					break;
+				case "linear":
+					String min = element.getAttribute( "min" );
+					String max = element.getAttribute( "max" );
+					String active = element.getAttribute( "active" );
 					
-					float x = Float.parseFloat( point.getAttribute( "x" ) );
-					float y = Float.parseFloat( point.getAttribute( "y" ) );
+					NodeList points = element.getElementsByTagName( "point" );
 					
-					curve.add( new Vector2f( x, y ) );
-				}
-				
-				( (LinearInterpolator)value ).setCurve( curve );
-				( (LinearInterpolator)value ).setMin( Integer.parseInt( min ) );
-				( (LinearInterpolator)value ).setMax( Integer.parseInt( max ) );
-				( (LinearInterpolator)value ).setActive( "true".equals( active ) );
-			}
-			else
-			{
-				Log.warn( "unkown type detected: " + type );
+					ArrayList<Vector2f> curve = new ArrayList<>();
+					for( int i = 0; i < points.getLength(); i++ )
+					{
+						Element point = (Element)points.item( i );
+						
+						float x = Float.parseFloat( point.getAttribute( "x" ) );
+						float y = Float.parseFloat( point.getAttribute( "y" ) );
+						
+						curve.add( new Vector2f( x, y ) );
+					}
+					
+					( (LinearInterpolator)value ).setCurve( curve );
+					( (LinearInterpolator)value ).setMin( Integer.parseInt( min ) );
+					( (LinearInterpolator)value ).setMax( Integer.parseInt( max ) );
+					( (LinearInterpolator)value ).setActive( "true".equals( active ) );
+					break;
+				default:
+					Log.warn( "unkown type detected: " + type );
+					break;
 			}
 		}
 	}

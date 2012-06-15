@@ -214,10 +214,7 @@ public class Particle
 			x += delta * velx;
 			y += delta * vely;
 		}
-		else
-		{
-			engine.release( this );
-		}
+		else engine.release( this );
 	}
 	
 	/**
@@ -345,10 +342,7 @@ public class Particle
 	 */
 	public void setColor( float r, float g, float b, float a )
 	{
-		if( color == Color.white )
-		{
-			color = new Color( r, g, b, a );
-		}
+		if( color == Color.white ) color = new Color( r, g, b, a );
 		else
 		{
 			color.r = r;
@@ -441,10 +435,7 @@ public class Particle
 	 */
 	public void adjustColor( float r, float g, float b, float a )
 	{
-		if( color == Color.white )
-		{
-			color = new Color( 1, 1, 1, 1f );
-		}
+		if( color == Color.white ) color = new Color( 1, 1, 1, 1f );
 		color.r += r;
 		color.g += g;
 		color.b += b;
@@ -465,10 +456,7 @@ public class Particle
 	 */
 	public void adjustColor( int r, int g, int b, int a )
 	{
-		if( color == Color.white )
-		{
-			color = new Color( 1, 1, 1, 1f );
-		}
+		if( color == Color.white ) color = new Color( 1, 1, 1, 1f );
 		
 		color.r += ( r / 255.0f );
 		color.g += ( g / 255.0f );

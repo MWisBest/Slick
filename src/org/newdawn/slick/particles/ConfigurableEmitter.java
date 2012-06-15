@@ -33,10 +33,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 	 */
 	public static void setRelativePath( String path )
 	{
-		if( !path.endsWith( "/" ) )
-		{
-			path += "/";
-		}
+		if( !path.endsWith( "/" ) ) path += "/";
 		relativePath = path;
 	}
 	
@@ -186,20 +183,11 @@ public class ConfigurableEmitter implements ParticleEmitter
 	 */
 	public void setImageName( String imageName )
 	{
-		if( imageName.length() == 0 )
-		{
-			imageName = null;
-		}
+		if( imageName.length() == 0 ) imageName = null;
 		
 		this.imageName = imageName;
-		if( imageName == null )
-		{
-			image = null;
-		}
-		else
-		{
-			updateImage = true;
-		}
+		if( imageName == null ) image = null;
+		else updateImage = true;
 	}
 	
 	/**
@@ -307,10 +295,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 			adjustx = 0;
 			adjusty = 0;
 		}
-		else
-		{
-			adjust = false;
-		}
+		else adjust = false;
 		
 		if( updateImage )
 		{
@@ -326,35 +311,20 @@ public class ConfigurableEmitter implements ParticleEmitter
 			}
 		}
 		
-		if( ( wrapUp ) || ( ( length.isEnabled() ) && ( timeout < 0 ) ) || ( ( emitCount.isEnabled() && ( leftToEmit <= 0 ) ) ) )
+		if( ( ( wrapUp ) || ( ( length.isEnabled() ) && ( timeout < 0 ) ) || ( ( emitCount.isEnabled() && ( leftToEmit <= 0 ) ) ) ) && ( particleCount == 0 ) )
 		{
-			if( particleCount == 0 )
-			{
-				completed = true;
-			}
+			completed = true;
 		}
 		particleCount = 0;
 		
-		if( wrapUp )
-		{
-			return;
-		}
+		if( wrapUp ) return;
 		
 		if( length.isEnabled() )
 		{
-			if( timeout < 0 )
-			{
-				return;
-			}
+			if( timeout < 0 ) return;
 			timeout -= delta;
 		}
-		if( emitCount.isEnabled() )
-		{
-			if( leftToEmit <= 0 )
-			{
-				return;
-			}
-		}
+		if( emitCount.isEnabled() && leftToEmit <= 0 ) return;
 		
 		nextSpawn -= delta;
 		if( nextSpawn < 0 )
@@ -384,10 +354,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 					p.setVelocity( xv, yv, power * 0.001f );
 				}
 				
-				if( image != null )
-				{
-					p.setImage( image );
-				}
+				if( image != null ) p.setImage( image );
 				
 				ColorRecord start = colors.get( 0 );
 				p.setColor( start.col.r, start.col.g, start.col.b, startAlpha.getValue( 0 ) / 255.0f );
@@ -397,10 +364,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 				if( emitCount.isEnabled() )
 				{
 					leftToEmit--;
-					if( leftToEmit <= 0 )
-					{
-						break;
-					}
+					if( leftToEmit <= 0 ) break;
 				}
 			}
 		}
@@ -453,14 +417,8 @@ public class ConfigurableEmitter implements ParticleEmitter
 			float b = ( startColor.b * colOffset ) + ( endColor.b * colInv );
 			
 			float a;
-			if( alpha.isActive() )
-			{
-				a = alpha.getValue( inv ) / 255.0f;
-			}
-			else
-			{
-				a = ( ( startAlpha.getValue( 0 ) / 255.0f ) * offset ) + ( ( endAlpha.getValue( 0 ) / 255.0f ) * inv );
-			}
+			if( alpha.isActive() ) a = alpha.getValue( inv ) / 255.0f;
+			else a = ( ( startAlpha.getValue( 0 ) / 255.0f ) * offset ) + ( ( endAlpha.getValue( 0 ) / 255.0f ) * inv );
 			particle.setColor( r, g, b, a );
 		}
 		
@@ -469,20 +427,11 @@ public class ConfigurableEmitter implements ParticleEmitter
 			float s = size.getValue( inv );
 			particle.setSize( s );
 		}
-		else
-		{
-			particle.adjustSize( delta * growthFactor.getValue( 0 ) * 0.001f );
-		}
+		else particle.adjustSize( delta * growthFactor.getValue( 0 ) * 0.001f );
 		
-		if( velocity.isActive() )
-		{
-			particle.setSpeed( velocity.getValue( inv ) );
-		}
+		if( velocity.isActive() ) particle.setSpeed( velocity.getValue( inv ) );
 		
-		if( scaleY.isActive() )
-		{
-			particle.setScaleY( scaleY.getValue( inv ) );
-		}
+		if( scaleY.isActive() ) particle.setScaleY( scaleY.getValue( inv ) );
 	}
 	
 	/**
@@ -493,32 +442,20 @@ public class ConfigurableEmitter implements ParticleEmitter
 	@Override
 	public boolean completed()
 	{
-		if( engine == null )
-		{
-			return false;
-		}
+		if( engine == null ) return false;
 		
 		if( length.isEnabled() )
 		{
-			if( timeout > 0 )
-			{
-				return false;
-			}
+			if( timeout > 0 ) return false;
 			return completed;
 		}
 		if( emitCount.isEnabled() )
 		{
-			if( leftToEmit > 0 )
-			{
-				return false;
-			}
+			if( leftToEmit > 0 ) return false;
 			return completed;
 		}
 		
-		if( wrapUp )
-		{
-			return completed;
-		}
+		if( wrapUp ) return completed;
 		
 		return false;
 	}
@@ -540,10 +477,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 	public void reset()
 	{
 		completed = false;
-		if( engine != null )
-		{
-			engine.releaseAll( this );
-		}
+		if( engine != null ) engine.releaseAll( this );
 	}
 	
 	/**
@@ -551,16 +485,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 	 */
 	public void replayCheck()
 	{
-		if( completed() )
-		{
-			if( engine != null )
-			{
-				if( engine.getParticleCount() == 0 )
-				{
-					replay();
-				}
-			}
-		}
+		if( completed() && engine != null && engine.getParticleCount() == 0 ) replay();
 	}
 	
 	/**
@@ -772,8 +697,7 @@ public class ConfigurableEmitter implements ParticleEmitter
 					// found the segment
 					float st = ( t - p0.getX() ) / ( p1.getX() - p0.getX() );
 					float r = p0.getY() + st * ( p1.getY() - p0.getY() );
-					// System.out.println( "t: " + t + ", " + p0.x + ", " + p0.y
-					// + " : " + p1.x + ", " + p1.y + " => " + r );
+					// System.out.println( "t: " + t + ", " + p0.x + ", " + p0.y + " : " + p1.x + ", " + p1.y + " => " + r );
 					
 					return r;
 				}

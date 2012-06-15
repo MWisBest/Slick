@@ -73,10 +73,7 @@ public class ParticleSystem
 			particles = new Particle[maxParticles];
 			available = new ArrayList<>();
 			
-			for( int i = 0; i < particles.length; i++ )
-			{
-				particles[i] = createParticle( system );
-			}
+			for( int i = 0; i < particles.length; i++ ) particles[i] = createParticle( system );
 			
 			reset( system );
 		}
@@ -90,10 +87,7 @@ public class ParticleSystem
 		{
 			available.clear();
 			
-			for( int i = 0; i < particles.length; i++ )
-			{
-				available.add( particles[i] );
-			}
+			for( int i = 0; i < particles.length; i++ ) available.add( particles[i] );
 		}
 	}
 	
@@ -159,10 +153,7 @@ public class ParticleSystem
 	 */
 	public void reset()
 	{
-		for( ParticlePool pool : particlesByEmitter.values() )
-		{
-			pool.reset( this );
-		}
+		for( ParticlePool pool : particlesByEmitter.values() ) pool.reset( this );
 		
 		for( int i = 0; i < emitters.size(); i++ )
 		{
@@ -415,22 +406,13 @@ public class ParticleSystem
 	 */
 	public void render( float x, float y )
 	{
-		if( ( sprite == null ) && ( defaultImageName != null ) )
-		{
-			loadSystemParticleImage();
-		}
+		if( ( sprite == null ) && ( defaultImageName != null ) ) loadSystemParticleImage();
 		
-		if( !visible )
-		{
-			return;
-		}
+		if( !visible ) return;
 		
 		GL.glTranslatef( x, y, 0 );
 		
-		if( blendingMode == BLEND_ADDITIVE )
-		{
-			GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE );
-		}
+		if( blendingMode == BLEND_ADDITIVE ) GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE );
 		if( usePoints() )
 		{
 			GL.glEnable( SGL.GL_POINT_SMOOTH );
@@ -443,55 +425,31 @@ public class ParticleSystem
 			// get emitter
 			ParticleEmitter emitter = emitters.get( emitterIdx );
 			
-			if( !emitter.isEnabled() )
-			{
-				continue;
-			}
+			if( !emitter.isEnabled() ) continue;
 			
 			// check for additive override and enable when set
-			if( emitter.useAdditive() )
-			{
-				GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE );
-			}
+			if( emitter.useAdditive() ) GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE );
 			
 			// now get the particle pool for this emitter and render all particles that are in use
 			ParticlePool pool = particlesByEmitter.get( emitter );
 			Image image = emitter.getImage();
-			if( image == null )
-			{
-				image = this.sprite;
-			}
+			if( image == null ) image = this.sprite;
 			
-			if( !emitter.isOriented() && !emitter.usePoints( this ) )
-			{
-				image.startUse();
-			}
+			if( !emitter.isOriented() && !emitter.usePoints( this ) ) image.startUse();
 			
 			for( int i = 0; i < pool.particles.length; i++ )
 			{
 				if( pool.particles[i].inUse() ) pool.particles[i].render();
 			}
 			
-			if( !emitter.isOriented() && !emitter.usePoints( this ) )
-			{
-				image.endUse();
-			}
+			if( !emitter.isOriented() && !emitter.usePoints( this ) ) image.endUse();
 			
 			// reset additive blend mode
-			if( emitter.useAdditive() )
-			{
-				GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE_MINUS_SRC_ALPHA );
-			}
+			if( emitter.useAdditive() ) GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE_MINUS_SRC_ALPHA );
 		}
 		
-		if( usePoints() )
-		{
-			GL.glDisable( SGL.GL_POINT_SMOOTH );
-		}
-		if( blendingMode == BLEND_ADDITIVE )
-		{
-			GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE_MINUS_SRC_ALPHA );
-		}
+		if( usePoints() ) GL.glDisable( SGL.GL_POINT_SMOOTH );
+		if( blendingMode == BLEND_ADDITIVE ) GL.glBlendFunc( SGL.GL_SRC_ALPHA, SGL.GL_ONE_MINUS_SRC_ALPHA );
 		
 		Color.white.bind();
 		GL.glTranslatef( -x, -y, 0 );
@@ -509,14 +467,8 @@ public class ParticleSystem
 				{
 					try
 					{
-						if( mask != null )
-						{
-							sprite = new Image( defaultImageName, mask );
-						}
-						else
-						{
-							sprite = new Image( defaultImageName );
-						}
+						if( mask != null ) sprite = new Image( defaultImageName, mask );
+						else sprite = new Image( defaultImageName );
 					}
 					catch( SlickException e )
 					{
@@ -535,10 +487,7 @@ public class ParticleSystem
 	 */
 	public void update( int delta )
 	{
-		if( ( sprite == null ) && ( defaultImageName != null ) )
-		{
-			loadSystemParticleImage();
-		}
+		if( ( sprite == null ) && ( defaultImageName != null ) ) loadSystemParticleImage();
 		
 		removeMe.clear();
 		ArrayList<ParticleEmitter> emitters = new ArrayList<>( this.emitters );
@@ -669,10 +618,7 @@ public class ParticleSystem
 		ParticlePool pool = particlesByEmitter.get( emitter );
 		for( int i = 0; i < pool.particles.length; i++ )
 		{
-			if( pool.particles[i].inUse() )
-			{
-				pool.particles[i].move( x, y );
-			}
+			if( pool.particles[i].inUse() ) pool.particles[i].move( x, y );
 		}
 	}
 	
@@ -690,10 +636,7 @@ public class ParticleSystem
 	{
 		for( int i = 0; i < emitters.size(); i++ )
 		{
-			if( !( emitters.get( i ) instanceof ConfigurableEmitter ) )
-			{
-				throw new SlickException( "Only systems contianing configurable emitters can be duplicated" );
-			}
+			if( !( emitters.get( i ) instanceof ConfigurableEmitter ) ) throw new SlickException( "Only systems contianing configurable emitters can be duplicated" );
 		}
 		
 		ParticleSystem theCopy = null;
