@@ -211,14 +211,8 @@ public class GradientFill implements ShapeFill
 	@Override
 	public Color colorAt( Shape shape, float x, float y )
 	{
-		if( local )
-		{
-			return colorAt( x - shape.getCenterX(), y - shape.getCenterY() );
-		}
-		else
-		{
-			return colorAt( x, y );
-		}
+		if( local ) return colorAt( x - shape.getCenterX(), y - shape.getCenterY() );
+		else return colorAt( x, y );
 	}
 	
 	/**
@@ -237,21 +231,12 @@ public class GradientFill implements ShapeFill
 		float dy2 = dx1;
 		float denom = ( dy2 * dx1 ) - ( dx2 * dy1 );
 		
-		if( denom == 0 )
-		{
-			return Color.black;
-		}
+		if( denom == 0 ) return Color.black;
 		
 		float u = ( dx2 * ( start.getY() - y ) ) - ( dy2 * ( start.getX() - x ) );
 		u /= denom;
-		if( u < 0 )
-		{
-			u = 0;
-		}
-		if( u > 1 )
-		{
-			u = 1;
-		}
+		if( u < 0 ) u = 0;
+		if( u > 1 ) u = 1;
 		float v = 1 - u;
 		
 		// u is the proportion down the line we are
