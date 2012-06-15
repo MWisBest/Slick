@@ -155,25 +155,16 @@ public class InkscapeLoader implements Loader
 			Element root = doc.getDocumentElement();
 			
 			String widthString = root.getAttribute( "width" );
-			while( Character.isLetter( widthString.charAt( widthString.length() - 1 ) ) )
-			{
-				widthString = widthString.substring( 0, widthString.length() - 1 );
-			}
+			while( Character.isLetter( widthString.charAt( widthString.length() - 1 ) ) ) widthString = widthString.substring( 0, widthString.length() - 1 );
 			
 			String heightString = root.getAttribute( "height" );
-			while( Character.isLetter( heightString.charAt( heightString.length() - 1 ) ) )
-			{
-				heightString = heightString.substring( 0, heightString.length() - 1 );
-			}
+			while( Character.isLetter( heightString.charAt( heightString.length() - 1 ) ) ) heightString = heightString.substring( 0, heightString.length() - 1 );
 			
 			float docWidth = Float.parseFloat( widthString );
 			float docHeight = Float.parseFloat( heightString );
 			
 			diagram = new Diagram( docWidth, docHeight );
-			if( !offset )
-			{
-				docHeight = 0;
-			}
+			if( !offset ) docHeight = 0;
 			loadChildren( root, Transform.createTranslateTransform( 0, -docHeight ) );
 			
 			return diagram;
@@ -193,10 +184,7 @@ public class InkscapeLoader implements Loader
 		NodeList list = element.getChildNodes();
 		for( int i = 0; i < list.getLength(); i++ )
 		{
-			if( list.item( i ) instanceof Element )
-			{
-				loadElement( (Element)list.item( i ), t );
-			}
+			if( list.item( i ) instanceof Element ) loadElement( (Element)list.item( i ), t );
 		}
 	}
 	
@@ -216,10 +204,7 @@ public class InkscapeLoader implements Loader
 		{
 			ElementProcessor processor = processors.get( i );
 			
-			if( processor.handles( element ) )
-			{
-				processor.process( this, element, diagram, t );
-			}
+			if( processor.handles( element ) ) processor.process( this, element, diagram, t );
 		}
 	}
 }

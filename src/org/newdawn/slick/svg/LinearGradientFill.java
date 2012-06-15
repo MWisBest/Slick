@@ -63,5 +63,4 @@ public class LinearGradientFill implements TexCoordGenerator
 		
 		return new Vector2f( u, 0 );
 	}
-	
 }

@@ -58,20 +58,17 @@ public class NonGeometricData
 	 */
 	private String morphColor( String str )
 	{
-		if( str.equals( "" ) )
+		switch( str )
 		{
-			return "#000000";
+			case "":
+				return "#000000";
+			case "white":
+				return "#ffffff";
+			case "black":
+				return "#000000";
+			default:
+				return str;
 		}
-		if( str.equals( "white" ) )
-		{
-			return "#ffffff";
-		}
-		if( str.equals( "black" ) )
-		{
-			return "#000000";
-		}
-		
-		return str;
 	}
 	
 	/**
@@ -82,44 +79,24 @@ public class NonGeometricData
 	 */
 	public void addAttribute( String attribute, String value )
 	{
-		if( value == null )
-		{
-			value = "";
-		}
+		if( value == null ) value = "";
 		
-		if( attribute.equals( FILL ) )
+		switch( attribute )
 		{
-			value = morphColor( value );
-		}
-		if( attribute.equals( STROKE_OPACITY ) )
-		{
-			if( value.equals( "0" ) )
-			{
-				props.setProperty( STROKE, "none" );
-			}
-		}
-		if( attribute.equals( STROKE_WIDTH ) )
-		{
-			if( value.equals( "" ) )
-			{
-				value = "1";
-			}
-			if( value.endsWith( "px" ) )
-			{
-				value = value.substring( 0, value.length() - 2 );
-			}
-		}
-		if( attribute.equals( STROKE ) )
-		{
-			if( "none".equals( props.getProperty( STROKE ) ) )
-			{
-				return;
-			}
-			if( "".equals( props.getProperty( STROKE ) ) )
-			{
-				return;
-			}
-			value = morphColor( value );
+			case FILL:
+				value = morphColor( value );
+				break;
+			case STROKE_OPACITY:
+				if( value.equals( "0" ) ) props.setProperty( STROKE, "none" );
+				break;
+			case STROKE_WIDTH:
+				if( value.equals( "" ) ) value = "";
+				if( value.endsWith( "px" ) ) value = value.substring( 0, value.length() - 2 );
+				break;
+			case STROKE:
+				if( "none".equals( props.getProperty( STROKE ) ) || "".equals( props.getProperty( STROKE ) ) ) return;
+				value = morphColor( value );
+				break;
 		}
 		
 		props.setProperty( attribute, value );
@@ -166,10 +143,7 @@ public class NonGeometricData
 	 */
 	public Color getAsColor( String attribute )
 	{
-		if( !isColor( attribute ) )
-		{
-			throw new RuntimeException( "Attribute " + attribute + " is not specified as a color:" + getAttribute( attribute ) );
-		}
+		if( !isColor( attribute ) ) throw new RuntimeException( "Attribute " + attribute + " is not specified as a color:" + getAttribute( attribute ) );
 		
 		int col = Integer.parseInt( getAttribute( attribute ).substring( 1 ), 16 );
 		
@@ -185,10 +159,7 @@ public class NonGeometricData
 	public String getAsReference( String attribute )
 	{
 		String value = getAttribute( attribute );
-		if( value.length() < 7 )
-		{
-			return "";
-		}
+		if( value.length() < 7 ) return "";
 		
 		value = value.substring( 5, value.length() - 1 );
 		
@@ -204,10 +175,7 @@ public class NonGeometricData
 	public float getAsFloat( String attribute )
 	{
 		String value = getAttribute( attribute );
-		if( value == null )
-		{
-			return 0;
-		}
+		if( value == null ) return 0;
 		
 		try
 		{

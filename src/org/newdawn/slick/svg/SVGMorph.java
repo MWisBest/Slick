@@ -39,10 +39,7 @@ public class SVGMorph extends Diagram
 	 */
 	public void addStep( Diagram diagram )
 	{
-		if( diagram.getFigureCount() != figures.size() )
-		{
-			throw new RuntimeException( "Mismatched diagrams, missing ids" );
-		}
+		if( diagram.getFigureCount() != figures.size() ) throw new RuntimeException( "Mismatched diagrams, missing ids" );
 		for( int i = 0; i < diagram.getFigureCount(); i++ )
 		{
 			Figure figure = diagram.getFigure( i );

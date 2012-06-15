@@ -51,12 +51,8 @@ public class RadialGradientFill implements TexCoordGenerator
 		float u = centre.distance( new Vector2f( x, y ) );
 		u /= radius;
 		
-		if( u > 0.99f )
-		{
-			u = 0.99f;
-		}
+		if( u > 0.99f ) u = 0.99f;
 		
 		return new Vector2f( u, 0 );
 	}
-	
 }

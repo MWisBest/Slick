@@ -137,10 +137,7 @@ public class Diagram
 		{
 			if( gradient.isRadial() )
 			{
-				for( int i = 0; i < InkscapeLoader.RADIAL_TRIANGULATION_LEVEL; i++ )
-				{
-					figure.getShape().increaseTriangulation();
-				}
+				for( int i = 0; i < InkscapeLoader.RADIAL_TRIANGULATION_LEVEL; i++ ) figure.getShape().increaseTriangulation();
 			}
 		}
 	}

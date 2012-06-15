@@ -80,23 +80,14 @@ public class SimpleDiagramRenderer
 				}
 				
 				String fill = figure.getData().getAsReference( NonGeometricData.FILL );
-				if( diagram.getPatternDef( fill ) != null )
-				{
-					System.out.println( "PATTERN" );
-				}
+				if( diagram.getPatternDef( fill ) != null ) System.out.println( "PATTERN" );
 				if( diagram.getGradient( fill ) != null )
 				{
 					Gradient gradient = diagram.getGradient( fill );
 					Shape shape = diagram.getFigure( i ).getShape();
 					TexCoordGenerator fg = null;
-					if( gradient.isRadial() )
-					{
-						fg = new RadialGradientFill( shape, diagram.getFigure( i ).getTransform(), gradient );
-					}
-					else
-					{
-						fg = new LinearGradientFill( shape, diagram.getFigure( i ).getTransform(), gradient );
-					}
+					if( gradient.isRadial() ) fg = new RadialGradientFill( shape, diagram.getFigure( i ).getTransform(), gradient );
+					else fg = new LinearGradientFill( shape, diagram.getFigure( i ).getTransform(), gradient );
 					
 					Color.white.bind();
 					ShapeRenderer.texture( shape, gradient.getImage(), fg );

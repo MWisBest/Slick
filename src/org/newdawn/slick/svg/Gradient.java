@@ -93,17 +93,11 @@ public class Gradient
 	 */
 	public void resolve( Diagram diagram )
 	{
-		if( ref == null )
-		{
-			return;
-		}
+		if( ref == null ) return;
 		
 		Gradient other = diagram.getGradient( ref );
 		
-		for( int i = 0; i < other.steps.size(); i++ )
-		{
-			steps.add( other.steps.get( i ) );
-		}
+		for( int i = 0; i < other.steps.size(); i++ ) steps.add( other.steps.get( i ) );
 	}
 	
 	/**
@@ -117,10 +111,7 @@ public class Gradient
 			for( int i = 0; i < 128; i++ )
 			{
 				Color col = getColorAt( i / 128.0f );
-				for( int j = 0; j < 16; j++ )
-				{
-					buffer.setRGBA( i, j, col.getRedByte(), col.getGreenByte(), col.getBlueByte(), col.getAlphaByte() );
-				}
+				for( int j = 0; j < 16; j++ ) buffer.setRGBA( i, j, col.getRedByte(), col.getGreenByte(), col.getBlueByte(), col.getAlphaByte() );
 			}
 			image = buffer.getImage();
 		}
@@ -257,14 +248,8 @@ public class Gradient
 	 */
 	public Color getColorAt( float p )
 	{
-		if( p <= 0 )
-		{
-			return steps.get( 0 ).col;
-		}
-		if( p > 1 )
-		{
-			return steps.get( steps.size() - 1 ).col;
-		}
+		if( p <= 0 ) return steps.get( 0 ).col;
+		if( p > 1 ) return steps.get( steps.size() - 1 ).col;
 		
 		for( int i = 1; i < steps.size(); i++ )
 		{
