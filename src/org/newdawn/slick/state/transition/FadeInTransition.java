@@ -78,10 +78,7 @@ public class FadeInTransition implements Transition
 	public void update( StateBasedGame game, GameContainer container, int delta )
 	{
 		color.a -= delta * ( 1.0f / fadeTime );
-		if( color.a < 0 )
-		{
-			color.a = 0;
-		}
+		if( color.a < 0 ) color.a = 0;
 	}
 	
 	/**
@@ -95,8 +92,5 @@ public class FadeInTransition implements Transition
 	@Override
 	public void init( GameState firstState, GameState secondState )
 	{
-		// TODO Auto-generated method stub
-		
 	}
-	
 }

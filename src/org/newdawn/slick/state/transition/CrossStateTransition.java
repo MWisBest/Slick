@@ -113,5 +113,4 @@ public abstract class CrossStateTransition implements Transition
 	public void postRenderSecondState( StateBasedGame game, GameContainer container, Graphics g ) throws SlickException
 	{
 	}
-	
 }

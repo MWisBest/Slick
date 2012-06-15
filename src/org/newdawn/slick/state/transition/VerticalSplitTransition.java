@@ -36,7 +36,6 @@ public class VerticalSplitTransition implements Transition
 	 */
 	public VerticalSplitTransition()
 	{
-		
 	}
 	
 	/**
@@ -119,10 +118,6 @@ public class VerticalSplitTransition implements Transition
 	public void update( StateBasedGame game, GameContainer container, int delta ) throws SlickException
 	{
 		offset += delta * 1f;
-		if( offset > container.getHeight() / 2 )
-		{
-			finish = true;
-		}
+		if( offset > container.getHeight() / 2 ) finish = true;
 	}
-	
 }

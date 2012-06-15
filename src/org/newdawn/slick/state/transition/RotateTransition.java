@@ -33,7 +33,6 @@ public class RotateTransition implements Transition
 	 */
 	public RotateTransition()
 	{
-		
 	}
 	
 	/**
@@ -103,15 +102,8 @@ public class RotateTransition implements Transition
 	public void update( StateBasedGame game, GameContainer container, int delta ) throws SlickException
 	{
 		ang += delta * 0.5f;
-		if( ang > 500 )
-		{
-			finish = true;
-		}
+		if( ang > 500 ) finish = true;
 		scale -= delta * 0.001f;
-		if( scale < 0 )
-		{
-			scale = 0;
-		}
+		if( scale < 0 ) scale = 0;
 	}
-	
 }

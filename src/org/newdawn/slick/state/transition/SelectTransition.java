@@ -52,7 +52,6 @@ public class SelectTransition implements Transition
 	 */
 	public SelectTransition()
 	{
-		
 	}
 	
 	/**
@@ -140,55 +139,28 @@ public class SelectTransition implements Transition
 			if( scale1 > 0.4f )
 			{
 				scale1 -= delta * 0.002f;
-				if( scale1 <= 0.4f )
-				{
-					scale1 = 0.4f;
-				}
+				if( scale1 <= 0.4f ) scale1 = 0.4f;
 				xp1 += delta * 0.3f;
-				if( xp1 > 50 )
-				{
-					xp1 = 50;
-				}
+				if( xp1 > 50 ) xp1 = 50;
 				yp1 += delta * 0.5f;
-				if( yp1 > ( container.getHeight() / 4 ) )
-				{
-					yp1 = ( container.getHeight() / 4 );
-				}
+				if( yp1 > ( container.getHeight() / 4 ) ) yp1 = ( container.getHeight() / 4 );
 			}
-			else
-			{
-				moveBackDone = true;
-			}
+			else moveBackDone = true;
 		}
 		else
 		{
 			pause -= delta;
-			if( pause > 0 )
-			{
-				return;
-			}
+			if( pause > 0 ) return;
 			if( scale2 < 1 )
 			{
 				scale2 += delta * 0.002f;
-				if( scale2 >= 1 )
-				{
-					scale2 = 1f;
-				}
+				if( scale2 >= 1 ) scale2 = 1f;
 				xp2 -= delta * 1.5f;
-				if( xp2 < 0 )
-				{
-					xp2 = 0;
-				}
+				if( xp2 < 0 ) xp2 = 0;
 				yp2 -= delta * 0.5f;
-				if( yp2 < 0 )
-				{
-					yp2 = 0;
-				}
+				if( yp2 < 0 ) yp2 = 0;
 			}
-			else
-			{
-				finish = true;
-			}
+			else finish = true;
 		}
 	}
 }

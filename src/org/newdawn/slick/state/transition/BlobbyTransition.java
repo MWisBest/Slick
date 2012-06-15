@@ -43,7 +43,6 @@ public class BlobbyTransition implements Transition
 	 */
 	public BlobbyTransition()
 	{
-		
 	}
 	
 	/**
@@ -92,10 +91,7 @@ public class BlobbyTransition implements Transition
 		prev.render( container, game, g );
 		
 		MaskUtil.defineMask();
-		for( int i = 0; i < blobs.size(); i++ )
-		{
-			blobs.get( i ).render( g );
-		}
+		for( int i = 0; i < blobs.size(); i++ ) blobs.get( i ).render( g );
 		MaskUtil.finishDefineMask();
 		
 		MaskUtil.drawOnMask();
@@ -116,22 +112,13 @@ public class BlobbyTransition implements Transition
 	{
 		if( blobs.size() == 0 )
 		{
-			for( int i = 0; i < blobCount; i++ )
-			{
-				blobs.add( new Blob( container ) );
-			}
+			for( int i = 0; i < blobCount; i++ ) blobs.add( new Blob( container ) );
 		}
 		
-		for( int i = 0; i < blobs.size(); i++ )
-		{
-			blobs.get( i ).update( delta );
-		}
+		for( int i = 0; i < blobs.size(); i++ ) blobs.get( i ).update( delta );
 		
 		timer -= delta;
-		if( timer < 0 )
-		{
-			finish = true;
-		}
+		if( timer < 0 ) finish = true;
 	}
 	
 	/**

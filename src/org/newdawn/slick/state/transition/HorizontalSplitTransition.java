@@ -36,7 +36,6 @@ public class HorizontalSplitTransition implements Transition
 	 */
 	public HorizontalSplitTransition()
 	{
-		
 	}
 	
 	/**
@@ -118,9 +117,6 @@ public class HorizontalSplitTransition implements Transition
 	public void update( StateBasedGame game, GameContainer container, int delta ) throws SlickException
 	{
 		offset += delta * 1f;
-		if( offset > container.getWidth() / 2 )
-		{
-			finish = true;
-		}
+		if( offset > container.getWidth() / 2 ) finish = true;
 	}
 }

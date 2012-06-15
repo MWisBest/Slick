@@ -14,7 +14,6 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class EmptyTransition implements Transition
 {
-	
 	/**
 	 * @see org.newdawn.slick.state.transition.Transition#isComplete()
 	 */
@@ -30,7 +29,6 @@ public class EmptyTransition implements Transition
 	@Override
 	public void postRender( StateBasedGame game, GameContainer container, Graphics g ) throws SlickException
 	{
-		// no op
 	}
 	
 	/**
@@ -39,7 +37,6 @@ public class EmptyTransition implements Transition
 	@Override
 	public void preRender( StateBasedGame game, GameContainer container, Graphics g ) throws SlickException
 	{
-		// no op
 	}
 	
 	/**
@@ -48,13 +45,10 @@ public class EmptyTransition implements Transition
 	@Override
 	public void update( StateBasedGame game, GameContainer container, int delta ) throws SlickException
 	{
-		// no op
 	}
 	
 	@Override
 	public void init( GameState firstState, GameState secondState )
 	{
-		// TODO Auto-generated method stub
-		
 	}
 }
