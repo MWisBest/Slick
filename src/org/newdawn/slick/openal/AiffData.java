@@ -199,17 +199,34 @@ public class AiffData
 		
 		// get channels
 		int channels = 0;
+		
 		if( audioformat.getChannels() == 1 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 ) channels = AL10.AL_FORMAT_MONO8;
-			else if( audioformat.getSampleSizeInBits() == 16 ) channels = AL10.AL_FORMAT_MONO16;
-			else throw new RuntimeException( "Illegal sample size" );
+			switch( audioformat.getSampleSizeInBits() )
+			{
+				case 8:
+					channels = AL10.AL_FORMAT_MONO8;
+					break;
+				case 16:
+					channels = AL10.AL_FORMAT_MONO16;
+					break;
+				default:
+					throw new RuntimeException( "Illegal sample size" );
+			}
 		}
 		else if( audioformat.getChannels() == 2 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 ) channels = AL10.AL_FORMAT_STEREO8;
-			else if( audioformat.getSampleSizeInBits() == 16 ) channels = AL10.AL_FORMAT_STEREO16;
-			else throw new RuntimeException( "Illegal sample size" );
+			switch( audioformat.getSampleSizeInBits() )
+			{
+				case 8:
+					channels = AL10.AL_FORMAT_STEREO8;
+					break;
+				case 16:
+					channels = AL10.AL_FORMAT_STEREO16;
+					break;
+				default:
+					throw new RuntimeException( "Illegal sample size" );
+			}
 		}
 		else throw new RuntimeException( "Only mono or stereo is supported" );
 		

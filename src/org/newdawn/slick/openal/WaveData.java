@@ -229,10 +229,7 @@ public class WaveData
 					throw new RuntimeException( "Illegal sample size" );
 			}
 		}
-		else
-		{
-			throw new RuntimeException( "Only mono or stereo is supported" );
-		}
+		else throw new RuntimeException( "Only mono or stereo is supported" );
 		
 		
 		// read data into buffer
