@@ -18,7 +18,6 @@ public abstract class BasicGameState implements GameState
 	@Override
 	public void inputStarted()
 	{
-		
 	}
 	
 	/**
@@ -212,5 +211,4 @@ public abstract class BasicGameState implements GameState
 	public void mouseWheelMoved( int newValue )
 	{
 	}
-	
 }

@@ -75,7 +75,6 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void inputStarted()
 	{
-		
 	}
 	
 	/**
@@ -126,10 +125,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	{
 		states.put( new Integer( state.getID() ), state );
 		
-		if( currentState.getID() == -1 )
-		{
-			currentState = state;
-		}
+		if( currentState.getID() == -1 ) currentState = state;
 	}
 	
 	/**
@@ -162,22 +158,13 @@ public abstract class StateBasedGame implements Game, InputListener
 	 */
 	public void enterState( int id, Transition leave, Transition enter )
 	{
-		if( leave == null )
-		{
-			leave = new EmptyTransition();
-		}
-		if( enter == null )
-		{
-			enter = new EmptyTransition();
-		}
+		if( leave == null ) leave = new EmptyTransition();
+		if( enter == null ) enter = new EmptyTransition();
 		leaveTransition = leave;
 		enterTransition = enter;
 		
 		nextState = getState( id );
-		if( nextState == null )
-		{
-			throw new RuntimeException( "No game state registered with the ID: " + id );
-		}
+		if( nextState == null ) throw new RuntimeException( "No game state registered with the ID: " + id );
 		
 		leaveTransition.init( currentState, nextState );
 	}
@@ -191,15 +178,9 @@ public abstract class StateBasedGame implements Game, InputListener
 		this.container = container;
 		initStatesList( container );
 		
-		for( GameState state : states.values() )
-		{
-			state.init( container, this );
-		}
+		for( GameState state : states.values() ) state.init( container, this );
 		
-		if( currentState != null )
-		{
-			currentState.enter( container, this );
-		}
+		if( currentState != null ) currentState.enter( container, this );
 	}
 	
 	/**
@@ -218,25 +199,13 @@ public abstract class StateBasedGame implements Game, InputListener
 	{
 		preRenderState( container, g );
 		
-		if( leaveTransition != null )
-		{
-			leaveTransition.preRender( this, container, g );
-		}
-		else if( enterTransition != null )
-		{
-			enterTransition.preRender( this, container, g );
-		}
+		if( leaveTransition != null ) leaveTransition.preRender( this, container, g );
+		else if( enterTransition != null ) enterTransition.preRender( this, container, g );
 		
 		currentState.render( container, this, g );
 		
-		if( leaveTransition != null )
-		{
-			leaveTransition.postRender( this, container, g );
-		}
-		else if( enterTransition != null )
-		{
-			enterTransition.postRender( this, container, g );
-		}
+		if( leaveTransition != null ) leaveTransition.postRender( this, container, g );
+		else if( enterTransition != null ) enterTransition.postRender( this, container, g );
 		
 		postRenderState( container, g );
 	}
@@ -286,28 +255,16 @@ public abstract class StateBasedGame implements Game, InputListener
 				nextState = null;
 				leaveTransition = null;
 				currentState.enter( container, this );
-				if( enterTransition != null )
-				{
-					enterTransition.init( currentState, prevState );
-				}
+				if( enterTransition != null ) enterTransition.init( currentState, prevState );
 			}
-			else
-			{
-				return;
-			}
+			else return;
 		}
 		
 		if( enterTransition != null )
 		{
 			enterTransition.update( this, container, delta );
-			if( enterTransition.isComplete() )
-			{
-				enterTransition = null;
-			}
-			else
-			{
-				return;
-			}
+			if( enterTransition.isComplete() ) enterTransition = null;
+			else return;
 		}
 		
 		currentState.update( container, this, delta );
@@ -385,10 +342,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerButtonPressed( int controller, int button )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerButtonPressed( controller, button );
 	}
@@ -399,10 +353,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerButtonReleased( int controller, int button )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerButtonReleased( controller, button );
 	}
@@ -413,10 +364,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerDownPressed( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerDownPressed( controller );
 	}
@@ -427,10 +375,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerDownReleased( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerDownReleased( controller );
 	}
@@ -441,10 +386,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerLeftPressed( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerLeftPressed( controller );
 	}
@@ -455,10 +397,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerLeftReleased( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerLeftReleased( controller );
 	}
@@ -469,10 +408,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerRightPressed( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerRightPressed( controller );
 	}
@@ -483,10 +419,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerRightReleased( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerRightReleased( controller );
 	}
@@ -497,10 +430,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerUpPressed( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerUpPressed( controller );
 	}
@@ -511,10 +441,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void controllerUpReleased( int controller )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.controllerUpReleased( controller );
 	}
@@ -525,10 +452,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.keyPressed( key, c );
 	}
@@ -539,10 +463,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void keyReleased( int key, char c )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.keyReleased( key, c );
 	}
@@ -553,10 +474,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mouseMoved( int oldx, int oldy, int newx, int newy )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mouseMoved( oldx, oldy, newx, newy );
 	}
@@ -567,10 +485,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mouseDragged( int oldx, int oldy, int newx, int newy )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mouseDragged( oldx, oldy, newx, newy );
 	}
@@ -581,10 +496,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mouseClicked( int button, int x, int y, int clickCount )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mouseClicked( button, x, y, clickCount );
 	}
@@ -595,10 +507,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mousePressed( int button, int x, int y )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mousePressed( button, x, y );
 	}
@@ -609,10 +518,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mouseReleased( int button, int x, int y )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mouseReleased( button, x, y );
 	}
@@ -623,10 +529,7 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public boolean isAcceptingInput()
 	{
-		if( transitioning() )
-		{
-			return false;
-		}
+		if( transitioning() ) return false;
 		
 		return currentState.isAcceptingInput();
 	}
@@ -645,12 +548,8 @@ public abstract class StateBasedGame implements Game, InputListener
 	@Override
 	public void mouseWheelMoved( int newValue )
 	{
-		if( transitioning() )
-		{
-			return;
-		}
+		if( transitioning() ) return;
 		
 		currentState.mouseWheelMoved( newValue );
 	}
-	
 }
