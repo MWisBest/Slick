@@ -86,11 +86,7 @@ public class PNGImageData implements LoadableImageData
 	@Override
 	public ByteBuffer loadImage( InputStream fis, boolean flipped, boolean forceAlpha, int[] transparent ) throws IOException
 	{
-		if( transparent != null )
-		{
-			forceAlpha = true;
-			// throw new IOException("Transparent color not support in custom PNG Decoder");
-		}
+		if( transparent != null ) forceAlpha = true; // throw new IOException("Transparent color not support in custom PNG Decoder");
 		
 		PNGDecoder decoder = new PNGDecoder( fis );
 		
@@ -100,30 +96,12 @@ public class PNGImageData implements LoadableImageData
 		texHeight = get2Fold( height );
 		// get the decoder's format
 		final PNGDecoder.Format decoderFormat = decoder.decideTextureFormat( PNGDecoder.Format.LUMINANCE );
-		if( decoderFormat == PNGDecoder.Format.RGB )
-		{
-			format = Format.RGB;
-		}
-		else if( decoderFormat == PNGDecoder.Format.RGBA )
-		{
-			format = Format.RGBA;
-		}
-		else if( decoderFormat == PNGDecoder.Format.BGRA )
-		{
-			format = Format.BGRA;
-		}
-		else if( decoderFormat == PNGDecoder.Format.LUMINANCE )
-		{
-			format = Format.GRAY;
-		}
-		else if( decoderFormat == PNGDecoder.Format.LUMINANCE_ALPHA )
-		{
-			format = Format.GRAYALPHA;
-		}
-		else
-		{
-			throw new IOException( "Unsupported Image format." );
-		}
+		if( decoderFormat == PNGDecoder.Format.RGB ) format = Format.RGB;
+		else if( decoderFormat == PNGDecoder.Format.RGBA ) format = Format.RGBA;
+		else if( decoderFormat == PNGDecoder.Format.BGRA ) format = Format.BGRA;
+		else if( decoderFormat == PNGDecoder.Format.LUMINANCE ) format = Format.GRAY;
+		else if( decoderFormat == PNGDecoder.Format.LUMINANCE_ALPHA ) format = Format.GRAYALPHA;
+		else throw new IOException( "Unsupported Image format." );
 		
 		int perPixel = format.getColorComponents();
 		
@@ -170,29 +148,14 @@ public class PNGImageData implements LoadableImageData
 					
 					temp.position( dstOffset );
 					scratch.position( srcOffset );
-					for( int i = 0; i < orgComp; i++ )
-					{
-						temp.put( scratch.get() );
-					}
-					if( ( x < getWidth() ) && ( y < getHeight() ) )
-					{
-						temp.put( (byte)255 );
-					}
-					else
-					{
-						temp.put( (byte)0 );
-					}
+					for( int i = 0; i < orgComp; i++ ) temp.put( scratch.get() );
+					if( ( x < getWidth() ) && ( y < getHeight() ) ) temp.put( (byte)255 );
+					else temp.put( (byte)0 );
 				}
 			}
 			
-			if( format == Format.RGB )
-			{
-				format = Format.RGBA;
-			}
-			else if( format == Format.GRAY )
-			{
-				format = Format.GRAYALPHA;
-			}
+			if( format == Format.RGB ) format = Format.RGBA;
+			else if( format == Format.GRAY ) format = Format.GRAYALPHA;
 			scratch = temp;
 		}
 		
@@ -217,10 +180,7 @@ public class PNGImageData implements LoadableImageData
 						break;
 					}
 				}
-				if( match )
-				{
-					scratch.put( i + components - 1, (byte)0 );
-				}
+				if( match ) scratch.put( i + components - 1, (byte)0 );
 			}
 		}
 		
@@ -237,10 +197,7 @@ public class PNGImageData implements LoadableImageData
 	 */
 	private int toInt( byte b )
 	{
-		if( b < 0 )
-		{
-			return 256 + b;
-		}
+		if( b < 0 ) return 256 + b;
 		
 		return b;
 	}
@@ -254,10 +211,7 @@ public class PNGImageData implements LoadableImageData
 	private int get2Fold( int fold )
 	{
 		int ret = 2;
-		while( ret < fold )
-		{
-			ret *= 2;
-		}
+		while( ret < fold ) ret *= 2;
 		return ret;
 	}
 	

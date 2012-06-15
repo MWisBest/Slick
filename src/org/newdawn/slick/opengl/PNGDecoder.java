@@ -45,7 +45,6 @@ import java.util.zip.Inflater;
  */
 public class PNGDecoder
 {
-	
 	public enum Format
 	{
 		ALPHA( 1, true ),
@@ -115,10 +114,7 @@ public class PNGDecoder
 		this.buffer = new byte[4096];
 		
 		readFully( buffer, 0, SIGNATURE.length );
-		if( !checkSignature( buffer ) )
-		{
-			throw new IOException( "Not a valid PNG file" );
-		}
+		if( !checkSignature( buffer ) ) throw new IOException( "Not a valid PNG file" );
 		
 		openChunk( IHDR );
 		readIHDR();
@@ -141,10 +137,7 @@ public class PNGDecoder
 			closeChunk();
 		}
 		
-		if( colorType == COLOR_INDEXED && palette == null )
-		{
-			throw new IOException( "Missing PLTE chunk" );
-		}
+		if( colorType == COLOR_INDEXED && palette == null ) throw new IOException( "Missing PLTE chunk" );
 	}
 	
 	public int getHeight()
@@ -208,24 +201,15 @@ public class PNGDecoder
 	 */
 	public void overwriteTRNS( byte r, byte g, byte b )
 	{
-		if( hasAlphaChannel() )
-		{
-			throw new UnsupportedOperationException( "image has an alpha channel" );
-		}
+		if( hasAlphaChannel() ) throw new UnsupportedOperationException( "image has an alpha channel" );
 		byte[] pal = this.palette;
-		if( pal == null )
-		{
-			transPixel = new byte[] { 0, r, 0, g, 0, b };
-		}
+		if( pal == null ) transPixel = new byte[] { 0, r, 0, g, 0, b };
 		else
 		{
 			paletteA = new byte[pal.length / 3];
 			for( int i = 0, j = 0; i < pal.length; i += 3, j++ )
 			{
-				if( pal[i] != r || pal[i + 1] != g || pal[i + 2] != b )
-				{
-					paletteA[j] = (byte)0xFF;
-				}
+				if( pal[i] != r || pal[i + 1] != g || pal[i + 2] != b ) paletteA[j] = (byte)0xFF;
 			}
 		}
 	}
@@ -458,10 +442,7 @@ public class PNGDecoder
 	 */
 	public void decodeFlipped( ByteBuffer buffer, int stride, Format fmt ) throws IOException
 	{
-		if( stride <= 0 )
-		{
-			throw new IllegalArgumentException( "stride" );
-		}
+		if( stride <= 0 ) throw new IllegalArgumentException( "stride" );
 		int pos = buffer.position();
 		int posDelta = ( height - 1 ) * stride;
 		buffer.position( pos + posDelta );
@@ -487,19 +468,13 @@ public class PNGDecoder
 				byte g = curLine[i + 1];
 				byte b = curLine[i + 2];
 				byte a = (byte)0xFF;
-				if( r == tr && g == tg && b == tb )
-				{
-					a = 0;
-				}
+				if( r == tr && g == tg && b == tb ) a = 0;
 				buffer.put( a ).put( b ).put( g ).put( r );
 			}
 		}
 		else
 		{
-			for( int i = 1, n = curLine.length; i < n; i += 3 )
-			{
-				buffer.put( (byte)0xFF ).put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] );
-			}
+			for( int i = 1, n = curLine.length; i < n; i += 3 ) buffer.put( (byte)0xFF ).put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] );
 		}
 	}
 	
@@ -516,19 +491,13 @@ public class PNGDecoder
 				byte g = curLine[i + 1];
 				byte b = curLine[i + 2];
 				byte a = (byte)0xFF;
-				if( r == tr && g == tg && b == tb )
-				{
-					a = 0;
-				}
+				if( r == tr && g == tg && b == tb ) a = 0;
 				buffer.put( r ).put( g ).put( b ).put( a );
 			}
 		}
 		else
 		{
-			for( int i = 1, n = curLine.length; i < n; i += 3 )
-			{
-				buffer.put( curLine[i] ).put( curLine[i + 1] ).put( curLine[i + 2] ).put( (byte)0xFF );
-			}
+			for( int i = 1, n = curLine.length; i < n; i += 3 ) buffer.put( curLine[i] ).put( curLine[i + 1] ).put( curLine[i + 2] ).put( (byte)0xFF );
 		}
 	}
 	
@@ -545,44 +514,29 @@ public class PNGDecoder
 				byte g = curLine[i + 1];
 				byte b = curLine[i + 2];
 				byte a = (byte)0xFF;
-				if( r == tr && g == tg && b == tb )
-				{
-					a = 0;
-				}
+				if( r == tr && g == tg && b == tb ) a = 0;
 				buffer.put( b ).put( g ).put( r ).put( a );
 			}
 		}
 		else
 		{
-			for( int i = 1, n = curLine.length; i < n; i += 3 )
-			{
-				buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] ).put( (byte)0xFF );
-			}
+			for( int i = 1, n = curLine.length; i < n; i += 3 ) buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] ).put( (byte)0xFF );
 		}
 	}
 	
 	private void copyRGBAtoABGR( ByteBuffer buffer, byte[] curLine )
 	{
-		for( int i = 1, n = curLine.length; i < n; i += 4 )
-		{
-			buffer.put( curLine[i + 3] ).put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] );
-		}
+		for( int i = 1, n = curLine.length; i < n; i += 4 ) buffer.put( curLine[i + 3] ).put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] );
 	}
 	
 	private void copyRGBAtoBGRA( ByteBuffer buffer, byte[] curLine )
 	{
-		for( int i = 1, n = curLine.length; i < n; i += 4 )
-		{
-			buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] ).put( curLine[i + 3] );
-		}
+		for( int i = 1, n = curLine.length; i < n; i += 4 ) buffer.put( curLine[i + 2] ).put( curLine[i + 1] ).put( curLine[i] ).put( curLine[i + 3] );
 	}
 	
 	private void copyRGBAtoRGB( ByteBuffer buffer, byte[] curLine )
 	{
-		for( int i = 1, n = curLine.length; i < n; i += 4 )
-		{
-			buffer.put( curLine[i] ).put( curLine[i + 1] ).put( curLine[i + 2] );
-		}
+		for( int i = 1, n = curLine.length; i < n; i += 4 ) buffer.put( curLine[i] ).put( curLine[i + 1] ).put( curLine[i + 2] );
 	}
 	
 	private void copyPALtoABGR( ByteBuffer buffer, byte[] curLine )
@@ -756,18 +710,12 @@ public class PNGDecoder
 	private void unfilterSub( byte[] curLine )
 	{
 		final int bpp = this.bytesPerPixel;
-		for( int i = bpp + 1, n = curLine.length; i < n; ++i )
-		{
-			curLine[i] += curLine[i - bpp];
-		}
+		for( int i = bpp + 1, n = curLine.length; i < n; ++i ) curLine[i] += curLine[i - bpp];
 	}
 	
 	private void unfilterUp( byte[] curLine, byte[] prevLine )
 	{
-		for( int i = 1, n = curLine.length; i < n; ++i )
-		{
-			curLine[i] += prevLine[i];
-		}
+		for( int i = 1, n = curLine.length; i < n; ++i ) curLine[i] += prevLine[i];
 	}
 	
 	private void unfilterAverage( byte[] curLine, byte[] prevLine )
@@ -775,14 +723,8 @@ public class PNGDecoder
 		final int bpp = this.bytesPerPixel;
 		
 		int i;
-		for( i = 1; i <= bpp; ++i )
-		{
-			curLine[i] += (byte)( ( prevLine[i] & 0xFF ) >>> 1 );
-		}
-		for( int n = curLine.length; i < n; ++i )
-		{
-			curLine[i] += (byte)( ( ( prevLine[i] & 0xFF ) + ( curLine[i - bpp] & 0xFF ) ) >>> 1 );
-		}
+		for( i = 1; i <= bpp; ++i ) curLine[i] += (byte)( ( prevLine[i] & 0xFF ) >>> 1 );
+		for( int n = curLine.length; i < n; ++i ) curLine[i] += (byte)( ( ( prevLine[i] & 0xFF ) + ( curLine[i - bpp] & 0xFF ) ) >>> 1 );
 	}
 	
 	private void unfilterPaeth( byte[] curLine, byte[] prevLine )
@@ -790,10 +732,7 @@ public class PNGDecoder
 		final int bpp = this.bytesPerPixel;
 		
 		int i;
-		for( i = 1; i <= bpp; ++i )
-		{
-			curLine[i] += prevLine[i];
-		}
+		for( i = 1; i <= bpp; ++i ) curLine[i] += prevLine[i];
 		for( int n = curLine.length; i < n; ++i )
 		{
 			int a = curLine[i - bpp] & 255;
@@ -824,31 +763,19 @@ public class PNGDecoder
 		switch( colorType )
 		{
 			case COLOR_GREYSCALE:
-				if( bitdepth != 8 )
-				{
-					throw new IOException( "Unsupported bit depth: " + bitdepth );
-				}
+				if( bitdepth != 8 ) throw new IOException( "Unsupported bit depth: " + bitdepth );
 				bytesPerPixel = 1;
 				break;
 			case COLOR_GREYALPHA:
-				if( bitdepth != 8 )
-				{
-					throw new IOException( "Unsupported bit depth: " + bitdepth );
-				}
+				if( bitdepth != 8 ) throw new IOException( "Unsupported bit depth: " + bitdepth );
 				bytesPerPixel = 2;
 				break;
 			case COLOR_TRUECOLOR:
-				if( bitdepth != 8 )
-				{
-					throw new IOException( "Unsupported bit depth: " + bitdepth );
-				}
+				if( bitdepth != 8 ) throw new IOException( "Unsupported bit depth: " + bitdepth );
 				bytesPerPixel = 3;
 				break;
 			case COLOR_TRUEALPHA:
-				if( bitdepth != 8 )
-				{
-					throw new IOException( "Unsupported bit depth: " + bitdepth );
-				}
+				if( bitdepth != 8 ) throw new IOException( "Unsupported bit depth: " + bitdepth );
 				bytesPerPixel = 4;
 				break;
 			case COLOR_INDEXED:
@@ -868,27 +795,15 @@ public class PNGDecoder
 				throw new IOException( "unsupported color format: " + colorType );
 		}
 		
-		if( buffer[10] != 0 )
-		{
-			throw new IOException( "unsupported compression method" );
-		}
-		if( buffer[11] != 0 )
-		{
-			throw new IOException( "unsupported filtering method" );
-		}
-		if( buffer[12] != 0 )
-		{
-			throw new IOException( "unsupported interlace method" );
-		}
+		if( buffer[10] != 0 ) throw new IOException( "unsupported compression method" );
+		if( buffer[11] != 0 ) throw new IOException( "unsupported filtering method" );
+		if( buffer[12] != 0 ) throw new IOException( "unsupported interlace method" );
 	}
 	
 	private void readPLTE() throws IOException
 	{
 		int paletteEntries = chunkLength / 3;
-		if( paletteEntries < 1 || paletteEntries > 256 || ( chunkLength % 3 ) != 0 )
-		{
-			throw new IOException( "PLTE chunk has wrong length" );
-		}
+		if( paletteEntries < 1 || paletteEntries > 256 || ( chunkLength % 3 ) != 0 ) throw new IOException( "PLTE chunk has wrong length" );
 		palette = new byte[paletteEntries * 3];
 		readChunk( palette, 0, palette.length );
 	}
@@ -908,10 +823,7 @@ public class PNGDecoder
 				readChunk( transPixel, 0, 6 );
 				break;
 			case COLOR_INDEXED:
-				if( palette == null )
-				{
-					throw new IOException( "tRNS chunk without PLTE chunk" );
-				}
+				if( palette == null ) throw new IOException( "tRNS chunk without PLTE chunk" );
 				paletteA = new byte[palette.length / 3];
 				Arrays.fill( paletteA, (byte)0xFF );
 				readChunk( paletteA, 0, paletteA.length );
@@ -923,20 +835,13 @@ public class PNGDecoder
 	
 	private void closeChunk() throws IOException
 	{
-		if( chunkRemaining > 0 )
-		{
-			// just skip the rest and the CRC
-			skip( chunkRemaining + 4 );
-		}
+		if( chunkRemaining > 0 ) skip( chunkRemaining + 4 ); // just skip the rest and the CRC
 		else
 		{
 			readFully( buffer, 0, 4 );
 			int expectedCrc = readInt( buffer, 0 );
 			int computedCrc = (int)crc.getValue();
-			if( computedCrc != expectedCrc )
-			{
-				throw new IOException( "Invalid CRC" );
-			}
+			if( computedCrc != expectedCrc ) throw new IOException( "Invalid CRC" );
 		}
 		chunkRemaining = 0;
 		chunkLength = 0;
@@ -956,26 +861,17 @@ public class PNGDecoder
 	private void openChunk( int expected ) throws IOException
 	{
 		openChunk();
-		if( chunkType != expected )
-		{
-			throw new IOException( "Expected chunk: " + Integer.toHexString( expected ) );
-		}
+		if( chunkType != expected ) throw new IOException( "Expected chunk: " + Integer.toHexString( expected ) );
 	}
 	
 	private void checkChunkLength( int expected ) throws IOException
 	{
-		if( chunkLength != expected )
-		{
-			throw new IOException( "Chunk has wrong size" );
-		}
+		if( chunkLength != expected ) throw new IOException( "Chunk has wrong size" );
 	}
 	
 	private int readChunk( byte[] buffer, int offset, int length ) throws IOException
 	{
-		if( length > chunkRemaining )
-		{
-			length = chunkRemaining;
-		}
+		if( length > chunkRemaining ) length = chunkRemaining;
 		readFully( buffer, offset, length );
 		crc.update( buffer, offset, length );
 		chunkRemaining -= length;
@@ -1003,18 +899,9 @@ public class PNGDecoder
 				int read = inflater.inflate( buffer, offset, length );
 				if( read <= 0 )
 				{
-					if( inflater.finished() )
-					{
-						throw new EOFException();
-					}
-					if( inflater.needsInput() )
-					{
-						refillInflater( inflater );
-					}
-					else
-					{
-						throw new IOException( "Can't inflate " + length + " bytes" );
-					}
+					if( inflater.finished() ) throw new EOFException();
+					if( inflater.needsInput() ) refillInflater( inflater );
+					else throw new IOException( "Can't inflate " + length + " bytes" );
 				}
 				else
 				{
@@ -1035,10 +922,7 @@ public class PNGDecoder
 		do
 		{
 			int read = input.read( buffer, offset, length );
-			if( read < 0 )
-			{
-				throw new EOFException();
-			}
+			if( read < 0 ) throw new EOFException();
 			offset += read;
 			length -= read;
 		}
@@ -1055,10 +939,7 @@ public class PNGDecoder
 		while( amount > 0 )
 		{
 			long skipped = input.skip( amount );
-			if( skipped < 0 )
-			{
-				throw new EOFException();
-			}
+			if( skipped < 0 ) throw new EOFException();
 			amount -= skipped;
 		}
 	}
@@ -1067,10 +948,7 @@ public class PNGDecoder
 	{
 		for( int i = 0; i < SIGNATURE.length; i++ )
 		{
-			if( buffer[i] != SIGNATURE[i] )
-			{
-				return false;
-			}
+			if( buffer[i] != SIGNATURE[i] ) return false;
 		}
 		return true;
 	}

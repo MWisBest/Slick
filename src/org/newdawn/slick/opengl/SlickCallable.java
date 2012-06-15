@@ -53,10 +53,7 @@ public abstract class SlickCallable
 	 */
 	public static void enterSafeBlock()
 	{
-		if( inSafe )
-		{
-			return;
-		}
+		if( inSafe ) return;
 		
 		Renderer.get().flush();
 		lastUsed = TextureImpl.getLastBind();
@@ -78,10 +75,7 @@ public abstract class SlickCallable
 	 */
 	public static void leaveSafeBlock()
 	{
-		if( !inSafe )
-		{
-			return;
-		}
+		if( !inSafe ) return;
 		
 		GL11.glMatrixMode( GL11.GL_PROJECTION );
 		GL11.glPopMatrix();
@@ -90,14 +84,8 @@ public abstract class SlickCallable
 		GL11.glPopClientAttrib();
 		GL11.glPopAttrib();
 		
-		if( lastUsed != null )
-		{
-			lastUsed.bind();
-		}
-		else
-		{
-			TextureImpl.bindNone();
-		}
+		if( lastUsed != null ) lastUsed.bind();
+		else TextureImpl.bindNone();
 		
 		inSafe = false;
 	}

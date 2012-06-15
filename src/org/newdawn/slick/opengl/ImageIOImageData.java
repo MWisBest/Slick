@@ -121,10 +121,7 @@ public class ImageIOImageData implements LoadableImageData
 	@Override
 	public ByteBuffer loadImage( InputStream fis, boolean flipped, boolean forceAlpha, int[] transparent ) throws IOException
 	{
-		if( transparent != null )
-		{
-			forceAlpha = true;
-		}
+		if( transparent != null ) forceAlpha = true;
 		
 		BufferedImage bufferedImage = ImageIO.read( fis );
 		return imageToByteBuffer( bufferedImage, flipped, forceAlpha, transparent );
@@ -142,14 +139,8 @@ public class ImageIOImageData implements LoadableImageData
 		// find the closest power of 2 for the width and height
 		// of the produced texture
 		
-		while( texWidth < image.getWidth() )
-		{
-			texWidth *= 2;
-		}
-		while( texHeight < image.getHeight() )
-		{
-			texHeight *= 2;
-		}
+		while( texWidth < image.getWidth() ) texWidth *= 2;
+		while( texHeight < image.getHeight() ) texHeight *= 2;
 		
 		this.width = image.getWidth();
 		this.height = image.getHeight();
@@ -207,10 +198,7 @@ public class ImageIOImageData implements LoadableImageData
 			g.scale( 1, -1 );
 			g.drawImage( image, 0, -height, null );
 		}
-		else
-		{
-			g.drawImage( image, 0, 0, null );
-		}
+		else g.drawImage( image, 0, 0, null );
 		
 		if( edging )
 		{
@@ -248,10 +236,7 @@ public class ImageIOImageData implements LoadableImageData
 					}
 				}
 				
-				if( match )
-				{
-					data[i + components] = 0;
-				}
+				if( match ) data[i + components] = 0;
 			}
 		}
 		
@@ -272,10 +257,7 @@ public class ImageIOImageData implements LoadableImageData
 	 */
 	private int toInt( byte b )
 	{
-		if( b < 0 )
-		{
-			return 256 + b;
-		}
+		if( b < 0 ) return 256 + b;
 		
 		return b;
 	}

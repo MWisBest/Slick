@@ -169,5 +169,4 @@ public interface ImageData
 	 * @return The stored image
 	 */
 	public ByteBuffer getImageBufferData();
-	
 }

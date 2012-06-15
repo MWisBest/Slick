@@ -268,10 +268,7 @@ public class TextureImpl implements Texture
 	 */
 	private void setHeight()
 	{
-		if( texHeight != 0 )
-		{
-			heightRatio = ( (float)height ) / texHeight;
-		}
+		if( texHeight != 0 ) heightRatio = ( (float)height ) / texHeight;
 	}
 	
 	/**
@@ -280,10 +277,7 @@ public class TextureImpl implements Texture
 	 */
 	private void setWidth()
 	{
-		if( texWidth != 0 )
-		{
-			widthRatio = ( (float)width ) / texWidth;
-		}
+		if( texWidth != 0 ) widthRatio = ( (float)width ) / texWidth;
 	}
 	
 	/**
@@ -295,19 +289,10 @@ public class TextureImpl implements Texture
 		if( textureID == 0 ) return;
 		InternalTextureLoader.deleteTextureID( textureID );
 		
-		if( lastBind == this )
-		{
-			bindNone();
-		}
+		if( lastBind == this ) bindNone();
 		
-		if( cacheName != null )
-		{
-			InternalTextureLoader.get().clear( cacheName );
-		}
-		else
-		{
-			InternalTextureLoader.get().clear( ref );
-		}
+		if( cacheName != null ) InternalTextureLoader.get().clear( cacheName );
+		else InternalTextureLoader.get().clear( ref );
 		textureID = 0;
 	}
 	
@@ -397,10 +382,7 @@ public class TextureImpl implements Texture
 	 */
 	public void reload()
 	{
-		if( reloadData != null )
-		{
-			textureID = reloadData.reload();
-		}
+		if( reloadData != null ) textureID = reloadData.reload();
 	}
 	
 	/**

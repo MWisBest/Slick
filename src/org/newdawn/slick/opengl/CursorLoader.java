@@ -73,10 +73,7 @@ public class CursorLoader
 		try
 		{
 			int yspot = imageData.getHeight() - y - 1;
-			if( yspot < 0 )
-			{
-				yspot = 0;
-			}
+			if( yspot < 0 ) yspot = 0;
 			
 			return new Cursor( imageData.getTexWidth(), imageData.getTexHeight(), x, yspot, 1, buf.asIntBuffer(), null );
 		}
@@ -117,10 +114,7 @@ public class CursorLoader
 		try
 		{
 			int yspot = height - y - 1;
-			if( yspot < 0 )
-			{
-				yspot = 0;
-			}
+			if( yspot < 0 ) yspot = 0;
 			return new Cursor( width, height, x, yspot, 1, buf.asIntBuffer(), null );
 		}
 		catch( Throwable e )
@@ -159,10 +153,7 @@ public class CursorLoader
 		try
 		{
 			int yspot = imageData.getHeight() - y - 1;
-			if( yspot < 0 )
-			{
-				yspot = 0;
-			}
+			if( yspot < 0 ) yspot = 0;
 			return new Cursor( imageData.getTexWidth(), imageData.getTexHeight(), x, yspot, 1, buf.asIntBuffer(), null );
 		}
 		catch( Throwable e )
@@ -191,10 +182,7 @@ public class CursorLoader
 	public Cursor getAnimatedCursor( String ref, int x, int y, int width, int height, int[] cursorDelays ) throws IOException, LWJGLException
 	{
 		IntBuffer cursorDelaysBuffer = ByteBuffer.allocateDirect( cursorDelays.length * 4 ).order( ByteOrder.nativeOrder() ).asIntBuffer();
-		for( int i = 0; i < cursorDelays.length; i++ )
-		{
-			cursorDelaysBuffer.put( cursorDelays[i] );
-		}
+		for( int i = 0; i < cursorDelays.length; i++ ) cursorDelaysBuffer.put( cursorDelays[i] );
 		cursorDelaysBuffer.flip();
 		
 		LoadableImageData imageData = new TGAImageData();

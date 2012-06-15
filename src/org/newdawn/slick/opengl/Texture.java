@@ -7,7 +7,6 @@ package org.newdawn.slick.opengl;
  */
 public interface Texture
 {
-	
 	/**
 	 * Check if the texture has alpha
 	 * 
@@ -98,5 +97,4 @@ public interface Texture
 	 * @param textureFilter The texture filter to apply (GL_LINEAR, GL_NEAREST, etc..)
 	 */
 	public void setTextureFilter( int textureFilter );
-	
 }

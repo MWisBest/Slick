@@ -9,7 +9,6 @@ import org.newdawn.slick.opengl.renderer.Renderer;
  */
 public final class GLUtils
 {
-	
 	/**
 	 * Check that we're in the right place to be doing GL operations
 	 */

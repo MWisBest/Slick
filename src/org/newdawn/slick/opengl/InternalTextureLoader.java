@@ -32,7 +32,6 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class InternalTextureLoader
 {
-	
 	/** Useful for debugging; keeps track of the current number of active textures. */
 	static int textureCount = 0;
 	
@@ -322,31 +321,19 @@ public class InternalTextureLoader
 	 */
 	public TextureImpl getTexture( InputStream in, String resourceName, boolean flipped, int filter, int[] transparent ) throws IOException
 	{
-		if( deferred )
-		{
-			return new DeferredTexture( in, resourceName, flipped, filter, transparent );
-		}
+		if( deferred ) return new DeferredTexture( in, resourceName, flipped, filter, transparent );
 		
 		HashMap<String, Object> hash = texturesLinear;
-		if( filter == SGL.GL_NEAREST )
-		{
-			hash = texturesNearest;
-		}
+		if( filter == SGL.GL_NEAREST ) hash = texturesNearest;
 		
 		String resName = resourceName;
-		if( transparent != null )
-		{
-			resName += ":" + transparent[0] + ":" + transparent[1] + ":" + transparent[2];
-		}
+		if( transparent != null ) resName += ":" + transparent[0] + ":" + transparent[1] + ":" + transparent[2];
 		resName += ":" + flipped;
 		
 		if( holdTextureData )
 		{
 			TextureImpl tex = (TextureImpl)hash.get( resName );
-			if( tex != null )
-			{
-				return tex;
-			}
+			if( tex != null ) return tex;
 		}
 		else
 		{
@@ -355,14 +342,8 @@ public class InternalTextureLoader
 			if( ref != null )
 			{
 				TextureImpl tex = ref.get();
-				if( tex != null )
-				{
-					return tex;
-				}
-				else
-				{
-					hash.remove( resName );
-				}
+				if( tex != null ) return tex;
+				else hash.remove( resName );
 			}
 		}
 		
@@ -379,14 +360,8 @@ public class InternalTextureLoader
 		TextureImpl tex = getTexture( in, resourceName, SGL.GL_TEXTURE_2D, filter, filter, flipped, transparent );
 		
 		tex.setCacheName( resName );
-		if( holdTextureData )
-		{
-			hash.put( resName, tex );
-		}
-		else
-		{
-			hash.put( resName, new SoftReference<>( tex ) );
-		}
+		if( holdTextureData ) hash.put( resName, tex );
+		else hash.put( resName, new SoftReference<>( tex ) );
 		
 		return tex;
 	}
@@ -425,10 +400,7 @@ public class InternalTextureLoader
 		IntBuffer temp = BufferUtils.createIntBuffer( 16 );
 		GL.glGetInteger( SGL.GL_MAX_TEXTURE_SIZE, temp );
 		int max = temp.get( 0 );
-		if( ( texWidth > max ) || ( texHeight > max ) )
-		{
-			throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
-		}
+		if( ( texWidth > max ) || ( texHeight > max ) ) throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
 		
 		int srcPixelFormat = format.getOGLType();
 		int componentCount = format.getColorComponents();
@@ -437,10 +409,7 @@ public class InternalTextureLoader
 		texture.setHeight( height );
 		texture.setImageFormat( format );
 		
-		if( holdTextureData )
-		{
-			texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
-		}
+		if( holdTextureData ) texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
 		
 		GL.glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
 		GL.glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
@@ -547,24 +516,6 @@ public class InternalTextureLoader
 		// For now, just assume Slick has decoded image data into POT
 		GL.glTexImage2D( target, 0, dstFmt, texWidth, texHeight, 0, srcFmt, SGL.GL_UNSIGNED_BYTE, buffer );
 		
-		// if (texWidth==width && texHeight==height) {
-		// GL.glTexImage2D(target, 0, dstFmt, texWidth, texHeight,
-		// 0, srcFmt, SGL.GL_UNSIGNED_BYTE, buffer);
-		// } else {
-		// //Slick2D decodes NPOT image data into padded byte buffers.
-		// //Once we make the shift to decoding NPOT image data, then we can clean this up
-		// GL.glTexImage2D(target, 0, dstFmt, texWidth, texHeight,
-		// 0, srcFmt, SGL.GL_UNSIGNED_BYTE, buffer);
-		//
-		// //first create the full texture
-		// //we could also use a null ByteBuffer but this seems to be buggy with certain machines
-		// // ByteBuffer empty = BufferUtils.createByteBuffer(texWidth * texHeight * 4);
-		// // GL.glTexImage2D(target, 0, dstFmt, texWidth, texHeight,
-		// // 0, SGL.GL_RGBA, SGL.GL_UNSIGNED_BYTE, empty);
-		// // //then upload the sub image
-		// // GL.glTexSubImage2D(target, 0, 0, 0, width, height, srcFmt, SGL.GL_UNSIGNED_BYTE, buffer);
-		// }
-		
 		if( genMipmaps )
 		{
 			GL11.glEnable( target ); // fixes ATI bug
@@ -655,15 +606,9 @@ public class InternalTextureLoader
 		IntBuffer temp = BufferUtils.createIntBuffer( 16 );
 		GL.glGetInteger( SGL.GL_MAX_TEXTURE_SIZE, temp );
 		int max = temp.get( 0 );
-		if( ( texWidth > max ) || ( texHeight > max ) )
-		{
-			throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
-		}
+		if( ( texWidth > max ) || ( texHeight > max ) ) throw new IOException( "Attempt to allocate a texture to big for the current hardware" );
 		
-		if( holdTextureData )
-		{
-			texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
-		}
+		if( holdTextureData ) texture.setTextureData( srcPixelFormat, componentCount, minFilter, magFilter, textureBuffer );
 		
 		GL.glTexParameteri( target, SGL.GL_TEXTURE_MIN_FILTER, minFilter );
 		GL.glTexParameteri( target, SGL.GL_TEXTURE_MAG_FILTER, magFilter );
@@ -683,10 +628,7 @@ public class InternalTextureLoader
 	{
 		// new algorithm? -> return 1 << (32 - Integer.numberOfLeadingZeros(n-1));
 		int ret = 2;
-		while( ret < fold )
-		{
-			ret *= 2;
-		}
+		while( ret < fold ) ret *= 2;
 		return ret;
 	}
 	
@@ -710,14 +652,8 @@ public class InternalTextureLoader
 	 */
 	public void reload()
 	{
-		for( Object texture : texturesLinear.values() )
-		{
-			( (TextureImpl)texture ).reload();
-		}
-		for( Object texture : texturesNearest.values() )
-		{
-			( (TextureImpl)texture ).reload();
-		}
+		for( Object texture : texturesLinear.values() ) ( (TextureImpl)texture ).reload();
+		for( Object texture : texturesNearest.values() ) ( (TextureImpl)texture ).reload();
 	}
 	
 	/**

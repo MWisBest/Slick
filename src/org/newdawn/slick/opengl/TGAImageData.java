@@ -120,10 +120,7 @@ public class TGAImageData implements LoadableImageData
 	@Override
 	public ByteBuffer loadImage( InputStream fis, boolean flipped, boolean forceAlpha, int[] transparent ) throws IOException
 	{
-		if( transparent != null )
-		{
-			forceAlpha = true;
-		}
+		if( transparent != null ) forceAlpha = true;
 		byte red = 0;
 		byte green = 0;
 		byte blue = 0;
@@ -136,33 +133,21 @@ public class TGAImageData implements LoadableImageData
 		short idLength = (short)dis.read();
 		short imageType = (short)dis.read();
 		
-		if( imageType != 2 )
-		{
-			throw new IOException( "Slick only supports uncompressed RGB(A) TGA images" );
-		}
+		if( imageType != 2 ) throw new IOException( "Slick only supports uncompressed RGB(A) TGA images" );
 		
 		width = flipEndian( dis.readShort() );
 		height = flipEndian( dis.readShort() );
 		short pixelDepth = (short)dis.read();
-		if( pixelDepth == 32 )
-		{
-			forceAlpha = false;
-		}
+		if( pixelDepth == 32 ) forceAlpha = false;
 		
 		texWidth = get2Fold( width );
 		texHeight = get2Fold( height );
 		
 		short imageDescriptor = (short)dis.read();
-		if( ( imageDescriptor & 0x0020 ) == 0 )
-		{
-			flipped = !flipped;
-		}
+		if( ( imageDescriptor & 0x0020 ) == 0 ) flipped = !flipped;
 		
 		// Skip image ID
-		if( idLength > 0 )
-		{
-			bis.skip( idLength );
-		}
+		if( idLength > 0 ) bis.skip( idLength );
 		
 		byte[] rawData = null;
 		if( ( pixelDepth == 32 ) || ( forceAlpha ) )
@@ -176,10 +161,7 @@ public class TGAImageData implements LoadableImageData
 			format = Format.RGB;
 			rawData = new byte[texWidth * texHeight * 3];
 		}
-		else
-		{
-			throw new RuntimeException( "Only 24 and 32 bit TGAs are supported" );
-		}
+		else throw new RuntimeException( "Only 24 and 32 bit TGAs are supported" );
 		
 		if( pixelDepth == 24 )
 		{
@@ -229,14 +211,8 @@ public class TGAImageData implements LoadableImageData
 						blue = dis.readByte();
 						green = dis.readByte();
 						red = dis.readByte();
-						if( forceAlpha )
-						{
-							alpha = (byte)255;
-						}
-						else
-						{
-							alpha = dis.readByte();
-						}
+						if( forceAlpha ) alpha = (byte)255;
+						else alpha = dis.readByte();
 						
 						int ofs = ( ( j + ( i * texWidth ) ) * 4 );
 						
@@ -263,14 +239,8 @@ public class TGAImageData implements LoadableImageData
 						blue = dis.readByte();
 						green = dis.readByte();
 						red = dis.readByte();
-						if( forceAlpha )
-						{
-							alpha = (byte)255;
-						}
-						else
-						{
-							alpha = dis.readByte();
-						}
+						if( forceAlpha ) alpha = (byte)255;
+						else alpha = dis.readByte();
 						
 						int ofs = ( ( j + ( i * texWidth ) ) * 4 );
 						
@@ -308,16 +278,10 @@ public class TGAImageData implements LoadableImageData
 				boolean match = true;
 				for( int c = 0; c < 3; c++ )
 				{
-					if( rawData[i + c] != transparent[c] )
-					{
-						match = false;
-					}
+					if( rawData[i + c] != transparent[c] ) match = false;
 				}
 				
-				if( match )
-				{
-					rawData[i + 3] = 0;
-				}
+				if( match ) rawData[i + 3] = 0;
 			}
 		}
 		
@@ -362,10 +326,7 @@ public class TGAImageData implements LoadableImageData
 	private int get2Fold( int fold )
 	{
 		int ret = 2;
-		while( ret < fold )
-		{
-			ret *= 2;
-		}
+		while( ret < fold ) ret *= 2;
 		return ret;
 	}
 	

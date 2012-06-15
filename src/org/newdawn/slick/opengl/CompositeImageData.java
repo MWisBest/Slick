@@ -80,10 +80,7 @@ public class CompositeImageData implements LoadableImageData
 			}
 		}
 		
-		if( picked == null )
-		{
-			throw exception;
-		}
+		if( picked == null ) throw exception;
 		
 		return buffer;
 	}
@@ -94,10 +91,7 @@ public class CompositeImageData implements LoadableImageData
 	 */
 	private void checkPicked()
 	{
-		if( picked == null )
-		{
-			throw new RuntimeException( "Attempt to make use of uninitialised or invalid composite image data" );
-		}
+		if( picked == null ) throw new RuntimeException( "Attempt to make use of uninitialised or invalid composite image data" );
 	}
 	
 	/**
@@ -172,10 +166,6 @@ public class CompositeImageData implements LoadableImageData
 	@Override
 	public void configureEdging( boolean edging )
 	{
-		for( int i = 0; i < sources.size(); i++ )
-		{
-			sources.get( i ).configureEdging( edging );
-		}
+		for( int i = 0; i < sources.size(); i++ ) sources.get( i ).configureEdging( edging );
 	}
-	
 }
