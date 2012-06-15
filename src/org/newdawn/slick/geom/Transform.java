@@ -35,10 +35,7 @@ public class Transform
 	public Transform( Transform other )
 	{
 		matrixPosition = new float[9];
-		for( int i = 0; i < 9; i++ )
-		{
-			matrixPosition[i] = other.matrixPosition[i];
-		}
+		for( int i = 0; i < 9; i++ ) matrixPosition[i] = other.matrixPosition[i];
 	}
 	
 	/**
@@ -61,10 +58,7 @@ public class Transform
 	 */
 	public Transform( float matrixPosition[] )
 	{
-		if( matrixPosition.length != 6 )
-		{
-			throw new RuntimeException( "The parameter must be a float array of length 6." );
-		}
+		if( matrixPosition.length != 6 ) throw new RuntimeException( "The parameter must be a float array of length 6." );
 		this.matrixPosition = new float[] { matrixPosition[0], matrixPosition[1], matrixPosition[2], matrixPosition[3], matrixPosition[4], matrixPosition[5], 0, 0, 1 };
 	}
 	
@@ -102,10 +96,7 @@ public class Transform
 		
 		for( int i = 0; i < numberOfPoints * 2; i += 2 )
 		{
-			for( int j = 0; j < 6; j += 3 )
-			{
-				result[i + ( j / 3 )] = source[i + sourceOffset] * matrixPosition[j] + source[i + sourceOffset + 1] * matrixPosition[j + 1] + 1 * matrixPosition[j + 2];
-			}
+			for( int j = 0; j < 6; j += 3 ) result[i + ( j / 3 )] = source[i + sourceOffset] * matrixPosition[j] + source[i + sourceOffset + 1] * matrixPosition[j + 1] + 1 * matrixPosition[j + 2];
 		}
 		
 		if( source == destination )
@@ -140,14 +131,7 @@ public class Transform
 		mp[3] = n10;
 		mp[4] = n11;
 		mp[5] = n12;
-		//
-		// mp[0] = matrixPosition[0] * transform.matrixPosition[0] + matrixPosition[0] * transform.matrixPosition[3] + matrixPosition[0] * transform.matrixPosition[6];
-		// mp[1] = matrixPosition[1] * transform.matrixPosition[1] + matrixPosition[1] * transform.matrixPosition[4] + matrixPosition[1] * transform.matrixPosition[7];
-		// mp[2] = matrixPosition[2] * transform.matrixPosition[2] + matrixPosition[2] * transform.matrixPosition[5] + matrixPosition[2] * transform.matrixPosition[8];
-		// mp[3] = matrixPosition[3] * transform.matrixPosition[0] + matrixPosition[3] * transform.matrixPosition[3] + matrixPosition[3] * transform.matrixPosition[6];
-		// mp[4] = matrixPosition[4] * transform.matrixPosition[1] + matrixPosition[4] * transform.matrixPosition[4] + matrixPosition[4] * transform.matrixPosition[7];
-		// mp[5] = matrixPosition[5] * transform.matrixPosition[2] + matrixPosition[5] * transform.matrixPosition[5] + matrixPosition[5] * transform.matrixPosition[8];
-		//
+		
 		matrixPosition = mp;
 		return this;
 	}

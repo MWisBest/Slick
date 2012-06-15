@@ -78,10 +78,7 @@ public class RoundedRectangle extends Rectangle
 	{
 		super( x, y, width, height );
 		
-		if( cornerRadius < 0 )
-		{
-			throw new IllegalArgumentException( "corner radius must be >= 0" );
-		}
+		if( cornerRadius < 0 ) throw new IllegalArgumentException( "corner radius must be >= 0" );
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -109,13 +106,10 @@ public class RoundedRectangle extends Rectangle
 	 */
 	public void setCornerRadius( float cornerRadius )
 	{
-		if( cornerRadius >= 0 )
+		if( cornerRadius >= 0 && cornerRadius != this.cornerRadius )
 		{
-			if( cornerRadius != this.cornerRadius )
-			{
-				this.cornerRadius = cornerRadius;
-				pointsDirty = true;
-			}
+			this.cornerRadius = cornerRadius;
+			pointsDirty = true;
 		}
 	}
 	
@@ -215,10 +209,7 @@ public class RoundedRectangle extends Rectangle
 			// straight sides, so the straight sides do not have to be added.
 			
 			// top left corner arc
-			if( ( cornerFlags & TOP_LEFT ) != 0 )
-			{
-				tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + cornerRadius, y + cornerRadius, 180, 270 ) );
-			}
+			if( ( cornerFlags & TOP_LEFT ) != 0 ) tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + cornerRadius, y + cornerRadius, 180, 270 ) );
 			else
 			{
 				tempPoints.add( new Float( x ) );
@@ -226,10 +217,7 @@ public class RoundedRectangle extends Rectangle
 			}
 			
 			// top right corner arc
-			if( ( cornerFlags & TOP_RIGHT ) != 0 )
-			{
-				tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + useWidth - cornerRadius, y + cornerRadius, 270, 360 ) );
-			}
+			if( ( cornerFlags & TOP_RIGHT ) != 0 ) tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + useWidth - cornerRadius, y + cornerRadius, 270, 360 ) );
 			else
 			{
 				tempPoints.add( new Float( x + useWidth ) );
@@ -237,10 +225,7 @@ public class RoundedRectangle extends Rectangle
 			}
 			
 			// bottom right corner arc
-			if( ( cornerFlags & BOTTOM_RIGHT ) != 0 )
-			{
-				tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + useWidth - cornerRadius, y + useHeight - cornerRadius, 0, 90 ) );
-			}
+			if( ( cornerFlags & BOTTOM_RIGHT ) != 0 ) tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + useWidth - cornerRadius, y + useHeight - cornerRadius, 0, 90 ) );
 			else
 			{
 				tempPoints.add( new Float( x + useWidth ) );
@@ -248,10 +233,7 @@ public class RoundedRectangle extends Rectangle
 			}
 			
 			// bottom left corner arc
-			if( ( cornerFlags & BOTTOM_LEFT ) != 0 )
-			{
-				tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + cornerRadius, y + useHeight - cornerRadius, 90, 180 ) );
-			}
+			if( ( cornerFlags & BOTTOM_LEFT ) != 0 ) tempPoints.addAll( createPoints( segmentCount, cornerRadius, x + cornerRadius, y + useHeight - cornerRadius, 90, 180 ) );
 			else
 			{
 				tempPoints.add( new Float( x ) );
@@ -259,10 +241,7 @@ public class RoundedRectangle extends Rectangle
 			}
 			
 			points = new float[tempPoints.size()];
-			for( int i = 0; i < tempPoints.size(); i++ )
-			{
-				points[i] = tempPoints.get( i ).floatValue();
-			}
+			for( int i = 0; i < tempPoints.size(); i++ ) points[i] = tempPoints.get( i ).floatValue();
 		}
 		
 		findCenter();
@@ -289,10 +268,7 @@ public class RoundedRectangle extends Rectangle
 		for( float a = start; a <= end + step; a += step )
 		{
 			float ang = a;
-			if( ang > end )
-			{
-				ang = end;
-			}
+			if( ang > end ) ang = end;
 			float x = (float)( cx + ( FastTrig.cos( Math.toRadians( ang ) ) * radius ) );
 			float y = (float)( cy + ( FastTrig.sin( Math.toRadians( ang ) ) * radius ) );
 			
@@ -324,5 +300,4 @@ public class RoundedRectangle extends Rectangle
 		
 		return resultPolygon;
 	}
-	
 }

@@ -34,48 +34,30 @@ public class GeomUtil
 		int count = 0;
 		for( int i = 0; i < target.getPointCount(); i++ )
 		{
-			if( missing.contains( target.getPoint( i )[0], target.getPoint( i )[1] ) )
-			{
-				count++;
-			}
+			if( missing.contains( target.getPoint( i )[0], target.getPoint( i )[1] ) ) count++;
 		}
 		
-		if( count == target.getPointCount() )
-		{
-			return new Shape[0];
-		}
+		if( count == target.getPointCount() ) return new Shape[0];
 		
-		if( !target.intersects( missing ) )
-		{
-			return new Shape[] { target };
-		}
+		if( !target.intersects( missing ) ) return new Shape[] { target };
 		
 		int found = 0;
 		for( int i = 0; i < missing.getPointCount(); i++ )
 		{
 			if( target.contains( missing.getPoint( i )[0], missing.getPoint( i )[1] ) )
 			{
-				if( !onPath( target, missing.getPoint( i )[0], missing.getPoint( i )[1] ) )
-				{
-					found++;
-				}
+				if( !onPath( target, missing.getPoint( i )[0], missing.getPoint( i )[1] ) ) found++;
 			}
 		}
 		for( int i = 0; i < target.getPointCount(); i++ )
 		{
 			if( missing.contains( target.getPoint( i )[0], target.getPoint( i )[1] ) )
 			{
-				if( !onPath( missing, target.getPoint( i )[0], target.getPoint( i )[1] ) )
-				{
-					found++;
-				}
+				if( !onPath( missing, target.getPoint( i )[0], target.getPoint( i )[1] ) ) found++;
 			}
 		}
 		
-		if( found < 1 )
-		{
-			return new Shape[] { target };
-		}
+		if( found < 1 ) return new Shape[] { target };
 		
 		return combine( target, missing, true );
 	}
@@ -94,10 +76,7 @@ public class GeomUtil
 		{
 			int n = rationalPoint( path, i + 1 );
 			Line line = getLine( path, rationalPoint( path, i ), n );
-			if( line.distance( new Vector2f( x, y ) ) < EPSILON * 100 )
-			{
-				return true;
-			}
+			if( line.distance( new Vector2f( x, y ) ) < EPSILON * 100 ) return true;
 		}
 		
 		return false;
@@ -126,10 +105,7 @@ public class GeomUtil
 		target = target.transform( new Transform() );
 		other = other.transform( new Transform() );
 		
-		if( !target.intersects( other ) )
-		{
-			return new Shape[] { target, other };
-		}
+		if( !target.intersects( other ) ) return new Shape[] { target, other };
 		
 		// handle the case where intersects is true but really we're talking
 		// about edge points
@@ -145,10 +121,7 @@ public class GeomUtil
 					break;
 				}
 			}
-			if( other.hasVertex( target.getPoint( i )[0], target.getPoint( i )[1] ) )
-			{
-				buttCount++;
-			}
+			if( other.hasVertex( target.getPoint( i )[0], target.getPoint( i )[1] ) ) buttCount++;
 		}
 		for( int i = 0; i < other.getPointCount(); i++ )
 		{
@@ -162,10 +135,7 @@ public class GeomUtil
 			}
 		}
 		
-		if( ( !touches ) && ( buttCount < 2 ) )
-		{
-			return new Shape[] { target, other };
-		}
+		if( ( !touches ) && ( buttCount < 2 ) ) return new Shape[] { target, other };
 		
 		// so they are definitely touching, consider the union
 		return combine( target, other, false );
@@ -194,10 +164,7 @@ public class GeomUtil
 				if( other.contains( point[0], point[1] ) )
 				{
 					used.add( new Vector2f( point[0], point[1] ) );
-					if( listener != null )
-					{
-						listener.pointExcluded( point[0], point[1] );
-					}
+					if( listener != null ) listener.pointExcluded( point[0], point[1] );
 				}
 			}
 			
@@ -268,17 +235,11 @@ public class GeomUtil
 		{
 			first = false;
 			loop++;
-			if( loop > MAX_POINTS )
-			{
-				break;
-			}
+			if( loop > MAX_POINTS ) break;
 			
 			// add the current point to the result shape
 			poly.addPoint( px, py );
-			if( listener != null )
-			{
-				listener.pointUsed( px, py );
-			}
+			if( listener != null ) listener.pointUsed( px, py );
 			
 			// if the line between the current point and the next one intersect the
 			// other shape work out where on the other shape and start traversing it's
@@ -293,10 +254,7 @@ public class GeomUtil
 				px = pt.x;
 				py = pt.y;
 				
-				if( listener != null )
-				{
-					listener.pointIntersected( px, py );
-				}
+				if( listener != null ) listener.pointIntersected( px, py );
 				
 				if( other.hasVertex( px, py ) )
 				{
@@ -389,10 +347,7 @@ public class GeomUtil
 				else
 				{
 					// give up
-					if( subtract )
-					{
-						break;
-					}
+					if( subtract ) break;
 					else
 					{
 						point = hit.p1;
@@ -417,10 +372,7 @@ public class GeomUtil
 		}
 		
 		poly.addPoint( px, py );
-		if( listener != null )
-		{
-			listener.pointUsed( px, py );
-		}
+		if( listener != null ) listener.pointUsed( px, py );
 		
 		return poly;
 	}
@@ -470,14 +422,8 @@ public class GeomUtil
 	 */
 	public static int rationalPoint( Shape shape, int p )
 	{
-		while( p < 0 )
-		{
-			p += shape.getPointCount();
-		}
-		while( p >= shape.getPointCount() )
-		{
-			p -= shape.getPointCount();
-		}
+		while( p < 0 ) p += shape.getPointCount();
+		while( p >= shape.getPointCount() ) p -= shape.getPointCount();
 		
 		return p;
 	}

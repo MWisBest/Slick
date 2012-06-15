@@ -183,16 +183,10 @@ public class Line extends Shape
 	public void set( Vector2f start, Vector2f end )
 	{
 		super.pointsDirty = true;
-		if( this.start == null )
-		{
-			this.start = new Vector2f();
-		}
+		if( this.start == null ) this.start = new Vector2f();
 		this.start.set( start );
 		
-		if( this.end == null )
-		{
-			this.end = new Vector2f();
-		}
+		if( this.end == null ) this.end = new Vector2f();
 		this.end.set( end );
 		
 		vec = new Vector2f( end );
@@ -408,10 +402,7 @@ public class Line extends Shape
 	{
 		Vector2f temp = new Vector2f();
 		
-		if( !intersect( other, limit, temp ) )
-		{
-			return null;
-		}
+		if( !intersect( other, limit, temp ) ) return null;
 		
 		return temp;
 	}
@@ -435,27 +426,16 @@ public class Line extends Shape
 		float dy2 = other.end.getY() - other.start.getY();
 		float denom = ( dy2 * dx1 ) - ( dx2 * dy1 );
 		
-		if( denom == 0 )
-		{
-			return false;
-		}
+		if( denom == 0 ) return false;
 		
 		float ua = ( dx2 * ( start.getY() - other.start.getY() ) ) - ( dy2 * ( start.getX() - other.start.getX() ) );
 		ua /= denom;
 		float ub = ( dx1 * ( start.getY() - other.start.getY() ) ) - ( dy1 * ( start.getX() - other.start.getX() ) );
 		ub /= denom;
 		
-		if( ( limit ) && ( ( ua < 0 ) || ( ua > 1 ) || ( ub < 0 ) || ( ub > 1 ) ) )
-		{
-			return false;
-		}
+		if( ( limit ) && ( ( ua < 0 ) || ( ua > 1 ) || ( ub < 0 ) || ( ub > 1 ) ) ) return false;
 		
-		float u = ua;
-		
-		float ix = start.getX() + ( u * ( end.getX() - start.getX() ) );
-		float iy = start.getY() + ( u * ( end.getY() - start.getY() ) );
-		
-		result.set( ix, iy );
+		result.set( start.getX() + ( ua * ( end.getX() - start.getX() ) ), start.getY() + ( ua * ( end.getY() - start.getY() ) ) );
 		return true;
 	}
 	
@@ -500,10 +480,7 @@ public class Line extends Shape
 	@Override
 	public boolean intersects( Shape shape )
 	{
-		if( shape instanceof Circle )
-		{
-			return shape.intersects( this );
-		}
+		if( shape instanceof Circle ) return shape.intersects( this );
 		return super.intersects( shape );
 	}
 }

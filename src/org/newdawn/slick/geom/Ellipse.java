@@ -13,7 +13,7 @@ import org.newdawn.slick.util.FastTrig;
 public class Ellipse extends Shape
 {
 	private static final long serialVersionUID = 7281134500426236863L;
-
+	
 	/**
 	 * Default number of segments to draw this ellipse with
 	 */
@@ -149,38 +149,20 @@ public class Ellipse extends Shape
 		for( float a = start; a <= end + step; a += step )
 		{
 			float ang = a;
-			if( ang > end )
-			{
-				ang = end;
-			}
+			if( ang > end ) ang = end;
 			float newX = (float)( cx + ( FastTrig.cos( Math.toRadians( ang ) ) * radius1 ) );
 			float newY = (float)( cy + ( FastTrig.sin( Math.toRadians( ang ) ) * radius2 ) );
 			
-			if( newX > maxX )
-			{
-				maxX = newX;
-			}
-			if( newY > maxY )
-			{
-				maxY = newY;
-			}
-			if( newX < minX )
-			{
-				minX = newX;
-			}
-			if( newY < minY )
-			{
-				minY = newY;
-			}
+			if( newX > maxX ) maxX = newX;
+			if( newY > maxY ) maxY = newY;
+			if( newX < minX ) minX = newX;
+			if( newY < minY ) minY = newY;
 			
 			tempPoints.add( new Float( newX ) );
 			tempPoints.add( new Float( newY ) );
 		}
 		points = new float[tempPoints.size()];
-		for( int i = 0; i < points.length; i++ )
-		{
-			points[i] = tempPoints.get( i ).floatValue();
-		}
+		for( int i = 0; i < points.length; i++ ) points[i] = tempPoints.get( i ).floatValue();
 	}
 	
 	/**

@@ -101,14 +101,7 @@ public strictfp class Circle extends Ellipse
 			Circle other = (Circle)shape;
 			float totalRad2 = getRadius() + other.getRadius();
 			
-			if( Math.abs( other.getCenterX() - getCenterX() ) > totalRad2 )
-			{
-				return false;
-			}
-			if( Math.abs( other.getCenterY() - getCenterY() ) > totalRad2 )
-			{
-				return false;
-			}
+			if( ( Math.abs( other.getCenterX() - getCenterX() ) > totalRad2 ) || ( Math.abs( other.getCenterY() - getCenterY() ) > totalRad2 ) ) return false;
 			
 			totalRad2 *= totalRad2;
 			
@@ -117,14 +110,8 @@ public strictfp class Circle extends Ellipse
 			
 			return totalRad2 >= ( ( dx * dx ) + ( dy * dy ) );
 		}
-		else if( shape instanceof Rectangle )
-		{
-			return intersects( (Rectangle)shape );
-		}
-		else
-		{
-			return super.intersects( shape );
-		}
+		else if( shape instanceof Rectangle ) return intersects( (Rectangle)shape );
+		else return super.intersects( shape );
 	}
 	
 	/**
@@ -183,10 +170,7 @@ public strictfp class Circle extends Ellipse
 		Rectangle box = other;
 		Circle circle = this;
 		
-		if( box.contains( x + radius, y + radius ) )
-		{
-			return true;
-		}
+		if( box.contains( x + radius, y + radius ) ) return true;
 		
 		float x1 = box.getX();
 		float y1 = box.getY();
@@ -206,10 +190,7 @@ public strictfp class Circle extends Ellipse
 		for( int i = 0; i < 4; i++ )
 		{
 			float dis = lines[i].distanceSquared( pos );
-			if( dis < r2 )
-			{
-				return true;
-			}
+			if( dis < r2 ) return true;
 		}
 		
 		return false;
@@ -236,21 +217,14 @@ public strictfp class Circle extends Ellipse
 		Vector2f ptv = circleCenter.copy().sub( lineSegmentStart );
 		float segvLength = segv.length();
 		float projvl = ptv.dot( segv ) / segvLength;
-		if( projvl < 0 )
-		{
-			closest = lineSegmentStart;
-		}
-		else if( projvl > segvLength )
-		{
-			closest = lineSegmentEnd;
-		}
+		if( projvl < 0 ) closest = lineSegmentStart;
+		else if( projvl > segvLength ) closest = lineSegmentEnd;
 		else
 		{
 			Vector2f projv = segv.copy().scale( projvl / segvLength );
 			closest = lineSegmentStart.copy().add( projv );
 		}
-		boolean intersects = circleCenter.copy().sub( closest ).lengthSquared() <= getRadius() * getRadius();
 		
-		return intersects;
+		return ( circleCenter.copy().sub( closest ).lengthSquared() <= getRadius() * getRadius() );
 	}
 }

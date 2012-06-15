@@ -1,6 +1,5 @@
 package org.newdawn.slick.geom;
 
-
 /**
  * A single point shape
  * 
@@ -9,7 +8,7 @@ package org.newdawn.slick.geom;
 public class Point extends Shape
 {
 	private static final long serialVersionUID = 7358918173283184318L;
-
+	
 	/**
 	 * Create a new point
 	 * 

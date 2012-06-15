@@ -59,14 +59,8 @@ public class Path extends Shape
 	 */
 	public void lineTo( float x, float y )
 	{
-		if( hole != null )
-		{
-			hole.add( new float[] { x, y } );
-		}
-		else
-		{
-			localPoints.add( new float[] { x, y } );
-		}
+		if( hole != null ) hole.add( new float[] { x, y } );
+		else localPoints.add( new float[] { x, y } );
 		cx = x;
 		cy = y;
 		pointsDirty = true;
@@ -109,10 +103,7 @@ public class Path extends Shape
 	public void curveTo( float x, float y, float cx1, float cy1, float cx2, float cy2, int segments )
 	{
 		// special case for zero movement
-		if( ( cx == x ) && ( cy == y ) )
-		{
-			return;
-		}
+		if( ( cx == x ) && ( cy == y ) ) return;
 		
 		Curve curve = new Curve( new Vector2f( cx, cy ), new Vector2f( cx1, cy1 ), new Vector2f( cx2, cy2 ), new Vector2f( x, y ) );
 		float step = 1.0f / segments;
@@ -121,14 +112,8 @@ public class Path extends Shape
 		{
 			float t = i * step;
 			Vector2f p = curve.pointAt( t );
-			if( hole != null )
-			{
-				hole.add( new float[] { p.x, p.y } );
-			}
-			else
-			{
-				localPoints.add( new float[] { p.x, p.y } );
-			}
+			if( hole != null ) hole.add( new float[] { p.x, p.y } );
+			else localPoints.add( new float[] { p.x, p.y } );
 			cx = p.x;
 			cy = p.y;
 		}
@@ -158,10 +143,7 @@ public class Path extends Shape
 	{
 		Path p = new Path( cx, cy );
 		p.localPoints = transform( localPoints, transform );
-		for( int i = 0; i < holes.size(); i++ )
-		{
-			p.holes.add( transform( holes.get( i ), transform ) );
-		}
+		for( int i = 0; i < holes.size(); i++ ) p.holes.add( transform( holes.get( i ), transform ) );
 		p.closed = this.closed;
 		
 		return p;
@@ -187,73 +169,10 @@ public class Path extends Shape
 		t.transform( in, 0, out, 0, pts.size() );
 		
 		ArrayList<float[]> outList = new ArrayList<>();
-		for( int i = 0; i < pts.size(); i++ )
-		{
-			outList.add( new float[] { out[( i * 2 )], out[( i * 2 ) + 1] } );
-		}
+		for( int i = 0; i < pts.size(); i++ ) outList.add( new float[] { out[( i * 2 )], out[( i * 2 ) + 1] } );
 		
 		return outList;
 	}
-	
-	// /**
-	// * Calculate the triangles that can fill this shape
-	// */
-	// protected void calculateTriangles() {
-	// if (!trianglesDirty) {
-	// return;
-	// }
-	// if (points.length >= 6) {
-	// boolean clockwise = true;
-	// float area = 0;
-	// for (int i=0;i<(points.length/2)-1;i++) {
-	// float x1 = points[(i*2)];
-	// float y1 = points[(i*2)+1];
-	// float x2 = points[(i*2)+2];
-	// float y2 = points[(i*2)+3];
-	//
-	// area += (x1 * y2) - (y1 * x2);
-	// }
-	// area /= 2;
-	// clockwise = area > 0;
-	//
-	// if (clockwise) {
-	// tris = new MannTriangulator();
-	// for (int i=0;i<points.length;i+=2) {
-	// tris.addPolyPoint(points[i], points[i+1]);
-	// }
-	//
-	// for (int h=0;h<holes.size();h++) {
-	// ArrayList hole = (ArrayList) holes.get(h);
-	// tris.startHole();
-	// for (int i=0;i<hole.size();i++) {
-	// float[] pt = (float[]) hole.get(i);
-	// tris.addPolyPoint(pt[0],pt[1]);
-	// }
-	// }
-	// tris.triangulate();
-	// } else {
-	// tris = new MannTriangulator();
-	// for (int i=points.length-2;i>=0;i-=2) {
-	// tris.addPolyPoint(points[i], points[i+1]);
-	// }
-	//
-	// for (int h=0;h<holes.size();h++) {
-	// ArrayList hole = (ArrayList) holes.get(h);
-	// tris.startHole();
-	// for (int i=hole.size()-1;i>=0;i--) {
-	// float[] pt = (float[]) hole.get(i);
-	// tris.addPolyPoint(pt[0],pt[1]);
-	// }
-	// }
-	// tris.triangulate();
-	// }
-	//
-	// } else {
-	// tris.triangulate();
-	// }
-	//
-	// trianglesDirty = false;
-	// }
 	
 	/**
 	 * True if this is a closed shape

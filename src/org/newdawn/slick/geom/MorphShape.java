@@ -42,25 +42,13 @@ public class MorphShape extends Shape
 	 */
 	public void addShape( Shape shape )
 	{
-		if( shape.points.length != points.length )
-		{
-			throw new RuntimeException( "Attempt to morph between two shapes with different vertex counts" );
-		}
+		if( shape.points.length != points.length ) throw new RuntimeException( "Attempt to morph between two shapes with different vertex counts" );
 		
 		Shape prev = shapes.get( shapes.size() - 1 );
-		if( equalShapes( prev, shape ) )
-		{
-			shapes.add( prev );
-		}
-		else
-		{
-			shapes.add( shape );
-		}
+		if( equalShapes( prev, shape ) ) shapes.add( prev );
+		else shapes.add( shape );
 		
-		if( shapes.size() == 2 )
-		{
-			next = shapes.get( 1 );
-		}
+		if( shapes.size() == 2 ) next = shapes.get( 1 );
 	}
 	
 	/**
@@ -77,10 +65,7 @@ public class MorphShape extends Shape
 		
 		for( int i = 0; i < a.points.length; i++ )
 		{
-			if( a.points[i] != b.points[i] )
-			{
-				return false;
-			}
+			if( a.points[i] != b.points[i] ) return false;
 		}
 		
 		return true;
@@ -115,10 +100,7 @@ public class MorphShape extends Shape
 		if( offset < 0 )
 		{
 			int index = shapes.indexOf( current );
-			if( index < 0 )
-			{
-				index = shapes.size() - 1;
-			}
+			if( index < 0 ) index = shapes.size() - 1;
 			
 			int nframe = rational( index + 1 );
 			setFrame( index, nframe, offset );
@@ -127,19 +109,13 @@ public class MorphShape extends Shape
 		else if( offset > 1 )
 		{
 			int index = shapes.indexOf( next );
-			if( index < 1 )
-			{
-				index = 0;
-			}
+			if( index < 1 ) index = 0;
 			
 			int nframe = rational( index + 1 );
 			setFrame( index, nframe, offset );
 			offset -= 1;
 		}
-		else
-		{
-			pointsDirty = true;
-		}
+		else pointsDirty = true;
 	}
 	
 	/**
@@ -162,14 +138,8 @@ public class MorphShape extends Shape
 	 */
 	private int rational( int n )
 	{
-		while( n >= shapes.size() )
-		{
-			n -= shapes.size();
-		}
-		while( n < 0 )
-		{
-			n += shapes.size();
-		}
+		while( n >= shapes.size() ) n -= shapes.size();
+		while( n < 0 ) n += shapes.size();
 		
 		return n;
 	}

@@ -39,10 +39,7 @@ public class OverTriangulator implements Triangulator
 			for( int p = 0; p < 3; p++ )
 			{
 				int n = p + 1;
-				if( n > 2 )
-				{
-					n = 0;
-				}
+				if( n > 2 ) n = 0;
 				
 				float[] pt1 = tris.getTrianglePoint( i, p );
 				float[] pt2 = tris.getTrianglePoint( i, n );
@@ -62,10 +59,7 @@ public class OverTriangulator implements Triangulator
 			for( int p = 0; p < 3; p++ )
 			{
 				int n = p + 1;
-				if( n > 2 )
-				{
-					n = 0;
-				}
+				if( n > 2 ) n = 0;
 				
 				float[] pt1 = tris.getTrianglePoint( i, p );
 				float[] pt2 = tris.getTrianglePoint( i, n );
@@ -128,5 +122,4 @@ public class OverTriangulator implements Triangulator
 	{
 		return true;
 	}
-	
 }

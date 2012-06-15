@@ -58,32 +58,15 @@ public strictfp class Vector2f implements Serializable
 	{
 		// Next lines are to prevent numbers like -1.8369701E-16
 		// when working with negative numbers
-		if( ( theta < -360 ) || ( theta > 360 ) )
-		{
-			theta = theta % 360;
-		}
-		if( theta < 0 )
-		{
-			theta = 360 + theta;
-		}
+		if( ( theta < -360 ) || ( theta > 360 ) ) theta = theta % 360;
+		if( theta < 0 ) theta = 360 + theta;
 		double oldTheta = getTheta();
-		if( ( theta < -360 ) || ( theta > 360 ) )
-		{
-			oldTheta = oldTheta % 360;
-		}
-		if( theta < 0 )
-		{
-			oldTheta = 360 + oldTheta;
-		}
+		if( ( theta < -360 ) || ( theta > 360 ) ) oldTheta = oldTheta % 360;
+		if( theta < 0 ) oldTheta = 360 + oldTheta;
 		
 		float len = length();
 		x = len * (float)FastTrig.cos( StrictMath.toRadians( theta ) );
 		y = len * (float)FastTrig.sin( StrictMath.toRadians( theta ) );
-		
-		// x = x / (float) FastTrig.cos(StrictMath.toRadians(oldTheta))
-		// * (float) FastTrig.cos(StrictMath.toRadians(theta));
-		// y = x / (float) FastTrig.sin(StrictMath.toRadians(oldTheta))
-		// * (float) FastTrig.sin(StrictMath.toRadians(theta));
 	}
 	
 	/**
@@ -122,14 +105,8 @@ public strictfp class Vector2f implements Serializable
 	public double getTheta()
 	{
 		double theta = StrictMath.toDegrees( StrictMath.atan2( y, x ) );
-		if( ( theta < -360 ) || ( theta > 360 ) )
-		{
-			theta = theta % 360;
-		}
-		if( theta < 0 )
-		{
-			theta = 360 + theta;
-		}
+		if( ( theta < -360 ) || ( theta > 360 ) ) theta = theta % 360;
+		if( theta < 0 ) theta = 360 + theta;
 		
 		return theta;
 	}
@@ -307,10 +284,7 @@ public strictfp class Vector2f implements Serializable
 	{
 		float l = length();
 		
-		if( l == 0 )
-		{
-			return this;
-		}
+		if( l == 0 ) return this;
 		
 		x /= l;
 		y /= l;

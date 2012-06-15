@@ -39,33 +39,15 @@ public class Polygon extends Shape
 			this.points[i] = points[i];
 			if( i % 2 == 0 )
 			{
-				if( points[i] > maxX )
-				{
-					maxX = points[i];
-				}
-				if( points[i] < minX )
-				{
-					minX = points[i];
-				}
-				if( points[i] < x )
-				{
-					x = points[i];
-				}
+				if( points[i] > maxX ) maxX = points[i];
+				if( points[i] < minX ) minX = points[i];
+				if( points[i] < x ) x = points[i];
 			}
 			else
 			{
-				if( points[i] > maxY )
-				{
-					maxY = points[i];
-				}
-				if( points[i] < minY )
-				{
-					minY = points[i];
-				}
-				if( points[i] < y )
-				{
-					y = points[i];
-				}
+				if( points[i] > maxY ) maxY = points[i];
+				if( points[i] < minY ) minY = points[i];
+				if( points[i] < y ) y = points[i];
 			}
 		}
 		
@@ -105,40 +87,19 @@ public class Polygon extends Shape
 	 */
 	public void addPoint( float x, float y )
 	{
-		if( hasVertex( x, y ) && ( !allowDups ) )
-		{
-			return;
-		}
+		if( hasVertex( x, y ) && ( !allowDups ) ) return;
 		
 		ArrayList<Float> tempPoints = new ArrayList<>();
-		for( int i = 0; i < points.length; i++ )
-		{
-			tempPoints.add( new Float( points[i] ) );
-		}
+		for( int i = 0; i < points.length; i++ ) tempPoints.add( new Float( points[i] ) );
 		tempPoints.add( new Float( x ) );
 		tempPoints.add( new Float( y ) );
 		int length = tempPoints.size();
 		points = new float[length];
-		for( int i = 0; i < length; i++ )
-		{
-			points[i] = tempPoints.get( i ).floatValue();
-		}
-		if( x > maxX )
-		{
-			maxX = x;
-		}
-		if( y > maxY )
-		{
-			maxY = y;
-		}
-		if( x < minX )
-		{
-			minX = x;
-		}
-		if( y < minY )
-		{
-			minY = y;
-		}
+		for( int i = 0; i < length; i++ ) points[i] = tempPoints.get( i ).floatValue();
+		if( x > maxX ) maxX = x;
+		if( y > maxY ) maxY = y;
+		if( x < minX ) minX = x;
+		if( y < minY ) minY = y;
 		findCenter();
 		calculateRadius();
 		

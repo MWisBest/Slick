@@ -37,10 +37,7 @@ public class BasicTriangulator implements Triangulator
 	public void addPolyPoint( float x, float y )
 	{
 		Point p = new Point( x, y );
-		if( !poly.contains( p ) )
-		{
-			poly.add( p );
-		}
+		if( !poly.contains( p ) ) poly.add( p );
 	}
 	
 	/**
@@ -86,10 +83,7 @@ public class BasicTriangulator implements Triangulator
 	@Override
 	public int getTriangleCount()
 	{
-		if( !tried )
-		{
-			throw new RuntimeException( "Call triangulate() before accessing triangles" );
-		}
+		if( !tried ) throw new RuntimeException( "Call triangulate() before accessing triangles" );
 		return tris.size() / 3;
 	}
 	
@@ -104,10 +98,7 @@ public class BasicTriangulator implements Triangulator
 	@Override
 	public float[] getTrianglePoint( int tri, int i )
 	{
-		if( !tried )
-		{
-			throw new RuntimeException( "Call triangulate() before accessing triangles" );
-		}
+		if( !tried ) throw new RuntimeException( "Call triangulate() before accessing triangles" );
 		
 		return tris.get( ( tri * 3 ) + i ).toArray();
 	}
@@ -201,25 +192,16 @@ public class BasicTriangulator implements Triangulator
 		Cx = contour.get( V[w] ).getX();
 		Cy = contour.get( V[w] ).getY();
 		
-		if( EPSILON > ( ( ( Bx - Ax ) * ( Cy - Ay ) ) - ( ( By - Ay ) * ( Cx - Ax ) ) ) )
-		{
-			return false;
-		}
+		if( EPSILON > ( ( ( Bx - Ax ) * ( Cy - Ay ) ) - ( ( By - Ay ) * ( Cx - Ax ) ) ) ) return false;
 		
 		for( p = 0; p < n; p++ )
 		{
-			if( ( p == u ) || ( p == v ) || ( p == w ) )
-			{
-				continue;
-			}
+			if( ( p == u ) || ( p == v ) || ( p == w ) ) continue;
 			
 			Px = contour.get( V[p] ).getX();
 			Py = contour.get( V[p] ).getY();
 			
-			if( insideTriangle( Ax, Ay, Bx, By, Cx, Cy, Px, Py ) )
-			{
-				return false;
-			}
+			if( insideTriangle( Ax, Ay, Bx, By, Cx, Cy, Px, Py ) ) return false;
 		}
 		
 		return true;
@@ -249,13 +231,11 @@ public class BasicTriangulator implements Triangulator
 		
 		if( 0.0f < area( contour ) )
 		{
-			for( int v = 0; v < n; v++ )
-				V[v] = v;
+			for( int v = 0; v < n; v++ ) V[v] = v;
 		}
 		else
 		{
-			for( int v = 0; v < n; v++ )
-				V[v] = ( n - 1 ) - v;
+			for( int v = 0; v < n; v++ ) V[v] = ( n - 1 ) - v;
 		}
 		
 		int nv = n;
@@ -266,11 +246,7 @@ public class BasicTriangulator implements Triangulator
 		for( int v = nv - 1; nv > 2; )
 		{
 			/* if we loop, it is probably a non-simple polygon */
-			if( 0 >= ( count-- ) )
-			{
-				// ** Triangulator4: ERROR - probable bad polygon!
-				return false;
-			}
+			if( 0 >= ( count-- ) ) return false; // ** Triangulator4: ERROR - probable bad polygon!
 			
 			/* three consecutive vertices in current polygon, <u,v,w> */
 			int u = v;
@@ -295,10 +271,7 @@ public class BasicTriangulator implements Triangulator
 				result.add( contour.get( c ) );
 				
 				/* remove v from remaining polygon */
-				for( s = v, t = v + 1; t < nv; s++, t++ )
-				{
-					V[s] = V[t];
-				}
+				for( s = v, t = v + 1; t < nv; s++, t++ ) V[s] = V[t];
 				nv--;
 				
 				/* resest error detection counter */
@@ -476,7 +449,5 @@ public class BasicTriangulator implements Triangulator
 	@Override
 	public void startHole()
 	{
-		// TODO Auto-generated method stub
-		
 	}
 }

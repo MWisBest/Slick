@@ -94,15 +94,9 @@ public abstract class Shape implements Serializable
 			float dx = x - this.x;
 			this.x = x;
 			
-			if( ( points == null ) || ( center == null ) )
-			{
-				checkPoints();
-			}
+			if( ( points == null ) || ( center == null ) ) checkPoints();
 			// update the points in the special case
-			for( int i = 0; i < points.length / 2; i++ )
-			{
-				points[i * 2] += dx;
-			}
+			for( int i = 0; i < points.length / 2; i++ ) points[i * 2] += dx;
 			center[0] += dx;
 			x += dx;
 			maxX += dx;
@@ -123,15 +117,9 @@ public abstract class Shape implements Serializable
 			float dy = y - this.y;
 			this.y = y;
 			
-			if( ( points == null ) || ( center == null ) )
-			{
-				checkPoints();
-			}
+			if( ( points == null ) || ( center == null ) ) checkPoints();
 			// update the points in the special case
-			for( int i = 0; i < points.length / 2; i++ )
-			{
-				points[( i * 2 ) + 1] += dy;
-			}
+			for( int i = 0; i < points.length / 2; i++ ) points[( i * 2 ) + 1] += dy;
 			center[1] += dy;
 			y += dy;
 			maxY += dy;
@@ -180,10 +168,7 @@ public abstract class Shape implements Serializable
 	 */
 	public void setCenterX( float centerX )
 	{
-		if( ( points == null ) || ( center == null ) )
-		{
-			checkPoints();
-		}
+		if( ( points == null ) || ( center == null ) ) checkPoints();
 		
 		float xDiff = centerX - getCenterX();
 		setX( x + xDiff );
@@ -208,10 +193,7 @@ public abstract class Shape implements Serializable
 	 */
 	public void setCenterY( float centerY )
 	{
-		if( ( points == null ) || ( center == null ) )
-		{
-			checkPoints();
-		}
+		if( ( points == null ) || ( center == null ) ) checkPoints();
 		
 		float yDiff = centerY - getCenterY();
 		setY( y + yDiff );
@@ -338,14 +320,8 @@ public abstract class Shape implements Serializable
 		float[] t1 = getNormal( prev, current );
 		float[] t2 = getNormal( current, next );
 		
-		if( ( index == 0 ) && ( !closed() ) )
-		{
-			return t2;
-		}
-		if( ( index == getPointCount() - 1 ) && ( !closed() ) )
-		{
-			return t1;
-		}
+		if( ( index == 0 ) && ( !closed() ) ) return t2;
+		if( ( index == getPointCount() - 1 ) && ( !closed() ) ) return t1;
 		
 		float tx = ( t1[0] + t2[0] ) / 2;
 		float ty = ( t1[1] + t2[1] ) / 2;
@@ -363,18 +339,12 @@ public abstract class Shape implements Serializable
 	 */
 	public boolean contains( Shape other )
 	{
-		if( other.intersects( this ) )
-		{
-			return false;
-		}
+		if( other.intersects( this ) ) return false;
 		
 		for( int i = 0; i < other.getPointCount(); i++ )
 		{
 			float[] pt = other.getPoint( i );
-			if( !contains( pt[0], pt[1] ) )
-			{
-				return false;
-			}
+			if( !contains( pt[0], pt[1] ) ) return false;
 		}
 		
 		return true;
@@ -407,10 +377,7 @@ public abstract class Shape implements Serializable
 	 */
 	public boolean includes( float x, float y )
 	{
-		if( points.length == 0 )
-		{
-			return false;
-		}
+		if( points.length == 0 ) return false;
 		
 		checkPoints();
 		
@@ -420,16 +387,10 @@ public abstract class Shape implements Serializable
 		for( int i = 0; i < points.length; i += 2 )
 		{
 			int n = i + 2;
-			if( n >= points.length )
-			{
-				n = 0;
-			}
+			if( n >= points.length ) n = 0;
 			testLine.set( points[i], points[i + 1], points[n], points[n + 1] );
 			
-			if( testLine.on( pt ) )
-			{
-				return true;
-			}
+			if( testLine.on( pt ) ) return true;
 		}
 		
 		return false;
@@ -446,10 +407,7 @@ public abstract class Shape implements Serializable
 	{
 		for( int i = 0; i < points.length; i += 2 )
 		{
-			if( ( points[i] == x ) && ( points[i + 1] == y ) )
-			{
-				return i / 2;
-			}
+			if( ( points[i] == x ) && ( points[i + 1] == y ) ) return i / 2;
 		}
 		
 		return -1;
@@ -465,10 +423,7 @@ public abstract class Shape implements Serializable
 	public boolean contains( float x, float y )
 	{
 		checkPoints();
-		if( points.length == 0 )
-		{
-			return false;
-		}
+		if( points.length == 0 ) return false;
 		
 		boolean result = false;
 		float xnew, ynew;
@@ -497,11 +452,7 @@ public abstract class Shape implements Serializable
 				y1 = ynew;
 				y2 = yold;
 			}
-			if( ( xnew < x ) == ( x <= xold ) /* edge "open" at one end */
-					&& ( (double)y - (double)y1 ) * ( x2 - x1 ) < ( (double)y2 - (double)y1 ) * ( x - x1 ) )
-			{
-				result = !result;
-			}
+			if( ( xnew < x ) == ( x <= xold ) /* edge "open" at one end */ && ( (double)y - (double)y1 ) * ( x2 - x1 ) < ( (double)y2 - (double)y1 ) * ( x - x1 ) ) result = !result;
 			xold = xnew;
 			yold = ynew;
 		}
@@ -538,38 +489,18 @@ public abstract class Shape implements Serializable
 		double unknownA;
 		double unknownB;
 		
-		if( !closed() )
-		{
-			length -= 2;
-		}
-		if( !shape.closed() )
-		{
-			thatLength -= 2;
-		}
+		if( !closed() ) length -= 2;
+		if( !shape.closed() ) thatLength -= 2;
 		
-		// x1 = thatPoints[j]
-		// x2 = thatPoints[j + 2]
-		// y1 = thatPoints[j + 1]
-		// y2 = thatPoints[j + 3]
-		// x3 = points[i]
-		// x4 = points[i + 2]
-		// y3 = points[i + 1]
-		// y4 = points[i + 3]
 		for( int i = 0; i < length; i += 2 )
 		{
 			int iNext = i + 2;
-			if( iNext >= points.length )
-			{
-				iNext = 0;
-			}
+			if( iNext >= points.length ) iNext = 0;
 			
 			for( int j = 0; j < thatLength; j += 2 )
 			{
 				int jNext = j + 2;
-				if( jNext >= thatPoints.length )
-				{
-					jNext = 0;
-				}
+				if( jNext >= thatPoints.length ) jNext = 0;
 				
 				unknownA = ( ( ( points[iNext] - points[i] ) * (double)( thatPoints[j + 1] - points[i + 1] ) ) - ( ( points[iNext + 1] - points[i + 1] ) * ( thatPoints[j] - points[i] ) ) ) / ( ( ( points[iNext + 1] - points[i + 1] ) * ( thatPoints[jNext] - thatPoints[j] ) ) - ( ( points[iNext] - points[i] ) * ( thatPoints[jNext + 1] - thatPoints[j + 1] ) ) );
 				unknownB = ( ( ( thatPoints[jNext] - thatPoints[j] ) * (double)( thatPoints[j + 1] - points[i + 1] ) ) - ( ( thatPoints[jNext + 1] - thatPoints[j + 1] ) * ( thatPoints[j] - points[i] ) ) ) / ( ( ( points[iNext + 1] - points[i + 1] ) * ( thatPoints[jNext] - thatPoints[j] ) ) - ( ( points[iNext] - points[i] ) * ( thatPoints[jNext + 1] - thatPoints[j + 1] ) ) );
@@ -580,10 +511,7 @@ public abstract class Shape implements Serializable
 					break;
 				}
 			}
-			if( result )
-			{
-				break;
-			}
+			if( result ) break;
 		}
 		
 		return result;
@@ -598,19 +526,13 @@ public abstract class Shape implements Serializable
 	 */
 	public boolean hasVertex( float x, float y )
 	{
-		if( points.length == 0 )
-		{
-			return false;
-		}
+		if( points.length == 0 ) return false;
 		
 		checkPoints();
 		
 		for( int i = 0; i < points.length; i += 2 )
 		{
-			if( ( points[i] == x ) && ( points[i + 1] == y ) )
-			{
-				return true;
-			}
+			if( ( points[i] == x ) && ( points[i + 1] == y ) ) return true;
 		}
 		
 		return false;
@@ -654,17 +576,11 @@ public abstract class Shape implements Serializable
 	 */
 	protected void calculateTriangles()
 	{
-		if( ( !trianglesDirty ) && ( tris != null ) )
-		{
-			return;
-		}
+		if( ( !trianglesDirty ) && ( tris != null ) ) return;
 		if( points.length >= 6 )
 		{
 			tris = new NeatTriangulator();
-			for( int i = 0; i < points.length; i += 2 )
-			{
-				tris.addPolyPoint( points[i], points[i + 1] );
-			}
+			for( int i = 0; i < points.length; i += 2 ) tris.addPolyPoint( points[i], points[i + 1] );
 			tris.triangulate();
 		}
 		
@@ -769,10 +685,7 @@ public abstract class Shape implements Serializable
 			dx2 /= len2;
 			dy2 /= len2;
 			
-			if( ( dx1 != dx2 ) || ( dy1 != dy2 ) )
-			{
-				result.addPoint( getPoint( i )[0], getPoint( i )[1] );
-			}
+			if( ( dx1 != dx2 ) || ( dy1 != dy2 ) ) result.addPoint( getPoint( i )[0], getPoint( i )[1] );
 		}
 		
 		return result;

@@ -42,22 +42,7 @@ public class Rectangle extends Shape
 	@Override
 	public boolean contains( float xp, float yp )
 	{
-		if( xp <= getX() )
-		{
-			return false;
-		}
-		if( yp <= getY() )
-		{
-			return false;
-		}
-		if( xp >= maxX )
-		{
-			return false;
-		}
-		if( yp >= maxY )
-		{
-			return false;
-		}
+		if( xp <= getX() || yp <= getY() || xp >= maxX || yp >= maxY ) return false;
 		
 		return true;
 	}
@@ -189,24 +174,11 @@ public class Rectangle extends Shape
 		if( shape instanceof Rectangle )
 		{
 			Rectangle other = (Rectangle)shape;
-			if( ( x > ( other.x + other.width ) ) || ( ( x + width ) < other.x ) )
-			{
-				return false;
-			}
-			if( ( y > ( other.y + other.height ) ) || ( ( y + height ) < other.y ) )
-			{
-				return false;
-			}
+			if( ( x > ( other.x + other.width ) ) || ( ( x + width ) < other.x ) || ( y > ( other.y + other.height ) ) || ( ( y + height ) < other.y ) ) return false;
 			return true;
 		}
-		else if( shape instanceof Circle )
-		{
-			return intersects( (Circle)shape );
-		}
-		else
-		{
-			return super.intersects( shape );
-		}
+		else if( shape instanceof Circle ) return intersects( (Circle)shape );
+		else return super.intersects( shape );
 	}
 	
 	@Override

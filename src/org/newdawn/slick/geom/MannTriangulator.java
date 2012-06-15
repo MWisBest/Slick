@@ -39,7 +39,7 @@ import java.util.List;
 public class MannTriangulator implements Triangulator
 {
 	private static final long serialVersionUID = 3460371293975572064L;
-
+	
 	/** The allowed error value */
 	private static final double EPSILON = 1e-5;
 	
@@ -74,10 +74,7 @@ public class MannTriangulator implements Triangulator
 	 */
 	public void reset()
 	{
-		while( holes != null )
-		{
-			holes = freePointBag( holes );
-		}
+		while( holes != null ) holes = freePointBag( holes );
 		
 		contour.clear();
 		holes = null;
@@ -123,10 +120,7 @@ public class MannTriangulator implements Triangulator
 	{
 		// Step 1: Compute all angles
 		contour.computeAngles();
-		for( PointBag hole = holes; hole != null; hole = hole.next )
-		{
-			hole.computeAngles();
-		}
+		for( PointBag hole = holes; hole != null; hole = hole.next ) hole.computeAngles();
 		
 		// Step 2: Connect the holes with the contour (build bridges)
 		while( holes != null )
@@ -146,10 +140,7 @@ public class MannTriangulator implements Triangulator
 								PointBag hole = holes;
 								do
 								{
-									if( hole.doesIntersectSegment( pHole.pt, pContour.pt ) )
-									{
-										break inner;
-									}
+									if( hole.doesIntersectSegment( pHole.pt, pContour.pt ) ) break inner;
 								}
 								while( ( hole = hole.next ) != null );
 								
@@ -188,26 +179,17 @@ public class MannTriangulator implements Triangulator
 		// Step 3: Make sure we have enough space for the result
 		int numTriangles = contour.countPoints() - 2;
 		int neededSpace = numTriangles * 3 + 1; // for the null
-		if( result.length < neededSpace )
-		{
-			result = (Vector2f[])Array.newInstance( result.getClass().getComponentType(), neededSpace );
-		}
+		if( result.length < neededSpace ) result = (Vector2f[])Array.newInstance( result.getClass().getComponentType(), neededSpace );
 		
 		// Step 4: Extract the triangles
 		int idx = 0;
-		for( ;; )
+		while( true )
 		{
 			Point pContour = contour.first;
 			
-			if( pContour == null )
-			{
-				break;
-			}
+			if( pContour == null ) break;
 			// Are there 2 or less points left ?
-			if( pContour.next == pContour.prev )
-			{
-				break;
-			}
+			if( pContour.next == pContour.prev ) break;
 			
 			outer: do
 			{
@@ -413,31 +395,22 @@ public class MannTriangulator implements Triangulator
 		 */
 		public void computeAngle()
 		{
-			if( prev.pt.equals( pt ) )
-			{
-				pt.x += 0.01f;
-			}
+			if( prev.pt.equals( pt ) ) pt.x += 0.01f;
 			double dx1 = pt.x - prev.pt.x;
 			double dy1 = pt.y - prev.pt.y;
 			double len1 = hypot( dx1, dy1 );
 			dx1 /= len1;
 			dy1 /= len1;
 			
-			if( next.pt.equals( pt ) )
-			{
-				pt.y += 0.01f;
-			}
+			if( next.pt.equals( pt ) ) pt.y += 0.01f;
 			double dx2 = next.pt.x - pt.x;
 			double dy2 = next.pt.y - pt.y;
 			double len2 = hypot( dx2, dy2 );
 			dx2 /= len2;
 			dy2 /= len2;
 			
-			double nx1 = -dy1;
-			double ny1 = dx1;
-			
-			nx = ( nx1 - dy2 ) * 0.5;
-			ny = ( ny1 + dx2 ) * 0.5;
+			nx = ( -dy1 - dy2 ) * 0.5;
+			ny = ( dx1 + dx2 ) * 0.5;
 			
 			if( nx * nx + ny * ny < EPSILON )
 			{
@@ -450,10 +423,7 @@ public class MannTriangulator implements Triangulator
 					ny = -dy1;
 				}
 			}
-			else
-			{
-				angle = nx * dx2 + ny * dy2;
-			}
+			else angle = nx * dx2 + ny * dy2;
 		}
 		
 		/**
@@ -544,10 +514,7 @@ public class MannTriangulator implements Triangulator
 		 */
 		public void add( Point p )
 		{
-			if( first != null )
-			{
-				first.insertBefore( p );
-			}
+			if( first != null ) first.insertBefore( p );
 			else
 			{
 				first = p;
@@ -561,10 +528,7 @@ public class MannTriangulator implements Triangulator
 		 */
 		public void computeAngles()
 		{
-			if( first == null )
-			{
-				return;
-			}
+			if( first == null ) return;
 			
 			Point p = first;
 			do
@@ -603,17 +567,11 @@ public class MannTriangulator implements Triangulator
 						double tA = ( dyB * tmp1 - dxB * tmp2 ) / d;
 						double tB = ( dyA * tmp1 - dxA * tmp2 ) / d;
 						
-						if( tA >= 0 && tA <= 1 && tB >= 0 && tB <= 1 )
-						{
-							return true;
-						}
+						if( tA >= 0 && tA <= 1 && tB >= 0 && tB <= 1 ) return true;
 					}
 				}
 				
-				if( n == first )
-				{
-					return false;
-				}
+				if( n == first ) return false;
 				p = n;
 			}
 		}
@@ -625,10 +583,7 @@ public class MannTriangulator implements Triangulator
 		 */
 		public int countPoints()
 		{
-			if( first == null )
-			{
-				return 0;
-			}
+			if( first == null ) return 0;
 			
 			int count = 0;
 			Point p = first;
@@ -648,19 +603,10 @@ public class MannTriangulator implements Triangulator
 		 */
 		public boolean contains( Vector2f point )
 		{
-			if( first == null )
-			{
-				return false;
-			}
+			if( first == null ) return false;
 			
-			if( first.prev.pt.equals( point ) )
-			{
-				return true;
-			}
-			if( first.pt.equals( point ) )
-			{
-				return true;
-			}
+			if( first.prev.pt.equals( point ) || first.pt.equals( point ) ) return true;
+			
 			return false;
 		}
 	}
@@ -672,14 +618,8 @@ public class MannTriangulator implements Triangulator
 		
 		for( int i = 0; i < temp.length; i++ )
 		{
-			if( temp[i] == null )
-			{
-				break;
-			}
-			else
-			{
-				triangles.add( temp[i] );
-			}
+			if( temp[i] == null ) break;
+			else triangles.add( temp[i] );
 		}
 		
 		return true;
@@ -704,5 +644,4 @@ public class MannTriangulator implements Triangulator
 		
 		return new float[] { pt.x, pt.y };
 	}
-	
 }

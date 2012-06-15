@@ -9,7 +9,6 @@ import java.io.Serializable;
  */
 public interface Triangulator extends Serializable
 {
-	
 	/**
 	 * Get a count of the number of triangles produced
 	 * 

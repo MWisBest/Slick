@@ -34,26 +34,14 @@ public final class ShapeRenderer
 		float points[] = shape.getPoints();
 		
 		LSR.start();
-		for( int i = 0; i < points.length; i += 2 )
-		{
-			LSR.vertex( points[i], points[i + 1] );
-		}
+		for( int i = 0; i < points.length; i += 2 ) LSR.vertex( points[i], points[i + 1] );
 		
-		if( shape.closed() )
-		{
-			LSR.vertex( points[0], points[1] );
-		}
+		if( shape.closed() ) LSR.vertex( points[0], points[1] );
 		
 		LSR.end();
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -86,14 +74,8 @@ public final class ShapeRenderer
 		}
 		GL.glEnd();
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -104,10 +86,7 @@ public final class ShapeRenderer
 	 */
 	public static boolean validFill( Shape shape )
 	{
-		if( shape.getTriangles() == null )
-		{
-			return false;
-		}
+		if( shape.getTriangles() == null ) return false;
 		return shape.getTriangles().getTriangleCount() != 0;
 	}
 	
@@ -119,10 +98,7 @@ public final class ShapeRenderer
 	 */
 	public static final void fill( Shape shape )
 	{
-		if( !validFill( shape ) )
-		{
-			return;
-		}
+		if( !validFill( shape ) ) return;
 		
 		Texture t = TextureImpl.getLastBind();
 		TextureImpl.bindNone();
@@ -137,14 +113,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -166,14 +136,8 @@ public final class ShapeRenderer
 				float[] pt = tris.getTrianglePoint( i, p );
 				float[] np = callback.preRenderPoint( shape, pt[0], pt[1] );
 				
-				if( np == null )
-				{
-					GL.glVertex2f( pt[0], pt[1] );
-				}
-				else
-				{
-					GL.glVertex2f( np[0], np[1] );
-				}
+				if( np == null ) GL.glVertex2f( pt[0], pt[1] );
+				else GL.glVertex2f( np[0], np[1] );
 			}
 		}
 		GL.glEnd();
@@ -215,10 +179,7 @@ public final class ShapeRenderer
 	 */
 	public static final void texture( Shape shape, final Image image, final float scaleX, final float scaleY )
 	{
-		if( !validFill( shape ) )
-		{
-			return;
-		}
+		if( !validFill( shape ) ) return;
 		
 		final Texture t = TextureImpl.getLastBind();
 		image.getTexture().bind();
@@ -239,14 +200,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -261,10 +216,7 @@ public final class ShapeRenderer
 	 */
 	public static final void textureFit( Shape shape, final Image image, final float scaleX, final float scaleY )
 	{
-		if( !validFill( shape ) )
-		{
-			return;
-		}
+		if( !validFill( shape ) ) return;
 		
 		Texture t = TextureImpl.getLastBind();
 		image.getTexture().bind();
@@ -291,14 +243,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -310,10 +256,7 @@ public final class ShapeRenderer
 	 */
 	public static final void fill( final Shape shape, final ShapeFill fill )
 	{
-		if( !validFill( shape ) )
-		{
-			return;
-		}
+		if( !validFill( shape ) ) return;
 		
 		Texture t = TextureImpl.getLastBind();
 		TextureImpl.bindNone();
@@ -330,14 +273,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -352,10 +289,7 @@ public final class ShapeRenderer
 	 */
 	public static final void texture( final Shape shape, final Image image, final float scaleX, final float scaleY, final ShapeFill fill )
 	{
-		if( !validFill( shape ) )
-		{
-			return;
-		}
+		if( !validFill( shape ) ) return;
 		
 		Texture t = TextureImpl.getLastBind();
 		image.getTexture().bind();
@@ -384,14 +318,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**
@@ -420,14 +348,8 @@ public final class ShapeRenderer
 				}
 			} );
 		
-		if( t == null )
-		{
-			TextureImpl.bindNone();
-		}
-		else
-		{
-			t.bind();
-		}
+		if( t == null ) TextureImpl.bindNone();
+		else t.bind();
 	}
 	
 	/**

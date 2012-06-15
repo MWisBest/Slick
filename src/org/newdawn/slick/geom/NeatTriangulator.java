@@ -8,7 +8,7 @@ package org.newdawn.slick.geom;
 public class NeatTriangulator implements Triangulator
 {
 	private static final long serialVersionUID = 2181630687948961826L;
-
+	
 	/** The error factor */
 	static final float EPSILON = 1E-006F;
 	
@@ -77,7 +77,9 @@ public class NeatTriangulator implements Triangulator
 			l = i;
 		}
 		for( int i1 = 0; i1 < numEdges; i1++ )
+		{
 			if( edges[i1].v0 == k && edges[i1].v1 == l ) return i1;
+		}
 		
 		return -1;
 	}
@@ -145,10 +147,7 @@ public class NeatTriangulator implements Triangulator
 	private void deleteEdge( int i, int j ) throws InternalException
 	{
 		int k;
-		if( 0 > ( k = findEdge( i, j ) ) )
-		{
-			throw new InternalException( "Attempt to delete unknown edge" );
-		}
+		if( 0 > ( k = findEdge( i, j ) ) ) throw new InternalException( "Attempt to delete unknown edge" );
 		else
 		{
 			edges[k] = edges[--numEdges];
@@ -167,10 +166,7 @@ public class NeatTriangulator implements Triangulator
 	void markSuspect( int i, int j, boolean flag ) throws InternalException
 	{
 		int k;
-		if( 0 > ( k = findEdge( i, j ) ) )
-		{
-			throw new InternalException( "Attempt to mark unknown edge" );
-		}
+		if( 0 > ( k = findEdge( i, j ) ) ) throw new InternalException( "Attempt to mark unknown edge" );
 		else
 		{
 			edges[k].suspect = flag;
@@ -229,10 +225,7 @@ public class NeatTriangulator implements Triangulator
 			float f17 = f11 * f11;
 			return ( ( f12 + f13 ) * ( f14 + f15 ) * ( f16 + f17 ) ) / ( f18 * f18 );
 		}
-		else
-		{
-			return -1F;
-		}
+		else return -1F;
 	}
 	
 	/**
@@ -289,12 +282,14 @@ public class NeatTriangulator implements Triangulator
 		float f5 = pointsY[V[k]];
 		if( 1E-006F > ( f2 - f ) * ( f5 - f1 ) - ( f3 - f1 ) * ( f4 - f ) ) return false;
 		for( int i1 = 0; i1 < l; i1++ )
+		{
 			if( i1 != i && i1 != j && i1 != k )
 			{
 				float f6 = pointsX[V[i1]];
 				float f7 = pointsY[V[i1]];
 				if( insideTriangle( f, f1, f2, f3, f4, f5, f6, f7 ) ) return false;
 			}
+		}
 		
 		return true;
 	}
@@ -332,24 +327,18 @@ public class NeatTriangulator implements Triangulator
 		
 		if( 0.0D < area() )
 		{
-			for( int k = 0; k < i; k++ )
-				V[k] = k;
+			for( int k = 0; k < i; k++ ) V[k] = k;
 			
 		}
 		else
 		{
-			for( int l = 0; l < i; l++ )
-				V[l] = numPoints - 1 - l;
-			
+			for( int l = 0; l < i; l++ ) V[l] = numPoints - 1 - l;
 		}
 		int k1 = 2 * i;
 		int i1 = i - 1;
 		while( i > 2 )
 		{
-			if( 0 >= k1-- )
-			{
-				throw new InternalException( "Bad polygon" );
-			}
+			if( 0 >= k1-- ) throw new InternalException( "Bad polygon" );
 			
 			int j = i1;
 			if( i <= j ) j = 0;
@@ -398,10 +387,7 @@ public class NeatTriangulator implements Triangulator
 		do
 		{
 			Edge edge;
-			if( ( edge = chooseSuspect() ) == null )
-			{
-				break;
-			}
+			if( ( edge = chooseSuspect() ) == null ) break;
 			int i1 = edge.v0;
 			int k1 = edge.v1;
 			int i = edge.t0;
@@ -411,10 +397,7 @@ public class NeatTriangulator implements Triangulator
 			for( int k = 0; k < 3; k++ )
 			{
 				int i2 = triangles[i].v[k];
-				if( i1 == i2 || k1 == i2 )
-				{
-					continue;
-				}
+				if( i1 == i2 || k1 == i2 ) continue;
 				l1 = i2;
 				break;
 			}
@@ -422,18 +405,12 @@ public class NeatTriangulator implements Triangulator
 			for( int l = 0; l < 3; l++ )
 			{
 				int j2 = triangles[j].v[l];
-				if( i1 == j2 || k1 == j2 )
-				{
-					continue;
-				}
+				if( i1 == j2 || k1 == j2 ) continue;
 				j1 = j2;
 				break;
 			}
 			
-			if( -1 == j1 || -1 == l1 )
-			{
-				throw new InternalException( "can't find quad" );
-			}
+			if( -1 == j1 || -1 == l1 ) throw new InternalException( "can't find quad" );
 			
 			float f = pointsX[i1];
 			float f1 = pointsY[i1];
@@ -447,20 +424,11 @@ public class NeatTriangulator implements Triangulator
 			float f9 = rho( f, f1, f4, f5, f6, f7 );
 			float f10 = rho( f2, f3, f4, f5, f6, f7 );
 			float f11 = rho( f2, f3, f6, f7, f, f1 );
-			if( 0.0F > f8 || 0.0F > f9 )
-			{
-				throw new InternalException( "original triangles backwards" );
-			}
+			if( 0.0F > f8 || 0.0F > f9 ) throw new InternalException( "original triangles backwards" );
 			if( 0.0F <= f10 && 0.0F <= f11 )
 			{
-				if( f8 > f9 )
-				{
-					f8 = f9;
-				}
-				if( f10 > f11 )
-				{
-					f10 = f11;
-				}
+				if( f8 > f9 ) f8 = f9;
+				if( f10 > f11 ) f10 = f11;
 				if( f8 > f10 )
 				{
 					deleteEdge( i1, k1 );
@@ -597,7 +565,7 @@ public class NeatTriangulator implements Triangulator
 	class InternalException extends Exception
 	{
 		private static final long serialVersionUID = 3579922400170013665L;
-
+		
 		/**
 		 * Create an internal exception
 		 * 
