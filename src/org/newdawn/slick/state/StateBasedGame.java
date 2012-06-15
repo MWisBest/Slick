@@ -220,7 +220,6 @@ public abstract class StateBasedGame implements Game, InputListener
 	 */
 	protected void preRenderState( GameContainer container, Graphics g ) throws SlickException
 	{
-		// NO-OP
 	}
 	
 	/**
@@ -233,7 +232,6 @@ public abstract class StateBasedGame implements Game, InputListener
 	 */
 	protected void postRenderState( GameContainer container, Graphics g ) throws SlickException
 	{
-		// NO-OP
 	}
 	
 	/**
@@ -282,7 +280,6 @@ public abstract class StateBasedGame implements Game, InputListener
 	 */
 	protected void preUpdateState( GameContainer container, int delta ) throws SlickException
 	{
-		// NO-OP
 	}
 	
 	/**
@@ -295,7 +292,6 @@ public abstract class StateBasedGame implements Game, InputListener
 	 */
 	protected void postUpdateState( GameContainer container, int delta ) throws SlickException
 	{
-		// NO-OP
 	}
 	
 	/**
