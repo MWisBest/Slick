@@ -74,14 +74,7 @@ public class VAOGLRenderer extends ImmediateModeOGLRenderer
 	 */
 	private void flushBuffer()
 	{
-		if( vertIndex == 0 )
-		{
-			return;
-		}
-		if( currentType == NONE )
-		{
-			return;
-		}
+		if( vertIndex == 0 || currentType == NONE ) return;
 		
 		if( vertIndex < TOLERANCE )
 		{
@@ -121,10 +114,7 @@ public class VAOGLRenderer extends ImmediateModeOGLRenderer
 	 */
 	private void applyBuffer()
 	{
-		if( listMode > 0 )
-		{
-			return;
-		}
+		if( listMode > 0 ) return;
 		
 		if( vertIndex != 0 )
 		{

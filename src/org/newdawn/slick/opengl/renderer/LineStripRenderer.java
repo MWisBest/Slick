@@ -63,5 +63,4 @@ public interface LineStripRenderer
 	 * @param caps True if we should render end caps
 	 */
 	public void setLineCaps( boolean caps );
-	
 }

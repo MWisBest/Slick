@@ -144,10 +144,7 @@ public class QuadBasedLineStripRenderer implements LineStripRenderer
 		GL.glDisable( SGL.GL_POLYGON_SMOOTH );
 		renderLinesImpl( points, count, width );
 		
-		if( antialias )
-		{
-			GL.glEnable( SGL.GL_POLYGON_SMOOTH );
-		}
+		if( antialias ) GL.glEnable( SGL.GL_POLYGON_SMOOTH );
 	}
 	
 	/**
@@ -172,18 +169,9 @@ public class QuadBasedLineStripRenderer implements LineStripRenderer
 			int current = i;
 			int next = i + 1;
 			int prev = i - 1;
-			if( prev < 0 )
-			{
-				prev += count;
-			}
-			if( next >= count )
-			{
-				next -= count;
-			}
-			if( current >= count )
-			{
-				current -= count;
-			}
+			if( prev < 0 ) prev += count;
+			if( next >= count ) next -= count;
+			if( current >= count ) current -= count;
 			
 			float x1 = points[( current * 2 )];
 			float y1 = points[( current * 2 ) + 1];
@@ -194,10 +182,7 @@ public class QuadBasedLineStripRenderer implements LineStripRenderer
 			float dx = x2 - x1;
 			float dy = y2 - y1;
 			
-			if( ( dx == 0 ) && ( dy == 0 ) )
-			{
-				continue;
-			}
+			if( ( dx == 0 ) && ( dy == 0 ) ) continue;
 			
 			float d2 = ( dx * dx ) + ( dy * dy );
 			float d = (float)Math.sqrt( d2 );
@@ -291,14 +276,8 @@ public class QuadBasedLineStripRenderer implements LineStripRenderer
 	{
 		if( index < cpt )
 		{
-			if( renderHalf )
-			{
-				GL.glColor4f( colours[( index * 4 )] * 0.5f, colours[( index * 4 ) + 1] * 0.5f, colours[( index * 4 ) + 2] * 0.5f, colours[( index * 4 ) + 3] * 0.5f );
-			}
-			else
-			{
-				GL.glColor4f( colours[( index * 4 )], colours[( index * 4 ) + 1], colours[( index * 4 ) + 2], colours[( index * 4 ) + 3] );
-			}
+			if( renderHalf ) GL.glColor4f( colours[( index * 4 )] * 0.5f, colours[( index * 4 ) + 1] * 0.5f, colours[( index * 4 ) + 2] * 0.5f, colours[( index * 4 ) + 3] * 0.5f );
+			else GL.glColor4f( colours[( index * 4 )], colours[( index * 4 ) + 1], colours[( index * 4 ) + 2], colours[( index * 4 ) + 3] );
 		}
 	}
 	
@@ -324,10 +303,7 @@ public class QuadBasedLineStripRenderer implements LineStripRenderer
 	@Override
 	public boolean applyGLLineFixes()
 	{
-		if( width == 1 )
-		{
-			return def.applyGLLineFixes();
-		}
+		if( width == 1 ) return def.applyGLLineFixes();
 		
 		return def.applyGLLineFixes();
 	}

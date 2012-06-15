@@ -102,5 +102,4 @@ public class Renderer
 	{
 		return lineStripRenderer;
 	}
-	
 }

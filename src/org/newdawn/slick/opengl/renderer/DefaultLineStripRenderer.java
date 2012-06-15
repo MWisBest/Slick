@@ -26,14 +26,8 @@ public class DefaultLineStripRenderer implements LineStripRenderer
 	@Override
 	public void setAntiAlias( boolean antialias )
 	{
-		if( antialias )
-		{
-			GL.glEnable( SGL.GL_LINE_SMOOTH );
-		}
-		else
-		{
-			GL.glDisable( SGL.GL_LINE_SMOOTH );
-		}
+		if( antialias ) GL.glEnable( SGL.GL_LINE_SMOOTH );
+		else GL.glDisable( SGL.GL_LINE_SMOOTH );
 	}
 	
 	/**
@@ -88,5 +82,4 @@ public class DefaultLineStripRenderer implements LineStripRenderer
 	{
 		return true;
 	}
-	
 }
