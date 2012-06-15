@@ -13,7 +13,6 @@ import org.newdawn.slick.opengl.ImageData;
  */
 public interface GUIContext
 {
-	
 	/**
 	 * Get the input system
 	 * 

@@ -93,5 +93,4 @@ public abstract class BasicComponent extends AbstractComponent
 		this.x = x;
 		this.y = y;
 	}
-	
 }

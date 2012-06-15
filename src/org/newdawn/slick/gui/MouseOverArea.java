@@ -311,7 +311,6 @@ public class MouseOverArea extends AbstractComponent
 	{
 		if( currentImage != null )
 		{
-			
 			int xp = (int)( area.getX() + ( ( getWidth() - currentImage.getWidth() ) / 2 ) );
 			int yp = (int)( area.getY() + ( ( getHeight() - currentImage.getHeight() ) / 2 ) );
 			
@@ -343,10 +342,7 @@ public class MouseOverArea extends AbstractComponent
 			{
 				if( ( state != MOUSE_DOWN ) && ( mouseUp ) )
 				{
-					if( mouseDownSound != null )
-					{
-						mouseDownSound.play();
-					}
+					if( mouseDownSound != null ) mouseDownSound.play();
 					currentImage = mouseDownImage;
 					currentColor = mouseDownColor;
 					state = MOUSE_DOWN;
@@ -362,10 +358,7 @@ public class MouseOverArea extends AbstractComponent
 				mouseUp = true;
 				if( state != MOUSE_OVER )
 				{
-					if( mouseOverSound != null )
-					{
-						mouseOverSound.play();
-					}
+					if( mouseOverSound != null ) mouseOverSound.play();
 					currentImage = mouseOverImage;
 					currentColor = mouseOverColor;
 					state = MOUSE_OVER;
@@ -424,10 +417,7 @@ public class MouseOverArea extends AbstractComponent
 	public void mousePressed( int button, int mx, int my )
 	{
 		over = area.contains( mx, my );
-		if( button == 0 )
-		{
-			mouseDown = true;
-		}
+		if( button == 0 ) mouseDown = true;
 	}
 	
 	/**
@@ -437,10 +427,7 @@ public class MouseOverArea extends AbstractComponent
 	public void mouseReleased( int button, int mx, int my )
 	{
 		over = area.contains( mx, my );
-		if( button == 0 )
-		{
-			mouseDown = false;
-		}
+		if( button == 0 ) mouseDown = false;
 	}
 	
 	/**

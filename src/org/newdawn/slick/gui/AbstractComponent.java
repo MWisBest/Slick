@@ -81,10 +81,7 @@ public abstract class AbstractComponent extends InputAdapter
 	 */
 	protected void notifyListeners()
 	{
-		for( ComponentListener listener : listeners )
-		{
-			listener.componentActivated( this );
-		}
+		for( ComponentListener listener : listeners ) listener.componentActivated( this );
 	}
 	
 	/**
@@ -147,19 +144,11 @@ public abstract class AbstractComponent extends InputAdapter
 	{
 		if( focus )
 		{
-			if( currentFocus != null )
-			{
-				currentFocus.setFocus( false );
-			}
+			if( currentFocus != null ) currentFocus.setFocus( false );
 			currentFocus = this;
 		}
-		else
-		{
-			if( currentFocus == this )
-			{
-				currentFocus = null;
-			}
-		}
+		else if( currentFocus == this ) currentFocus = null;
+		
 		this.focus = focus;
 	}
 	

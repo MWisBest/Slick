@@ -7,7 +7,6 @@ package org.newdawn.slick.gui;
  */
 public interface ComponentListener
 {
-	
 	/**
 	 * Notification that a component has been activated (button clicked,
 	 * text field entered, etc)

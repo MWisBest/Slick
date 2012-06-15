@@ -250,10 +250,7 @@ public class TextField extends AbstractComponent
 					keyPressed( lastKey, lastChar );
 				}
 			}
-			else
-			{
-				lastKey = -1;
-			}
+			else lastKey = -1;
 		}
 		Rectangle oldClip = g.getClip();
 		g.setWorldClip( x, y, width, height );
@@ -271,19 +268,13 @@ public class TextField extends AbstractComponent
 		
 		int cpos = font.getWidth( value.substring( 0, cursorPos ) );
 		int tx = 0;
-		if( cpos > width )
-		{
-			tx = width - cpos - font.getWidth( "_" );
-		}
+		if( cpos > width ) tx = width - cpos - font.getWidth( "_" );
 		
 		g.translate( tx + 2, 0 );
 		g.setFont( font );
 		g.drawString( value, x + 1, y + 1 );
 		
-		if( hasFocus() && visibleCursor )
-		{
-			g.drawString( "_", x + 1 + cpos + 2, y + 1 );
-		}
+		if( hasFocus() && visibleCursor ) g.drawString( "_", x + 1 + cpos + 2, y + 1 );
 		
 		g.translate( -tx - 2, 0 );
 		
@@ -317,10 +308,7 @@ public class TextField extends AbstractComponent
 	public void setText( String value )
 	{
 		this.value = value;
-		if( cursorPos > value.length() )
-		{
-			cursorPos = value.length();
-		}
+		if( cursorPos > value.length() ) cursorPos = value.length();
 	}
 	
 	/**
@@ -332,10 +320,7 @@ public class TextField extends AbstractComponent
 	public void setCursorPos( int pos )
 	{
 		cursorPos = pos;
-		if( cursorPos > value.length() )
-		{
-			cursorPos = value.length();
-		}
+		if( cursorPos > value.length() ) cursorPos = value.length();
 	}
 	
 	/**
@@ -358,10 +343,7 @@ public class TextField extends AbstractComponent
 	public void setMaxLength( int length )
 	{
 		maxCharacter = length;
-		if( value.length() > maxCharacter )
-		{
-			value = value.substring( 0, maxCharacter );
-		}
+		if( value.length() > maxCharacter ) value = value.substring( 0, maxCharacter );
 	}
 	
 	/**
@@ -373,10 +355,7 @@ public class TextField extends AbstractComponent
 	{
 		recordOldPosition();
 		
-		for( int i = 0; i < text.length(); i++ )
-		{
-			keyPressed( -1, text.charAt( i ) );
-		}
+		for( int i = 0; i < text.length(); i++ ) keyPressed( -1, text.charAt( i ) );
 	}
 	
 	/**
@@ -416,30 +395,18 @@ public class TextField extends AbstractComponent
 				if( ( key == Input.KEY_V ) && ( ( input.isKeyDown( Input.KEY_LCONTROL ) ) || ( input.isKeyDown( Input.KEY_RCONTROL ) ) ) )
 				{
 					String text = Sys.getClipboard();
-					if( text != null )
-					{
-						doPaste( text );
-					}
+					if( text != null ) doPaste( text );
 					return;
 				}
 				if( ( key == Input.KEY_Z ) && ( ( input.isKeyDown( Input.KEY_LCONTROL ) ) || ( input.isKeyDown( Input.KEY_RCONTROL ) ) ) )
 				{
-					if( oldText != null )
-					{
-						doUndo( oldCursorPos, oldText );
-					}
+					if( oldText != null ) doUndo( oldCursorPos, oldText );
 					return;
 				}
 				
 				// alt and control keys don't come through here
-				if( input.isKeyDown( Input.KEY_LCONTROL ) || input.isKeyDown( Input.KEY_RCONTROL ) )
-				{
-					return;
-				}
-				if( input.isKeyDown( Input.KEY_LALT ) || input.isKeyDown( Input.KEY_RALT ) )
-				{
-					return;
-				}
+				if( input.isKeyDown( Input.KEY_LCONTROL ) || input.isKeyDown( Input.KEY_RCONTROL ) ) return;
+				if( input.isKeyDown( Input.KEY_LALT ) || input.isKeyDown( Input.KEY_RALT ) ) return;
 			}
 			
 			if( lastKey != key )
@@ -447,95 +414,52 @@ public class TextField extends AbstractComponent
 				lastKey = key;
 				repeatTimer = System.currentTimeMillis() + INITIAL_KEY_REPEAT_INTERVAL;
 			}
-			else
-			{
-				repeatTimer = System.currentTimeMillis() + KEY_REPEAT_INTERVAL;
-			}
+			else repeatTimer = System.currentTimeMillis() + KEY_REPEAT_INTERVAL;
 			lastChar = c;
 			
 			if( key == Input.KEY_LEFT )
 			{
-				if( cursorPos > 0 )
-				{
-					cursorPos--;
-				}
+				if( cursorPos > 0 ) cursorPos--;
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
 			else if( key == Input.KEY_RIGHT )
 			{
-				if( cursorPos < value.length() )
-				{
-					cursorPos++;
-				}
+				if( cursorPos < value.length() ) cursorPos++;
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
 			else if( key == Input.KEY_BACK )
 			{
 				if( ( cursorPos > 0 ) && ( value.length() > 0 ) )
 				{
-					if( cursorPos < value.length() )
-					{
-						value = value.substring( 0, cursorPos - 1 ) + value.substring( cursorPos );
-					}
-					else
-					{
-						value = value.substring( 0, cursorPos - 1 );
-					}
+					if( cursorPos < value.length() ) value = value.substring( 0, cursorPos - 1 ) + value.substring( cursorPos );
+					else value = value.substring( 0, cursorPos - 1 );
 					cursorPos--;
 				}
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
 			else if( key == Input.KEY_DELETE )
 			{
-				if( value.length() > cursorPos )
-				{
-					value = value.substring( 0, cursorPos ) + value.substring( cursorPos + 1 );
-				}
+				if( value.length() > cursorPos ) value = value.substring( 0, cursorPos ) + value.substring( cursorPos + 1 );
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
 			else if( ( c < 127 ) && ( c > 31 ) && ( value.length() < maxCharacter ) )
 			{
-				if( cursorPos < value.length() )
-				{
-					value = value.substring( 0, cursorPos ) + c + value.substring( cursorPos );
-				}
-				else
-				{
-					value = value.substring( 0, cursorPos ) + c;
-				}
+				if( cursorPos < value.length() ) value = value.substring( 0, cursorPos ) + c + value.substring( cursorPos );
+				else value = value.substring( 0, cursorPos ) + c;
 				cursorPos++;
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
 			else if( key == Input.KEY_RETURN )
 			{
 				notifyListeners();
 				// Nobody more will be notified
-				if( consume )
-				{
-					container.getInput().consumeEvent();
-				}
+				if( consume ) container.getInput().consumeEvent();
 			}
-			
 		}
 	}
 	
