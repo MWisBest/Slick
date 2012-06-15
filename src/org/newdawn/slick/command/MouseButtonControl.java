@@ -26,10 +26,7 @@ public class MouseButtonControl implements Control
 	@Override
 	public boolean equals( Object o )
 	{
-		if( o instanceof MouseButtonControl )
-		{
-			return ( (MouseButtonControl)o ).button == button;
-		}
+		if( o instanceof MouseButtonControl ) return ( (MouseButtonControl)o ).button == button;
 		
 		return false;
 	}

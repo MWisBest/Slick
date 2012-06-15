@@ -8,7 +8,6 @@ package org.newdawn.slick.command;
  */
 public class ControllerButtonControl extends ControllerControl
 {
-	
 	/**
 	 * Create a new control based on a controller input
 	 * 

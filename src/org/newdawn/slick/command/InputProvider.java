@@ -61,10 +61,7 @@ public class InputProvider
 		
 		for( Command command : commands.values() )
 		{
-			if( !uniqueCommands.contains( command ) )
-			{
-				uniqueCommands.add( command );
-			}
+			if( !uniqueCommands.contains( command ) ) uniqueCommands.add( command );
 		}
 		
 		return uniqueCommands;
@@ -87,10 +84,7 @@ public class InputProvider
 			Control key = entry.getKey();
 			Command value = entry.getValue();
 			
-			if( value == command )
-			{
-				controlsForCommand.add( key );
-			}
+			if( value == command ) controlsForCommand.add( key );
 		}
 		return controlsForCommand;
 	}
@@ -152,10 +146,7 @@ public class InputProvider
 	{
 		commands.put( control, command );
 		
-		if( commandState.get( command ) == null )
-		{
-			commandState.put( command, new CommandState() );
-		}
+		if( commandState.get( command ) == null ) commandState.put( command, new CommandState() );
 	}
 	
 	/**
@@ -167,10 +158,7 @@ public class InputProvider
 	{
 		List<Control> controls = getControlsFor( command );
 		
-		for( int i = 0; i < controls.size(); i++ )
-		{
-			unbindCommand( controls.get( i ) );
-		}
+		for( int i = 0; i < controls.size(); i++ ) unbindCommand( controls.get( i ) );
 	}
 	
 	/**
@@ -184,10 +172,7 @@ public class InputProvider
 		Command command = commands.remove( control );
 		if( command != null )
 		{
-			if( !commands.keySet().contains( command ) )
-			{
-				commandState.remove( command );
-			}
+			if( !commands.keySet().contains( command ) ) commandState.remove( command );
 		}
 	}
 	
@@ -241,15 +226,9 @@ public class InputProvider
 		getState( command ).down = true;
 		getState( command ).pressed = true;
 		
-		if( !isActive() )
-		{
-			return;
-		}
+		if( !isActive() ) return;
 		
-		for( int i = 0; i < listeners.size(); i++ )
-		{
-			listeners.get( i ).controlPressed( command );
-		}
+		for( int i = 0; i < listeners.size(); i++ ) listeners.get( i ).controlPressed( command );
 	}
 	
 	/**
@@ -263,15 +242,9 @@ public class InputProvider
 	{
 		getState( command ).down = false;
 		
-		if( !isActive() )
-		{
-			return;
-		}
+		if( !isActive() ) return;
 		
-		for( int i = 0; i < listeners.size(); i++ )
-		{
-			listeners.get( i ).controlReleased( command );
-		}
+		for( int i = 0; i < listeners.size(); i++ ) listeners.get( i ).controlReleased( command );
 	}
 	
 	/**
@@ -338,10 +311,7 @@ public class InputProvider
 		public void keyPressed( int key, char c )
 		{
 			Command command = commands.get( new KeyControl( key ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -351,10 +321,7 @@ public class InputProvider
 		public void keyReleased( int key, char c )
 		{
 			Command command = commands.get( new KeyControl( key ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -364,10 +331,7 @@ public class InputProvider
 		public void mousePressed( int button, int x, int y )
 		{
 			Command command = commands.get( new MouseButtonControl( button ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -377,10 +341,7 @@ public class InputProvider
 		public void mouseReleased( int button, int x, int y )
 		{
 			Command command = commands.get( new MouseButtonControl( button ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -390,10 +351,7 @@ public class InputProvider
 		public void controllerLeftPressed( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.LEFT ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -403,10 +361,7 @@ public class InputProvider
 		public void controllerLeftReleased( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.LEFT ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -416,10 +371,7 @@ public class InputProvider
 		public void controllerRightPressed( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.RIGHT ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -429,10 +381,7 @@ public class InputProvider
 		public void controllerRightReleased( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.RIGHT ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -452,10 +401,7 @@ public class InputProvider
 		public void controllerUpReleased( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.UP ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -465,10 +411,7 @@ public class InputProvider
 		public void controllerDownPressed( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.DOWN ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -478,10 +421,7 @@ public class InputProvider
 		public void controllerDownReleased( int controller )
 		{
 			Command command = commands.get( new ControllerDirectionControl( controller, ControllerDirectionControl.DOWN ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 		
 		/**
@@ -491,10 +431,7 @@ public class InputProvider
 		public void controllerButtonPressed( int controller, int button )
 		{
 			Command command = commands.get( new ControllerButtonControl( controller, button ) );
-			if( command != null )
-			{
-				firePressed( command );
-			}
+			if( command != null ) firePressed( command );
 		}
 		
 		/**
@@ -504,10 +441,7 @@ public class InputProvider
 		public void controllerButtonReleased( int controller, int button )
 		{
 			Command command = commands.get( new ControllerButtonControl( controller, button ) );
-			if( command != null )
-			{
-				fireReleased( command );
-			}
+			if( command != null ) fireReleased( command );
 		}
 	};
 }

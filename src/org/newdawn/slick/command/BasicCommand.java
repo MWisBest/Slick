@@ -45,10 +45,7 @@ public class BasicCommand implements Command
 	@Override
 	public boolean equals( Object other )
 	{
-		if( other instanceof BasicCommand )
-		{
-			return ( (BasicCommand)other ).name.equals( name );
-		}
+		if( other instanceof BasicCommand ) return ( (BasicCommand)other ).name.equals( name );
 		
 		return false;
 	}

@@ -27,10 +27,7 @@ public class KeyControl implements Control
 	@Override
 	public boolean equals( Object o )
 	{
-		if( o instanceof KeyControl )
-		{
-			return ( (KeyControl)o ).keycode == keycode;
-		}
+		if( o instanceof KeyControl ) return ( (KeyControl)o ).keycode == keycode;
 		
 		return false;
 	}

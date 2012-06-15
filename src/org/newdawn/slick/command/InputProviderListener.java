@@ -8,7 +8,6 @@ package org.newdawn.slick.command;
  */
 public interface InputProviderListener
 {
-	
 	/**
 	 * A control representing an control was pressed relating to a given command.
 	 * 
