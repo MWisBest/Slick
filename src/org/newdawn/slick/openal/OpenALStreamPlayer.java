@@ -91,21 +91,12 @@ public class OpenALStreamPlayer
 	 */
 	private void initStreams() throws IOException
 	{
-		if( audio != null )
-		{
-			audio.close();
-		}
+		if( audio != null ) audio.close();
 		
 		OggInputStream audio;
 		
-		if( url != null )
-		{
-			audio = new OggInputStream( url.openStream() );
-		}
-		else
-		{
-			audio = new OggInputStream( ResourceLoader.getResourceAsStream( ref ) );
-		}
+		if( url != null ) audio = new OggInputStream( url.openStream() );
+		else audio = new OggInputStream( ResourceLoader.getResourceAsStream( ref ) );
 		
 		this.audio = audio;
 		positionOffset = 0;
@@ -200,21 +191,12 @@ public class OpenALStreamPlayer
 	 */
 	public void update()
 	{
-		if( done )
-		{
-			return;
-		}
+		if( done ) return;
 		
 		float sampleRate = audio.getRate();
 		float sampleSize;
-		if( audio.getChannels() > 1 )
-		{
-			sampleSize = 4; // AL10.AL_FORMAT_STEREO16
-		}
-		else
-		{
-			sampleSize = 2; // AL10.AL_FORMAT_MONO16
-		}
+		if( audio.getChannels() > 1 ) sampleSize = 4; // AL10.AL_FORMAT_STEREO16
+		else sampleSize = 2; // AL10.AL_FORMAT_MONO16
 		
 		int processed = AL10.alGetSourcei( source, AL10.AL_BUFFERS_PROCESSED );
 		while( processed > 0 )
@@ -227,27 +209,18 @@ public class OpenALStreamPlayer
 			float bufferLength = ( AL10.alGetBufferi( bufferIndex, AL10.AL_SIZE ) / sampleSize ) / sampleRate;
 			positionOffset += bufferLength;
 			
-			if( stream( bufferIndex ) )
-			{
-				AL10.alSourceQueueBuffers( source, unqueued );
-			}
+			if( stream( bufferIndex ) ) AL10.alSourceQueueBuffers( source, unqueued );
 			else
 			{
 				remainingBufferCount--;
-				if( remainingBufferCount == 0 )
-				{
-					done = true;
-				}
+				if( remainingBufferCount == 0 ) done = true;
 			}
 			processed--;
 		}
 		
 		int state = AL10.alGetSourcei( source, AL10.AL_SOURCE_STATE );
 		
-		if( state != AL10.AL_PLAYING )
-		{
-			AL10.alSourcePlay( source );
-		}
+		if( state != AL10.AL_PLAYING ) AL10.alSourcePlay( source );
 	}
 	
 	/**
@@ -312,21 +285,12 @@ public class OpenALStreamPlayer
 	{
 		try
 		{
-			if( getPosition() > position )
-			{
-				initStreams();
-			}
+			if( getPosition() > position ) initStreams();
 			
 			float sampleRate = audio.getRate();
 			float sampleSize;
-			if( audio.getChannels() > 1 )
-			{
-				sampleSize = 4; // AL10.AL_FORMAT_STEREO16
-			}
-			else
-			{
-				sampleSize = 2; // AL10.AL_FORMAT_MONO16
-			}
+			if( audio.getChannels() > 1 ) sampleSize = 4; // AL10.AL_FORMAT_STEREO16
+			else sampleSize = 2; // AL10.AL_FORMAT_MONO16
 			
 			while( positionOffset < position )
 			{
@@ -338,14 +302,8 @@ public class OpenALStreamPlayer
 				}
 				else
 				{
-					if( loop )
-					{
-						initStreams();
-					}
-					else
-					{
-						done = true;
-					}
+					if( loop ) initStreams();
+					else done = true;
 					return false;
 				}
 			}
@@ -371,10 +329,7 @@ public class OpenALStreamPlayer
 		
 		remainingBufferCount = BUFFER_COUNT;
 		
-		for( int i = 0; i < BUFFER_COUNT; i++ )
-		{
-			stream( bufferNames.get( i ) );
-		}
+		for( int i = 0; i < BUFFER_COUNT; i++ ) stream( bufferNames.get( i ) );
 		
 		AL10.alSourceQueueBuffers( source, bufferNames );
 		AL10.alSourcePlay( source );

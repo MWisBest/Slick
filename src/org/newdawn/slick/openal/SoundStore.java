@@ -26,7 +26,6 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class SoundStore
 {
-	
 	/** The single instance of this class */
 	private static SoundStore store = new SoundStore();
 	
@@ -130,10 +129,7 @@ public class SoundStore
 				restartLoop();
 				setMusicVolume( musicVolume );
 			}
-			else
-			{
-				pauseLoop();
-			}
+			else pauseLoop();
 		}
 	}
 	
@@ -154,20 +150,11 @@ public class SoundStore
 	 */
 	public void setMusicVolume( float volume )
 	{
-		if( volume < 0 )
-		{
-			volume = 0;
-		}
-		if( volume > 1 )
-		{
-			volume = 1;
-		}
+		if( volume < 0 ) volume = 0;
+		if( volume > 1 ) volume = 1;
 		
 		musicVolume = volume;
-		if( soundWorks )
-		{
-			AL10.alSourcef( sources.get( 0 ), AL10.AL_GAIN, lastCurrentMusicVolume * musicVolume );
-		}
+		if( soundWorks ) AL10.alSourcef( sources.get( 0 ), AL10.AL_GAIN, lastCurrentMusicVolume * musicVolume );
 	}
 	
 	/**
@@ -187,14 +174,8 @@ public class SoundStore
 	 */
 	public void setCurrentMusicVolume( float volume )
 	{
-		if( volume < 0 )
-		{
-			volume = 0;
-		}
-		if( volume > 1 )
-		{
-			volume = 1;
-		}
+		if( volume < 0 ) volume = 0;
+		if( volume > 1 ) volume = 1;
 		
 		if( soundWorks )
 		{
@@ -210,10 +191,7 @@ public class SoundStore
 	 */
 	public void setSoundVolume( float volume )
 	{
-		if( volume < 0 )
-		{
-			volume = 0;
-		}
+		if( volume < 0 ) volume = 0;
 		soundVolume = volume;
 	}
 	
@@ -265,14 +243,7 @@ public class SoundStore
 	 */
 	public int getSource( int index )
 	{
-		if( !soundWorks )
-		{
-			return -1;
-		}
-		if( index < 0 )
-		{
-			return -1;
-		}
+		if( ( !soundWorks ) || ( index < 0 ) ) return -1;
 		return sources.get( index );
 	}
 	
@@ -283,10 +254,7 @@ public class SoundStore
 	 */
 	public void setSoundsOn( boolean sounds )
 	{
-		if( soundWorks )
-		{
-			this.sounds = sounds;
-		}
+		if( soundWorks ) this.sounds = sounds;
 	}
 	
 	/**
@@ -316,10 +284,7 @@ public class SoundStore
 	 */
 	public void init()
 	{
-		if( inited )
-		{
-			return;
-		}
+		if( inited ) return;
 		Log.info( "Initialising sounds.." );
 		inited = true;
 		
@@ -365,10 +330,7 @@ public class SoundStore
 					{
 						sourceCount++;
 						sources.put( temp.get( 0 ) );
-						if( sourceCount > maxSources - 1 )
-						{
-							break;
-						}
+						if( sourceCount > maxSources - 1 ) break;
 					}
 				}
 				catch( OpenALException e )
@@ -444,19 +406,13 @@ public class SoundStore
 	int playAsSoundAt( int buffer, float pitch, float gain, boolean loop, float x, float y, float z )
 	{
 		gain *= soundVolume;
-		if( gain == 0 )
-		{
-			gain = 0.001f;
-		}
+		if( gain == 0 ) gain = 0.001f;
 		if( soundWorks )
 		{
 			if( sounds )
 			{
 				int nextSource = findFreeSource();
-				if( nextSource == -1 )
-				{
-					return -1;
-				}
+				if( nextSource == -1 ) return -1;
 				
 				AL10.alSourceStop( sources.get( nextSource ) );
 				
@@ -519,10 +475,7 @@ public class SoundStore
 		{
 			int state = AL10.alGetSourcei( sources.get( i ), AL10.AL_SOURCE_STATE );
 			
-			if( ( state != AL10.AL_PLAYING ) && ( state != AL10.AL_PAUSED ) )
-			{
-				return i;
-			}
+			if( ( state != AL10.AL_PLAYING ) && ( state != AL10.AL_PAUSED ) ) return i;
 		}
 		
 		return -1;
@@ -540,19 +493,13 @@ public class SoundStore
 	{
 		paused = false;
 		gain *= musicVolume;
-		if( gain == 0 )
-		{
-			gain = 0.001f;
-		}
+		if( gain == 0 ) gain = 0.001f;
 		
 		setMOD( null );
 		
 		if( soundWorks )
 		{
-			if( currentMusic != -1 )
-			{
-				AL10.alSourceStop( sources.get( 0 ) );
-			}
+			if( currentMusic != -1 ) AL10.alSourceStop( sources.get( 0 ) );
 			
 			getMusicSource();
 			
@@ -563,14 +510,8 @@ public class SoundStore
 			
 			currentMusic = sources.get( 0 );
 			
-			if( !music )
-			{
-				pauseLoop();
-			}
-			else
-			{
-				AL10.alSourcePlay( sources.get( 0 ) );
-			}
+			if( !music ) pauseLoop();
+			else AL10.alSourcePlay( sources.get( 0 ) );
 		}
 	}
 	
@@ -591,10 +532,7 @@ public class SoundStore
 	 */
 	public void setMusicPitch( float pitch )
 	{
-		if( soundWorks )
-		{
-			AL10.alSourcef( sources.get( 0 ), AL10.AL_PITCH, pitch );
-		}
+		if( soundWorks ) AL10.alSourcef( sources.get( 0 ), AL10.AL_PITCH, pitch );
 	}
 	
 	/**
@@ -667,18 +605,9 @@ public class SoundStore
 	 */
 	public Audio getMOD( String ref, InputStream in ) throws IOException
 	{
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
-		if( !inited )
-		{
-			throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
-		}
-		if( deferred )
-		{
-			return new DeferredSound( ref, in, DeferredSound.MOD );
-		}
+		if( !soundWorks ) return new NullAudio();
+		if( !inited ) throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
+		if( deferred ) return new DeferredSound( ref, in, DeferredSound.MOD );
 		
 		return new MODSound( this, in );
 	}
@@ -719,25 +648,13 @@ public class SoundStore
 	{
 		in = new BufferedInputStream( in );
 		
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
-		if( !inited )
-		{
-			throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
-		}
-		if( deferred )
-		{
-			return new DeferredSound( ref, in, DeferredSound.AIF );
-		}
+		if( !soundWorks ) return new NullAudio();
+		if( !inited ) throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
+		if( deferred ) return new DeferredSound( ref, in, DeferredSound.AIF );
 		
 		int buffer = -1;
 		
-		if( loaded.get( ref ) != null )
-		{
-			buffer = loaded.get( ref ).intValue();
-		}
+		if( loaded.get( ref ) != null ) buffer = loaded.get( ref ).intValue();
 		else
 		{
 			try
@@ -761,10 +678,7 @@ public class SoundStore
 			}
 		}
 		
-		if( buffer == -1 )
-		{
-			throw new IOException( "Unable to load: " + ref );
-		}
+		if( buffer == -1 ) throw new IOException( "Unable to load: " + ref );
 		
 		return new AudioImpl( this, buffer );
 	}
@@ -803,25 +717,13 @@ public class SoundStore
 	 */
 	public Audio getWAV( String ref, InputStream in ) throws IOException
 	{
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
-		if( !inited )
-		{
-			throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
-		}
-		if( deferred )
-		{
-			return new DeferredSound( ref, in, DeferredSound.WAV );
-		}
+		if( !soundWorks ) return new NullAudio();
+		if( !inited ) throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
+		if( deferred ) return new DeferredSound( ref, in, DeferredSound.WAV );
 		
 		int buffer = -1;
 		
-		if( loaded.get( ref ) != null )
-		{
-			buffer = loaded.get( ref ).intValue();
-		}
+		if( loaded.get( ref ) != null ) buffer = loaded.get( ref ).intValue();
 		else
 		{
 			try
@@ -845,10 +747,7 @@ public class SoundStore
 			}
 		}
 		
-		if( buffer == -1 )
-		{
-			throw new IOException( "Unable to load: " + ref );
-		}
+		if( buffer == -1 ) throw new IOException( "Unable to load: " + ref );
 		
 		return new AudioImpl( this, buffer );
 	}
@@ -862,18 +761,12 @@ public class SoundStore
 	 */
 	public Audio getOggStream( String ref ) throws IOException
 	{
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
+		if( !soundWorks ) return new NullAudio();
 		
 		setMOD( null );
 		setStream( null );
 		
-		if( currentMusic != -1 )
-		{
-			AL10.alSourceStop( sources.get( 0 ) );
-		}
+		if( currentMusic != -1 ) AL10.alSourceStop( sources.get( 0 ) );
 		
 		getMusicSource();
 		currentMusic = sources.get( 0 );
@@ -890,18 +783,12 @@ public class SoundStore
 	 */
 	public Audio getOggStream( URL ref ) throws IOException
 	{
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
+		if( !soundWorks ) return new NullAudio();
 		
 		setMOD( null );
 		setStream( null );
 		
-		if( currentMusic != -1 )
-		{
-			AL10.alSourceStop( sources.get( 0 ) );
-		}
+		if( currentMusic != -1 ) AL10.alSourceStop( sources.get( 0 ) );
 		
 		getMusicSource();
 		currentMusic = sources.get( 0 );
@@ -943,25 +830,13 @@ public class SoundStore
 	 */
 	public Audio getOgg( String ref, InputStream in ) throws IOException
 	{
-		if( !soundWorks )
-		{
-			return new NullAudio();
-		}
-		if( !inited )
-		{
-			throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
-		}
-		if( deferred )
-		{
-			return new DeferredSound( ref, in, DeferredSound.OGG );
-		}
+		if( !soundWorks ) return new NullAudio();
+		if( !inited ) throw new RuntimeException( "Can't load sounds until SoundStore is init(). Use the container init() method." );
+		if( deferred ) return new DeferredSound( ref, in, DeferredSound.OGG );
 		
 		int buffer = -1;
 		
-		if( loaded.get( ref ) != null )
-		{
-			buffer = loaded.get( ref ).intValue();
-		}
+		if( loaded.get( ref ) != null ) buffer = loaded.get( ref ).intValue();
 		else
 		{
 			try
@@ -986,10 +861,7 @@ public class SoundStore
 			}
 		}
 		
-		if( buffer == -1 )
-		{
-			throw new IOException( "Unable to load: " + ref );
-		}
+		if( buffer == -1 ) throw new IOException( "Unable to load: " + ref );
 		
 		return new AudioImpl( this, buffer );
 	}
@@ -1001,19 +873,13 @@ public class SoundStore
 	 */
 	void setMOD( MODSound sound )
 	{
-		if( !soundWorks )
-		{
-			return;
-		}
+		if( !soundWorks ) return;
 		
 		currentMusic = sources.get( 0 );
 		stopSource( 0 );
 		
 		this.mod = sound;
-		if( sound != null )
-		{
-			this.stream = null;
-		}
+		if( sound != null ) this.stream = null;
 		paused = false;
 	}
 	
@@ -1024,17 +890,11 @@ public class SoundStore
 	 */
 	void setStream( OpenALStreamPlayer stream )
 	{
-		if( !soundWorks )
-		{
-			return;
-		}
+		if( !soundWorks ) return;
 		
 		currentMusic = sources.get( 0 );
 		this.stream = stream;
-		if( stream != null )
-		{
-			this.mod = null;
-		}
+		if( stream != null ) this.mod = null;
 		paused = false;
 	}
 	
@@ -1045,14 +905,8 @@ public class SoundStore
 	 */
 	public void poll( int delta )
 	{
-		if( !soundWorks )
-		{
-			return;
-		}
-		if( paused )
-		{
-			return;
-		}
+		if( !soundWorks ) return;
+		if( paused ) return;
 		
 		if( music )
 		{
@@ -1092,10 +946,7 @@ public class SoundStore
 	 */
 	public boolean isMusicPlaying()
 	{
-		if( !soundWorks )
-		{
-			return false;
-		}
+		if( !soundWorks ) return false;
 		
 		int state = AL10.alGetSourcei( sources.get( 0 ), AL10.AL_SOURCE_STATE );
 		return ( ( state == AL10.AL_PLAYING ) || ( state == AL10.AL_PAUSED ) );

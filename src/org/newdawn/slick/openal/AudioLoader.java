@@ -51,17 +51,14 @@ public class AudioLoader
 	{
 		init();
 		
-		if( format.equals( AIF ) )
+		switch( format )
 		{
-			return SoundStore.get().getAIF( in );
-		}
-		if( format.equals( WAV ) )
-		{
-			return SoundStore.get().getWAV( in );
-		}
-		if( format.equals( OGG ) )
-		{
-			return SoundStore.get().getOgg( in );
+			case AIF:
+				return SoundStore.get().getAIF( in );
+			case WAV:
+				return SoundStore.get().getWAV( in );
+			case OGG:
+				return SoundStore.get().getOgg( in );
 		}
 		
 		throw new IOException( "Unsupported format for non-streaming Audio: " + format );
@@ -80,17 +77,13 @@ public class AudioLoader
 	{
 		init();
 		
-		if( format.equals( OGG ) )
+		switch( format )
 		{
-			return SoundStore.get().getOggStream( url );
-		}
-		if( format.equals( MOD ) )
-		{
-			return SoundStore.get().getMOD( url.openStream() );
-		}
-		if( format.equals( XM ) )
-		{
-			return SoundStore.get().getMOD( url.openStream() );
+			case OGG:
+				return SoundStore.get().getOggStream( url );
+			case MOD:
+			case XM:
+				return SoundStore.get().getMOD( url.openStream() );
 		}
 		
 		throw new IOException( "Unsupported format for streaming Audio: " + format );

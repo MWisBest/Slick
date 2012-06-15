@@ -172,10 +172,7 @@ public class WaveData
 		{
 			byte[] bytes = null;
 			
-			if( buffer.hasArray() )
-			{
-				bytes = buffer.array();
-			}
+			if( buffer.hasArray() ) bytes = buffer.array();
 			else
 			{
 				bytes = new byte[buffer.capacity()];
@@ -203,40 +200,40 @@ public class WaveData
 		
 		// get channels
 		int channels = 0;
+		
 		if( audioformat.getChannels() == 1 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 )
+			switch( audioformat.getSampleSizeInBits() )
 			{
-				channels = AL10.AL_FORMAT_MONO8;
-			}
-			else if( audioformat.getSampleSizeInBits() == 16 )
-			{
-				channels = AL10.AL_FORMAT_MONO16;
-			}
-			else
-			{
-				throw new RuntimeException( "Illegal sample size" );
+				case 8:
+					channels = AL10.AL_FORMAT_MONO8;
+					break;
+				case 16:
+					channels = AL10.AL_FORMAT_MONO16;
+					break;
+				default:
+					throw new RuntimeException( "Illegal sample size" );
 			}
 		}
 		else if( audioformat.getChannels() == 2 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 )
+			switch( audioformat.getSampleSizeInBits() )
 			{
-				channels = AL10.AL_FORMAT_STEREO8;
-			}
-			else if( audioformat.getSampleSizeInBits() == 16 )
-			{
-				channels = AL10.AL_FORMAT_STEREO16;
-			}
-			else
-			{
-				throw new RuntimeException( "Illegal sample size" );
+				case 8:
+					channels = AL10.AL_FORMAT_STEREO8;
+					break;
+				case 16:
+					channels = AL10.AL_FORMAT_STEREO16;
+					break;
+				default:
+					throw new RuntimeException( "Illegal sample size" );
 			}
 		}
 		else
 		{
 			throw new RuntimeException( "Only mono or stereo is supported" );
 		}
+		
 		
 		// read data into buffer
 		byte[] buf = new byte[audioformat.getChannels() * (int)ais.getFrameLength() * audioformat.getSampleSizeInBits() / 8];
@@ -293,13 +290,11 @@ public class WaveData
 		{
 			ShortBuffer dest_short = dest.asShortBuffer();
 			ShortBuffer src_short = src.asShortBuffer();
-			while( src_short.hasRemaining() )
-				dest_short.put( src_short.get() );
+			while( src_short.hasRemaining() ) dest_short.put( src_short.get() );
 		}
 		else
 		{
-			while( src.hasRemaining() )
-				dest.put( src.get() );
+			while( src.hasRemaining() ) dest.put( src.get() );
 		}
 		dest.rewind();
 		return dest;

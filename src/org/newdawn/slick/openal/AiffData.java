@@ -171,10 +171,7 @@ public class AiffData
 		{
 			byte[] bytes = null;
 			
-			if( buffer.hasArray() )
-			{
-				bytes = buffer.array();
-			}
+			if( buffer.hasArray() ) bytes = buffer.array();
 			else
 			{
 				bytes = new byte[buffer.capacity()];
@@ -204,48 +201,24 @@ public class AiffData
 		int channels = 0;
 		if( audioformat.getChannels() == 1 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 )
-			{
-				channels = AL10.AL_FORMAT_MONO8;
-			}
-			else if( audioformat.getSampleSizeInBits() == 16 )
-			{
-				channels = AL10.AL_FORMAT_MONO16;
-			}
-			else
-			{
-				throw new RuntimeException( "Illegal sample size" );
-			}
+			if( audioformat.getSampleSizeInBits() == 8 ) channels = AL10.AL_FORMAT_MONO8;
+			else if( audioformat.getSampleSizeInBits() == 16 ) channels = AL10.AL_FORMAT_MONO16;
+			else throw new RuntimeException( "Illegal sample size" );
 		}
 		else if( audioformat.getChannels() == 2 )
 		{
-			if( audioformat.getSampleSizeInBits() == 8 )
-			{
-				channels = AL10.AL_FORMAT_STEREO8;
-			}
-			else if( audioformat.getSampleSizeInBits() == 16 )
-			{
-				channels = AL10.AL_FORMAT_STEREO16;
-			}
-			else
-			{
-				throw new RuntimeException( "Illegal sample size" );
-			}
+			if( audioformat.getSampleSizeInBits() == 8 ) channels = AL10.AL_FORMAT_STEREO8;
+			else if( audioformat.getSampleSizeInBits() == 16 ) channels = AL10.AL_FORMAT_STEREO16;
+			else throw new RuntimeException( "Illegal sample size" );
 		}
-		else
-		{
-			throw new RuntimeException( "Only mono or stereo is supported" );
-		}
+		else throw new RuntimeException( "Only mono or stereo is supported" );
 		
 		// read data into buffer
 		byte[] buf = new byte[audioformat.getChannels() * (int)ais.getFrameLength() * audioformat.getSampleSizeInBits() / 8];
 		int read = 0, total = 0;
 		try
 		{
-			while( ( read = ais.read( buf, total, buf.length - total ) ) != -1 && total < buf.length )
-			{
-				total += read;
-			}
+			while( ( read = ais.read( buf, total, buf.length - total ) ) != -1 && total < buf.length ) total += read;
 		}
 		catch( IOException ioe )
 		{
@@ -288,18 +261,14 @@ public class AiffData
 		{
 			ShortBuffer dest_short = dest.asShortBuffer();
 			ShortBuffer src_short = src.asShortBuffer();
-			while( src_short.hasRemaining() )
-				dest_short.put( src_short.get() );
+			while( src_short.hasRemaining() ) dest_short.put( src_short.get() );
 		}
 		else
 		{
 			while( src.hasRemaining() )
 			{
 				byte b = src.get();
-				if( format.getEncoding() == Encoding.PCM_SIGNED )
-				{
-					b = (byte)( b + 127 );
-				}
+				if( format.getEncoding() == Encoding.PCM_SIGNED ) b = (byte)( b + 127 );
 				dest.put( b );
 			}
 		}

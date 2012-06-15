@@ -45,11 +45,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource
 		this.ref = ref;
 		this.type = type;
 		
-		// nasty hack to detect when we're loading from a stream
-		if( ref.equals( in.toString() ) )
-		{
-			this.in = in;
-		}
+		if( ref.equals( in.toString() ) ) this.in = in; // nasty hack to detect when we're loading from a stream
 		
 		LoadingList.get().add( this );
 	}
@@ -59,10 +55,7 @@ public class DeferredSound extends AudioImpl implements DeferredResource
 	 */
 	private void checkTarget()
 	{
-		if( target == null )
-		{
-			throw new RuntimeException( "Attempt to use deferred sound before loading" );
-		}
+		if( target == null ) throw new RuntimeException( "Attempt to use deferred sound before loading" );
 	}
 	
 	/**
@@ -184,5 +177,4 @@ public class DeferredSound extends AudioImpl implements DeferredResource
 	{
 		return ref;
 	}
-	
 }

@@ -8,7 +8,6 @@ package org.newdawn.slick.openal;
  */
 public interface Audio
 {
-	
 	/**
 	 * Stop the sound effect
 	 */

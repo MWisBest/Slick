@@ -28,17 +28,11 @@ public class OggDecoder
 	 */
 	public OggData getData( InputStream input ) throws IOException
 	{
-		if( input == null )
-		{
-			throw new IOException( "Failed to read OGG, source does not exist?" );
-		}
+		if( input == null ) throw new IOException( "Failed to read OGG, source does not exist?" );
 		
 		try( ByteArrayOutputStream dataout = new ByteArrayOutputStream(); OggInputStream oggInput = new OggInputStream( input ); )
 		{
-			while( !oggInput.atEnd() )
-			{
-				dataout.write( oggInput.read() );
-			}
+			while( !oggInput.atEnd() ) dataout.write( oggInput.read() );
 			
 			OggData ogg = new OggData();
 			ogg.channels = oggInput.getChannels();

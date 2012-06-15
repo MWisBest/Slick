@@ -51,13 +51,8 @@ public class AudioImpl implements Audio
 	public void release()
 	{
 		stop();
-		if( index != -1 )
-		{
-			// detach buffer from source
-			AL10.alSourcei( SoundStore.get().getSource( index ), AL10.AL_BUFFER, 0 );
-		}
-		// delete buffer
-		if( buffer != 0 ) AL10.alDeleteBuffers( buffer );
+		if( index != -1 ) AL10.alSourcei( SoundStore.get().getSource( index ), AL10.AL_BUFFER, 0 ); // detach buffer from source
+		if( buffer != 0 ) AL10.alDeleteBuffers( buffer ); // delete buffer
 		index = -1;
 		buffer = 0;
 	}
@@ -93,7 +88,6 @@ public class AudioImpl implements Audio
 	 */
 	protected AudioImpl()
 	{
-		
 	}
 	
 	/**
@@ -115,10 +109,7 @@ public class AudioImpl implements Audio
 	@Override
 	public boolean isPlaying()
 	{
-		if( index != -1 )
-		{
-			return SoundStore.get().isPlaying( index );
-		}
+		if( index != -1 ) return SoundStore.get().isPlaying( index );
 		
 		return false;
 	}
@@ -195,10 +186,7 @@ public class AudioImpl implements Audio
 		position = position % length;
 		
 		AL10.alSourcef( store.getSource( index ), AL11.AL_SEC_OFFSET, position );
-		if( AL10.alGetError() != 0 )
-		{
-			return false;
-		}
+		if( AL10.alGetError() != 0 ) return false;
 		return true;
 	}
 	

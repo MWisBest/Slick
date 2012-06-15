@@ -241,7 +241,6 @@ public class OggInputStream extends InputStream implements AudioInputStream
 		{
 			while( i < 2 )
 			{
-				
 				int result = syncState.pageout( page );
 				if( result == 0 ) break; // Need more data
 				// Don't complain about missing or corrupt data yet. We'll
@@ -320,10 +319,7 @@ public class OggInputStream extends InputStream implements AudioInputStream
 		{ // we repeat if the bitstream is chained
 			if( endOfBitStream )
 			{
-				if( !getPageAndPacket() )
-				{
-					break;
-				}
+				if( !getPageAndPacket() ) break;
 				endOfBitStream = false;
 			}
 			
@@ -342,19 +338,13 @@ public class OggInputStream extends InputStream implements AudioInputStream
 				{
 					int result = syncState.pageout( page );
 					
-					if( result == 0 )
-					{
-						break; // need more data
-					}
+					if( result == 0 ) break; // need more data
 					
-					if( result == -1 )
-					{ // missing or corrupt data at this page position
-						Log.error( "Corrupt or missing data in bitstream; continuing..." );
-					}
+					if( result == -1 ) Log.error( "Corrupt or missing data in bitstream; continuing..." ); // missing or corrupt data at this page position
 					else
 					{
-						streamState.pagein( page ); // can safely ignore errors at
-						// this point
+						streamState.pagein( page ); // can safely ignore errors at this point
+						
 						while( true )
 						{
 							result = streamState.packetout( packet );
@@ -368,10 +358,7 @@ public class OggInputStream extends InputStream implements AudioInputStream
 							{
 								// we have a packet. Decode it
 								int samples;
-								if( vorbisBlock.synthesis( packet ) == 0 )
-								{ // test for success!
-									dspState.synthesis_blockin( vorbisBlock );
-								}
+								if( vorbisBlock.synthesis( packet ) == 0 ) dspState.synthesis_blockin( vorbisBlock ); // test for success!
 								
 								// **pcm is a multichannel float vector. In stereo, for
 								// example, pcm[0] is left, and pcm[1] is right. samples is
@@ -395,14 +382,8 @@ public class OggInputStream extends InputStream implements AudioInputStream
 										{
 											int val = (int)( pcm[i][mono + j] * 32767. );
 											// might as well guard against clipping
-											if( val > 32767 )
-											{
-												val = 32767;
-											}
-											if( val < -32768 )
-											{
-												val = -32768;
-											}
+											if( val > 32767 ) val = 32767;
+											if( val < -32768 ) val = -32768;
 											if( val < 0 ) val = val | 0x8000;
 											
 											if( bigEndian )
@@ -420,31 +401,17 @@ public class OggInputStream extends InputStream implements AudioInputStream
 									}
 									
 									int bytesToWrite = 2 * oggInfo.channels * bout;
-									if( bytesToWrite >= pcmBuffer.remaining() )
-									{
-										Log.warn( "Read block from OGG that was too big to be buffered: " + bytesToWrite );
-									}
-									else
-									{
-										pcmBuffer.put( convbuffer, 0, bytesToWrite );
-									}
+									if( bytesToWrite >= pcmBuffer.remaining() ) Log.warn( "Read block from OGG that was too big to be buffered: " + bytesToWrite );
+									else pcmBuffer.put( convbuffer, 0, bytesToWrite );
 									
 									wrote = true;
-									dspState.synthesis_read( bout ); // tell libvorbis how
-									// many samples we
-									// actually consumed
+									dspState.synthesis_read( bout ); // tell libvorbis how many samples we actually consumed
 								}
 							}
 						}
-						if( page.eos() != 0 )
-						{
-							endOfBitStream = true;
-						}
+						if( page.eos() != 0 ) endOfBitStream = true;
 						
-						if( ( !endOfBitStream ) && ( wrote ) )
-						{
-							return;
-						}
+						if( ( !endOfBitStream ) && ( wrote ) ) return;
 					}
 				}
 				
@@ -467,15 +434,9 @@ public class OggInputStream extends InputStream implements AudioInputStream
 							return;
 						}
 					}
-					else
-					{
-						bytes = 0;
-					}
+					else bytes = 0;
 					syncState.wrote( bytes );
-					if( bytes == 0 )
-					{
-						endOfBitStream = true;
-					}
+					if( bytes == 0 ) endOfBitStream = true;
 				}
 			}
 			
@@ -508,16 +469,10 @@ public class OggInputStream extends InputStream implements AudioInputStream
 			readPCM();
 			readIndex = 0;
 		}
-		if( readIndex >= pcmBuffer.position() )
-		{
-			return -1;
-		}
+		if( readIndex >= pcmBuffer.position() ) return -1;
 		
 		int value = pcmBuffer.get( readIndex );
-		if( value < 0 )
-		{
-			value = 256 + value;
-		}
+		if( value < 0 ) value = 256 + value;
 		readIndex++;
 		
 		return value;
@@ -543,20 +498,11 @@ public class OggInputStream extends InputStream implements AudioInputStream
 			try
 			{
 				int value = read();
-				if( value >= 0 )
-				{
-					b[i] = (byte)value;
-				}
+				if( value >= 0 ) b[i] = (byte)value;
 				else
 				{
-					if( i == 0 )
-					{
-						return -1;
-					}
-					else
-					{
-						return i;
-					}
+					if( i == 0 ) return -1;
+					else return i;
 				}
 			}
 			catch( IOException e )
