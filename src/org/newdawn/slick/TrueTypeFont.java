@@ -129,32 +129,20 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 		// Create a temporary image to extract the character's size
 		BufferedImage tempfontImage = new BufferedImage( 1, 1, BufferedImage.TYPE_INT_ARGB );
 		Graphics2D g = (Graphics2D)tempfontImage.getGraphics();
-		if( antiAlias == true )
-		{
-			g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-		}
+		if( antiAlias == true ) g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
 		g.setFont( font );
 		fontMetrics = g.getFontMetrics();
 		int charwidth = fontMetrics.charWidth( ch );
 		
-		if( charwidth <= 0 )
-		{
-			charwidth = 1;
-		}
+		if( charwidth <= 0 ) charwidth = 1;
 		int charheight = fontMetrics.getHeight();
-		if( charheight <= 0 )
-		{
-			charheight = fontSize;
-		}
+		if( charheight <= 0 ) charheight = fontSize;
 		
 		// Create another image holding the character we are creating
 		BufferedImage fontImage;
 		fontImage = new BufferedImage( charwidth, charheight, BufferedImage.TYPE_INT_ARGB );
 		Graphics2D gt = (Graphics2D)fontImage.getGraphics();
-		if( antiAlias == true )
-		{
-			gt.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-		}
+		if( antiAlias == true ) gt.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
 		gt.setFont( font );
 		
 		gt.setColor( Color.WHITE );
@@ -163,7 +151,6 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 		gt.drawString( String.valueOf( ch ), ( charx ), ( chary ) + fontMetrics.getAscent() );
 		
 		return fontImage;
-		
 	}
 	
 	/**
@@ -174,10 +161,7 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 	private void createSet( char[] customCharsArray )
 	{
 		// If there are custom chars then I expand the font texture twice
-		if( customCharsArray != null && customCharsArray.length > 0 )
-		{
-			textureWidth *= 2;
-		}
+		if( customCharsArray != null && customCharsArray.length > 0 ) textureWidth *= 2;
 		
 		// In any case this should be done in other way. Texture with size 512x512
 		// can maintain only 256 characters with resolution of 32x32. The texture
@@ -185,7 +169,6 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 		
 		try
 		{
-			
 			BufferedImage imgTemp = new BufferedImage( textureWidth, textureHeight, BufferedImage.TYPE_INT_ARGB );
 			Graphics2D g = (Graphics2D)imgTemp.getGraphics();
 			
@@ -200,7 +183,6 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 			
 			for( int i = 0; i < 256 + customCharsLength; i++ )
 			{
-				
 				// get 0-255 characters and then custom characters
 				@SuppressWarnings( "null" )
 				char ch = ( i < 256 ) ? (char)i : customCharsArray[i - 256];
@@ -222,35 +204,22 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 				newIntObject.storedX = positionX;
 				newIntObject.storedY = positionY;
 				
-				if( newIntObject.height > fontHeight )
-				{
-					fontHeight = newIntObject.height;
-				}
+				if( newIntObject.height > fontHeight ) fontHeight = newIntObject.height;
 				
-				if( newIntObject.height > rowHeight )
-				{
-					rowHeight = newIntObject.height;
-				}
+				if( newIntObject.height > rowHeight ) rowHeight = newIntObject.height;
 				
 				// Draw it here
 				g.drawImage( fontImage, positionX, positionY, null );
 				
 				positionX += newIntObject.width;
 				
-				if( i < 256 )
-				{ // standard characters
-					charArray[i] = newIntObject;
-				}
-				else
-				{ // custom characters
-					customChars.put( new Character( ch ), newIntObject );
-				}
+				if( i < 256 ) charArray[i] = newIntObject; // standard characters
+				else customChars.put( new Character( ch ), newIntObject ); // custom characters
 				
 				fontImage = null;
 			}
 			
 			fontTexture = BufferedImageUtil.getTexture( font.toString(), imgTemp );
-			
 		}
 		catch( IOException e )
 		{
@@ -317,14 +286,8 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 		for( int i = 0; i < whatchars.length(); i++ )
 		{
 			currentChar = whatchars.charAt( i );
-			if( currentChar < 256 )
-			{
-				intObject = charArray[currentChar];
-			}
-			else
-			{
-				intObject = customChars.get( new Character( (char)currentChar ) );
-			}
+			if( currentChar < 256 ) intObject = charArray[currentChar];
+			else intObject = customChars.get( new Character( (char)currentChar ) );
 			
 			if( intObject != null ) totalwidth += intObject.width;
 		}
@@ -399,21 +362,12 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 		for( int i = 0; i < whatchars.length(); i++ )
 		{
 			charCurrent = whatchars.charAt( i );
-			if( charCurrent < 256 )
-			{
-				intObject = charArray[charCurrent];
-			}
-			else
-			{
-				intObject = customChars.get( new Character( (char)charCurrent ) );
-			}
+			if( charCurrent < 256 ) intObject = charArray[charCurrent];
+			else intObject = customChars.get( new Character( (char)charCurrent ) );
 			
 			if( intObject != null )
 			{
-				if( ( i >= startIndex ) || ( i <= endIndex ) )
-				{
-					drawQuad( ( x + totalwidth ), y, ( x + totalwidth + intObject.width ), ( y + intObject.height ), intObject.storedX, intObject.storedY, intObject.storedX + intObject.width, intObject.storedY + intObject.height );
-				}
+				if( ( i >= startIndex ) || ( i <= endIndex ) ) drawQuad( ( x + totalwidth ), y, ( x + totalwidth + intObject.width ), ( y + intObject.height ), intObject.storedX, intObject.storedY, intObject.storedX + intObject.width, intObject.storedY + intObject.height );
 				totalwidth += intObject.width;
 			}
 		}
@@ -436,5 +390,4 @@ public class TrueTypeFont implements org.newdawn.slick.Font
 	{
 		drawString( x, y, whatchars, org.newdawn.slick.Color.white );
 	}
-	
 }

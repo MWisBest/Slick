@@ -296,8 +296,7 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	 */
 	public void addGlyphs( int startCodePoint, int endCodePoint )
 	{
-		for( int codePoint = startCodePoint; codePoint <= endCodePoint; codePoint++ )
-			addGlyphs( new String( Character.toChars( codePoint ) ) );
+		for( int codePoint = startCodePoint; codePoint <= endCodePoint; codePoint++ ) addGlyphs( new String( Character.toChars( codePoint ) ) );
 	}
 	
 	/**
@@ -414,8 +413,7 @@ public class UnicodeFont implements org.newdawn.slick.Font
 	 */
 	public void clearGlyphs()
 	{
-		for( int i = 0; i < PAGES; i++ )
-			glyphs[i] = null;
+		for( int i = 0; i < PAGES; i++ ) glyphs[i] = null;
 		
 		for( GlyphPage page : glyphPages )
 		{

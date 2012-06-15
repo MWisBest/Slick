@@ -11,7 +11,6 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public interface ShapeFill
 {
-	
 	/**
 	 * Get the colour that should be applied at the specified location
 	 * 

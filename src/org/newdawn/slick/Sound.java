@@ -31,26 +31,11 @@ public class Sound
 		
 		try
 		{
-			if( ref.toLowerCase().endsWith( ".ogg" ) )
-			{
-				sound = SoundStore.get().getOgg( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) )
-			{
-				sound = SoundStore.get().getAIF( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( in );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
-			}
+			if( ref.toLowerCase().endsWith( ".ogg" ) ) sound = SoundStore.get().getOgg( in );
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( in );
+			else if( ref.toLowerCase().endsWith( ".aif" ) ) sound = SoundStore.get().getAIF( in );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( in );
+			else throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
 		}
 		catch( Exception e )
 		{
@@ -72,26 +57,11 @@ public class Sound
 		
 		try
 		{
-			if( ref.toLowerCase().endsWith( ".ogg" ) )
-			{
-				sound = SoundStore.get().getOgg( url.openStream() );
-			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( url.openStream() );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) )
-			{
-				sound = SoundStore.get().getAIF( url.openStream() );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( url.openStream() );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
-			}
+			if( ref.toLowerCase().endsWith( ".ogg" ) ) sound = SoundStore.get().getOgg( url.openStream() );
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( url.openStream() );
+			else if( ref.toLowerCase().endsWith( ".aif" ) ) sound = SoundStore.get().getAIF( url.openStream() );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( url.openStream() );
+			else throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
 		}
 		catch( Exception e )
 		{
@@ -112,26 +82,11 @@ public class Sound
 		
 		try
 		{
-			if( ref.toLowerCase().endsWith( ".ogg" ) )
-			{
-				sound = SoundStore.get().getOgg( ref );
-			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( ref );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) )
-			{
-				sound = SoundStore.get().getAIF( ref );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( ref );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
-			}
+			if( ref.toLowerCase().endsWith( ".ogg" ) ) sound = SoundStore.get().getOgg( ref );
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( ref );
+			else if( ref.toLowerCase().endsWith( ".aif" ) ) sound = SoundStore.get().getAIF( ref );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( ref );
+			else throw new SlickException( "Only .xm, .mod, .aif, .wav and .ogg are currently supported." );
 		}
 		catch( Exception e )
 		{

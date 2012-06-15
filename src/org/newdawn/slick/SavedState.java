@@ -40,14 +40,8 @@ public class SavedState
 	{
 		this.fileName = fileName;
 		
-		if( isWebstartAvailable() )
-		{
-			muffin = new WebstartMuffin();
-		}
-		else
-		{
-			muffin = new FileMuffin();
-		}
+		if( isWebstartAvailable() ) muffin = new WebstartMuffin();
+		else muffin = new FileMuffin();
 		
 		try
 		{
@@ -79,12 +73,9 @@ public class SavedState
 	 */
 	public double getNumber( String nameOfField, double defaultValue )
 	{
-		Double value = ( numericData.get( nameOfField ) );
+		Double value = numericData.get( nameOfField );
 		
-		if( value == null )
-		{
-			return defaultValue;
-		}
+		if( value == null ) return defaultValue;
 		
 		return value.doubleValue();
 	}
@@ -123,10 +114,7 @@ public class SavedState
 	{
 		String value = stringData.get( nameOfField );
 		
-		if( value == null )
-		{
-			return defaultValue;
-		}
+		if( value == null ) return defaultValue;
 		
 		return value;
 	}

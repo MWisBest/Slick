@@ -8,7 +8,6 @@ package org.newdawn.slick;
  */
 public interface MusicListener
 {
-	
 	/**
 	 * Notification that a piece of music finished playing
 	 * 

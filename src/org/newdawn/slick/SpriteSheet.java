@@ -182,25 +182,16 @@ public class SpriteSheet extends Image
 	@Override
 	protected void initImpl()
 	{
-		if( subImages != null )
-		{
-			return;
-		}
+		if( subImages != null ) return;
 		
 		int tilesAcross = ( ( getWidth() - ( margin * 2 ) - tw ) / ( tw + spacing ) ) + 1;
 		int tilesDown = ( ( getHeight() - ( margin * 2 ) - th ) / ( th + spacing ) ) + 1;
-		if( ( getHeight() - th ) % ( th + spacing ) != 0 )
-		{
-			tilesDown++;
-		}
+		if( ( getHeight() - th ) % ( th + spacing ) != 0 ) tilesDown++;
 		
 		subImages = new Image[tilesAcross][tilesDown];
 		for( int x = 0; x < tilesAcross; x++ )
 		{
-			for( int y = 0; y < tilesDown; y++ )
-			{
-				subImages[x][y] = getSprite( x, y );
-			}
+			for( int y = 0; y < tilesDown; y++ ) subImages[x][y] = getSprite( x, y );
 		}
 	}
 	
@@ -215,14 +206,7 @@ public class SpriteSheet extends Image
 	{
 		init();
 		
-		if( ( x < 0 ) || ( x >= subImages.length ) )
-		{
-			throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
-		}
-		if( ( y < 0 ) || ( y >= subImages[0].length ) )
-		{
-			throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
-		}
+		if( ( ( x < 0 ) || ( x >= subImages.length ) ) || ( ( y < 0 ) || ( y >= subImages[0].length ) ) ) throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
 		
 		return subImages[x][y];
 	}
@@ -240,14 +224,7 @@ public class SpriteSheet extends Image
 		target.init();
 		initImpl();
 		
-		if( ( x < 0 ) || ( x >= subImages.length ) )
-		{
-			throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
-		}
-		if( ( y < 0 ) || ( y >= subImages[0].length ) )
-		{
-			throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
-		}
+		if( ( ( x < 0 ) || ( x >= subImages.length ) ) || ( ( y < 0 ) || ( y >= subImages[0].length ) ) ) throw new RuntimeException( "SubImage out of sheet bounds: " + x + "," + y );
 		
 		return target.getSubImage( x * ( tw + spacing ) + margin, y * ( th + spacing ) + margin, tw, th );
 	}
@@ -403,5 +380,4 @@ public class SpriteSheet extends Image
 	{
 		subImages[sx][sy].drawEmbedded( x, y, tw, th, transform );
 	}
-	
 }

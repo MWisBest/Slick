@@ -33,19 +33,13 @@ public class Music
 		if( currentMusic != null )
 		{
 			SoundStore.get().poll( delta );
-			if( !SoundStore.get().isMusicPlaying() )
+			if( !SoundStore.get().isMusicPlaying() && !currentMusic.positioning )
 			{
-				if( !currentMusic.positioning )
-				{
-					Music oldMusic = currentMusic;
-					currentMusic = null;
-					oldMusic.fireMusicEnded();
-				}
+				Music oldMusic = currentMusic;
+				currentMusic = null;
+				oldMusic.fireMusicEnded();
 			}
-			else
-			{
-				currentMusic.update( delta );
-			}
+			else currentMusic.update( delta );
 		}
 	}
 	
@@ -107,26 +101,11 @@ public class Music
 		
 		try
 		{
-			if( ref.toLowerCase().endsWith( ".ogg" ) )
-			{
-				sound = SoundStore.get().getOgg( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( in );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) )
-			{
-				sound = SoundStore.get().getAIF( in );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
-			}
+			if( ref.toLowerCase().endsWith( ".ogg" ) ) sound = SoundStore.get().getOgg( in );
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( in );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( in );
+			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) ) sound = SoundStore.get().getAIF( in );
+			else throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
 		}
 		catch( Exception e )
 		{
@@ -151,31 +130,13 @@ public class Music
 		{
 			if( ref.toLowerCase().endsWith( ".ogg" ) )
 			{
-				if( streamingHint )
-				{
-					sound = SoundStore.get().getOggStream( url );
-				}
-				else
-				{
-					sound = SoundStore.get().getOgg( url.openStream() );
-				}
+				if( streamingHint ) sound = SoundStore.get().getOggStream( url );
+				else sound = SoundStore.get().getOgg( url.openStream() );
 			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( url.openStream() );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( url.openStream() );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) )
-			{
-				sound = SoundStore.get().getAIF( url.openStream() );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
-			}
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( url.openStream() );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( url.openStream() );
+			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) ) sound = SoundStore.get().getAIF( url.openStream() );
+			else throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
 		}
 		catch( Exception e )
 		{
@@ -199,31 +160,13 @@ public class Music
 		{
 			if( ref.toLowerCase().endsWith( ".ogg" ) )
 			{
-				if( streamingHint )
-				{
-					sound = SoundStore.get().getOggStream( ref );
-				}
-				else
-				{
-					sound = SoundStore.get().getOgg( ref );
-				}
+				if( streamingHint ) sound = SoundStore.get().getOggStream( ref );
+				else sound = SoundStore.get().getOgg( ref );
 			}
-			else if( ref.toLowerCase().endsWith( ".wav" ) )
-			{
-				sound = SoundStore.get().getWAV( ref );
-			}
-			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) )
-			{
-				sound = SoundStore.get().getMOD( ref );
-			}
-			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) )
-			{
-				sound = SoundStore.get().getAIF( ref );
-			}
-			else
-			{
-				throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
-			}
+			else if( ref.toLowerCase().endsWith( ".wav" ) ) sound = SoundStore.get().getWAV( ref );
+			else if( ref.toLowerCase().endsWith( ".xm" ) || ref.toLowerCase().endsWith( ".mod" ) ) sound = SoundStore.get().getMOD( ref );
+			else if( ref.toLowerCase().endsWith( ".aif" ) || ref.toLowerCase().endsWith( ".aiff" ) ) sound = SoundStore.get().getAIF( ref );
+			else throw new SlickException( "Only .xm, .mod, .ogg, and .aif/f are currently supported." );
 		}
 		catch( Exception e )
 		{
@@ -258,10 +201,7 @@ public class Music
 	private void fireMusicEnded()
 	{
 		playing = false;
-		for( int i = 0; i < listeners.size(); i++ )
-		{
-			listeners.get( i ).musicEnded( this );
-		}
+		for( int i = 0; i < listeners.size(); i++ ) listeners.get( i ).musicEnded( this );
 	}
 	
 	/**
@@ -272,10 +212,7 @@ public class Music
 	private void fireMusicSwapped( Music newMusic )
 	{
 		playing = false;
-		for( int i = 0; i < listeners.size(); i++ )
-		{
-			listeners.get( i ).musicSwapped( this, newMusic );
-		}
+		for( int i = 0; i < listeners.size(); i++ ) listeners.get( i ).musicSwapped( this, newMusic );
 	}
 	
 	/**
@@ -338,10 +275,7 @@ public class Music
 		sound.playAsMusic( pitch, volume, loop );
 		playing = true;
 		setVolume( volume );
-		if( requiredPosition != -1 )
-		{
-			setPosition( requiredPosition );
-		}
+		if( requiredPosition != -1 ) setPosition( requiredPosition );
 	}
 	
 	/**
@@ -393,21 +327,12 @@ public class Music
 	public void setVolume( float volume )
 	{
 		// Bounds check
-		if( volume > 1 )
-		{
-			volume = 1;
-		}
-		else if( volume < 0 )
-		{
-			volume = 0;
-		}
+		if( volume > 1 ) volume = 1;
+		else if( volume < 0 ) volume = 0;
 		
 		this.volume = volume;
 		// This sound is being played as music
-		if( currentMusic == this )
-		{
-			SoundStore.get().setCurrentMusicVolume( volume );
-		}
+		if( currentMusic == this ) SoundStore.get().setCurrentMusicVolume( volume );
 	}
 	
 	/**
@@ -444,10 +369,7 @@ public class Music
 	 */
 	void update( int delta )
 	{
-		if( !playing )
-		{
-			return;
-		}
+		if( !playing ) return;
 		
 		if( fadeTime > 0 )
 		{

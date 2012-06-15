@@ -103,10 +103,7 @@ public class PackedSpriteSheet
 	{
 		Section section = sections.get( name );
 		
-		if( section == null )
-		{
-			throw new RuntimeException( "Unknown sprite from packed sheet: " + name );
-		}
+		if( section == null ) throw new RuntimeException( "Unknown sprite from packed sheet: " + name );
 		
 		return image.getSubImage( section.x, section.y, section.width, section.height );
 	}
@@ -142,18 +139,12 @@ public class PackedSpriteSheet
 			image = new Image( basePath + reader.readLine(), false, filter, trans );
 			while( reader.ready() )
 			{
-				if( reader.readLine() == null )
-				{
-					break;
-				}
+				if( reader.readLine() == null ) break;
 				
 				Section sect = new Section( reader );
 				sections.put( sect.name, sect );
 				
-				if( reader.readLine() == null )
-				{
-					break;
-				}
+				if( reader.readLine() == null ) break;
 			}
 		}
 		catch( Exception e )

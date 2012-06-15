@@ -138,23 +138,14 @@ public class ScalableGame implements Game
 			
 		}
 		
-		if( held instanceof InputListener )
-		{
-			container.getInput().addListener( (InputListener)held );
-		}
+		if( held instanceof InputListener ) container.getInput().addListener( (InputListener)held );
 		container.getInput().setScale( normalWidth / targetWidth, normalHeight / targetHeight );
 		
 		int yoffset = 0;
 		int xoffset = 0;
 		
-		if( targetHeight < container.getHeight() )
-		{
-			yoffset = ( container.getHeight() - targetHeight ) / 2;
-		}
-		if( targetWidth < container.getWidth() )
-		{
-			xoffset = ( container.getWidth() - targetWidth ) / 2;
-		}
+		if( targetHeight < container.getHeight() ) yoffset = ( container.getHeight() - targetHeight ) / 2;
+		if( targetWidth < container.getWidth() ) xoffset = ( container.getWidth() - targetWidth ) / 2;
 		container.getInput().setOffset( -xoffset / ( targetWidth / normalWidth ), -yoffset / ( targetHeight / normalHeight ) );
 		
 	}
@@ -165,10 +156,7 @@ public class ScalableGame implements Game
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		if( ( targetHeight != container.getHeight() ) || ( targetWidth != container.getWidth() ) )
-		{
-			recalculateScale();
-		}
+		if( ( targetHeight != container.getHeight() ) || ( targetWidth != container.getWidth() ) ) recalculateScale();
 		
 		held.update( container, delta );
 	}
@@ -182,14 +170,8 @@ public class ScalableGame implements Game
 		int yoffset = 0;
 		int xoffset = 0;
 		
-		if( targetHeight < container.getHeight() )
-		{
-			yoffset = ( container.getHeight() - targetHeight ) / 2;
-		}
-		if( targetWidth < container.getWidth() )
-		{
-			xoffset = ( container.getWidth() - targetWidth ) / 2;
-		}
+		if( targetHeight < container.getHeight() ) yoffset = ( container.getHeight() - targetHeight ) / 2;
+		if( targetWidth < container.getWidth() ) xoffset = ( container.getWidth() - targetWidth ) / 2;
 		
 		SlickCallable.enterSafeBlock();
 		g.setClip( xoffset, yoffset, targetWidth, targetHeight );

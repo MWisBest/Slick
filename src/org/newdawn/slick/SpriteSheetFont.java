@@ -90,10 +90,7 @@ public class SpriteSheetFont implements Font
 					int xPos = ( index % horizontalCount );
 					int yPos = ( index / horizontalCount );
 					
-					if( ( i >= startIndex ) || ( i <= endIndex ) )
-					{
-						font.getSprite( xPos, yPos ).draw( x + ( i * charWidth ), y, col );
-					}
+					if( ( i >= startIndex ) || ( i <= endIndex ) ) font.getSprite( xPos, yPos ).draw( x + ( i * charWidth ), y, col );
 				}
 			}
 		}
