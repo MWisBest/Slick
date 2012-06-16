@@ -100,14 +100,8 @@ public class DuplicateEmitterTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
-		if( key == Input.KEY_K )
-		{
-			explosionEmitter.wrapUp();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
+		if( key == Input.KEY_K ) explosionEmitter.wrapUp();
 	}
 	
 	/**
@@ -128,5 +122,4 @@ public class DuplicateEmitterTest extends BasicGame
 			e.printStackTrace();
 		}
 	}
-	
 }

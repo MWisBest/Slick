@@ -48,21 +48,12 @@ public class AnimationTest extends BasicGame
 		
 		SpriteSheet sheet = new SpriteSheet( "testdata/homeranim.png", 36, 65 );
 		animation = new Animation();
-		for( int i = 0; i < 8; i++ )
-		{
-			animation.addFrame( sheet.getSprite( i, 0 ), 150 );
-		}
+		for( int i = 0; i < 8; i++ ) animation.addFrame( sheet.getSprite( i, 0 ), 150 );
 		limited = new Animation();
-		for( int i = 0; i < 8; i++ )
-		{
-			limited.addFrame( sheet.getSprite( i, 0 ), 150 );
-		}
+		for( int i = 0; i < 8; i++ ) limited.addFrame( sheet.getSprite( i, 0 ), 150 );
 		limited.stopAt( 7 );
 		manual = new Animation( false );
-		for( int i = 0; i < 8; i++ )
-		{
-			manual.addFrame( sheet.getSprite( i, 0 ), 150 );
-		}
+		for( int i = 0; i < 8; i++ ) manual.addFrame( sheet.getSprite( i, 0 ), 150 );
 		pingPong = new Animation( sheet, 0, 0, 7, 0, true, 150, true );
 		pingPong.setPingPong( true );
 		container.getGraphics().setBackground( new Color( 0.4f, 0.6f, 0.6f ) );
@@ -82,10 +73,7 @@ public class AnimationTest extends BasicGame
 		g.scale( -1, 1 );
 		animation.draw( -100, 100 );
 		animation.draw( -200, 100, 36 * 4, 65 * 4 );
-		if( start < 0 )
-		{
-			limited.draw( -400, 100, 36 * 4, 65 * 4 );
-		}
+		if( start < 0 ) limited.draw( -400, 100, 36 * 4, 65 * 4 );
 		manual.draw( -600, 100, 36 * 4, 65 * 4 );
 		pingPong.draw( -700, 100, 36 * 2, 65 * 2 );
 	}
@@ -96,14 +84,8 @@ public class AnimationTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta )
 	{
-		if( container.getInput().isKeyDown( Input.KEY_1 ) )
-		{
-			manual.update( delta );
-		}
-		if( start >= 0 )
-		{
-			start -= delta;
-		}
+		if( container.getInput().isKeyDown( Input.KEY_1 ) ) manual.update( delta );
+		if( start >= 0 ) start -= delta;
 	}
 	
 	/**
@@ -131,13 +113,7 @@ public class AnimationTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
-		if( key == Input.KEY_SPACE )
-		{
-			limited.restart();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
+		if( key == Input.KEY_SPACE ) limited.restart();
 	}
 }

@@ -52,10 +52,7 @@ public class BigSpriteSheetTest extends BasicGame
 		{
 			for( int x = 0; x < 43; x++ )
 			{
-				for( int y = 0; y < 27; y++ )
-				{
-					bigSheet.getSprite( x, y ).draw( 10 + ( x * 18 ), 50 + ( y * 18 ) );
-				}
+				for( int y = 0; y < 27; y++ ) bigSheet.getSprite( x, y ).draw( 10 + ( x * 18 ), 50 + ( y * 18 ) );
 			}
 		}
 		else
@@ -63,10 +60,7 @@ public class BigSpriteSheetTest extends BasicGame
 			bigSheet.startUse();
 			for( int x = 0; x < 43; x++ )
 			{
-				for( int y = 0; y < 27; y++ )
-				{
-					bigSheet.renderInUse( 10 + ( x * 18 ), 50 + ( y * 18 ), x, y );
-				}
+				for( int y = 0; y < 27; y++ ) bigSheet.renderInUse( 10 + ( x * 18 ), 50 + ( y * 18 ), x, y );
 			}
 			bigSheet.endUse();
 		}
@@ -101,9 +95,6 @@ public class BigSpriteSheetTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) )
-		{
-			oldMethod = !oldMethod;
-		}
+		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) ) oldMethod = !oldMethod;
 	}
 }

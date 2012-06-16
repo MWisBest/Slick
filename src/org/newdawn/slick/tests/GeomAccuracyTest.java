@@ -71,17 +71,14 @@ public class GeomAccuracyTest extends BasicGame
 		
 		switch( curTest )
 		{
-		
 			case 0:
 				text = "Rectangles";
 				rectTest( g );
 				break;
-			
 			case 1:
 				text = "Ovals";
 				ovalTest( g );
 				break;
-			
 			case 2:
 				text = "Arcs";
 				arcTest( g );
@@ -114,7 +111,6 @@ public class GeomAccuracyTest extends BasicGame
 		g.drawString( "NOTE:", 500, 450 );
 		g.drawString( "lines should be flush with edges", 525, 470 );
 		g.drawString( "corners should be symetric", 525, 490 );
-		
 	}
 	
 	/**
@@ -124,7 +120,6 @@ public class GeomAccuracyTest extends BasicGame
 	 */
 	void arcTest( Graphics g )
 	{
-		
 		if( hideOverlay == false )
 		{
 			g.setColor( overlayColor );
@@ -134,7 +129,6 @@ public class GeomAccuracyTest extends BasicGame
 		
 		g.setColor( geomColor );
 		g.drawArc( 100, 100, 99, 99, 0, 90 );
-		
 	}
 	
 	/**
@@ -144,7 +138,6 @@ public class GeomAccuracyTest extends BasicGame
 	 */
 	void ovalTest( Graphics g )
 	{
-		
 		g.setColor( geomColor );
 		g.drawOval( 100, 100, 99, 99 );
 		g.fillOval( 100, 250, 99, 99 );
@@ -170,7 +163,6 @@ public class GeomAccuracyTest extends BasicGame
 			g.drawLine( 100 + 300, 149 + 150, 198 + 300, 149 + 150 );
 			g.drawLine( 149 + 300, 100 + 150, 149 + 300, 198 + 150 );
 		}
-		
 	}
 	
 	/**
@@ -180,7 +172,6 @@ public class GeomAccuracyTest extends BasicGame
 	 */
 	void rectTest( Graphics g )
 	{
-		
 		g.setColor( geomColor );
 		
 		// Draw using graphics routines
@@ -240,7 +231,6 @@ public class GeomAccuracyTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta )
 	{
-		
 	}
 	
 	/**
@@ -249,17 +239,12 @@ public class GeomAccuracyTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 		if( key == Input.KEY_N )
 		{
 			curTest++;
 			curTest %= NUMTESTS;
 		}
-		
 		if( key == Input.KEY_C )
 		{
 			colorIndex++;
@@ -267,12 +252,7 @@ public class GeomAccuracyTest extends BasicGame
 			colorIndex %= 4;
 			setColors();
 		}
-		
-		if( key == Input.KEY_T )
-		{
-			hideOverlay = !hideOverlay;
-		}
-		
+		if( key == Input.KEY_T ) hideOverlay = !hideOverlay;
 	}
 	
 	/**
@@ -287,17 +267,14 @@ public class GeomAccuracyTest extends BasicGame
 				overlayColor = Color.white;
 				geomColor = Color.magenta;
 				break;
-			
 			case 1:
 				overlayColor = Color.magenta;
 				geomColor = Color.white;
 				break;
-			
 			case 2:
 				overlayColor = Color.red;
 				geomColor = Color.green;
 				break;
-			
 			case 3:
 				overlayColor = Color.red;
 				geomColor = Color.white;

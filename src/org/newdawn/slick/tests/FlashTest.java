@@ -49,14 +49,8 @@ public class FlashTest extends BasicGame
 	public void render( GameContainer container, Graphics g )
 	{
 		g.drawString( "Press space to toggle", 10, 50 );
-		if( flash )
-		{
-			image.draw( 100, 100 );
-		}
-		else
-		{
-			image.drawFlash( 100, 100, image.getWidth(), image.getHeight(), new Color( 1, 0, 1f, 1f ) );
-		}
+		if( flash ) image.draw( 100, 100 );
+		else image.drawFlash( 100, 100, image.getWidth(), image.getHeight(), new Color( 1, 0, 1f, 1f ) );
 	}
 	
 	/**
@@ -92,13 +86,7 @@ public class FlashTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_SPACE )
-		{
-			flash = !flash;
-		}
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_SPACE ) flash = !flash;
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

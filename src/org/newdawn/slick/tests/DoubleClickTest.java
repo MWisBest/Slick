@@ -13,7 +13,6 @@ import org.newdawn.slick.SlickException;
  */
 public class DoubleClickTest extends BasicGame
 {
-	
 	/**
 	 * Create the test game
 	 */
@@ -75,13 +74,7 @@ public class DoubleClickTest extends BasicGame
 	@Override
 	public void mouseClicked( int button, int x, int y, int clickCount )
 	{
-		if( clickCount == 1 )
-		{
-			message = "Single Click: " + button + " " + x + "," + y;
-		}
-		if( clickCount == 2 )
-		{
-			message = "Double Click: " + button + " " + x + "," + y;
-		}
+		if( clickCount == 1 ) message = "Single Click: " + button + " " + x + "," + y;
+		if( clickCount == 2 ) message = "Double Click: " + button + " " + x + "," + y;
 	}
 }

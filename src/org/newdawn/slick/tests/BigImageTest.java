@@ -111,21 +111,9 @@ public class BigImageTest extends BasicGame
 	{
 		ang += delta * 0.1f;
 		
-		if( container.getInput().isKeyDown( Input.KEY_LEFT ) )
-		{
-			x -= delta * 0.1f;
-		}
-		if( container.getInput().isKeyDown( Input.KEY_RIGHT ) )
-		{
-			x += delta * 0.1f;
-		}
-		if( container.getInput().isKeyDown( Input.KEY_UP ) )
-		{
-			y -= delta * 0.1f;
-		}
-		if( container.getInput().isKeyDown( Input.KEY_DOWN ) )
-		{
-			y += delta * 0.1f;
-		}
+		if( container.getInput().isKeyDown( Input.KEY_LEFT ) ) x -= delta * 0.1f;
+		if( container.getInput().isKeyDown( Input.KEY_RIGHT ) ) x += delta * 0.1f;
+		if( container.getInput().isKeyDown( Input.KEY_UP ) ) y -= delta * 0.1f;
+		if( container.getInput().isKeyDown( Input.KEY_DOWN ) ) y += delta * 0.1f;
 	}
 }

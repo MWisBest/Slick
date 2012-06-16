@@ -21,7 +21,6 @@ import org.newdawn.slick.SlickException;
  */
 public class CanvasSizeTest extends BasicGame
 {
-	
 	/**
 	 * Create test
 	 */

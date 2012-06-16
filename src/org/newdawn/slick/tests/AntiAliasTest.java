@@ -14,7 +14,6 @@ import org.newdawn.slick.SlickException;
  */
 public class AntiAliasTest extends BasicGame
 {
-	
 	/**
 	 * Create the test
 	 */

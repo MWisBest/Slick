@@ -79,10 +79,7 @@ public class DeferredLoadingTest extends BasicGame
 	@Override
 	public void render( GameContainer container, Graphics g )
 	{
-		if( nextResource != null )
-		{
-			g.drawString( "Loading: " + nextResource.getDescription(), 100, 100 );
-		}
+		if( nextResource != null ) g.drawString( "Loading: " + nextResource.getDescription(), 100, 100 );
 		
 		int total = LoadingList.get().getTotalResources();
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
@@ -125,18 +122,12 @@ public class DeferredLoadingTest extends BasicGame
 			nextResource = null;
 		}
 		
-		if( LoadingList.get().getRemainingResources() > 0 )
+		if( LoadingList.get().getRemainingResources() > 0 ) nextResource = LoadingList.get().getNext();
+		else if( !started )
 		{
-			nextResource = LoadingList.get().getNext();
-		}
-		else
-		{
-			if( !started )
-			{
-				started = true;
-				music.loop();
-				sound.play();
-			}
+			started = true;
+			music.loop();
+			sound.play();
 		}
 	}
 	

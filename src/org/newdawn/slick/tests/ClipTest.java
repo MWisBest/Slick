@@ -15,7 +15,6 @@ import org.newdawn.slick.SlickException;
  */
 public class ClipTest extends BasicGame
 {
-	
 	/** The current angle of rotation */
 	private float ang = 0;
 	/** True if we're showing world clipping */
@@ -59,24 +58,12 @@ public class ClipTest extends BasicGame
 		g.drawString( "2 - Screen Clipping", 100, 30 );
 		g.drawString( "3 - World Clipping", 100, 50 );
 		
-		if( world )
-		{
-			g.drawString( "WORLD CLIPPING ENABLED", 200, 80 );
-		}
-		if( clip )
-		{
-			g.drawString( "SCREEN CLIPPING ENABLED", 200, 80 );
-		}
+		if( world ) g.drawString( "WORLD CLIPPING ENABLED", 200, 80 );
+		if( clip ) g.drawString( "SCREEN CLIPPING ENABLED", 200, 80 );
 		
 		g.rotate( 400, 400, ang );
-		if( world )
-		{
-			g.setWorldClip( 350, 302, 100, 196 );
-		}
-		if( clip )
-		{
-			g.setClip( 350, 302, 100, 196 );
-		}
+		if( world ) g.setWorldClip( 350, 302, 100, 196 );
+		if( clip ) g.setClip( 350, 302, 100, 196 );
 		g.setColor( Color.red );
 		g.fillOval( 300, 300, 200, 200 );
 		g.setColor( Color.blue );

@@ -108,7 +108,6 @@ public class GeomTest extends BasicGame
 		g.setColor( Color.blue );
 		g.draw( new Circle( 100, 100, 50 ) );
 		g.drawRect( 50, 50, 100, 100 );
-		
 	}
 	
 	/**
@@ -125,10 +124,7 @@ public class GeomTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 	}
 	
 	/**

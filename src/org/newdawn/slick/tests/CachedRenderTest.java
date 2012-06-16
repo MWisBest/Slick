@@ -61,10 +61,7 @@ public class CachedRenderTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) )
-		{
-			drawCached = !drawCached;
-		}
+		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) ) drawCached = !drawCached;
 	}
 	
 	/**

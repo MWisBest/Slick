@@ -49,10 +49,7 @@ public class FontPerformanceTest extends BasicGame
 			int lineLen = 90;
 			for( int i = 0; i < text.length(); i += lineLen )
 			{
-				if( i + lineLen > text.length() )
-				{
-					lineLen = text.length() - i;
-				}
+				if( i + lineLen > text.length() ) lineLen = text.length() - i;
 				
 				lines.add( text.substring( i, i + lineLen ) );
 			}
@@ -70,10 +67,7 @@ public class FontPerformanceTest extends BasicGame
 		
 		if( visible )
 		{
-			for( int i = 0; i < lines.size(); i++ )
-			{
-				font.drawString( 10, 50 + ( i * 20 ), lines.get( i ), i > 10 ? Color.red : Color.green );
-			}
+			for( int i = 0; i < lines.size(); i++ ) font.drawString( 10, 50 + ( i * 20 ), lines.get( i ), i > 10 ? Color.red : Color.green );
 		}
 	}
 	
@@ -91,14 +85,8 @@ public class FontPerformanceTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_SPACE )
-		{
-			visible = !visible;
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_SPACE ) visible = !visible;
 	}
 	
 	/**
