@@ -80,13 +80,7 @@ public class TestState2 extends BasicGameState
 	@Override
 	public void keyReleased( int key, char c )
 	{
-		if( key == Input.KEY_1 )
-		{
-			game.enterState( TestState1.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
-		}
-		if( key == Input.KEY_3 )
-		{
-			game.enterState( TestState3.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
-		}
+		if( key == Input.KEY_1 ) game.enterState( TestState1.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
+		if( key == Input.KEY_3 ) game.enterState( TestState3.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
 	}
 }

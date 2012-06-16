@@ -63,10 +63,7 @@ public class TestState3 extends BasicGameState
 		for( int i = 0; i < options.length; i++ )
 		{
 			g.drawString( options[i], 400 - ( font.getWidth( options[i] ) / 2 ), 200 + ( i * 50 ) );
-			if( selected == i )
-			{
-				g.drawRect( 200, 190 + ( i * 50 ), 400, 50 );
-			}
+			if( selected == i ) g.drawRect( 200, 190 + ( i * 50 ), 400, 50 );
 		}
 	}
 	
@@ -87,27 +84,14 @@ public class TestState3 extends BasicGameState
 		if( key == Input.KEY_DOWN )
 		{
 			selected++;
-			if( selected >= options.length )
-			{
-				selected = 0;
-			}
+			if( selected >= options.length ) selected = 0;
 		}
 		if( key == Input.KEY_UP )
 		{
 			selected--;
-			if( selected < 0 )
-			{
-				selected = options.length - 1;
-			}
+			if( selected < 0 ) selected = options.length - 1;
 		}
-		if( key == Input.KEY_1 )
-		{
-			game.enterState( TestState1.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
-		}
-		if( key == Input.KEY_2 )
-		{
-			game.enterState( TestState2.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
-		}
+		if( key == Input.KEY_1 ) game.enterState( TestState1.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
+		if( key == Input.KEY_2 ) game.enterState( TestState2.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
 	}
-	
 }

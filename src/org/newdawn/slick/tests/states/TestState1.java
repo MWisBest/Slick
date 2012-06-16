@@ -76,7 +76,6 @@ public class TestState1 extends BasicGameState
 	@Override
 	public void keyReleased( int key, char c )
 	{
-		
 		if( key == Input.KEY_2 )
 		{
 			GameState target = game.getState( TestState2.ID );
@@ -98,9 +97,6 @@ public class TestState1 extends BasicGameState
 			
 			game.enterState( TestState2.ID, t, new EmptyTransition() );
 		}
-		if( key == Input.KEY_3 )
-		{
-			game.enterState( TestState3.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
-		}
+		if( key == Input.KEY_3 ) game.enterState( TestState3.ID, new FadeOutTransition( Color.black ), new FadeInTransition( Color.black ) );
 	}
 }
