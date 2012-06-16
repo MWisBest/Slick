@@ -7,7 +7,6 @@ package org.newdawn.slick.util;
  */
 public interface LogSystem
 {
-	
 	/**
 	 * Log an error
 	 * 

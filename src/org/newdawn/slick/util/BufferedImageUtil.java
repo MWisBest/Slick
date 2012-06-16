@@ -20,10 +20,8 @@ import org.newdawn.slick.opengl.renderer.SGL;
  * @author Jeremy Adams (elias_naur)
  * @author Kevin Glass (kevglass)
  */
-
 public class BufferedImageUtil
 {
-	
 	/**
 	 * Load a texture
 	 * 
@@ -37,10 +35,7 @@ public class BufferedImageUtil
 	 */
 	public static Texture getTexture( String resourceName, BufferedImage resourceImage ) throws IOException
 	{
-		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, // target
-				SGL.GL_RGBA8, // dest pixel format
-				SGL.GL_LINEAR, // min filter (unused)
-				SGL.GL_LINEAR );
+		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, SGL.GL_RGBA8, SGL.GL_LINEAR, SGL.GL_LINEAR );
 		
 		return tex;
 	}
@@ -58,10 +53,7 @@ public class BufferedImageUtil
 	 */
 	public static Texture getTexture( String resourceName, BufferedImage resourceImage, int filter ) throws IOException
 	{
-		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, // target
-				SGL.GL_RGBA8, // dest pixel format
-				filter, // min filter (unused)
-				filter );
+		Texture tex = getTexture( resourceName, resourceImage, SGL.GL_TEXTURE_2D, SGL.GL_RGBA8, filter, filter );
 		
 		return tex;
 	}

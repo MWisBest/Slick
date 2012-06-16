@@ -66,16 +66,10 @@ public class ResourceLoader
 		{
 			ResourceLocation location = locations.get( i );
 			in = location.getResourceAsStream( ref );
-			if( in != null )
-			{
-				break;
-			}
+			if( in != null ) break;
 		}
 		
-		if( in == null )
-		{
-			throw new RuntimeException( "Resource not found: " + ref );
-		}
+		if( in == null ) throw new RuntimeException( "Resource not found: " + ref );
 		
 		return new BufferedInputStream( in );
 	}
@@ -94,10 +88,7 @@ public class ResourceLoader
 		{
 			ResourceLocation location = locations.get( i );
 			url = location.getResource( ref );
-			if( url != null )
-			{
-				return true;
-			}
+			if( url != null ) return true;
 		}
 		
 		return false;
@@ -111,23 +102,16 @@ public class ResourceLoader
 	 */
 	public static URL getResource( String ref )
 	{
-		
 		URL url = null;
 		
 		for( int i = 0; i < locations.size(); i++ )
 		{
 			ResourceLocation location = locations.get( i );
 			url = location.getResource( ref );
-			if( url != null )
-			{
-				break;
-			}
+			if( url != null ) break;
 		}
 		
-		if( url == null )
-		{
-			throw new RuntimeException( "Resource not found: " + ref );
-		}
+		if( url == null ) throw new RuntimeException( "Resource not found: " + ref );
 		
 		return url;
 	}

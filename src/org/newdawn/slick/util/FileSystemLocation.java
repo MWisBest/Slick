@@ -35,14 +35,8 @@ public class FileSystemLocation implements ResourceLocation
 		try
 		{
 			File file = new File( root, ref );
-			if( !file.exists() )
-			{
-				file = new File( ref );
-			}
-			if( !file.exists() )
-			{
-				return null;
-			}
+			if( !file.exists() ) file = new File( ref );
+			if( !file.exists() ) return null;
 			
 			return file.toURI().toURL();
 		}
@@ -61,10 +55,7 @@ public class FileSystemLocation implements ResourceLocation
 		try
 		{
 			File file = new File( root, ref );
-			if( !file.exists() )
-			{
-				file = new File( ref );
-			}
+			if( !file.exists() ) file = new File( ref );
 			return new FileInputStream( file );
 		}
 		catch( IOException e )
@@ -72,5 +63,4 @@ public class FileSystemLocation implements ResourceLocation
 			return null;
 		}
 	}
-	
 }

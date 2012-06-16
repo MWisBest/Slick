@@ -81,7 +81,7 @@ public class LocatedImage
 	}
 	
 	/**
-	 * Set the colour filter to apply to the image
+	 * Set the color filter to apply to the image
 	 * 
 	 * @param c The color filter to apply to the image
 	 */
@@ -91,7 +91,7 @@ public class LocatedImage
 	}
 	
 	/**
-	 * Get the colour filter being applied
+	 * Get the color filter being applied
 	 * 
 	 * @return The color the being applied
 	 */

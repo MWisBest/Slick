@@ -29,5 +29,4 @@ public class ClasspathLocation implements ResourceLocation
 		String cpRef = ref.replace( '\\', '/' );
 		return ResourceLoader.class.getClassLoader().getResourceAsStream( cpRef );
 	}
-	
 }

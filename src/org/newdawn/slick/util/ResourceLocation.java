@@ -10,7 +10,6 @@ import java.net.URL;
  */
 public interface ResourceLocation
 {
-	
 	/**
 	 * Get a resource as an input stream
 	 * 

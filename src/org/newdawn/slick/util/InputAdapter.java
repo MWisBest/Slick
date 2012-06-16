@@ -195,6 +195,5 @@ public class InputAdapter implements InputListener
 	@Override
 	public void inputStarted()
 	{
-		
 	}
 }

@@ -10,7 +10,6 @@ import org.newdawn.slick.Game;
  */
 public class Bootstrap
 {
-	
 	/**
 	 * Start the game as an application
 	 * 

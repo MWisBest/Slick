@@ -115,29 +115,22 @@ public class FontUtils
 	public static final int drawString( Font font, final String s, final int alignment, final int x, final int y, final int width, Color color )
 	{
 		int resultingXCoordinate = 0;
-		if( alignment == Alignment.LEFT )
+		
+		switch( alignment )
 		{
-			font.drawString( x, y, s, color );
-		}
-		else if( alignment == Alignment.CENTER )
-		{
-			font.drawString( x + ( width / 2 ) - ( font.getWidth( s ) / 2 ), y, s, color );
-		}
-		else if( alignment == Alignment.RIGHT )
-		{
-			font.drawString( x + width - font.getWidth( s ), y, s, color );
-		}
-		else if( alignment == Alignment.JUSTIFY )
-		{
-			// calculate left width
-			int leftWidth = width - font.getWidth( s );
-			if( leftWidth <= 0 )
-			{
-				// no width left, use standard draw string
+			case Alignment.LEFT:
 				font.drawString( x, y, s, color );
-			}
-			
-			return FontUtils.drawJustifiedSpaceSeparatedSubstrings( font, s, x, y, FontUtils.calculateWidthOfJustifiedSpaceInPixels( font, s, leftWidth ) );
+				break;
+			case Alignment.CENTER:
+				font.drawString( x + ( width / 2 ) - ( font.getWidth( s ) / 2 ), y, s, color );
+				break;
+			case Alignment.RIGHT:
+				font.drawString( x + width - font.getWidth( s ), y, s, color );
+				break;
+			case Alignment.JUSTIFY:
+				int leftWidth = width - font.getWidth( s ); // calculate left width
+				if( leftWidth <= 0 ) font.drawString( x, y, s, color ); // no width left, use standard draw string
+				return FontUtils.drawJustifiedSpaceSeparatedSubstrings( font, s, x, y, FontUtils.calculateWidthOfJustifiedSpaceInPixels( font, s, leftWidth ) );
 		}
 		
 		return resultingXCoordinate;
@@ -165,18 +158,13 @@ public class FontUtils
 		// count total space
 		while( curpos < s.length() )
 		{
-			if( s.charAt( curpos++ ) == ' ' )
-			{
-				space++;
-			}
+			if( s.charAt( curpos++ ) == ' ' ) space++;
 		}
 		
-		if( space > 0 )
-		{
-			// width left plus with total space
-			// space width (in pixel) = width left / total space
-			space = ( leftWidth + ( font.getWidth( " " ) * space ) ) / space;
-		}
+		// width left plus with total space
+		// space width (in pixel) = width left / total space
+		if( space > 0 ) space = ( leftWidth + ( font.getWidth( " " ) * space ) ) / space;
+		
 		return space;
 	}
 	
@@ -208,16 +196,12 @@ public class FontUtils
 		while( curpos < s.length() )
 		{
 			endpos = s.indexOf( ' ', curpos ); // find space
-			if( endpos == -1 )
-			{
-				endpos = s.length(); // no space, draw all string directly
-			}
+			if( endpos == -1 ) endpos = s.length(); // no space, draw all string directly
 			String substring = s.substring( curpos, endpos );
 			
 			font.drawString( resultingXCoordinate, y, substring );
 			
-			resultingXCoordinate += font.getWidth( substring ) + justifiedSpaceWidth; // increase
-			// x-coordinate
+			resultingXCoordinate += font.getWidth( substring ) + justifiedSpaceWidth; // increase x-coordinate
 			curpos = endpos + 1;
 		}
 		

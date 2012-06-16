@@ -35,7 +35,6 @@ public final class Log
 	 */
 	private Log()
 	{
-		
 	}
 	
 	/**
@@ -76,10 +75,7 @@ public final class Log
 					public Object run()
 					{
 						String val = System.getProperty( Log.forceVerboseProperty );
-						if( ( val != null ) && ( val.equalsIgnoreCase( Log.forceVerbosePropertyOnValue ) ) )
-						{
-							Log.setForcedVerboseOn();
-						}
+						if( ( val != null ) && ( val.equalsIgnoreCase( Log.forceVerbosePropertyOnValue ) ) ) Log.setForcedVerboseOn();
 						
 						return null;
 					}
@@ -157,14 +153,11 @@ public final class Log
 	/**
 	 * Log an information message
 	 * 
-	 * @param message The message describing the infomation
+	 * @param message The message describing the information
 	 */
 	public static void info( String message )
 	{
-		if( verbose || forcedVerbose )
-		{
-			logSystem.info( message );
-		}
+		if( verbose || forcedVerbose ) logSystem.info( message );
 	}
 	
 	/**
@@ -174,9 +167,6 @@ public final class Log
 	 */
 	public static void debug( String message )
 	{
-		if( verbose || forcedVerbose )
-		{
-			logSystem.debug( message );
-		}
+		if( verbose || forcedVerbose ) logSystem.debug( message );
 	}
 }
