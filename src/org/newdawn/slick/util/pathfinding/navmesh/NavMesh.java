@@ -21,7 +21,6 @@ public class NavMesh
 	 */
 	public NavMesh()
 	{
-		
 	}
 	
 	/**
@@ -77,10 +76,7 @@ public class NavMesh
 		for( int i = 0; i < spaces.size(); i++ )
 		{
 			Space space = getSpace( i );
-			if( space.contains( x, y ) )
-			{
-				return space;
-			}
+			if( space.contains( x, y ) ) return space;
 		}
 		
 		return null;
@@ -101,34 +97,18 @@ public class NavMesh
 		Space source = findSpace( sx, sy );
 		Space target = findSpace( tx, ty );
 		
-		if( ( source == null ) || ( target == null ) )
-		{
-			return null;
-		}
+		if( ( source == null ) || ( target == null ) ) return null;
 		
-		for( int i = 0; i < spaces.size(); i++ )
-		{
-			spaces.get( i ).clearCost();
-		}
+		for( int i = 0; i < spaces.size(); i++ ) spaces.get( i ).clearCost();
 		target.fill( source, tx, ty, 0 );
-		if( target.getCost() == Float.MAX_VALUE )
-		{
-			return null;
-		}
-		if( source.getCost() == Float.MAX_VALUE )
-		{
-			return null;
-		}
+		if( target.getCost() == Float.MAX_VALUE || source.getCost() == Float.MAX_VALUE ) return null;
 		
 		NavPath path = new NavPath();
 		path.push( new Link( sx, sy, null ) );
 		if( source.pickLowestCost( target, path ) )
 		{
 			path.push( new Link( tx, ty, null ) );
-			if( optimize )
-			{
-				optimize( path );
-			}
+			if( optimize ) optimize( path );
 			return path;
 		}
 		
@@ -161,10 +141,7 @@ public class NavMesh
 			float x = x1 + ( dx * i );
 			float y = y1 + ( dy * i );
 			
-			if( findSpace( x, y ) == null )
-			{
-				return false;
-			}
+			if( findSpace( x, y ) == null ) return false;
 		}
 		
 		return true;
@@ -187,14 +164,8 @@ public class NavMesh
 			float nx = path.getX( pt + 2 );
 			float ny = path.getY( pt + 2 );
 			
-			if( isClear( sx, sy, nx, ny, 0.1f ) )
-			{
-				path.remove( pt + 1 );
-			}
-			else
-			{
-				pt++;
-			}
+			if( isClear( sx, sy, nx, ny, 0.1f ) ) path.remove( pt + 1 );
+			else pt++;
 		}
 	}
 }

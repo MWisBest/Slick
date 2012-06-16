@@ -55,10 +55,7 @@ public class NavMeshBuilder implements PathFindingContext
 			{
 				for( int y = 0; y < map.getHeightInTiles(); y++ )
 				{
-					if( !map.blocked( this, x, y ) )
-					{
-						spaces.add( new Space( x, y, 1, 1 ) );
-					}
+					if( !map.blocked( this, x, y ) ) spaces.add( new Space( x, y, 1, 1 ) );
 				}
 			}
 		}
@@ -141,10 +138,7 @@ public class NavMeshBuilder implements PathFindingContext
 	 */
 	public boolean clear( TileBasedMap map, Space space )
 	{
-		if( tileBased )
-		{
-			return true;
-		}
+		if( tileBased ) return true;
 		
 		float x = 0;
 		boolean donex = false;
@@ -159,10 +153,7 @@ public class NavMeshBuilder implements PathFindingContext
 				sx = (int)( space.getX() + x );
 				sy = (int)( space.getY() + y );
 				
-				if( map.blocked( this, sx, sy ) )
-				{
-					return false;
-				}
+				if( map.blocked( this, sx, sy ) ) return false;
 				
 				y += 0.1f;
 				if( ( y > space.getHeight() ) && ( !doney ) )
@@ -198,20 +189,14 @@ public class NavMeshBuilder implements PathFindingContext
 			float width2 = space.getWidth() / 2;
 			float height2 = space.getHeight() / 2;
 			
-			if( ( width2 < smallestSpace ) && ( height2 < smallestSpace ) )
-			{
-				return;
-			}
+			if( ( width2 < smallestSpace ) && ( height2 < smallestSpace ) ) return;
 			
 			subsection( map, new Space( space.getX(), space.getY(), width2, height2 ), spaces );
 			subsection( map, new Space( space.getX(), space.getY() + height2, width2, height2 ), spaces );
 			subsection( map, new Space( space.getX() + width2, space.getY(), width2, height2 ), spaces );
 			subsection( map, new Space( space.getX() + width2, space.getY() + height2, width2, height2 ), spaces );
 		}
-		else
-		{
-			spaces.add( space );
-		}
+		else spaces.add( space );
 	}
 	
 	/**
