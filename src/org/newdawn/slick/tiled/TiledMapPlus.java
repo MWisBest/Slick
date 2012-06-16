@@ -135,10 +135,7 @@ public class TiledMapPlus extends TiledMap
 			ObjectGroup g = this.objectGroups.get( i );
 			this.objectGroupNameToOffset.put( g.name, i );
 			HashMap<String, Integer> nameToObjectMap = new HashMap<>();
-			for( int ib = 0; ib < this.getObjectCount( i ); ib++ )
-			{
-				nameToObjectMap.put( this.getObjectName( i, ib ), ib );
-			}
+			for( int ib = 0; ib < this.getObjectCount( i ); ib++ ) nameToObjectMap.put( this.getObjectName( i, ib ), ib );
 			g.setObjectNameMapping( nameToObjectMap );
 		}
 	}
@@ -287,10 +284,7 @@ public class TiledMapPlus extends TiledMap
 					}
 					tileset.appendChild( tilesetProperties );
 				}
-				if( tileCount == 1 )
-				{
-					tileCount++;
-				}
+				if( tileCount == 1 ) tileCount++;
 				for( int tileI = 0; tileI < tileCount; tileI++ )
 				{
 					Properties tileProperties = tilesetData.getProperties( tileI );
@@ -355,8 +349,7 @@ public class TiledMapPlus extends TiledMap
 				Element objectGroup = doc.createElement( "objectgroup" );
 				ObjectGroup objectGroupData = objectGroups.get( objectGroupI );
 				objectGroup.setAttribute( "color", "white" );
-				// It doesn't appear we use a color value,
-				// but its in the format so...
+				// It doesn't appear we use a color value, but its in the format so...
 				objectGroup.setAttribute( "name", objectGroupData.name );
 				objectGroup.setAttribute( "width", "" + objectGroupData.width );
 				objectGroup.setAttribute( "height", "" + objectGroupData.height );
@@ -385,20 +378,14 @@ public class TiledMapPlus extends TiledMap
 						case POLYGON:
 							Element polygon = doc.createElement( "polygon" );
 							String polygonPoints = "";
-							for( int polygonPointIndex = 0; polygonPointIndex < groupObject.points.getPointCount() - 1; polygonPointIndex++ )
-							{
-								polygonPoints += groupObject.points.getPoint( polygonPointIndex )[0] + "," + groupObject.points.getPoint( polygonPointIndex )[1] + " ";
-							}
+							for( int polygonPointIndex = 0; polygonPointIndex < groupObject.points.getPointCount() - 1; polygonPointIndex++ ) polygonPoints += groupObject.points.getPoint( polygonPointIndex )[0] + "," + groupObject.points.getPoint( polygonPointIndex )[1] + " ";
 							polygonPoints.trim();
 							polygon.setAttribute( "points", polygonPoints );
 							break;
 						case POLYLINE:
 							Element polyline = doc.createElement( "polyline" );
 							String polylinePoints = "";
-							for( int polyLinePointIndex = 0; polyLinePointIndex < groupObject.points.getPointCount() - 1; polyLinePointIndex++ )
-							{
-								polylinePoints += groupObject.points.getPoint( polyLinePointIndex )[0] + "," + groupObject.points.getPoint( polyLinePointIndex )[1] + " ";
-							}
+							for( int polyLinePointIndex = 0; polyLinePointIndex < groupObject.points.getPointCount() - 1; polyLinePointIndex++ ) polylinePoints += groupObject.points.getPoint( polyLinePointIndex )[0] + "," + groupObject.points.getPoint( polyLinePointIndex )[1] + " ";
 							polylinePoints.trim();
 							polyline.setAttribute( "points", polylinePoints );
 							break;
@@ -475,10 +462,7 @@ public class TiledMapPlus extends TiledMap
 				continue;
 			}
 		}
-		if( visibleTileImage == null )
-		{
-			throw new SlickException( "Tile doesn't have a tileset!" );
-		}
+		if( visibleTileImage == null ) throw new SlickException( "Tile doesn't have a tileset!" );
 		return visibleTileImage;
 	}
 	
@@ -505,5 +489,4 @@ public class TiledMapPlus extends TiledMap
 		int layerID = this.layerNameToIDMap.get( layerName );
 		return layerID;
 	}
-	
 }

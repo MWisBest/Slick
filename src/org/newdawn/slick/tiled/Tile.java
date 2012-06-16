@@ -42,5 +42,4 @@ public class Tile
 		this.gid = gid;
 		this.tilesetName = tileset;
 	}
-	
 }

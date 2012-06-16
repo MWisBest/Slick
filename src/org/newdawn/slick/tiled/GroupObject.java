@@ -72,51 +72,37 @@ public class GroupObject
 		else if( element.getElementsByTagName( "polygon" ).item( 0 ) != null ) this.objectType = ObjectType.POLYGON;
 		else this.objectType = ObjectType.RECTANGLE;
 		
-		if( objectType == ObjectType.IMAGE )
+		switch( objectType )
 		{
-			if( element.getAttribute( "width" ) != "" )
-			{
-				width = Integer.parseInt( element.getAttribute( "width" ) );
-			}
-			if( element.getAttribute( "height" ) != "" )
-			{
-				height = Integer.parseInt( element.getAttribute( "height" ) );
-			}
-			if( element.getAttribute( "name" ) != "" )
-			{
+			case IMAGE:
+				if( element.getAttribute( "width" ) != "" ) width = Integer.parseInt( element.getAttribute( "width" ) );
+				if( element.getAttribute( "height" ) != "" ) height = Integer.parseInt( element.getAttribute( "height" ) );
+				if( element.getAttribute( "name" ) != "" ) name = element.getAttribute( "name" );
+				if( element.getAttribute( "type" ) != "" ) type = element.getAttribute( "type" );
+				break;
+			case POLYGON:
+			case POLYLINE:
 				name = element.getAttribute( "name" );
-			}
-			if( element.getAttribute( "type" ) != "" )
-			{
+				Element polyLine;
+				if( objectType == ObjectType.POLYGON ) polyLine = (Element)element.getElementsByTagName( "polygon" ).item( 0 );
+				else polyLine = (Element)element.getElementsByTagName( "polyline" ).item( 0 );
+				
+				String pointsUnformatted = polyLine.getAttribute( "points" );
+				String[] pointsFormatted = pointsUnformatted.split( " " );
+				for( String pointS : pointsFormatted )
+				{
+					String[] pointArray = pointS.split( "," );
+					float pointX = Float.parseFloat( pointArray[0] );
+					float pointY = Float.parseFloat( pointArray[1] );
+					points.addPoint( pointX, pointY );
+				}
+				break;
+			case RECTANGLE:
+				width = Integer.parseInt( element.getAttribute( "width" ) );
+				height = Integer.parseInt( element.getAttribute( "height" ) );
+				name = element.getAttribute( "name" );
 				type = element.getAttribute( "type" );
-			}
-		}
-		
-		else if( ( objectType == ObjectType.POLYGON ) || ( objectType == ObjectType.POLYLINE ) )
-		{
-			name = element.getAttribute( "name" );
-			Element polyLine;
-			if( objectType == ObjectType.POLYGON ) polyLine = (Element)element.getElementsByTagName( "polygon" ).item( 0 );
-			else polyLine = (Element)element.getElementsByTagName( "polyline" ).item( 0 );
-			
-			String pointsUnformatted = polyLine.getAttribute( "points" );
-			String[] pointsFormatted = pointsUnformatted.split( " " );
-			for( String pointS : pointsFormatted )
-			{
-				String[] pointArray = pointS.split( "," );
-				float pointX = Float.parseFloat( pointArray[0] );
-				float pointY = Float.parseFloat( pointArray[1] );
-				points.addPoint( pointX, pointY );
-			}
-		}
-		
-		else if( objectType == ObjectType.RECTANGLE )
-		{
-			objectType = ObjectType.RECTANGLE;
-			width = Integer.parseInt( element.getAttribute( "width" ) );
-			height = Integer.parseInt( element.getAttribute( "height" ) );
-			name = element.getAttribute( "name" );
-			type = element.getAttribute( "type" );
+				break;
 		}
 		x = Integer.parseInt( element.getAttribute( "x" ) );
 		y = Integer.parseInt( element.getAttribute( "y" ) );
@@ -159,46 +145,38 @@ public class GroupObject
 			gid = Integer.parseInt( element.getAttribute( "gid" ) );
 			this.objectType = ObjectType.IMAGE;
 		}
-		if( objectType == ObjectType.IMAGE )
+		
+		switch( objectType )
 		{
-			if( element.getAttribute( "width" ) != "" )
-			{
+			case IMAGE:
+				if( element.getAttribute( "width" ) != "" ) width = Integer.parseInt( element.getAttribute( "width" ) );
+				if( element.getAttribute( "height" ) != "" ) height = Integer.parseInt( element.getAttribute( "height" ) );
+				if( element.getAttribute( "name" ) != "" ) name = element.getAttribute( "name" );
+				if( element.getAttribute( "type" ) != "" ) type = element.getAttribute( "type" );
+				break;
+			case RECTANGLE:
 				width = Integer.parseInt( element.getAttribute( "width" ) );
-			}
-			if( element.getAttribute( "height" ) != "" )
-			{
 				height = Integer.parseInt( element.getAttribute( "height" ) );
-			}
-			if( element.getAttribute( "name" ) != "" )
-			{
 				name = element.getAttribute( "name" );
-			}
-			if( element.getAttribute( "type" ) != "" )
-			{
 				type = element.getAttribute( "type" );
-			}
+				break;
+			case POLYGON:
+				name = element.getAttribute( "name" );
+				Element polyLine = (Element)element.getElementsByTagName( "polyline" ).item( 0 );
+				String pointsUnformatted = polyLine.getAttribute( "points" );
+				String[] pointsFormatted = pointsUnformatted.split( " " );
+				for( String pointS : pointsFormatted )
+				{
+					String[] pointArray = pointS.split( "," );
+					float pointX = Float.parseFloat( pointArray[0] );
+					float pointY = Float.parseFloat( pointArray[1] );
+					points.addPoint( pointX, pointY );
+				}
+				break;
+			case POLYLINE:
+				break;
 		}
-		else if( objectType == ObjectType.RECTANGLE )
-		{
-			width = Integer.parseInt( element.getAttribute( "width" ) );
-			height = Integer.parseInt( element.getAttribute( "height" ) );
-			name = element.getAttribute( "name" );
-			type = element.getAttribute( "type" );
-		}
-		else if( objectType == ObjectType.POLYGON )
-		{
-			name = element.getAttribute( "name" );
-			Element polyLine = (Element)element.getElementsByTagName( "polyline" ).item( 0 );
-			String pointsUnformatted = polyLine.getAttribute( "points" );
-			String[] pointsFormatted = pointsUnformatted.split( " " );
-			for( String pointS : pointsFormatted )
-			{
-				String[] pointArray = pointS.split( "," );
-				float pointX = Float.parseFloat( pointArray[0] );
-				float pointY = Float.parseFloat( pointArray[1] );
-				points.addPoint( pointX, pointY );
-			}
-		}
+		
 		x = Integer.parseInt( element.getAttribute( "x" ) );
 		y = Integer.parseInt( element.getAttribute( "y" ) );
 		
@@ -254,14 +232,8 @@ public class GroupObject
 	 */
 	public Image getImage() throws SlickException
 	{
-		if( !( objectType == ObjectType.IMAGE ) )
-		{
-			throw new SlickException( "Object isn't an image object" );
-		}
-		if( map == null )
-		{
-			throw new SlickException( "Object doesn't belong to a map of type TiledMapPlus" );
-		}
+		if( !( objectType == ObjectType.IMAGE ) ) throw new SlickException( "Object isn't an image object" );
+		if( map == null ) throw new SlickException( "Object doesn't belong to a map of type TiledMapPlus" );
 		TileSet tileset = this.map.getTileSetByGID( gid );
 		int tilesetTileID = ( this.gid - tileset.firstGID );
 		return tileset.tiles.getSubImage( tileset.getTileX( tilesetTileID ), tileset.getTileY( tilesetTileID ), tileset.tileWidth, tileset.tileHeight );

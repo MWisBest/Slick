@@ -167,10 +167,7 @@ public class TiledMap
 		{
 			Layer layer = layers.get( i );
 			
-			if( layer.name.equals( name ) )
-			{
-				return i;
-			}
+			if( layer.name.equals( name ) ) return i;
 		}
 		
 		return -1;
@@ -337,18 +334,12 @@ public class TiledMap
 	 */
 	public String getTileProperty( int tileID, String propertyName, String def )
 	{
-		if( tileID == 0 )
-		{
-			return def;
-		}
+		if( tileID == 0 ) return def;
 		
 		TileSet set = findTileSet( tileID );
 		
 		Properties props = set.getProperties( tileID );
-		if( props == null )
-		{
-			return def;
-		}
+		if( props == null ) return def;
 		return props.getProperty( propertyName, def );
 	}
 	
@@ -429,16 +420,14 @@ public class TiledMap
 		switch( orientation )
 		{
 			case ORTHOGONAL:
-				for( int ty = 0; ty < height; ty++ )
-				{
-					layer.render( x, y, sx, sy, width, ty, lineByLine, tileWidth, tileHeight );
-				}
+				for( int ty = 0; ty < height; ty++ ) layer.render( x, y, sx, sy, width, ty, lineByLine, tileWidth, tileHeight );
 				break;
 			case ISOMETRIC:
 				renderIsometricMap( x, y, sx, sy, width, height, layer, lineByLine );
 				break;
 			default:
 				// log error or something
+				break;
 		}
 	}
 	
@@ -480,6 +469,7 @@ public class TiledMap
 				break;
 			default:
 				// log error or something
+				break;
 		}
 	}
 	
@@ -529,7 +519,6 @@ public class TiledMap
 		int startLineTileY = 0;
 		while( !allProcessed )
 		{
-			
 			int currentTileX = startLineTileX;
 			int currentTileY = startLineTileY;
 			int currentLineX = initialLineX;
@@ -608,14 +597,8 @@ public class TiledMap
 			Document doc = builder.parse( in );
 			Element docElement = doc.getDocumentElement();
 			
-			if( docElement.getAttribute( "orientation" ).equals( "orthogonal" ) )
-			{
-				orientation = ORTHOGONAL;
-			}
-			else
-			{
-				orientation = ISOMETRIC;
-			}
+			if( docElement.getAttribute( "orientation" ).equals( "orthogonal" ) ) orientation = ORTHOGONAL;
+			else orientation = ISOMETRIC;
 			
 			width = Integer.parseInt( docElement.getAttribute( "width" ) );
 			height = Integer.parseInt( docElement.getAttribute( "height" ) );
@@ -654,10 +637,7 @@ public class TiledMap
 					tileSet = new TileSet( this, current, !headless );
 					tileSet.index = i;
 					
-					if( lastSet != null )
-					{
-						lastSet.setLimit( tileSet.firstGID - 1 );
-					}
+					if( lastSet != null ) lastSet.setLimit( tileSet.firstGID - 1 );
 					lastSet = tileSet;
 					
 					tileSets.add( tileSet );
@@ -727,10 +707,7 @@ public class TiledMap
 		{
 			TileSet set = tileSets.get( i );
 			
-			if( set.contains( gid ) )
-			{
-				return set;
-			}
+			if( set.contains( gid ) ) return set;
 		}
 		
 		return null;
@@ -750,10 +727,7 @@ public class TiledMap
 		{
 			TileSet set = tileSets.get( i );
 			
-			if( set.contains( gid ) )
-			{
-				return set;
-			}
+			if( set.contains( gid ) ) return set;
 		}
 		
 		return null;
@@ -958,10 +932,7 @@ public class TiledMap
 			{
 				GroupObject object = grp.objects.get( objectID );
 				
-				if( object == null )
-				{
-					return null;
-				}
+				if( object == null ) return null;
 				
 				return object.image;
 			}
@@ -994,19 +965,12 @@ public class TiledMap
 			{
 				GroupObject object = grp.objects.get( objectID );
 				
-				if( object == null )
-				{
-					return def;
-				}
-				if( object.props == null )
-				{
-					return def;
-				}
+				if( object == null ) return def;
+				if( object.props == null ) return def;
 				
 				return object.props.getProperty( propertyName, def );
 			}
 		}
 		return def;
 	}
-	
 }

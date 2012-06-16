@@ -54,33 +54,18 @@ public class ObjectGroup
 	{
 		this.map = map;
 		TiledMapPlus tmap = null;
-		if( map instanceof TiledMapPlus )
-		{
-			tmap = (TiledMapPlus)map;
-		}
+		if( map instanceof TiledMapPlus ) tmap = (TiledMapPlus)map;
 		name = element.getAttribute( "name" );
 		String widthS = element.getAttribute( "width" );
-		if( widthS != null && widthS.length() != 0 )
-		{
-			width = Integer.parseInt( widthS );
-		}
+		if( widthS != null && widthS.length() != 0 ) width = Integer.parseInt( widthS );
 		String heightS = element.getAttribute( "height" );
-		if( heightS != null && heightS.length() != 0 )
-		{
-			height = Integer.parseInt( heightS );
-		}
+		if( heightS != null && heightS.length() != 0 ) height = Integer.parseInt( heightS );
 		if( width == 0 || height == 0 ) Log.warn( "ObjectGroup " + name + " has zero size (width or height equal to 0)" );
 		
 		objects = new ArrayList<>();
 		String opacityS = element.getAttribute( "opacity" );
-		if( opacityS != null && opacityS.length() != 0 )
-		{
-			opacity = Float.parseFloat( opacityS );
-		}
-		if( "0".equals( element.getAttribute( "visible" ) ) )
-		{
-			visible = false;
-		}
+		if( opacityS != null && opacityS.length() != 0 ) opacity = Float.parseFloat( opacityS );
+		if( "0".equals( element.getAttribute( "visible" ) ) ) visible = false;
 		// will default to Color.white if attribute is not found / can't be parsed
 		String colorS = element.getAttribute( "color" );
 		if( colorS != null && colorS.length() != 0 )
@@ -118,14 +103,8 @@ public class ObjectGroup
 		{
 			Element objElement = (Element)objectNodes.item( i );
 			GroupObject object = null;
-			if( tmap != null )
-			{
-				object = new GroupObject( objElement, tmap );
-			}
-			else
-			{
-				object = new GroupObject( objElement );
-			}
+			if( tmap != null ) object = new GroupObject( objElement, tmap );
+			else object = new GroupObject( objElement );
 			object.index = i;
 			objects.add( object );
 		}
@@ -154,10 +133,7 @@ public class ObjectGroup
 		ArrayList<GroupObject> foundObjects = new ArrayList<>();
 		for( GroupObject object : this.objects )
 		{
-			if( object.type.equals( type ) )
-			{
-				foundObjects.add( object );
-			}
+			if( object.type.equals( type ) ) foundObjects.add( object );
 		}
 		return foundObjects;
 	}

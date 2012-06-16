@@ -85,8 +85,7 @@ public class TileSet
 				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document doc = builder.parse( in );
 				Element docElement = doc.getDocumentElement();
-				element = docElement; // (Element)
-										// docElement.getElementsByTagName("tileset").item(0);
+				element = docElement; // (Element)docElement.getElementsByTagName( "tileset" ).item( 0 );
 			}
 			catch( Exception e )
 			{
@@ -97,24 +96,15 @@ public class TileSet
 		name = element.getAttribute( "name" );
 		String tileWidthString = element.getAttribute( "tilewidth" );
 		String tileHeightString = element.getAttribute( "tileheight" );
-		if( tileWidthString.length() == 0 || tileHeightString.length() == 0 )
-		{
-			throw new SlickException( "TiledMap requires that the map be created with tilesets that use a " + "single image.  Check the WiKi for more complete information." );
-		}
+		if( tileWidthString.length() == 0 || tileHeightString.length() == 0 ) throw new SlickException( "TiledMap requires that the map be created with tilesets that use a " + "single image.  Check the WiKi for more complete information." );
 		tileWidth = Integer.parseInt( tileWidthString );
 		tileHeight = Integer.parseInt( tileHeightString );
 		
 		String sv = element.getAttribute( "spacing" );
-		if( ( sv != null ) && ( !sv.equals( "" ) ) )
-		{
-			tileSpacing = Integer.parseInt( sv );
-		}
+		if( ( sv != null ) && ( !sv.equals( "" ) ) ) tileSpacing = Integer.parseInt( sv );
 		
 		String mv = element.getAttribute( "margin" );
-		if( ( mv != null ) && ( !mv.equals( "" ) ) )
-		{
-			tileMargin = Integer.parseInt( mv );
-		}
+		if( ( mv != null ) && ( !mv.equals( "" ) ) ) tileMargin = Integer.parseInt( mv );
 		
 		NodeList list = element.getElementsByTagName( "image" );
 		Element imageNode = (Element)list.item( 0 );
@@ -223,19 +213,12 @@ public class TileSet
 	 */
 	public void setTileSetImage( Image image )
 	{
-		
 		tiles = new SpriteSheet( image, tileWidth, tileHeight, tileSpacing, tileMargin );
 		tilesAcross = tiles.getHorizontalCount();
 		tilesDown = tiles.getVerticalCount();
 		
-		if( tilesAcross <= 0 )
-		{
-			tilesAcross = 1;
-		}
-		if( tilesDown <= 0 )
-		{
-			tilesDown = 1;
-		}
+		if( tilesAcross <= 0 ) tilesAcross = 1;
+		if( tilesDown <= 0 ) tilesDown = 1;
 		
 		lastGID = ( tilesAcross * tilesDown ) + firstGID - 1;
 	}

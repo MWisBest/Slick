@@ -30,14 +30,10 @@ public class Layer
 	 */
 	static
 	{
-		for( int i = 0; i < 256; i++ )
-			baseCodes[i] = -1;
-		for( int i = 'A'; i <= 'Z'; i++ )
-			baseCodes[i] = (byte)( i - 'A' );
-		for( int i = 'a'; i <= 'z'; i++ )
-			baseCodes[i] = (byte)( 26 + i - 'a' );
-		for( int i = '0'; i <= '9'; i++ )
-			baseCodes[i] = (byte)( 52 + i - '0' );
+		for( int i = 0; i < 256; i++ ) baseCodes[i] = -1;
+		for( int i = 'A'; i <= 'Z'; i++ ) baseCodes[i] = (byte)( i - 'A' );
+		for( int i = 'a'; i <= 'z'; i++ ) baseCodes[i] = (byte)( 26 + i - 'a' );
+		for( int i = '0'; i <= '9'; i++ ) baseCodes[i] = (byte)( 52 + i - '0' );
 		baseCodes['+'] = 62;
 		baseCodes['/'] = 63;
 	}
@@ -48,10 +44,7 @@ public class Layer
 	public int index;
 	/** The name of this layer - read from the XML */
 	public String name;
-	/**
-	 * The tile data representing this data, index 0 = tileset, index 1 = tile
-	 * id
-	 */
+	/** The tile data representing this data, index 0 = tileset, index 1 = tile id */
 	public int[][][] data;
 	/** The width of this layer */
 	public int width;
@@ -81,23 +74,14 @@ public class Layer
 	public Layer( TiledMap map, Element element ) throws SlickException
 	{
 		this.map = map;
-		if( map instanceof TiledMapPlus )
-		{
-			tmap = (TiledMapPlus)map;
-		}
+		if( map instanceof TiledMapPlus ) tmap = (TiledMapPlus)map;
 		name = element.getAttribute( "name" );
 		width = Integer.parseInt( element.getAttribute( "width" ) );
 		height = Integer.parseInt( element.getAttribute( "height" ) );
 		data = new int[width][height][3];
 		String opacityS = element.getAttribute( "opacity" );
-		if( !opacityS.equals( "" ) )
-		{
-			opacity = Float.parseFloat( opacityS );
-		}
-		if( element.getAttribute( "visible" ).equals( "0" ) )
-		{
-			visible = false;
-		}
+		if( !opacityS.equals( "" ) ) opacity = Float.parseFloat( opacityS );
+		if( element.getAttribute( "visible" ).equals( "0" ) ) visible = false;
 		
 		// now read the layer properties
 		Element propsElement = (Element)element.getElementsByTagName( "properties" ).item( 0 );
@@ -146,10 +130,7 @@ public class Layer
 			InflaterInputStream is = new InflaterInputStream( new ByteArrayInputStream( dec ) );
 			readData( is );
 		}
-		else
-		{
-			throw new SlickException( "Unsupport tiled map type: " + encoding + "," + compression + " (only gzip/zlib base64 supported)" );
-		}
+		else throw new SlickException( "Unsupport tiled map type: " + encoding + "," + compression + " (only gzip/zlib base64 supported)" );
 	}
 	
 	/**
@@ -269,14 +250,7 @@ public class Layer
 			
 			for( int tx = 0; tx < width; tx++ )
 			{
-				if( ( sx + tx < 0 ) || ( sy + ty < 0 ) )
-				{
-					continue;
-				}
-				if( ( sx + tx >= this.width ) || ( sy + ty >= this.height ) )
-				{
-					continue;
-				}
+				if( ( sx + tx < 0 ) || ( sy + ty < 0 ) || ( sx + tx >= this.width ) || ( sy + ty >= this.height ) ) continue;
 				
 				if( data[sx + tx][sy + ty][0] == tileset )
 				{
@@ -311,10 +285,7 @@ public class Layer
 				map.renderedLine( ty, ty + sy, index );
 			}
 			
-			if( set != null )
-			{
-				set.tiles.endUse();
-			}
+			if( set != null ) set.tiles.endUse();
 		}
 	}
 	
@@ -330,10 +301,7 @@ public class Layer
 		int temp = data.length;
 		for( int ix = 0; ix < data.length; ix++ )
 		{
-			if( ( data[ix] > 255 ) || baseCodes[data[ix]] < 0 )
-			{
-				--temp;
-			}
+			if( ( data[ix] > 255 ) || baseCodes[data[ix]] < 0 ) --temp;
 		}
 		
 		int len = ( temp / 4 ) * 3;
@@ -363,10 +331,7 @@ public class Layer
 			}
 		}
 		
-		if( index != out.length )
-		{
-			throw new RuntimeException( "Data length appears to be wrong (wrote " + index + " should be " + out.length + ")" );
-		}
+		if( index != out.length ) throw new RuntimeException( "Data length appears to be wrong (wrote " + index + " should be " + out.length + ")" );
 		
 		return out;
 	}
@@ -379,10 +344,7 @@ public class Layer
 	 */
 	public ArrayList<Tile> getTiles() throws SlickException
 	{
-		if( tmap == null )
-		{
-			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
-		}
+		if( tmap == null ) throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		ArrayList<Tile> tiles = new ArrayList<>();
 		for( int x = 0; x < this.width; x++ )
 		{
@@ -406,10 +368,7 @@ public class Layer
 	 */
 	public ArrayList<Tile> getTilesOfTileset( String tilesetName ) throws SlickException
 	{
-		if( tmap == null )
-		{
-			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
-		}
+		if( tmap == null ) throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		ArrayList<Tile> tiles = new ArrayList<>();
 		int tilesetID = tmap.getTilesetID( tilesetName );
 		for( int x = 0; x < tmap.getWidth(); x++ )
@@ -456,10 +415,7 @@ public class Layer
 	 */
 	public void setTile( int x, int y, int tileOffset, String tilesetName ) throws SlickException
 	{
-		if( tmap == null )
-		{
-			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
-		}
+		if( tmap == null ) throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		int tilesetID = tmap.getTilesetID( tilesetName );
 		TileSet tileset = tmap.getTileSet( tilesetID );
 		this.data[x][y][0] = tileset.index; // tileSetIndex
@@ -481,16 +437,9 @@ public class Layer
 	 */
 	public boolean isTileOfTileset( int x, int y, String tilesetName ) throws SlickException
 	{
-		if( tmap == null )
-		{
-			throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
-		}
+		if( tmap == null ) throw new SlickException( "This method can only be used with Layers loaded using TiledMapPlus" );
 		int tilesetID = tmap.getTilesetID( tilesetName );
-		if( this.data[x][y][0] == tilesetID )
-		{
-			return true;
-		}
+		if( this.data[x][y][0] == tilesetID ) return true;
 		return false;
 	}
-	
 }
