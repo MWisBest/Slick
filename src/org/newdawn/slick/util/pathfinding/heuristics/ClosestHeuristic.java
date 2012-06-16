@@ -25,5 +25,4 @@ public class ClosestHeuristic implements AStarHeuristic
 		
 		return result;
 	}
-	
 }

@@ -33,5 +33,4 @@ public class ManhattanHeuristic implements AStarHeuristic
 	{
 		return minimumCost * ( Math.abs( x - tx ) + Math.abs( y - ty ) );
 	}
-	
 }
