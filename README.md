@@ -22,7 +22,7 @@ Available from http://homepage.ntlworld.com/config/imagepacker/index.htm
 Particle Editor written as part of the Slick Project (Java).
 
 **Hiero**  
-Bitmap Font tool with effects written as part fo the Slick Project (Java).
+Bitmap Font tool with effects written as part of the Slick Project (Java).
 
 Authors
 -------
