@@ -18,7 +18,6 @@ import org.newdawn.slick.util.Log;
  */
 public class ShaderTestAdvanced extends BasicGame
 {
-	
 	public static void main( String[] args ) throws SlickException
 	{
 		new AppGameContainer( new ShaderTestAdvanced(), 800, 600, false ).start();
@@ -164,22 +163,10 @@ public class ShaderTestAdvanced extends BasicGame
 	{
 		if( container.getInput().isKeyPressed( Input.KEY_V ) ) useVert = !useVert;
 		if( container.getInput().isKeyPressed( Input.KEY_H ) ) useHoriz = !useHoriz;
-		if( container.getInput().isKeyDown( Input.KEY_DOWN ) )
-		{
-			radius = Math.max( 0.5f, radius - 0.0003f * delta );
-		}
-		else if( container.getInput().isKeyDown( Input.KEY_UP ) )
-		{
-			radius = Math.min( 5f, radius + 0.0003f * delta );
-		}
-		if( container.getInput().isKeyDown( Input.KEY_A ) )
-		{
-			alpha = Math.max( 0.0f, alpha - 0.0003f * delta );
-		}
-		else if( container.getInput().isKeyDown( Input.KEY_Q ) )
-		{
-			alpha = Math.min( 1f, alpha + 0.0003f * delta );
-		}
+		if( container.getInput().isKeyDown( Input.KEY_DOWN ) ) radius = Math.max( 0.5f, radius - 0.0003f * delta );
+		else if( container.getInput().isKeyDown( Input.KEY_UP ) ) radius = Math.min( 5f, radius + 0.0003f * delta );
+		if( container.getInput().isKeyDown( Input.KEY_A ) ) alpha = Math.max( 0.0f, alpha - 0.0003f * delta );
+		else if( container.getInput().isKeyDown( Input.KEY_Q ) ) alpha = Math.min( 1f, alpha + 0.0003f * delta );
 		rot += 0.03f * delta;
 	}
 }

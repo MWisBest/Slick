@@ -18,7 +18,6 @@ import org.newdawn.slick.util.Log;
  */
 public class ShaderTest extends BasicGame
 {
-	
 	public static void main( String[] args ) throws SlickException
 	{
 		new AppGameContainer( new ShaderTest(), 800, 600, false ).start();
