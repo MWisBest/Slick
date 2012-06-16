@@ -10,7 +10,6 @@ package org.newdawn.slick.util.pathfinding;
  */
 public interface PathFinder
 {
-	
 	/**
 	 * Find a path from the starting location provided (sx,sy) to the target
 	 * location (tx,ty) avoiding blockages and attempting to honour costs

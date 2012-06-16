@@ -72,10 +72,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		nodes = new Node[map.getWidthInTiles()][map.getHeightInTiles()];
 		for( int x = 0; x < map.getWidthInTiles(); x++ )
 		{
-			for( int y = 0; y < map.getHeightInTiles(); y++ )
-			{
-				nodes[x][y] = new Node( x, y );
-			}
+			for( int y = 0; y < map.getHeightInTiles(); y++ ) nodes[x][y] = new Node( x, y );
 		}
 	}
 	
@@ -93,17 +90,11 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		this.sourceY = ty;
 		this.distance = 0;
 		
-		if( map.blocked( this, tx, ty ) )
-		{
-			return null;
-		}
+		if( map.blocked( this, tx, ty ) ) return null;
 		
 		for( int x = 0; x < map.getWidthInTiles(); x++ )
 		{
-			for( int y = 0; y < map.getHeightInTiles(); y++ )
-			{
-				nodes[x][y].reset();
-			}
+			for( int y = 0; y < map.getHeightInTiles(); y++ ) nodes[x][y].reset();
 		}
 		
 		// initial state for A*. The closed group is empty. Only the starting
@@ -135,10 +126,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 			
 			if( current == nodes[tx][ty] )
 			{
-				if( isValidLocation( mover, lx, ly, tx, ty ) )
-				{
-					break;
-				}
+				if( isValidLocation( mover, lx, ly, tx, ty ) ) break;
 			}
 			
 			removeFromOpen( current );
@@ -151,19 +139,13 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 				for( int y = -1; y < 2; y++ )
 				{
 					// not a neighbour, its the current tile
-					if( ( x == 0 ) && ( y == 0 ) )
-					{
-						continue;
-					}
+					if( ( x == 0 ) && ( y == 0 ) ) continue;
 					
 					// if we're not allowing diaganol movement then only
 					// one of x or y can be set
 					if( !allowDiagMovement )
 					{
-						if( ( x != 0 ) && ( y != 0 ) )
-						{
-							continue;
-						}
+						if( ( x != 0 ) && ( y != 0 ) ) continue;
 					}
 					
 					// determine the location of the neighbour and evaluate it
@@ -185,14 +167,8 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 						// this node so it needs to be re-evaluated
 						if( nextStepCost < neighbour.cost )
 						{
-							if( inOpenList( neighbour ) )
-							{
-								removeFromOpen( neighbour );
-							}
-							if( inClosedList( neighbour ) )
-							{
-								removeFromClosed( neighbour );
-							}
+							if( inOpenList( neighbour ) ) removeFromOpen( neighbour );
+							if( inClosedList( neighbour ) ) removeFromClosed( neighbour );
 						}
 						
 						// if the node hasn't already been processed and discarded then
@@ -212,10 +188,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		
 		// since we've got an empty open list or we've run out of search
 		// there was no path. Just return null
-		if( nodes[tx][ty].parent == null )
-		{
-			return null;
-		}
+		if( nodes[tx][ty].parent == null ) return null;
 		
 		// At this point we've definitely found a path so we can uses the parent
 		// references of the nodes to find out way from the target location back
@@ -240,10 +213,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	 */
 	public int getCurrentX()
 	{
-		if( current == null )
-		{
-			return -1;
-		}
+		if( current == null ) return -1;
 		
 		return current.x;
 	}
@@ -255,10 +225,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	 */
 	public int getCurrentY()
 	{
-		if( current == null )
-		{
-			return -1;
-		}
+		if( current == null ) return -1;
 		
 		return current.y;
 	}
@@ -271,7 +238,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	 */
 	protected Node getFirstInOpen()
 	{
-		return (Node)open.first();
+		return open.first();
 	}
 	
 	/**
@@ -408,14 +375,14 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	private class PriorityList
 	{
 		/** The list of elements */
-		private List<Object> list = new LinkedList<>();
+		private List<Node> list = new LinkedList<>();
 		
 		/**
 		 * Retrieve the first element from the list
 		 * 
 		 * @return The first element from the list
 		 */
-		public Object first()
+		public Node first()
 		{
 			return list.get( 0 );
 		}
@@ -433,22 +400,18 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		 * 
 		 * @param o The element to add
 		 */
-		@SuppressWarnings( "unchecked" )
-		public void add( Object o )
+		public void add( Node o )
 		{
 			// float the new entry
 			for( int i = 0; i < list.size(); i++ )
 			{
-				if( ( (Comparable<Object>)list.get( i ) ).compareTo( o ) > 0 )
+				if( list.get( i ).compareTo( o ) > 0 )
 				{
 					list.add( i, o );
 					break;
 				}
 			}
-			if( !list.contains( o ) )
-			{
-				list.add( o );
-			}
+			if( !list.contains( o ) ) list.add( o );
 			// Collections.sort(list);
 		}
 		
@@ -457,7 +420,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		 * 
 		 * @param o The element to remove
 		 */
-		public void remove( Object o )
+		public void remove( Node o )
 		{
 			list.remove( o );
 		}
@@ -479,7 +442,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		 * @return True if the element is in the list
 		 */
 		@SuppressWarnings( "unused" )
-		public boolean contains( Object o )
+		public boolean contains( Node o )
 		{
 			return list.contains( o );
 		}
@@ -488,10 +451,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		public String toString()
 		{
 			String temp = "{";
-			for( int i = 0; i < size(); i++ )
-			{
-				temp += list.get( i ).toString() + ",";
-			}
+			for( int i = 0; i < size(); i++ ) temp += list.get( i ).toString() + ",";
 			temp += "}";
 			
 			return temp;
@@ -501,7 +461,7 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 	/**
 	 * A single node in the search graph
 	 */
-	private class Node implements Comparable<Object>
+	private class Node implements Comparable<Node>
 	{
 		/** The x coordinate of the node */
 		private int x;
@@ -547,28 +507,17 @@ public class AStarPathFinder implements PathFinder, PathFindingContext
 		}
 		
 		/**
-		 * @see Comparable#compareTo(Object)
+		 * @see Comparable#compareTo(Node)
 		 */
 		@Override
-		public int compareTo( Object other )
+		public int compareTo( Node other )
 		{
-			Node o = (Node)other;
-			
 			float f = heuristic + cost;
-			float of = o.heuristic + o.cost;
+			float of = other.heuristic + other.cost;
 			
-			if( f < of )
-			{
-				return -1;
-			}
-			else if( f > of )
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
+			if( f < of ) return -1;
+			else if( f > of ) return 1;
+			else return 0;
 		}
 		
 		/**

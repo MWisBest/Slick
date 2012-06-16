@@ -23,7 +23,6 @@ public class Path implements Serializable
 	 */
 	public Path()
 	{
-		
 	}
 	
 	/**

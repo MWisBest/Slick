@@ -9,7 +9,6 @@ package org.newdawn.slick.util.pathfinding;
  */
 public interface AStarHeuristic
 {
-	
 	/**
 	 * Get the additional heuristic cost of the given tile. This controls the
 	 * order in which tiles are searched while attempting to find a path to the
