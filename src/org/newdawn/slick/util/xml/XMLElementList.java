@@ -18,7 +18,6 @@ public class XMLElementList
 	 */
 	public XMLElementList()
 	{
-		
 	}
 	
 	/**

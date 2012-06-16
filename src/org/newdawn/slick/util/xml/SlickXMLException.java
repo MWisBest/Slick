@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
 public class SlickXMLException extends SlickException
 {
 	private static final long serialVersionUID = 6629406492791202163L;
-
+	
 	/**
 	 * Create a new exception
 	 * 
@@ -32,5 +32,4 @@ public class SlickXMLException extends SlickException
 	{
 		super( message, e );
 	}
-	
 }

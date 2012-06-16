@@ -54,10 +54,7 @@ public class XMLParser
 	{
 		try
 		{
-			if( factory == null )
-			{
-				factory = DocumentBuilderFactory.newInstance();
-			}
+			if( factory == null ) factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse( in );
 			

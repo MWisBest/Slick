@@ -192,10 +192,7 @@ public class ObjectTreeParser
 	private Class<?> getClassForElementName( String name )
 	{
 		Class<?> clazz = nameToClass.get( name );
-		if( clazz != null )
-		{
-			return clazz;
-		}
+		if( clazz != null ) return clazz;
 		
 		if( defaultPackage != null )
 		{
@@ -237,26 +234,14 @@ public class ObjectTreeParser
 	private Object traverse( XMLElement current, Object instance ) throws SlickXMLException
 	{
 		String name = current.getName();
-		if( ignored.contains( name ) )
-		{
-			return null;
-		}
+		if( ignored.contains( name ) ) return null;
 		
 		Class<?> clazz;
 		
-		if( instance == null )
-		{
-			clazz = getClassForElementName( name );
-		}
-		else
-		{
-			clazz = instance.getClass();
-		}
+		if( instance == null ) clazz = getClassForElementName( name );
+		else clazz = instance.getClass();
 		
-		if( clazz == null )
-		{
-			throw new SlickXMLException( "Unable to map element " + name + " to a class, define the mapping" );
-		}
+		if( clazz == null ) throw new SlickXMLException( "Unable to map element " + name + " to a class, define the mapping" );
 		
 		try
 		{
@@ -265,15 +250,9 @@ public class ObjectTreeParser
 				instance = clazz.newInstance();
 				
 				Method elementNameMethod = getMethod( clazz, "setXMLElementName", new Class[] { String.class } );
-				if( elementNameMethod != null )
-				{
-					invoke( elementNameMethod, instance, new Object[] { name } );
-				}
+				if( elementNameMethod != null ) invoke( elementNameMethod, instance, new Object[] { name } );
 				Method contentMethod = getMethod( clazz, "setXMLElementContent", new Class[] { String.class } );
-				if( contentMethod != null )
-				{
-					invoke( contentMethod, instance, new Object[] { current.getContent() } );
-				}
+				if( contentMethod != null ) invoke( contentMethod, instance, new Object[] { current.getContent() } );
 			}
 			
 			String[] attrs = current.getAttributeNames();
@@ -292,10 +271,7 @@ public class ObjectTreeParser
 						Object typedValue = typeValue( value, field.getType() );
 						setField( field, instance, typedValue );
 					}
-					else
-					{
-						Log.info( "Unable to find property on: " + clazz + " for attribute: " + attrs[i] );
-					}
+					else Log.info( "Unable to find property on: " + clazz + " for attribute: " + attrs[i] );
 				}
 				else
 				{
@@ -316,24 +292,14 @@ public class ObjectTreeParser
 					String methodName = addMethod;
 					
 					Method method = findMethod( clazz, methodName, child.getClass() );
-					if( method == null )
-					{
-						Log.info( "Unable to find method to add: " + child + " to " + clazz );
-					}
-					else
-					{
-						invoke( method, instance, new Object[] { child } );
-					}
+					if( method == null ) Log.info( "Unable to find method to add: " + child + " to " + clazz );
+					else invoke( method, instance, new Object[] { child } );
 				}
 			}
 			
 			return instance;
 		}
-		catch( InstantiationException e )
-		{
-			throw new SlickXMLException( "Unable to instance " + clazz + " for element " + name + ", no zero parameter constructor?", e );
-		}
-		catch( IllegalAccessException e )
+		catch( InstantiationException|IllegalAccessException e )
 		{
 			throw new SlickXMLException( "Unable to instance " + clazz + " for element " + name + ", no zero parameter constructor?", e );
 		}
@@ -349,10 +315,7 @@ public class ObjectTreeParser
 	 */
 	private Object typeValue( String value, Class<?> clazz ) throws SlickXMLException
 	{
-		if( clazz == String.class )
-		{
-			return value;
-		}
+		if( clazz == String.class ) return value;
 		
 		try
 		{
@@ -373,26 +336,11 @@ public class ObjectTreeParser
 	 */
 	private Class<?> mapPrimitive( Class<?> clazz )
 	{
-		if( clazz == Integer.TYPE )
-		{
-			return Integer.class;
-		}
-		if( clazz == Double.TYPE )
-		{
-			return Double.class;
-		}
-		if( clazz == Float.TYPE )
-		{
-			return Float.class;
-		}
-		if( clazz == Boolean.TYPE )
-		{
-			return Boolean.class;
-		}
-		if( clazz == Long.TYPE )
-		{
-			return Long.class;
-		}
+		if( clazz == Integer.TYPE ) return Integer.class;
+		if( clazz == Double.TYPE ) return Double.class;
+		if( clazz == Float.TYPE ) return Float.class;
+		if( clazz == Boolean.TYPE ) return Boolean.class;
+		if( clazz == Long.TYPE ) return Long.class;
 		
 		throw new RuntimeException( "Unsupported primitive: " + clazz );
 	}
@@ -413,14 +361,7 @@ public class ObjectTreeParser
 		{
 			if( fields[i].getName().equalsIgnoreCase( name ) )
 			{
-				if( fields[i].getType().isPrimitive() )
-				{
-					return fields[i];
-				}
-				if( fields[i].getType() == String.class )
-				{
-					return fields[i];
-				}
+				if( fields[i].getType().isPrimitive() || fields[i].getType() == String.class ) return fields[i];
 			}
 		}
 		
@@ -446,10 +387,7 @@ public class ObjectTreeParser
 				Method method = methods[i];
 				Class<?>[] params = method.getParameterTypes();
 				
-				if( params.length == 1 )
-				{
-					return method;
-				}
+				if( params.length == 1 ) return method;
 			}
 		}
 		
@@ -476,10 +414,7 @@ public class ObjectTreeParser
 				
 				if( params.length == 1 )
 				{
-					if( method.getParameterTypes()[0].isAssignableFrom( parameter ) )
-					{
-						return method;
-					}
+					if( method.getParameterTypes()[0].isAssignableFrom( parameter ) ) return method;
 				}
 			}
 		}
@@ -502,11 +437,7 @@ public class ObjectTreeParser
 			field.setAccessible( true );
 			field.set( instance, value );
 		}
-		catch( IllegalArgumentException e )
-		{
-			throw new SlickXMLException( "Failed to set: " + field + " for an XML attribute, is it valid?", e );
-		}
-		catch( IllegalAccessException e )
+		catch( IllegalArgumentException|IllegalAccessException e )
 		{
 			throw new SlickXMLException( "Failed to set: " + field + " for an XML attribute, is it valid?", e );
 		}
@@ -531,15 +462,7 @@ public class ObjectTreeParser
 			method.setAccessible( true );
 			method.invoke( instance, params );
 		}
-		catch( IllegalArgumentException e )
-		{
-			throw new SlickXMLException( "Failed to invoke: " + method + " for an XML attribute, is it valid?", e );
-		}
-		catch( IllegalAccessException e )
-		{
-			throw new SlickXMLException( "Failed to invoke: " + method + " for an XML attribute, is it valid?", e );
-		}
-		catch( InvocationTargetException e )
+		catch( IllegalArgumentException|IllegalAccessException|InvocationTargetException e )
 		{
 			throw new SlickXMLException( "Failed to invoke: " + method + " for an XML attribute, is it valid?", e );
 		}
@@ -564,11 +487,7 @@ public class ObjectTreeParser
 		{
 			return clazz.getMethod( name, params );
 		}
-		catch( SecurityException e )
-		{
-			return null;
-		}
-		catch( NoSuchMethodException e )
+		catch( SecurityException|NoSuchMethodException e )
 		{
 			return null;
 		}
