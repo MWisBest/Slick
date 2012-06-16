@@ -63,18 +63,12 @@ public class InkscapeTest extends BasicGame
 		if( container.getInput().isKeyDown( Input.KEY_Q ) )
 		{
 			zoom += ( delta * 0.01f );
-			if( zoom > 10 )
-			{
-				zoom = 10;
-			}
+			if( zoom > 10 ) zoom = 10;
 		}
 		if( container.getInput().isKeyDown( Input.KEY_A ) )
 		{
 			zoom -= ( delta * 0.01f );
-			if( zoom < 0.1f )
-			{
-				zoom = 0.1f;
-			}
+			if( zoom < 0.1f ) zoom = 0.1f;
 		}
 		if( container.getInput().isKeyDown( Input.KEY_RIGHT ) )
 		{

@@ -56,10 +56,7 @@ public class LineRenderTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) )
-		{
-			antialias = !antialias;
-		}
+		if( container.getInput().isKeyPressed( Input.KEY_SPACE ) ) antialias = !antialias;
 	}
 	
 	/**

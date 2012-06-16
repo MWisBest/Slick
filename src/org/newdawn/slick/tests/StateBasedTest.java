@@ -15,7 +15,6 @@ import org.newdawn.slick.tests.states.TestState3;
  */
 public class StateBasedTest extends StateBasedGame
 {
-	
 	/**
 	 * Create a new test
 	 */

@@ -59,10 +59,7 @@ public class TestUtils
 			Display.update();
 			Display.sync( 100 );
 			
-			if( Display.isCloseRequested() )
-			{
-				System.exit( 0 );
-			}
+			if( Display.isCloseRequested() ) System.exit( 0 );
 		}
 	}
 	

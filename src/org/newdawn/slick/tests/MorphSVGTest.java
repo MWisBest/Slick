@@ -56,10 +56,7 @@ public class MorphSVGTest extends BasicGame
 		morph.updateMorphTime( delta * 0.003f );
 		
 		x += delta * 0.2f;
-		if( x > 550 )
-		{
-			x = -450;
-		}
+		if( x > 550 ) x = -450;
 	}
 	
 	/**

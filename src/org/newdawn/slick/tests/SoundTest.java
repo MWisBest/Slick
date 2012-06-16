@@ -121,59 +121,26 @@ public class SoundTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_SPACE )
-		{
-			sound.play();
-		}
-		if( key == Input.KEY_B )
-		{
-			burp.play();
-		}
-		if( key == Input.KEY_A )
-		{
-			sound.playAt( -1, 0, 0 );
-		}
-		if( key == Input.KEY_L )
-		{
-			sound.playAt( 1, 0, 0 );
-		}
-		if( key == Input.KEY_RETURN )
-		{
-			charlie.play( 1.0f, 1.0f );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_SPACE ) sound.play();
+		if( key == Input.KEY_B ) burp.play();
+		if( key == Input.KEY_A ) sound.playAt( -1, 0, 0 );
+		if( key == Input.KEY_L ) sound.playAt( 1, 0, 0 );
+		if( key == Input.KEY_RETURN ) charlie.play( 1.0f, 1.0f );
 		if( key == Input.KEY_P )
 		{
-			if( music.playing() )
-			{
-				music.pause();
-			}
+			if( music.playing() ) music.pause();
 			else
 			{
-				if( music.paused() )
-				{
-					music.resume();
-				}
-				else
-				{
-					music.loop();
-				}
+				if( music.paused() ) music.resume();
+				else music.loop();
 			}
 		}
 		if( key == Input.KEY_C )
 		{
 			music.stop();
-			if( music == musica )
-			{
-				music = musicb;
-			}
-			else
-			{
-				music = musica;
-			}
+			if( music == musica ) music = musicb;
+			else music = musica;
 			
 			music.loop();
 		}
@@ -239,7 +206,6 @@ public class SoundTest extends BasicGame
 			// set global volume of sound fx
 			myContainer.setSoundVolume( vol / 10.0f );
 		}
-		
 	}
 	
 	/**
@@ -248,14 +214,8 @@ public class SoundTest extends BasicGame
 	private void setVolume()
 	{
 		// Do bounds checking
-		if( volume > 10 )
-		{
-			volume = 10;
-		}
-		else if( volume < 0 )
-		{
-			volume = 0;
-		}
+		if( volume > 10 ) volume = 10;
+		else if( volume < 0 ) volume = 0;
 		
 		myContainer.setMusicVolume( volume / 10.0f );
 	}

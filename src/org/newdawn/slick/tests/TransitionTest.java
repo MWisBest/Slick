@@ -61,14 +61,8 @@ public class TransitionTest extends StateBasedGame
 		
 		try
 		{
-			if( transitions[index][0] != null )
-			{
-				pair[0] = (Transition)transitions[index][0].newInstance();
-			}
-			if( transitions[index][1] != null )
-			{
-				pair[1] = (Transition)transitions[index][1].newInstance();
-			}
+			if( transitions[index][0] != null ) pair[0] = (Transition)transitions[index][0].newInstance();
+			if( transitions[index][1] != null ) pair[1] = (Transition)transitions[index][1].newInstance();
 		}
 		catch( Throwable e )
 		{
@@ -76,10 +70,7 @@ public class TransitionTest extends StateBasedGame
 		}
 		
 		index++;
-		if( index >= transitions.length )
-		{
-			index = 0;
-		}
+		if( index >= transitions.length ) index = 0;
 		
 		return pair;
 	}

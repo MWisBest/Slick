@@ -96,10 +96,7 @@ public class GradientImageTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta )
 	{
-		if( rotating )
-		{
-			ang += ( delta * 0.1f );
-		}
+		if( rotating ) ang += ( delta * 0.1f );
 	}
 	
 	/**
@@ -127,13 +124,7 @@ public class GradientImageTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_R )
-		{
-			rotating = !rotating;
-		}
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_R ) rotating = !rotating;
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

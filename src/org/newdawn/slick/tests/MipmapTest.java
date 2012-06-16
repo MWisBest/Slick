@@ -28,7 +28,6 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class MipmapTest extends BasicGame
 {
-	
 	public static void main( String[] args ) throws SlickException
 	{
 		new AppGameContainer( new MipmapTest(), 800, 600, false ).start();
@@ -55,7 +54,6 @@ public class MipmapTest extends BasicGame
 		String ref = "testdata/hiero.png";
 		image = new Image( ref );
 		mippedImage = supported ? createMipmapImage( ref ) : image;
-		
 	}
 	
 	private Image createMipmapImage( String ref ) throws SlickException
@@ -89,14 +87,8 @@ public class MipmapTest extends BasicGame
 	@Override
 	public void render( GameContainer c, Graphics g ) throws SlickException
 	{
-		if( !supported )
-		{
-			g.drawString( "Your OpenGL version does not support automatic mipmap generation", 10, 25 );
-		}
-		else
-		{
-			g.drawString( "Left = no mipmapping, right = automatically generated mipmaps", 10, 25 );
-		}
+		if( !supported ) g.drawString( "Your OpenGL version does not support automatic mipmap generation", 10, 25 );
+		else g.drawString( "Left = no mipmapping, right = automatically generated mipmaps", 10, 25 );
 		image.draw( 10, 80, scale );
 		mippedImage.draw( image.getWidth() * scale + 25, 80, scale );
 	}

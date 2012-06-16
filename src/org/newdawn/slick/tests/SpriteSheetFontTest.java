@@ -67,10 +67,7 @@ public class SpriteSheetFontTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 		if( key == Input.KEY_SPACE )
 		{
 			try

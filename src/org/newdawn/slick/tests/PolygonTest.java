@@ -41,7 +41,6 @@ public class PolygonTest extends BasicGame
 		poly.addPoint( 280, 250 );
 		poly.addPoint( 300, 200 );
 		poly.addPoint( 240, 150 );
-		
 	}
 	
 	/**

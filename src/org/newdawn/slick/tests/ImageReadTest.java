@@ -83,14 +83,8 @@ public class ImageReadTest extends BasicGame
 		int mx = container.getInput().getMouseX();
 		int my = container.getInput().getMouseY();
 		
-		if( ( mx >= 100 ) && ( my >= 100 ) && ( mx < 200 ) && ( my < 200 ) )
-		{
-			read[4] = image.getColor( mx - 100, my - 100 );
-		}
-		else
-		{
-			read[4] = Color.black;
-		}
+		if( ( mx >= 100 ) && ( my >= 100 ) && ( mx < 200 ) && ( my < 200 ) ) read[4] = image.getColor( mx - 100, my - 100 );
+		else read[4] = Color.black;
 		
 		read[5] = g.getPixel( mx, my );
 	}

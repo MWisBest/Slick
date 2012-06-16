@@ -65,10 +65,7 @@ public class PureFontTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 	}
 	
 	/** The container we're using */

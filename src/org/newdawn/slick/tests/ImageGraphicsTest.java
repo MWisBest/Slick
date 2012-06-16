@@ -69,14 +69,8 @@ public class ImageGraphicsTest extends BasicGame
 		offscreenPreload.drawRect( 190, 20, 70, 70 );
 		offscreenPreload.flush();
 		
-		if( GraphicsFactory.usingFBO() )
-		{
-			using = "FBO (Frame Buffer Objects)";
-		}
-		else if( GraphicsFactory.usingPBuffer() )
-		{
-			using = "Pbuffer (Pixel Buffers)";
-		}
+		if( GraphicsFactory.usingFBO() ) using = "FBO (Frame Buffer Objects)";
+		else if( GraphicsFactory.usingPBuffer() ) using = "Pbuffer (Pixel Buffers)";
 		
 		System.out.println( preloaded.getColor( 50, 50 ) );
 	}
@@ -87,7 +81,6 @@ public class ImageGraphicsTest extends BasicGame
 	@Override
 	public void render( GameContainer container, Graphics g ) throws SlickException
 	{
-		
 		// RENDERING TO AN IMAGE AND THEN DRAWING IT TO THE DISPLAY
 		// Draw graphics and text onto our graphics context from the Image target
 		gTarget.setBackground( new Color( 0, 0, 0, 0 ) );

@@ -84,14 +84,8 @@ public class KeyRepeatTest extends BasicGame
 		count++;
 		if( key == Input.KEY_SPACE )
 		{
-			if( input.isKeyRepeatEnabled() )
-			{
-				input.disableKeyRepeat();
-			}
-			else
-			{
-				input.enableKeyRepeat();
-			}
+			if( input.isKeyRepeatEnabled() ) input.disableKeyRepeat();
+			else input.enableKeyRepeat();
 		}
 	}
 }

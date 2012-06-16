@@ -72,10 +72,7 @@ public class ImageCornerTest extends BasicGame
 	{
 		for( int x = 0; x < 3; x++ )
 		{
-			for( int y = 0; y < 3; y++ )
-			{
-				images[x + ( y * 3 )].draw( 100 + ( x * width ), 100 + ( y * height ) );
-			}
+			for( int y = 0; y < 3; y++ ) images[x + ( y * 3 )].draw( 100 + ( x * width ), 100 + ( y * height ) );
 		}
 	}
 	

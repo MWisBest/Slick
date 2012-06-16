@@ -54,14 +54,8 @@ public class GraphicsTest extends BasicGame
 		
 		for( int x = 0; x < 360; x += 30 )
 		{
-			if( len == 100 )
-			{
-				len = 50;
-			}
-			else
-			{
-				len = 100;
-			}
+			if( len == 100 ) len = 50;
+			else len = 100;
 			poly.addPoint( (float)FastTrig.cos( Math.toRadians( x ) ) * len, (float)FastTrig.sin( Math.toRadians( x ) ) * len );
 		}
 	}
@@ -75,10 +69,7 @@ public class GraphicsTest extends BasicGame
 		g.setColor( Color.white );
 		
 		g.setAntiAlias( true );
-		for( int x = 0; x < 360; x += 10 )
-		{
-			g.drawLine( 700, 100, (int)( 700 + ( Math.cos( Math.toRadians( x ) ) * 100 ) ), (int)( 100 + ( Math.sin( Math.toRadians( x ) ) * 100 ) ) );
-		}
+		for( int x = 0; x < 360; x += 10 ) g.drawLine( 700, 100, (int)( 700 + ( Math.cos( Math.toRadians( x ) ) * 100 ) ), (int)( 100 + ( Math.sin( Math.toRadians( x ) ) * 100 ) ) );
 		g.setAntiAlias( false );
 		
 		g.setColor( Color.yellow );
@@ -128,10 +119,7 @@ public class GraphicsTest extends BasicGame
 		g.setAntiAlias( true );
 		g.resetTransform();
 		
-		if( clip )
-		{
-			g.clearClip();
-		}
+		if( clip ) g.clearClip();
 	}
 	
 	/**
@@ -149,14 +137,8 @@ public class GraphicsTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_SPACE )
-		{
-			clip = !clip;
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_SPACE ) clip = !clip;
 	}
 	
 	/**

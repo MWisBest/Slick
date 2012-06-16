@@ -80,7 +80,6 @@ public class GradientTest extends BasicGame
 	@Override
 	public void render( GameContainer container, Graphics g )
 	{
-		
 		g.rotate( 400, 300, ang );
 		g.fill( rect, gradient );
 		g.fill( round, gradient );
@@ -137,9 +136,6 @@ public class GradientTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

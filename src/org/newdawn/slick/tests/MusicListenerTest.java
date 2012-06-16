@@ -80,14 +80,8 @@ public class MusicListenerTest extends BasicGame implements MusicListener
 	{
 		g.drawString( "Press M to play music", 100, 100 );
 		g.drawString( "Press S to stream music", 100, 150 );
-		if( musicEnded )
-		{
-			g.drawString( "Music Ended", 100, 200 );
-		}
-		if( musicSwapped )
-		{
-			g.drawString( "Music Swapped", 100, 250 );
-		}
+		if( musicEnded ) g.drawString( "Music Ended", 100, 200 );
+		if( musicSwapped ) g.drawString( "Music Swapped", 100, 250 );
 	}
 	
 	/**

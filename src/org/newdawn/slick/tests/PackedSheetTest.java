@@ -55,10 +55,7 @@ public class PackedSheetTest extends BasicGame
 		
 		for( int y = 0; y < 2; y++ )
 		{
-			for( int x = 0; x < 6; x++ )
-			{
-				runner.addFrame( anim.getSprite( x, y ), 50 );
-			}
+			for( int x = 0; x < 6; x++ ) runner.addFrame( anim.getSprite( x, y ), 50 );
 		}
 	}
 	
@@ -87,10 +84,7 @@ public class PackedSheetTest extends BasicGame
 	public void update( GameContainer container, int delta )
 	{
 		r += delta * 0.4f;
-		if( r > 900 )
-		{
-			r = -500;
-		}
+		if( r > 900 ) r = -500;
 		
 		ang += delta * 0.1f;
 	}
@@ -120,9 +114,6 @@ public class PackedSheetTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

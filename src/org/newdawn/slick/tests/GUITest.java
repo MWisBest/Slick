@@ -101,10 +101,7 @@ public class GUITest extends BasicGame implements ComponentListener
 	{
 		background.draw( 0, 0, 800, 500 );
 		
-		for( int i = 0; i < 4; i++ )
-		{
-			areas[i].render( container, g );
-		}
+		for( int i = 0; i < 4; i++ ) areas[i].render( container, g );
 		field.render( container, g );
 		field2.render( container, g );
 		
@@ -126,14 +123,8 @@ public class GUITest extends BasicGame implements ComponentListener
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_F2 )
-		{
-			app.setDefaultMouseCursor();
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_F2 ) app.setDefaultMouseCursor();
 		if( key == Input.KEY_F1 )
 		{
 			if( app != null )
@@ -178,10 +169,7 @@ public class GUITest extends BasicGame implements ComponentListener
 		System.out.println( "ACTIVL : " + source );
 		for( int i = 0; i < 4; i++ )
 		{
-			if( source == areas[i] )
-			{
-				message = "Option " + ( i + 1 ) + " pressed!";
-			}
+			if( source == areas[i] ) message = "Option " + ( i + 1 ) + " pressed!";
 		}
 		if( source == field2 )
 		{

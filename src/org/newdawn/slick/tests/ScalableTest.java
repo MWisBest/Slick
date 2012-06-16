@@ -15,7 +15,6 @@ import org.newdawn.slick.SlickException;
  */
 public class ScalableTest extends BasicGame
 {
-	
 	/**
 	 * Simple test
 	 */
@@ -94,15 +93,13 @@ public class ScalableTest extends BasicGame
 		{
 			ScalableGame game = new ScalableGame( new ScalableTest(), 1024, 568, true )
 				{
-					
 					@Override
 					protected void renderOverlay( GameContainer container, Graphics g )
 					{
 						g.setColor( Color.white );
 						g.drawString( "Outside The Game", 350, 10 );
 						g.drawString( container.getInput().getMouseX() + "," + container.getInput().getMouseY(), 400, 20 );
-					}
-					
+					}					
 				};
 			
 			AppGameContainer container = new AppGameContainer( game );

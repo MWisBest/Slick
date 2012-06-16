@@ -81,10 +81,7 @@ public class SavedStateTest extends BasicGame implements ComponentListener
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 	}
 	
 	/** The container we're using */
@@ -129,7 +126,6 @@ public class SavedStateTest extends BasicGame implements ComponentListener
 			}
 			catch( NumberFormatException e )
 			{
-				// ignone
 			}
 		}
 		

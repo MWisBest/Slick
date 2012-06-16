@@ -86,14 +86,8 @@ public class NavMeshTest extends BasicGame implements PathFindingContext
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		if( container.getInput().isKeyPressed( Input.KEY_1 ) )
-		{
-			showLinks = !showLinks;
-		}
-		if( container.getInput().isKeyPressed( Input.KEY_2 ) )
-		{
-			showSpaces = !showSpaces;
-		}
+		if( container.getInput().isKeyPressed( Input.KEY_1 ) ) showLinks = !showLinks;
+		if( container.getInput().isKeyPressed( Input.KEY_2 ) ) showSpaces = !showSpaces;
 	}
 	
 	/**
@@ -147,10 +141,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext
 		if( path != null )
 		{
 			g.setColor( Color.white );
-			for( int i = 0; i < path.length() - 1; i++ )
-			{
-				g.drawLine( path.getX( i ) * 10, path.getY( i ) * 10, path.getX( i + 1 ) * 10, path.getY( i + 1 ) * 10 );
-			}
+			for( int i = 0; i < path.length() - 1; i++ ) g.drawLine( path.getX( i ) * 10, path.getY( i ) * 10, path.getX( i + 1 ) * 10, path.getY( i + 1 ) * 10 );
 		}
 	}
 	
@@ -246,10 +237,7 @@ public class NavMeshTest extends BasicGame implements PathFindingContext
 		@Override
 		public boolean blocked( PathFindingContext context, int tx, int ty )
 		{
-			if( ( tx < 0 ) || ( ty < 0 ) || ( tx >= 50 ) || ( ty >= 50 ) )
-			{
-				return false;
-			}
+			if( ( tx < 0 ) || ( ty < 0 ) || ( tx >= 50 ) || ( ty >= 50 ) ) return false;
 			
 			return map[tx + ( ty * 50 )] != 0;
 		}

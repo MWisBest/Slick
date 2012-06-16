@@ -10,7 +10,6 @@ import org.newdawn.slick.SpriteSheet;
 
 public class RotateInUseTest extends BasicGame
 {
-	
 	public static void main( String[] args ) throws SlickException
 	{
 		new AppGameContainer( new RotateInUseTest(), 800, 600, false ).start();
@@ -67,5 +66,4 @@ public class RotateInUseTest extends BasicGame
 		rot1 += delta * 0.03f;
 		rot2 += delta * 0.08f;
 	}
-	
 }

@@ -16,7 +16,6 @@ import org.newdawn.slick.util.Log;
  */
 public class ImageMemTest extends BasicGame
 {
-	
 	/**
 	 * Create a new image rendering test
 	 */

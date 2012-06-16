@@ -92,65 +92,29 @@ public class SoundURLTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_SPACE )
-		{
-			sound.play();
-		}
-		if( key == Input.KEY_B )
-		{
-			burp.play();
-		}
-		if( key == Input.KEY_A )
-		{
-			sound.playAt( -1, 0, 0 );
-		}
-		if( key == Input.KEY_L )
-		{
-			sound.playAt( 1, 0, 0 );
-		}
-		if( key == Input.KEY_RETURN )
-		{
-			charlie.play( 1.0f, 1.0f );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_SPACE ) sound.play();
+		if( key == Input.KEY_B ) burp.play();
+		if( key == Input.KEY_A ) sound.playAt( -1, 0, 0 );
+		if( key == Input.KEY_L ) sound.playAt( 1, 0, 0 );
+		if( key == Input.KEY_RETURN ) charlie.play( 1.0f, 1.0f );
 		if( key == Input.KEY_P )
 		{
-			if( music.playing() )
-			{
-				music.pause();
-			}
-			else
-			{
-				music.resume();
-			}
+			if( music.playing() ) music.pause();
+			else music.resume();
 		}
 		if( key == Input.KEY_C )
 		{
 			music.stop();
-			if( music == musica )
-			{
-				music = musicb;
-			}
-			else
-			{
-				music = musica;
-			}
+			if( music == musica ) music = musicb;
+			else music = musica;
 			
 			music.loop();
 		}
 		if( key == Input.KEY_E )
 		{
-			if( engine.playing() )
-			{
-				engine.stop();
-			}
-			else
-			{
-				engine.loop();
-			}
+			if( engine.playing() ) engine.stop();
+			else engine.loop();
 		}
 		
 		if( c == '+' )
@@ -164,7 +128,6 @@ public class SoundURLTest extends BasicGame
 			volume -= 1;
 			setVolume();
 		}
-		
 	}
 	
 	/**
@@ -173,14 +136,8 @@ public class SoundURLTest extends BasicGame
 	private void setVolume()
 	{
 		// Do bounds checking
-		if( volume > 10 )
-		{
-			volume = 10;
-		}
-		else if( volume < 0 )
-		{
-			volume = 0;
-		}
+		if( volume > 10 ) volume = 10;
+		else if( volume < 0 ) volume = 0;
 		
 		music.setVolume( volume / 10.0f );
 	}

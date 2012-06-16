@@ -68,19 +68,10 @@ public class SoundPositionTest extends BasicGame
 	{
 		if( key == Input.KEY_SPACE )
 		{
-			if( music.playing() )
-			{
-				music.pause();
-			}
-			else
-			{
-				music.resume();
-			}
+			if( music.playing() ) music.pause();
+			else music.resume();
 		}
-		if( key == Input.KEY_RIGHT )
-		{
-			music.setPosition( music.getPosition() + 5 );
-		}
+		if( key == Input.KEY_RIGHT ) music.setPosition( music.getPosition() + 5 );
 	}
 	
 	/**

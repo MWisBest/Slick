@@ -58,10 +58,7 @@ public class InputTest extends BasicGame
 	@Override
 	public void init( GameContainer container ) throws SlickException
 	{
-		if( container instanceof AppGameContainer )
-		{
-			app = (AppGameContainer)container;
-		}
+		if( container instanceof AppGameContainer ) app = (AppGameContainer)container;
 		
 		x = 300;
 		y = 300;
@@ -104,22 +101,10 @@ public class InputTest extends BasicGame
 		rshift = container.getInput().isKeyDown( Input.KEY_RSHIFT );
 		space = container.getInput().isKeyDown( Input.KEY_SPACE );
 		
-		if( controllerLeft[0] )
-		{
-			x -= delta * 0.1f;
-		}
-		if( controllerRight[0] )
-		{
-			x += delta * 0.1f;
-		}
-		if( controllerUp[0] )
-		{
-			y -= delta * 0.1f;
-		}
-		if( controllerDown[0] )
-		{
-			y += delta * 0.1f;
-		}
+		if( controllerLeft[0] ) x -= delta * 0.1f;
+		if( controllerRight[0] ) x += delta * 0.1f;
+		if( controllerUp[0] ) y -= delta * 0.1f;
+		if( controllerDown[0] ) y += delta * 0.1f;
 	}
 	
 	/**
@@ -128,10 +113,7 @@ public class InputTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 		if( key == Input.KEY_F1 )
 		{
 			if( app != null )
@@ -164,10 +146,7 @@ public class InputTest extends BasicGame
 	@Override
 	public void mousePressed( int button, int x, int y )
 	{
-		if( button == 0 )
-		{
-			buttonDown = true;
-		}
+		if( button == 0 ) buttonDown = true;
 		
 		message = "Mouse pressed " + button + " " + x + "," + y;
 	}
@@ -178,10 +157,7 @@ public class InputTest extends BasicGame
 	@Override
 	public void mouseReleased( int button, int x, int y )
 	{
-		if( button == 0 )
-		{
-			buttonDown = false;
-		}
+		if( button == 0 ) buttonDown = false;
 		
 		message = "Mouse released " + button + " " + x + "," + y;
 	}
@@ -203,14 +179,8 @@ public class InputTest extends BasicGame
 	{
 		message = "Mouse wheel moved: " + change;
 		
-		if( change < 0 )
-		{
-			ypos -= 10;
-		}
-		if( change > 0 )
-		{
-			ypos += 10;
-		}
+		if( change < 0 ) ypos -= 10;
+		if( change > 0 ) ypos += 10;
 	}
 	
 	/**
@@ -219,10 +189,7 @@ public class InputTest extends BasicGame
 	@Override
 	public void mouseMoved( int oldx, int oldy, int newx, int newy )
 	{
-		if( buttonDown )
-		{
-			lines.add( new Line( oldx, oldy, newx, newy ) );
-		}
+		if( buttonDown ) lines.add( new Line( oldx, oldy, newx, newy ) );
 	}
 	
 	/**

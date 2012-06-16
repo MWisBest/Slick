@@ -61,10 +61,7 @@ public class ImageTest extends BasicGame
 		subImage = image.getSubImage( 200, 0, 70, 260 );
 		rot = 0;
 		
-		if( exitMe )
-		{
-			container.exit();
-		}
+		if( exitMe ) container.exit();
 		
 		Image test = tga.getSubImage( 50, 50, 50, 50 );
 		System.out.println( test.getColor( 50, 50 ) );
@@ -88,10 +85,7 @@ public class ImageTest extends BasicGame
 		Image flipped3 = flipped2.getFlippedCopy( true, false );
 		flipped3.draw( 400, 380 );
 		
-		for( int i = 0; i < 3; i++ )
-		{
-			subImage.draw( 200 + ( i * 30 ), 300 );
-		}
+		for( int i = 0; i < 3; i++ ) subImage.draw( 200 + ( i * 30 ), 300 );
 		
 		g.translate( 500, 200 );
 		g.rotate( 50, 50, rot );
@@ -103,7 +97,6 @@ public class ImageTest extends BasicGame
 		// centerX/centerY is scaled with rotation
 		rotImage.draw( 100, 200, 0.25f );
 		rotImage.draw( 10, 300, 2f );
-		
 	}
 	
 	/**
@@ -113,10 +106,7 @@ public class ImageTest extends BasicGame
 	public void update( GameContainer container, int delta )
 	{
 		rot += delta * 0.1f;
-		if( rot > 360 )
-		{
-			rot -= 360;
-		}
+		if( rot > 360 ) rot -= 360;
 	}
 	
 	/**
@@ -165,14 +155,8 @@ public class ImageTest extends BasicGame
 	{
 		if( key == Input.KEY_SPACE )
 		{
-			if( image == gif )
-			{
-				image = tga;
-			}
-			else
-			{
-				image = gif;
-			}
+			if( image == gif ) image = tga;
+			else image = gif;
 		}
 	}
 }

@@ -62,10 +62,7 @@ public class ImageOutTest extends BasicGame
 		for( int i = 0; i < formats.length; i++ )
 		{
 			message += formats[i];
-			if( i < formats.length - 1 )
-			{
-				message += ",";
-			}
+			if( i < formats.length - 1 ) message += ",";
 		}
 	}
 	
@@ -111,18 +108,9 @@ public class ImageOutTest extends BasicGame
 	{
 		fire.update( delta );
 		
-		if( container.getInput().isKeyPressed( Input.KEY_P ) )
-		{
-			writeTo( "ImageOutTest.png" );
-		}
-		if( container.getInput().isKeyPressed( Input.KEY_J ) )
-		{
-			writeTo( "ImageOutTest.jpg" );
-		}
-		if( container.getInput().isKeyPressed( Input.KEY_T ) )
-		{
-			writeTo( "ImageOutTest.tga" );
-		}
+		if( container.getInput().isKeyPressed( Input.KEY_P ) ) writeTo( "ImageOutTest.png" );
+		if( container.getInput().isKeyPressed( Input.KEY_J ) ) writeTo( "ImageOutTest.jpg" );
+		if( container.getInput().isKeyPressed( Input.KEY_T ) ) writeTo( "ImageOutTest.tga" );
 	}
 	
 	/**
@@ -150,9 +138,6 @@ public class ImageOutTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

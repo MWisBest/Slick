@@ -52,16 +52,10 @@ public class TestBox extends BasicGame
 	 */
 	private void nextGame()
 	{
-		if( index == -1 )
-		{
-			return;
-		}
+		if( index == -1 ) return;
 		
 		index++;
-		if( index >= games.size() )
-		{
-			index = 0;
-		}
+		if( index >= games.size() ) index = 0;
 		
 		startGame();
 	}
@@ -242,10 +236,7 @@ public class TestBox extends BasicGame
 	{
 		currentGame.keyPressed( key, c );
 		
-		if( key == Input.KEY_ENTER )
-		{
-			nextGame();
-		}
+		if( key == Input.KEY_ENTER ) nextGame();
 	}
 	
 	/**
@@ -313,7 +304,7 @@ public class TestBox extends BasicGame
 			box.addGame( FontTest.class );
 			box.addGame( GeomTest.class );
 			box.addGame( GradientTest.class );
-			// box.addGame(GraphicsTest.class);
+			// box.addGame( GraphicsTest.class );
 			box.addGame( ImageBufferTest.class );
 			box.addGame( ImageFormatTest.class );
 			box.addGame( ImageReadTest.class );

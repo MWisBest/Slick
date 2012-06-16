@@ -80,14 +80,8 @@ public class ImageBufferEndianTest extends BasicGame
 	public void init( GameContainer container ) throws SlickException
 	{
 		// detect what endian we have
-		if( ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN )
-		{
-			endian = "Big endian";
-		}
-		else if( ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN )
-		{
-			endian = "Little endian";
-		}
+		if( ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN ) endian = "Big endian";
+		else if( ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ) endian = "Little endian";
 		else endian = "no idea";
 		
 		redImageBuffer = new ImageBuffer( 100, 100 );
@@ -112,10 +106,7 @@ public class ImageBufferEndianTest extends BasicGame
 	{
 		for( int x = 0; x < width; x++ )
 		{
-			for( int y = 0; y < height; y++ )
-			{
-				buffer.setRGBA( x, y, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() );
-			}
+			for( int y = 0; y < height; y++ ) buffer.setRGBA( x, y, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() );
 		}
 	}
 	
@@ -126,7 +117,5 @@ public class ImageBufferEndianTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		// nothing to do
 	}
-	
 }

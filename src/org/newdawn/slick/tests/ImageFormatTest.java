@@ -63,7 +63,6 @@ public class ImageFormatTest extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta ) throws SlickException
 	{
-		// nothing to do
 	}
 	
 	@Override

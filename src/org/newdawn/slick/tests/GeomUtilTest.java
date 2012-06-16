@@ -165,14 +165,8 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener
 		exclude.clear();
 		cut.setCenterX( xp );
 		cut.setCenterY( yp );
-		if( union )
-		{
-			result = util.union( source, cut );
-		}
-		else
-		{
-			result = util.subtract( source, cut );
-		}
+		if( union ) result = util.union( source, cut );
+		else result = util.subtract( source, cut );
 	}
 	
 	/**
@@ -215,16 +209,12 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener
 		g.setColor( Color.white );
 		if( result != null )
 		{
-			for( int i = 0; i < result.length; i++ )
-			{
-				g.draw( result[i] );
-			}
+			for( int i = 0; i < result.length; i++ ) g.draw( result[i] );
 			
 			g.drawString( "Polys:" + result.length, 10, 100 );
 			g.drawString( "X:" + xp, 10, 120 );
 			g.drawString( "Y:" + yp, 10, 130 );
 		}
-		
 	}
 	
 	/**
@@ -269,14 +259,8 @@ public class GeomUtilTest extends BasicGame implements GeomUtilListener
 	{
 		if( dynamic )
 		{
-			if( change < 0 )
-			{
-				cut = cut.transform( Transform.createRotateTransform( (float)Math.toRadians( 10 ), cut.getCenterX(), cut.getCenterY() ) );
-			}
-			else
-			{
-				cut = cut.transform( Transform.createRotateTransform( (float)Math.toRadians( -10 ), cut.getCenterX(), cut.getCenterY() ) );
-			}
+			if( change < 0 ) cut = cut.transform( Transform.createRotateTransform( (float)Math.toRadians( 10 ), cut.getCenterX(), cut.getCenterY() ) );
+			else cut = cut.transform( Transform.createRotateTransform( (float)Math.toRadians( -10 ), cut.getCenterX(), cut.getCenterY() ) );
 		}
 	}
 }

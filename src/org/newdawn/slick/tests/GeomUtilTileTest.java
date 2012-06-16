@@ -87,10 +87,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 				{
 					Shape shape = shapes.get( i );
 					
-					if( collides( shape, segmentPolygon ) )
-					{
-						quadSpace[x][y].add( shape );
-					}
+					if( collides( shape, segmentPolygon ) ) quadSpace[x][y].add( shape );
 				}
 				
 				quadSpaceShapes[x][y] = segmentPolygon;
@@ -109,10 +106,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		
 		for( int x = 0; x < segments; x++ )
 		{
-			for( int y = 0; y < segments; y++ )
-			{
-				quadSpace[x][y].remove( shape );
-			}
+			for( int y = 0; y < segments; y++ ) quadSpace[x][y].remove( shape );
 		}
 	}
 	
@@ -129,10 +123,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		{
 			for( int y = 0; y < segments; y++ )
 			{
-				if( collides( shape, quadSpaceShapes[x][y] ) )
-				{
-					quadSpace[x][y].add( shape );
-				}
+				if( collides( shape, quadSpaceShapes[x][y] ) ) quadSpace[x][y].add( shape );
 			}
 		}
 	}
@@ -254,10 +245,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		
 		for( int x = 0; x < quadSpace.length; x++ )
 		{
-			for( int y = 0; y < quadSpace.length; y++ )
-			{
-				result.addAll( quadSpace[x][y] );
-			}
+			for( int y = 0; y < quadSpace.length; y++ ) result.addAll( quadSpace[x][y] );
 		}
 		
 		return new ArrayList<>( result );
@@ -284,10 +272,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		}
 		
 		ArrayList<Shape> pruned = new ArrayList<>();
-		for( int i = 0; i < current.size(); i++ )
-		{
-			pruned.add( current.get( i ).prune() );
-		}
+		for( int i = 0; i < current.size(); i++ ) pruned.add( current.get( i ).prune() );
 		return pruned;
 	}
 	
@@ -302,10 +287,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 	private ArrayList<Shape> combineImpl( ArrayList<Shape> shapes )
 	{
 		ArrayList<Shape> result = new ArrayList<>( shapes );
-		if( quadSpace != null )
-		{
-			result = shapes;
-		}
+		if( quadSpace != null ) result = shapes;
 		
 		for( int i = 0; i < shapes.size(); i++ )
 		{
@@ -314,10 +296,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 			{
 				Shape second = shapes.get( j );
 				
-				if( !first.intersects( second ) )
-				{
-					continue;
-				}
+				if( !first.intersects( second ) ) continue;
 				
 				Shape[] joined = util.union( first, second );
 				if( joined.length == 1 )
@@ -351,25 +330,16 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 	 */
 	public boolean collides( Shape shape1, Shape shape2 )
 	{
-		if( shape1.intersects( shape2 ) )
-		{
-			return true;
-		}
+		if( shape1.intersects( shape2 ) ) return true;
 		for( int i = 0; i < shape1.getPointCount(); i++ )
 		{
 			float[] pt = shape1.getPoint( i );
-			if( shape2.contains( pt[0], pt[1] ) )
-			{
-				return true;
-			}
+			if( shape2.contains( pt[0], pt[1] ) ) return true;
 		}
 		for( int i = 0; i < shape2.getPointCount(); i++ )
 		{
 			float[] pt = shape2.getPoint( i );
-			if( shape1.contains( pt[0], pt[1] ) )
-			{
-				return true;
-			}
+			if( shape1.contains( pt[0], pt[1] ) ) return true;
 		}
 		
 		return false;
@@ -408,10 +378,7 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 		}
 		
 		g.setColor( Color.white );
-		if( quadSpaceShapes != null )
-		{
-			g.draw( quadSpaceShapes[0][0] );
-		}
+		if( quadSpaceShapes != null ) g.draw( quadSpaceShapes[0][0] );
 		
 		g.translate( 0, 320 );
 		
@@ -427,7 +394,6 @@ public class GeomUtilTileTest extends BasicGame implements GeomUtilListener
 				g.fillOval( pt[0] - 1, pt[1] - 1, 3, 3 );
 			}
 		}
-		
 	}
 	
 	/**

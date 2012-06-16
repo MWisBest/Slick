@@ -67,10 +67,7 @@ public class TransformTest2 extends BasicGame
 		g.setColor( Color.red );
 		for( int x = 0; x < 10; x++ )
 		{
-			for( int y = 0; y < 10; y++ )
-			{
-				g.fillRect( -500 + ( x * 100 ), -500 + ( y * 100 ), 80, 80 );
-			}
+			for( int y = 0; y < 10; y++ ) g.fillRect( -500 + ( x * 100 ), -500 + ( y * 100 ), 80, 80 );
 		}
 		
 		g.setColor( new Color( 1, 1, 1, 0.5f ) );
@@ -85,33 +82,15 @@ public class TransformTest2 extends BasicGame
 	@Override
 	public void update( GameContainer container, int delta )
 	{
-		if( scaleUp )
-		{
-			scale += delta * 0.001f;
-		}
-		if( scaleDown )
-		{
-			scale -= delta * 0.001f;
-		}
+		if( scaleUp ) scale += delta * 0.001f;
+		if( scaleDown ) scale -= delta * 0.001f;
 		
 		float moveSpeed = delta * 0.4f * ( 1 / scale );
 		
-		if( moveLeft )
-		{
-			camX -= moveSpeed;
-		}
-		if( moveUp )
-		{
-			camY -= moveSpeed;
-		}
-		if( moveRight )
-		{
-			camX += moveSpeed;
-		}
-		if( moveDown )
-		{
-			camY += moveSpeed;
-		}
+		if( moveLeft ) camX -= moveSpeed;
+		if( moveUp ) camY -= moveSpeed;
+		if( moveRight ) camX += moveSpeed;
+		if( moveDown ) camY += moveSpeed;
 	}
 	
 	/**
@@ -120,35 +99,14 @@ public class TransformTest2 extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
-		if( key == Input.KEY_Q )
-		{
-			scaleUp = true;
-		}
-		if( key == Input.KEY_A )
-		{
-			scaleDown = true;
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
+		if( key == Input.KEY_Q ) scaleUp = true;
+		if( key == Input.KEY_A ) scaleDown = true;
 		
-		if( key == Input.KEY_LEFT )
-		{
-			moveLeft = true;
-		}
-		if( key == Input.KEY_UP )
-		{
-			moveUp = true;
-		}
-		if( key == Input.KEY_RIGHT )
-		{
-			moveRight = true;
-		}
-		if( key == Input.KEY_DOWN )
-		{
-			moveDown = true;
-		}
+		if( key == Input.KEY_LEFT ) moveLeft = true;
+		if( key == Input.KEY_UP ) moveUp = true;
+		if( key == Input.KEY_RIGHT ) moveRight = true;
+		if( key == Input.KEY_DOWN ) moveDown = true;
 	}
 	
 	/**
@@ -157,31 +115,13 @@ public class TransformTest2 extends BasicGame
 	@Override
 	public void keyReleased( int key, char c )
 	{
-		if( key == Input.KEY_Q )
-		{
-			scaleUp = false;
-		}
-		if( key == Input.KEY_A )
-		{
-			scaleDown = false;
-		}
+		if( key == Input.KEY_Q ) scaleUp = false;
+		if( key == Input.KEY_A ) scaleDown = false;
 		
-		if( key == Input.KEY_LEFT )
-		{
-			moveLeft = false;
-		}
-		if( key == Input.KEY_UP )
-		{
-			moveUp = false;
-		}
-		if( key == Input.KEY_RIGHT )
-		{
-			moveRight = false;
-		}
-		if( key == Input.KEY_DOWN )
-		{
-			moveDown = false;
-		}
+		if( key == Input.KEY_LEFT ) moveLeft = false;
+		if( key == Input.KEY_UP ) moveUp = false;
+		if( key == Input.KEY_RIGHT ) moveRight = false;
+		if( key == Input.KEY_DOWN ) moveDown = false;
 	}
 	
 	/**

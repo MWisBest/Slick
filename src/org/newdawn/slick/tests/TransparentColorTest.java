@@ -53,8 +53,8 @@ public class TransparentColorTest extends BasicGame
 	public void render( GameContainer container, Graphics g )
 	{
 		g.setBackground( Color.lightGray );
-		// image.draw(0,0, inside ? Color.red : Color.white);
-		// timage.draw(10,310);
+		// image.draw( 0, 0, inside ? Color.red : Color.white );
+		// timage.draw( 10, 310 );
 		
 		image.draw();
 		timage.draw( image.getWidth(), 0 );

@@ -53,7 +53,6 @@ public class PedigreeTest extends BasicGame
 		{
 			fire = ParticleIO.loadConfiguredSystem( "testdata/system.xml" );
 			trail = ParticleIO.loadConfiguredSystem( "testdata/smoketrail.xml" );
-			
 		}
 		catch( IOException e )
 		{
@@ -97,10 +96,7 @@ public class PedigreeTest extends BasicGame
 		trail.update( delta );
 		
 		ry -= delta * 0.25f;
-		if( ry < -100 )
-		{
-			spawnRocket();
-		}
+		if( ry < -100 ) spawnRocket();
 	}
 	
 	@Override
@@ -108,10 +104,7 @@ public class PedigreeTest extends BasicGame
 	{
 		super.mousePressed( button, x, y );
 		
-		for( int i = 0; i < fire.getEmitterCount(); i++ )
-		{
-			( (ConfigurableEmitter)fire.getEmitter( i ) ).setPosition( x - 400, y - 300, true );
-		}
+		for( int i = 0; i < fire.getEmitterCount(); i++ ) ( (ConfigurableEmitter)fire.getEmitter( i ) ).setPosition( x - 400, y - 300, true );
 	}
 	
 	/**
@@ -139,9 +132,6 @@ public class PedigreeTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			container.exit();
-		}
+		if( key == Input.KEY_ESCAPE ) container.exit();
 	}
 }

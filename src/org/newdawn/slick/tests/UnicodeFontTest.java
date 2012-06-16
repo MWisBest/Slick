@@ -38,25 +38,25 @@ public class UnicodeFontTest extends BasicGame
 	{
 		container.setShowFPS( false );
 		
-		// unicodeFont = new UnicodeFont(Font.decode("Arial Unicode MS"), 25, false, false);
+		// unicodeFont = new UnicodeFont( Font.decode( "Arial Unicode MS" ), 25, false, false );
 		
 		unicodeFont = new UnicodeFont( "testdata/Arial Black.ttf", 32, false, false );
-		// unicodeFont.setPaddingBottom(10);
-		// unicodeFont.setPaddingRight(10);
-		// unicodeFont.setPaddingAdvanceX(-10);
-		// unicodeFont.getEffects().add(new ShadowEffect(java.awt.Color.black, 5, 5, 0.5f));
+		// unicodeFont.setPaddingBottom( 10 );
+		// unicodeFont.setPaddingRight( 10 );
+		// unicodeFont.setPaddingAdvanceX( -10 );
+		// unicodeFont.getEffects().add( new ShadowEffect( java.awt.Color.black, 5, 5, 0.5f ) );
 		unicodeFont.getEffects().add( new ColorEffect( java.awt.Color.white ) );
 		
-		// unicodeFont = new UnicodeFont("Arial", 25, false, false);
-		// unicodeFont = new UnicodeFont("Everson Mono", 44, false, false);
+		// unicodeFont = new UnicodeFont( "Arial", 25, false, false );
+		// unicodeFont = new UnicodeFont( "Everson Mono", 44, false, false );
 		
-		// font.addGlyphs(0, 255);
-		// font.addGlyphs("~!@#$%^&*()");
+		// font.addGlyphs( 0, 255 );
+		// font.addGlyphs( "~!@#$%^&*()" );
 		
 		// long l = System.currentTimeMillis();
 		// unicodeFont.addAsciiGlyphs();
 		// unicodeFont.loadGlyphs();
-		// System.out.println(System.currentTimeMillis()-l);
+		// System.out.println( System.currentTimeMillis() - l );
 		container.getGraphics().setBackground( Color.darkGray );
 	}
 	
@@ -70,18 +70,18 @@ public class UnicodeFontTest extends BasicGame
 		
 		String text = "This is UnicodeFont!\nIt rockz. Kerning: T,";
 		unicodeFont.drawString( 10, 33, text );
-		// unicodeFont.drawString(10, 33, text, Color.red, 8, 19);
+		// unicodeFont.drawString( 10, 33, text, Color.red, 8, 19 );
 		g.setColor( Color.red );
 		g.drawRect( 10, 33, unicodeFont.getWidth( text ), unicodeFont.getLineHeight() );
 		g.setColor( Color.blue );
 		int yOffset = unicodeFont.getYOffset( text );
 		g.drawRect( 10, 33 + yOffset, unicodeFont.getWidth( text ), unicodeFont.getHeight( text ) - yOffset );
 		
-		// unicodeFont.drawString(10, 373, "\u6880\u6881\u6882 (...) \u6883\u6884\u6885\u6886\u6887 hi?");
-		// unicodeFont.drawString(10, 373, "\uD802\uDC02\uD802\uDC03\uD802\uDC12a");
-		// unicodeFont.addGlyphs("~!@!#!#$%___--");
+		// unicodeFont.drawString( 10, 373, "\u6880\u6881\u6882 (...) \u6883\u6884\u6885\u6886\u6887 hi?" );
+		// unicodeFont.drawString( 10, 373, "\uD802\uDC02\uD802\uDC03\uD802\uDC12a" );
+		// unicodeFont.addGlyphs( "~!@!#!#$%___--" );
 		// Cypriot Syllabary glyphs (Everson Mono font): \uD802\uDC02\uD802\uDC03\uD802\uDC12 == 0x10802, 0x10803, s0x10812
-		// g.drawLine(0, container.getHeight() - 512, container.getWidth(), container.getHeight() - 512);
+		// g.drawLine( 0, container.getHeight() - 512, container.getWidth(), container.getHeight() - 512 );
 	}
 	
 	/**

@@ -38,14 +38,8 @@ public class ImageBufferTest extends BasicGame
 		{
 			for( int y = 0; y < 200; y++ )
 			{
-				if( y == 20 )
-				{
-					buffer.setRGBA( x, y, 255, 255, 255, 255 );
-				}
-				else
-				{
-					buffer.setRGBA( x, y, x, y, 0, 255 );
-				}
+				if( y == 20 ) buffer.setRGBA( x, y, 255, 255, 255, 255 );
+				else buffer.setRGBA( x, y, x, y, 0, 255 );
 			}
 		}
 		image = buffer.getImage();
@@ -74,10 +68,7 @@ public class ImageBufferTest extends BasicGame
 	@Override
 	public void keyPressed( int key, char c )
 	{
-		if( key == Input.KEY_ESCAPE )
-		{
-			System.exit( 0 );
-		}
+		if( key == Input.KEY_ESCAPE ) System.exit( 0 );
 	}
 	
 	/**
