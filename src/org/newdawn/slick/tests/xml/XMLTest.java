@@ -29,10 +29,7 @@ public class XMLTest
 	 */
 	private static void assertNotNull( Object object1 )
 	{
-		if( object1 == null )
-		{
-			throw new RuntimeException( "TEST FAILS: " + object1 + " must not be null" );
-		}
+		if( object1 == null ) throw new RuntimeException( "TEST FAILS: " + object1 + " must not be null" );
 	}
 	
 	/**
@@ -43,10 +40,7 @@ public class XMLTest
 	 */
 	private static void assertEquals( float a1, float a2 )
 	{
-		if( a1 != a2 )
-		{
-			throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
-		}
+		if( a1 != a2 ) throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
 	}
 	
 	/**
@@ -57,10 +51,7 @@ public class XMLTest
 	 */
 	private static void assertEquals( int a1, int a2 )
 	{
-		if( a1 != a2 )
-		{
-			throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
-		}
+		if( a1 != a2 ) throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
 	}
 	
 	/**
@@ -71,10 +62,7 @@ public class XMLTest
 	 */
 	private static void assertEquals( Object a1, Object a2 )
 	{
-		if( !a1.equals( a2 ) )
-		{
-			throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
-		}
+		if( !a1.equals( a2 ) ) throw new RuntimeException( "TEST FAILS: " + a1 + " should be " + a2 );
 	}
 	
 	/**

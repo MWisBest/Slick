@@ -11,7 +11,6 @@ import org.newdawn.slick.util.xml.SlickXMLException;
  */
 public class ObjectParserTest
 {
-	
 	/**
 	 * Entity point to our test. Simple read some XML which should
 	 * generate an object tree.

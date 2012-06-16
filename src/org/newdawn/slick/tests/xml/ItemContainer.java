@@ -58,9 +58,6 @@ public class ItemContainer extends Item
 	public void dump( String prefix )
 	{
 		System.out.println( prefix + "Item Container " + name + "," + condition );
-		for( int i = 0; i < items.size(); i++ )
-		{
-			items.get( i ).dump( prefix + "\t" );
-		}
+		for( int i = 0; i < items.size(); i++ ) items.get( i ).dump( prefix + "\t" );
 	}
 }

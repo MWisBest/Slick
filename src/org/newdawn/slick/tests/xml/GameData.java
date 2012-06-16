@@ -31,9 +31,6 @@ public class GameData
 	public void dump( String prefix )
 	{
 		System.out.println( prefix + "GameData" );
-		for( int i = 0; i < entities.size(); i++ )
-		{
-			entities.get( i ).dump( prefix + "\t" );
-		}
+		for( int i = 0; i < entities.size(); i++ ) entities.get( i ).dump( prefix + "\t" );
 	}
 }

@@ -31,9 +31,6 @@ public class Inventory
 	public void dump( String prefix )
 	{
 		System.out.println( prefix + "Inventory" );
-		for( int i = 0; i < items.size(); i++ )
-		{
-			items.get( i ).dump( prefix + "\t" );
-		}
+		for( int i = 0; i < items.size(); i++ ) items.get( i ).dump( prefix + "\t" );
 	}
 }
