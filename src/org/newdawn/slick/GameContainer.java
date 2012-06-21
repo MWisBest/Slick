@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Cursor;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.Drawable;
 import org.lwjgl.opengl.Pbuffer;
@@ -14,6 +15,7 @@ import org.newdawn.slick.gui.GUIContext;
 import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.CursorLoader;
 import org.newdawn.slick.opengl.ImageData;
+import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.util.Log;
@@ -110,6 +112,19 @@ public abstract class GameContainer implements GUIContext
 		stencil = true;
 	}
 	
+	/**
+	 * Called to clean up the program's memory. Destroys AL and Display
+	 * if either is created.
+	 */
+	
+	public void destroy()
+	{
+		InternalTextureLoader.get().clear();
+		SoundStore.get().clear();
+		if( Display.isCreated() ) Display.destroy();
+		if( AL.isCreated() ) AL.destroy();
+	}
+
 	/**
 	 * Set the default font that will be intialised in the graphics held in this container
 	 * 
@@ -909,7 +924,7 @@ public abstract class GameContainer implements GUIContext
 	 * 
 	 * @return True if the game is running
 	 */
-	protected boolean running()
+	public boolean running()
 	{
 		return running;
 	}

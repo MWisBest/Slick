@@ -183,7 +183,7 @@ public class CanvasGameContainer extends Canvas
 		 * @see org.newdawn.slick.GameContainer#running()
 		 */
 		@Override
-		protected boolean running()
+		public boolean running()
 		{
 			return super.running() && CanvasGameContainer.this.isDisplayable();
 		}

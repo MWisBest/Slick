@@ -50,8 +50,9 @@ public class AudioImpl implements Audio
 	@Override
 	public void release()
 	{
+		int oldIndex = index;
 		stop();
-		if( index != -1 ) AL10.alSourcei( SoundStore.get().getSource( index ), AL10.AL_BUFFER, 0 ); // detach buffer from source
+		if( oldIndex != -1 ) AL10.alSourcei( SoundStore.get().getSource( oldIndex ), AL10.AL_BUFFER, 0 ); // detach buffer from source
 		if( buffer != 0 ) AL10.alDeleteBuffers( buffer ); // delete buffer
 		index = -1;
 		buffer = 0;

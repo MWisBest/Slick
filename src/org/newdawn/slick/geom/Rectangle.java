@@ -42,7 +42,7 @@ public class Rectangle extends Shape
 	@Override
 	public boolean contains( float xp, float yp )
 	{
-		if( xp <= getX() || yp <= getY() || xp >= maxX || yp >= maxY ) return false;
+		if( xp < getX() || yp < getY() || xp >= maxX || yp >= maxY ) return false;
 		
 		return true;
 	}

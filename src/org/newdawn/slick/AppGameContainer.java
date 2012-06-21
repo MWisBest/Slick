@@ -9,11 +9,9 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
-import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.CursorLoader;
 import org.newdawn.slick.opengl.ImageData;
 import org.newdawn.slick.opengl.ImageIOImageData;
@@ -358,8 +356,7 @@ public class AppGameContainer extends GameContainer
 	@Override
 	public void reinit() throws SlickException
 	{
-		InternalTextureLoader.get().clear();
-		SoundStore.get().clear();
+		destroy();
 		initSystem();
 		enterOrtho();
 		
@@ -614,15 +611,6 @@ public class AppGameContainer extends GameContainer
 	public int getScreenWidth()
 	{
 		return originalDisplayMode.getWidth();
-	}
-	
-	/**
-	 * Destroy the app game container
-	 */
-	public void destroy()
-	{
-		Display.destroy();
-		AL.destroy();
 	}
 	
 	/**
