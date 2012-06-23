@@ -49,7 +49,7 @@ import org.lwjgl.openal.AL10;
 
 /**
  * 
- * Utitlity class for loading wavefiles.
+ * Utility class for loading wavefiles.
  * 
  * @author Brian Matzon <brian@matzon.dk>
  * @version $Revision: 2286 $
@@ -68,7 +68,7 @@ public class AiffData
 	/**
 	 * Creates a new AiffData
 	 * 
-	 * @param data actual Aiffdata
+	 * @param data actual Aiff data
 	 * @param format format of Aiff data
 	 * @param samplerate sample rate of data
 	 */
@@ -80,7 +80,7 @@ public class AiffData
 	}
 	
 	/**
-	 * Disposes the Aiffdata
+	 * Disposes the Aiff data
 	 */
 	public void dispose()
 	{
@@ -88,10 +88,10 @@ public class AiffData
 	}
 	
 	/**
-	 * Creates a AiffData container from the specified url
+	 * Creates a AiffData container from the specified URL
 	 * 
 	 * @param path URL to file
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( URL path )
 	{
@@ -111,7 +111,7 @@ public class AiffData
 	 * Creates a AiffData container from the specified in the classpath
 	 * 
 	 * @param path path to file (relative, and in classpath)
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( String path )
 	{
@@ -119,10 +119,10 @@ public class AiffData
 	}
 	
 	/**
-	 * Creates a AiffData container from the specified inputstream
+	 * Creates a AiffData container from the specified InputStream
 	 * 
 	 * @param is InputStream to read from
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( InputStream is )
 	{
@@ -142,7 +142,7 @@ public class AiffData
 	 * Creates a AiffData container from the specified bytes
 	 * 
 	 * @param buffer array of bytes containing the complete Aiff file
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( byte[] buffer )
 	{
@@ -163,7 +163,7 @@ public class AiffData
 	 * else the contents of the buffer will be copied using get(byte[]).
 	 * 
 	 * @param buffer ByteBuffer containing sound file
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( ByteBuffer buffer )
 	{
@@ -190,7 +190,7 @@ public class AiffData
 	 * Creates a AiffData container from the specified stream
 	 * 
 	 * @param ais AudioInputStream to read from
-	 * @return AiffData containing data, or null if a failure occured
+	 * @return AiffData containing data, or null if a failure occurred
 	 */
 	public static AiffData create( AudioInputStream ais )
 	{
@@ -264,9 +264,9 @@ public class AiffData
 	 * Convert the audio bytes into the stream
 	 * 
 	 * @param format The audio format being decoded
-	 * @param audio_bytes The audio byts
+	 * @param audio_bytes The audio bytes
 	 * @param two_bytes_data True if we using double byte data
-	 * @return The byte bufer of data
+	 * @return The byte buffer of data
 	 */
 	private static ByteBuffer convertAudioBytes( AudioFormat format, byte[] audio_bytes, boolean two_bytes_data )
 	{

@@ -48,8 +48,7 @@ import org.lwjgl.openal.AL10;
 import org.newdawn.slick.util.Log;
 
 /**
- * 
- * Utitlity class for loading wavefiles.
+ * Utility class for loading wave files.
  * 
  * @author Brian Matzon <brian@matzon.dk>
  * @version $Revision: 2286 $
@@ -69,7 +68,7 @@ public class WaveData
 	/**
 	 * Creates a new WaveData
 	 * 
-	 * @param data actual wavedata
+	 * @param data actual wave data
 	 * @param format format of wave data
 	 * @param samplerate sample rate of data
 	 */
@@ -81,7 +80,7 @@ public class WaveData
 	}
 	
 	/**
-	 * Disposes the wavedata
+	 * Disposes the wave data
 	 */
 	public void dispose()
 	{
@@ -89,10 +88,10 @@ public class WaveData
 	}
 	
 	/**
-	 * Creates a WaveData container from the specified url
+	 * Creates a WaveData container from the specified URL
 	 * 
 	 * @param path URL to file
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( URL path )
 	{
@@ -112,7 +111,7 @@ public class WaveData
 	 * Creates a WaveData container from the specified in the classpath
 	 * 
 	 * @param path path to file (relative, and in classpath)
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( String path )
 	{
@@ -120,10 +119,10 @@ public class WaveData
 	}
 	
 	/**
-	 * Creates a WaveData container from the specified inputstream
+	 * Creates a WaveData container from the specified InputStream
 	 * 
 	 * @param is InputStream to read from
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( InputStream is )
 	{
@@ -143,7 +142,7 @@ public class WaveData
 	 * Creates a WaveData container from the specified bytes
 	 * 
 	 * @param buffer array of bytes containing the complete wave file
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( byte[] buffer )
 	{
@@ -164,7 +163,7 @@ public class WaveData
 	 * else the contents of the buffer will be copied using get(byte[]).
 	 * 
 	 * @param buffer ByteBuffer containing sound file
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( ByteBuffer buffer )
 	{
@@ -191,7 +190,7 @@ public class WaveData
 	 * Creates a WaveData container from the specified stream
 	 * 
 	 * @param ais AudioInputStream to read from
-	 * @return WaveData containing data, or null if a failure occured
+	 * @return WaveData containing data, or null if a failure occurred
 	 */
 	public static WaveData create( AudioInputStream ais )
 	{
@@ -273,9 +272,9 @@ public class WaveData
 	/**
 	 * Convert the audio bytes into the stream
 	 * 
-	 * @param audio_bytes The audio byts
+	 * @param audio_bytes The audio bytes
 	 * @param two_bytes_data True if we using double byte data
-	 * @return The byte bufer of data
+	 * @return The byte buffer of data
 	 */
 	private static ByteBuffer convertAudioBytes( byte[] audio_bytes, boolean two_bytes_data )
 	{

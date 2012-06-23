@@ -10,6 +10,8 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
 
+import gnu.trove.map.hash.TObjectIntHashMap;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Sys;
 import org.lwjgl.openal.AL;
@@ -33,17 +35,18 @@ public class SoundStore
 	private boolean sounds;
 	/** True if music is turned on */
 	private boolean music;
-	/** True if sound initialisation succeeded */
+	/** True if sound initialization succeeded */
 	private boolean soundWorks;
 	/** The number of sound sources enabled - default 8 */
 	private int sourceCount;
 	/** The map of references to IDs of previously loaded sounds */
 	private HashMap<String, Integer> loaded = new HashMap<>();
 	/** The ID of the buffer containing the music currently being played */
+	private TObjectIntHashMap<String> loadedTwo = new TObjectIntHashMap<String>();
 	private int currentMusic = -1;
 	/** The OpenGL AL sound sources in use */
 	private IntBuffer sources;
-	/** True if the sound system has been initialise */
+	/** True if the sound system has been initialize */
 	private boolean inited = false;
 	/** The MODSound to be updated */
 	private MODSound mod;
@@ -125,7 +128,7 @@ public class SoundStore
 	}
 	
 	/**
-	 * Inidicate whether music should be playing
+	 * Indicate whether music should be playing
 	 * 
 	 * @param music True if music should be played
 	 */
@@ -289,7 +292,7 @@ public class SoundStore
 	}
 	
 	/**
-	 * Initialise the sound effects stored. This must be called
+	 * Initialize the sound effects stored. This must be called
 	 * before anything else will work
 	 */
 	public void init()
@@ -496,7 +499,7 @@ public class SoundStore
 	 * 
 	 * @param buffer The buffer to be played
 	 * @param pitch The pitch to play the music at
-	 * @param gain The gaing to play the music at
+	 * @param gain The gain to play the music at
 	 * @param loop True if we should loop the music
 	 */
 	void playAsMusic( int buffer, float pitch, float gain, boolean loop )
@@ -528,7 +531,7 @@ public class SoundStore
 	/**
 	 * Get the OpenAL source used for music
 	 * 
-	 * @return The open al source used for music
+	 * @return The OpenAL source used for music
 	 */
 	private int getMusicSource()
 	{
@@ -584,7 +587,7 @@ public class SoundStore
 	/**
 	 * Get a MOD sound (mod/xm etc)
 	 * 
-	 * @param ref The refernece to the mod to load
+	 * @param ref The reference to the mod to load
 	 * @return The sound for play back
 	 * @throws IOException Indicates a failure to read the data
 	 */
@@ -846,7 +849,7 @@ public class SoundStore
 		
 		int buffer = -1;
 		
-		if( loaded.get( ref ) != null ) buffer = loaded.get( ref ).intValue();
+		if( loadedTwo.get( ref ) != -1 ) buffer = loadedTwo.get( ref );
 		else
 		{
 			try
@@ -965,7 +968,7 @@ public class SoundStore
 	/**
 	 * Get the single instance of this class
 	 * 
-	 * @return The single instnace of this class
+	 * @return The single instance of this class
 	 */
 	public static SoundStore get()
 	{
@@ -986,7 +989,7 @@ public class SoundStore
 	
 	/**
 	 * Retrieve the number of OpenAL sound sources that have been
-	 * determined at initialisation.
+	 * determined at initialization.
 	 * 
 	 * @return The number of sources available
 	 */
