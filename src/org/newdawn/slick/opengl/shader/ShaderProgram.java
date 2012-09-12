@@ -442,6 +442,7 @@ public class ShaderProgram
 		return program != 0;
 	}
 	
+	@SuppressWarnings( "boxing" )
 	private void fetchUniforms()
 	{
 		int len = ARBShaderObjects.glGetObjectParameteriARB( program, GL20.GL_ACTIVE_UNIFORMS );
@@ -456,6 +457,7 @@ public class ShaderProgram
 		}
 	}
 	
+	@SuppressWarnings( "boxing" )
 	private void fetchAttributes()
 	{
 		int len = ARBShaderObjects.glGetObjectParameteriARB( program, GL20.GL_ACTIVE_ATTRIBUTES );
@@ -475,6 +477,7 @@ public class ShaderProgram
 	 * @param name the uniform name
 	 * @return the ID (location) in the shader program
 	 */
+	@SuppressWarnings( "boxing" )
 	public int getUniformID( String name )
 	{
 		Integer locI = uniforms.get( name );
@@ -492,6 +495,7 @@ public class ShaderProgram
 	 * @param name the attribute name
 	 * @return the ID (location) in the shader program
 	 */
+	@SuppressWarnings( "boxing" )
 	public int getAttributeID( String name )
 	{
 		int location = attributes.get( name );

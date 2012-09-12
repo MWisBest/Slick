@@ -465,47 +465,44 @@ public class Base64
 				return new String( baos.toByteArray() );
 			}
 		}
-		else
+		// Convert option to boolean in way that code likes it.
+		boolean breakLines = dontBreakLines == 0;
+		
+		int len43 = len * 4 / 3;
+		byte[] outBuff = new byte[( len43 ) // Main 4:3
+				+ ( ( len % 3 ) > 0 ? 4 : 0 ) // Account for padding
+				+ ( breakLines ? ( len43 / MAX_LINE_LENGTH ) : 0 )]; // New lines
+		int d = 0;
+		int e = 0;
+		int len2 = len - 2;
+		int lineLength = 0;
+		for( ; d < len2; d += 3, e += 4 )
 		{
-			// Convert option to boolean in way that code likes it.
-			boolean breakLines = dontBreakLines == 0;
+			encode3to4( source, d + off, 3, outBuff, e );
 			
-			int len43 = len * 4 / 3;
-			byte[] outBuff = new byte[( len43 ) // Main 4:3
-					+ ( ( len % 3 ) > 0 ? 4 : 0 ) // Account for padding
-					+ ( breakLines ? ( len43 / MAX_LINE_LENGTH ) : 0 )]; // New lines
-			int d = 0;
-			int e = 0;
-			int len2 = len - 2;
-			int lineLength = 0;
-			for( ; d < len2; d += 3, e += 4 )
+			lineLength += 4;
+			if( breakLines && lineLength == MAX_LINE_LENGTH )
 			{
-				encode3to4( source, d + off, 3, outBuff, e );
-				
-				lineLength += 4;
-				if( breakLines && lineLength == MAX_LINE_LENGTH )
-				{
-					outBuff[e + 4] = NEW_LINE;
-					e++;
-					lineLength = 0;
-				}
+				outBuff[e + 4] = NEW_LINE;
+				e++;
+				lineLength = 0;
 			}
-			
-			if( d < len )
-			{
-				encode3to4( source, d + off, len - d, outBuff, e );
-				e += 4;
-			}
-			
-			// Return value according to relevant encoding.
-			try
-			{
-				return new String( outBuff, 0, e, PREFERRED_ENCODING );
-			}
-			catch( java.io.UnsupportedEncodingException uue )
-			{
-				return new String( outBuff, 0, e );
-			}
+		}
+		
+		if( d < len )
+		{
+			encode3to4( source, d + off, len - d, outBuff, e );
+			e += 4;
+		}
+		
+		// Return value according to relevant encoding.
+		try
+		{
+			return new String( outBuff, 0, e, PREFERRED_ENCODING );
+		}
+		catch( java.io.UnsupportedEncodingException uue )
+		{
+			return new String( outBuff, 0, e );
 		}	
 	}
 	
@@ -1115,22 +1112,16 @@ public class Base64
 					lineLength = 0;
 					return '\n';
 				}
-				else
-				{
-					lineLength++; // This isn't important when decoding but throwing an extra "if" seems just as wasteful.
-					
-					int b = buffer[position++];
-					
-					if( position >= bufferLength ) position = -1;
-					
-					return b & 0xFF; // This is how you "cast" a byte that's intended to be unsigned.
-				}
+				lineLength++; // This isn't important when decoding but throwing an extra "if" seems just as wasteful.
+				
+				int b = buffer[position++];
+				
+				if( position >= bufferLength ) position = -1;
+				
+				return b & 0xFF; // This is how you "cast" a byte that's intended to be unsigned.
 			}
-			else // Else error
-			{
-				// When JDK1.4 is more accepted, use an assertion here.
-				throw new java.io.IOException( "Error in Base64 code reading stream." );
-			}
+			// When JDK1.4 is more accepted, use an assertion here.
+			throw new java.io.IOException( "Error in Base64 code reading stream." );
 		}
 		
 		/**

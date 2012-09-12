@@ -42,7 +42,7 @@ public class SoundStore
 	/** The map of references to IDs of previously loaded sounds */
 	private HashMap<String, Integer> loaded = new HashMap<>();
 	/** The ID of the buffer containing the music currently being played */
-	private TObjectIntHashMap<String> loadedTwo = new TObjectIntHashMap<String>();
+	private TObjectIntHashMap<String> loadedTwo = new TObjectIntHashMap<>();
 	private int currentMusic = -1;
 	/** The OpenGL AL sound sources in use */
 	private IntBuffer sources;

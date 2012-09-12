@@ -135,7 +135,7 @@ public class GraphicsFactory
 		if( pbuffer )
 		{
 			if( pbufferRT ) return new PBufferGraphics( image );
-			else return new PBufferUniqueGraphics( image );
+			return new PBufferUniqueGraphics( image );
 		}
 		
 		throw new SlickException( "Failed to create offscreen buffer even though the card reports it's possible" );

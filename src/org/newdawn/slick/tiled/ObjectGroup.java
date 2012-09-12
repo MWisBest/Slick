@@ -116,6 +116,7 @@ public class ObjectGroup
 	 * @param objectName
 	 *            The name of the object
 	 */
+	@SuppressWarnings( "boxing" )
 	public GroupObject getObject( String objectName )
 	{
 		GroupObject g = this.objects.get( this.nameToObjectMap.get( objectName ) );
@@ -166,6 +167,7 @@ public class ObjectGroup
 	 * @param object
 	 *            The object to be added
 	 */
+	@SuppressWarnings( "boxing" )
 	public void addObject( GroupObject object )
 	{
 		this.objects.add( object );

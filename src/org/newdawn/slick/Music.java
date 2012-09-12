@@ -410,11 +410,8 @@ public class Music
 			
 			return result;
 		}
-		else
-		{
-			requiredPosition = position;
-			return false;
-		}
+		requiredPosition = position;
+		return false;
 	}
 	
 	/**

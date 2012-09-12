@@ -35,7 +35,7 @@ public class FastTrig
 	{
 		radians = reduceSinAngle( radians ); // limits angle to between -PI/2 and +PI/2
 		if( Math.abs( radians ) <= Math.PI / 4 ) return Math.sin( radians );
-		else return Math.cos( Math.PI / 2 - radians );
+		return Math.cos( Math.PI / 2 - radians );
 	}
 	
 	/**

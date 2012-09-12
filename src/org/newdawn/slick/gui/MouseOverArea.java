@@ -353,16 +353,13 @@ public class MouseOverArea extends AbstractComponent
 				
 				return;
 			}
-			else
+			mouseUp = true;
+			if( state != MOUSE_OVER )
 			{
-				mouseUp = true;
-				if( state != MOUSE_OVER )
-				{
-					if( mouseOverSound != null ) mouseOverSound.play();
-					currentImage = mouseOverImage;
-					currentColor = mouseOverColor;
-					state = MOUSE_OVER;
-				}
+				if( mouseOverSound != null ) mouseOverSound.play();
+				currentImage = mouseOverImage;
+				currentColor = mouseOverColor;
+				state = MOUSE_OVER;
 			}
 		}
 		

@@ -188,22 +188,19 @@ public class GeomUtil
 			
 			return shapes.toArray( new Shape[0] );
 		}
-		else
+		for( int i = 0; i < target.getPointCount(); i++ )
 		{
-			for( int i = 0; i < target.getPointCount(); i++ )
+			if( !other.contains( target.getPoint( i )[0], target.getPoint( i )[1] ) )
 			{
-				if( !other.contains( target.getPoint( i )[0], target.getPoint( i )[1] ) )
+				if( !other.hasVertex( target.getPoint( i )[0], target.getPoint( i )[1] ) )
 				{
-					if( !other.hasVertex( target.getPoint( i )[0], target.getPoint( i )[1] ) )
-					{
-						Shape shape = combineSingle( target, other, false, i );
-						return new Shape[] { shape };
-					}
+					Shape shape = combineSingle( target, other, false, i );
+					return new Shape[] { shape };
 				}
 			}
-			
-			return new Shape[] { other };
 		}
+		
+		return new Shape[] { other };
 	}
 	
 	/**
@@ -348,18 +345,15 @@ public class GeomUtil
 				{
 					// give up
 					if( subtract ) break;
-					else
-					{
-						point = hit.p1;
-						dir = 1;
-						Shape temp = current;
-						current = other;
-						other = temp;
-						
-						point = rationalPoint( current, point + dir );
-						px = current.getPoint( point )[0];
-						py = current.getPoint( point )[1];
-					}
+					point = hit.p1;
+					dir = 1;
+					Shape temp = current;
+					current = other;
+					other = temp;
+					
+					point = rationalPoint( current, point + dir );
+					px = current.getPoint( point )[0];
+					py = current.getPoint( point )[1];
 				}
 			}
 			else

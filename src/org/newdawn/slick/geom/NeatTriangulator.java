@@ -148,11 +148,8 @@ public class NeatTriangulator implements Triangulator
 	{
 		int k;
 		if( 0 > ( k = findEdge( i, j ) ) ) throw new InternalException( "Attempt to delete unknown edge" );
-		else
-		{
-			edges[k] = edges[--numEdges];
-			return;
-		}
+		edges[k] = edges[--numEdges];
+		return;
 	}
 	
 	/**
@@ -167,11 +164,8 @@ public class NeatTriangulator implements Triangulator
 	{
 		int k;
 		if( 0 > ( k = findEdge( i, j ) ) ) throw new InternalException( "Attempt to mark unknown edge" );
-		else
-		{
-			edges[k].suspect = flag;
-			return;
-		}
+		edges[k].suspect = flag;
+		return;
 	}
 	
 	/**
@@ -225,7 +219,7 @@ public class NeatTriangulator implements Triangulator
 			float f17 = f11 * f11;
 			return ( ( f12 + f13 ) * ( f14 + f15 ) * ( f16 + f17 ) ) / ( f18 * f18 );
 		}
-		else return -1F;
+		return -1F;
 	}
 	
 	/**

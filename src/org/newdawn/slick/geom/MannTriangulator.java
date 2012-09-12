@@ -619,7 +619,7 @@ public class MannTriangulator implements Triangulator
 		for( int i = 0; i < temp.length; i++ )
 		{
 			if( temp[i] == null ) break;
-			else triangles.add( temp[i] );
+			triangles.add( temp[i] );
 		}
 		
 		return true;

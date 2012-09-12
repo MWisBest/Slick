@@ -96,7 +96,7 @@ public class ShaderTestAdvanced extends BasicGame
 		}
 	}
 	
-	public void renderScene( GameContainer container, Graphics g ) throws SlickException
+	public void renderScene( GameContainer container, Graphics g )// throws SlickException
 	{
 		g.setColor( Color.white );
 		g.fillRect( 400, 350, 100, 100 );

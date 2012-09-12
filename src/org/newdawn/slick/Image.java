@@ -1635,7 +1635,7 @@ public class Image implements Renderable
 		offset *= texture.hasAlpha() ? 4 : 3;
 		
 		if( texture.hasAlpha() ) return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ), translate( pixelData[offset + 3] ) );
-		else return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ) );
+		return new Color( translate( pixelData[offset] ), translate( pixelData[offset + 1] ), translate( pixelData[offset + 2] ) );
 	}
 	
 	/**

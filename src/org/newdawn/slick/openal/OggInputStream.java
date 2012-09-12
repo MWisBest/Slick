@@ -502,7 +502,7 @@ public class OggInputStream extends InputStream implements AudioInputStream
 				else
 				{
 					if( i == 0 ) return -1;
-					else return i;
+					return i;
 				}
 			}
 			catch( IOException e )

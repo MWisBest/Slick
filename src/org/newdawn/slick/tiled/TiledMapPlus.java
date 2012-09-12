@@ -128,6 +128,7 @@ public class TiledMapPlus extends TiledMap
 	 * 
 	 * @author liamzebedee
 	 */
+	@SuppressWarnings( "boxing" )
 	private void processNameToObjectMap()
 	{
 		for( int i = 0; i < this.getObjectGroupCount(); i++ )
@@ -145,6 +146,7 @@ public class TiledMapPlus extends TiledMap
 	 * 
 	 * @author liamzebedee
 	 */
+	@SuppressWarnings( "boxing" )
 	private void processLayerMap()
 	{
 		for( int l = 0; l < layers.size(); l++ )
@@ -159,6 +161,7 @@ public class TiledMapPlus extends TiledMap
 	 * 
 	 * @author liamzebedee
 	 */
+	@SuppressWarnings( "boxing" )
 	private void processTilesetMap()
 	{
 		for( int t = 0; t < this.getTileSetCount(); t++ )
@@ -174,6 +177,7 @@ public class TiledMapPlus extends TiledMap
 	 * @param layerName
 	 *            The name of the layer to get
 	 */
+	@SuppressWarnings( "boxing" )
 	public Layer getLayer( String layerName )
 	{
 		int layerID = this.layerNameToIDMap.get( layerName );
@@ -186,6 +190,7 @@ public class TiledMapPlus extends TiledMap
 	 * @param groupName
 	 *            The name of the group
 	 */
+	@SuppressWarnings( "boxing" )
 	public ObjectGroup getObjectGroup( String groupName )
 	{
 		return this.objectGroups.get( this.objectGroupNameToOffset.get( groupName ) );
@@ -205,6 +210,7 @@ public class TiledMapPlus extends TiledMap
 	 * @param tilesetName
 	 *            The name of the tileset that the tiles are part of
 	 */
+	@SuppressWarnings( "boxing" )
 	public ArrayList<Tile> getAllTilesFromAllLayers( String tilesetName )
 	{
 		ArrayList<Tile> tiles = new ArrayList<>();
@@ -472,6 +478,7 @@ public class TiledMapPlus extends TiledMap
 	 * @param tilesetName
 	 *            The name of the tileset to get the id of
 	 */
+	@SuppressWarnings( "boxing" )
 	public int getTilesetID( String tilesetName )
 	{
 		int tilesetID = this.tilesetNameToIDMap.get( tilesetName );
@@ -484,6 +491,7 @@ public class TiledMapPlus extends TiledMap
 	 * @param layerName
 	 *            The name of the layer to get the id of
 	 */
+	@SuppressWarnings( "boxing" )
 	public int getLayerID( String layerName )
 	{
 		int layerID = this.layerNameToIDMap.get( layerName );

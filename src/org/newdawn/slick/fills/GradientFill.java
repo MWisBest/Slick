@@ -212,7 +212,7 @@ public class GradientFill implements ShapeFill
 	public Color colorAt( Shape shape, float x, float y )
 	{
 		if( local ) return colorAt( x - shape.getCenterX(), y - shape.getCenterY() );
-		else return colorAt( x, y );
+		return colorAt( x, y );
 	}
 	
 	/**

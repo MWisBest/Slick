@@ -208,6 +208,7 @@ public class AngelCodeFont implements Font
 	 *            The stream from which the font file can be read
 	 * @throws SlickException
 	 */
+	@SuppressWarnings( "boxing" )
 	private void parseFnt( InputStream fntFile ) throws SlickException
 	{
 		if( displayListCaching )

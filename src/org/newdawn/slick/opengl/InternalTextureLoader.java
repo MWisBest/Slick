@@ -343,7 +343,7 @@ public class InternalTextureLoader
 			{
 				TextureImpl tex = ref.get();
 				if( tex != null ) return tex;
-				else hash.remove( resName );
+				hash.remove( resName );
 			}
 		}
 		
